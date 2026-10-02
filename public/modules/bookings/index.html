@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yêu cầu đặt phòng | HomeStay</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/booking.css">
+</head>
+<body class="bg-light">
+  <main class="container py-4">
+    <div class="booking-container mx-auto">
+      <h1 class="h3 mb-2">Yêu cầu đặt phòng</h1>
+      <p class="text-secondary">
+        Nhập thông tin liên hệ và kỳ lưu trú của bạn.
+      </p>
+
+      <div class="alert alert-warning">
+        Bản xem thử biểu mẫu. Chưa gửi yêu cầu đặt phòng.
+      </div>
+
+      <form id="booking-form" class="card card-body shadow-sm" novalidate>
+        <div class="row g-3">
+          <div class="col-12">
+            <label for="guestName" class="form-label">
+              Họ và tên *
+            </label>
+            <input id="guestName" name="guestName"
+              class="form-control" autocomplete="name" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="phone" class="form-label">
+              Số điện thoại *
+            </label>
+            <input id="phone" name="phone"
+              class="form-control" type="tel"
+              inputmode="numeric" autocomplete="tel"
+              placeholder="Ví dụ: 0912345678" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="email" class="form-label">
+              Email *
+            </label>
+            <input id="email" name="email"
+              class="form-control" type="email"
+              autocomplete="email" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="checkIn" class="form-label">
+              Ngày nhận phòng *
+            </label>
+            <input id="checkIn" name="checkIn"
+              class="form-control" type="date" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="checkOut" class="form-label">
+              Ngày trả phòng *
+            </label>
+            <input id="checkOut" name="checkOut"
+              class="form-control" type="date" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="guestCount" class="form-label">
+              Số khách *
+            </label>
+            <input id="guestCount" name="guestCount"
+              class="form-control" type="number"
+              min="1" step="1" value="1" required>
+          </div>
+
+          <div class="col-12">
+            <label for="notes" class="form-label">
+              Ghi chú
+            </label>
+            <textarea id="notes" name="notes"
+              class="form-control" rows="3"
+              placeholder="Yêu cầu thêm của bạn, nếu có"></textarea>
+          </div>
+
+          <div class="col-12">
+            <div class="form-check">
+              <input id="policyAccepted" name="policyAccepted"
+                class="form-check-input" type="checkbox" required>
+              <label for="policyAccepted" class="form-check-label">
+                Tôi đã đọc và đồng ý với chính sách huỷ đặt phòng *
+              </label>
+            </div>
+            <p class="small text-secondary mt-2 mb-0">
+              Nội dung chính sách sẽ được bổ sung trước khi mở đặt phòng.
+            </p>
+          </div>
+
+          <div class="col-12">
+            <button class="btn btn-primary w-100" type="submit">
+              Kiểm tra thông tin
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div id="feedback" class="alert mt-3"
+        role="status" hidden></div>
+    </div>
+  </main>
+  <script src="js/booking.js"></script>
+</body>
+</html>
