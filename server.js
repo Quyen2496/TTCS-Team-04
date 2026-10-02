@@ -1,44 +1,46 @@
-feature/t3-quynh-booking-lookup-api
-const express = require('express');
-const mongoose = require('mongoose');
-
-const app = express();
-
-// 1. Cấu hình middleware đọc dữ liệu JSON từ body (Tránh lỗi req.body undefined)
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// 2. Cấu hình kết nối MongoDB với database homestay của nhóm
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/homestay';
-
-mongoose.connect(MONGO_URI)
-  .then(() => console.log(' Connect MongoDB thành công!'))
-  .catch((err) => console.error(' Lỗi kết nối MongoDB:', err));
-
-// 3. Đăng ký Router tra cứu booking
-const lookupRouter = require('./src/modules/lookup/lookup.router');
-app.use('/api/lookup', lookupRouter);
+require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
+const mongoose = require("mongoose");
+
+const loginRouter = require("./src/modules/auth/login");
+const lookupRouter = require("./src/modules/lookup/lookup.router");
+const bookingRouter = require("./src/modules/bookings/booking.router");
 
 const app = express();
-const loginRouter = require("./src/modules/auth/login");
-const PORT = 3000;
-const HOST = "127.0.0.1";
+const PORT = Number(process.env.PORT || 3000);
+const HOST = process.env.HOST || "127.0.0.1";
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/auth", loginRouter);
-// Phục vụ các file frontend trong thư mục public
+app.use("/api/lookup", lookupRouter);
+app.use("/api/bookings", bookingRouter);
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "login.html"));
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
-develop
 
-// 4. Lắng nghe trên cổng 3000
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(` Server đang chạy tại http://localhost:${PORT}`);
-});
+async function startServer() {
+  try {
+    if (!process.env.MONGODB_URI) {
+      throw new Error("Chưa cấu hình MONGODB_URI trong .env");
+    }
+
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Đã kết nối MongoDB");
+
+    app.listen(PORT, HOST, () => {
+      console.log(`Server đang chạy tại http://${HOST}:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Không thể khởi động server:", error.message);
+    process.exit(1);
+  }
+}
+
+startServer();
