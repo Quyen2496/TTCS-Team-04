@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách phòng</title>
+    <link rel="stylesheet" href="./css/room.css">
+</head>
+<body>
+
+<header class="page-header">
+    <div>
+        <h1>Danh sách phòng</h1>
+        <p>Quản lý và theo dõi trạng thái các phòng</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="filter-card">
+        <div class="filter-header">
+            <h2>Bộ lọc</h2>
+            <button id="resetFilter" type="button" class="btn-secondary">
+                Xóa bộ lọc
+            </button>
+        </div>
+
+        <div class="filter-grid">
+
+            <div class="form-group">
+                <label for="roomTypeId">Loại phòng</label>
+                <input
+                    id="roomTypeId"
+                    type="text"
+                    placeholder="Nhập roomTypeId"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="floor">Tầng</label>
+                <input
+                    id="floor"
+                    type="number"
+                    min="1"
+                    placeholder="Ví dụ: 1"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="status">Trạng thái</label>
+                <select id="status">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="CLEAN_VACANT">Sạch - Trống</option>
+                    <option value="DIRTY_VACANT">Bẩn - Trống</option>
+                    <option value="OCCUPIED">Đang có khách</option>
+                    <option value="MAINTENANCE">Bảo trì</option>
+                </select>
+            </div>
+
+            <div class="filter-action">
+                <button id="filterButton" type="button" class="btn-primary">
+                    Lọc phòng
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="room-card">
+
+        <div class="room-card-header">
+            <div>
+                <h2>Danh sách phòng</h2>
+                <span id="roomCount">0 phòng</span>
+            </div>
+
+            <button id="reloadButton" type="button" class="btn-secondary">
+                Làm mới
+            </button>
+        </div>
+
+        <div id="loading" class="state-message hidden">
+            Đang tải danh sách phòng...
+        </div>
+
+        <div id="error" class="state-message error hidden"></div>
+
+        <div id="empty" class="state-message hidden">
+            Không có phòng phù hợp.
+        </div>
+
+        <div id="roomTableWrapper" class="table-wrapper hidden">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Số phòng</th><th>Loại phòng</th>
+                        <th>Tầng</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+
+                <tbody id="roomTableBody"></tbody>
+            </table>
+        </div>
+
+    </section>
+
+</main>
+
+<script src="./js/rooms.js"></script>
+
+</body>
+</html>
