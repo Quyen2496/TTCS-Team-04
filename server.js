@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./src/config/db");
 const receptionRoutes = require("./src/modules/reception/routes");
+const authRoutes = require("./src/modules/auth/auth.routes");
 const { notFound, errorHandler } = require("./src/middleware/errorHandler");
 
 const app = express();
@@ -20,6 +21,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/reception", receptionRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => res.sendFile(require("path").join(process.cwd(), "public", "index.html")));
 app.use(notFound);
