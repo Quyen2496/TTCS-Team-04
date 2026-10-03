@@ -1,33 +1,41 @@
 require("dotenv").config();
 
 const express = require("express");
-const connectDB = require("./config/db");
+const cors = require("cors");
+const connectDB = require("./src/config/db");
+const receptionRoutes = require("./src/modules/reception/routes");
+const { notFound, errorHandler } = require("./src/middleware/errorHandler");
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "127.0.0.1";
-
+app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-    res.json({
-        message: "TTCS Team 04 Backend đang hoạt động!",
-        status: "OK"
-    });
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "TTCS Team 04 Reception API is running"
+  });
 });
 
-async function startServer() {
-    try {
-        await connectDB();
+app.use("/api/reception", receptionRoutes);
 
-        app.listen(PORT, HOST, () => {
-            console.log(`Server đang chạy tại http://${HOST}:${PORT}`);
-        });
-    } catch (error) {
-        console.error("Không thể khởi động server:", error.message);
-        process.exit(1);
-    }
+app.get("/", (req, res) => res.sendFile(require("path").join(process.cwd(), "public", "index.html")));
+app.use(notFound);
+app.use(errorHandler);
+
+const PORT = Number(process.env.PORT || 3000);
+const HOST = process.env.HOST || "127.0.0.1";
+
+async function start() {
+  await connectDB();
+  app.listen(PORT, HOST, () => {
+    console.log(`Server running at http://${HOST}:${PORT}`);
+  });
 }
 
-startServer();
+start().catch((error) => {
+  console.error("Cannot start server:", error.message);
+  process.exit(1);
+});

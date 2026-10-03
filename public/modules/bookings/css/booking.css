@@ -1,0 +1,11 @@
+.booking-container {
+  max-width: 760px;
+}
+
+.form-check-label {
+  overflow-wrap: anywhere;
+}
+
+#feedback {
+  overflow-wrap: anywhere;
+}

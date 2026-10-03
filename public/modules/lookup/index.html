@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra cứu Booking - HomeStay</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container" style="padding: 20px; font-family: Arial, sans-serif;">
+        <h2>Tra cứu thông tin đặt phòng</h2>
+        <form id="lookupForm">
+            <div style="margin-bottom: 10px;">
+                <label>Mã booking:</label><br>
+                <input type="text" id="bookingCode" required style="padding: 5px; width: 300px;">
+            </div>
+            <div style="margin-bottom: 10px;">
+                <label>Email đăng ký:</label><br>
+                <input type="email" id="bookingEmail" required style="padding: 5px; width: 300px;">
+            </div>
+            <button type="submit" style="padding: 8px 15px;">Tra cứu</button>
+        </form>
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+    <script src="js/lookup.js"></script>
+</body>
+</html>
