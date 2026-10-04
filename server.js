@@ -5,7 +5,6 @@ const cors = require("cors");
 const path = require("path");
 const connectDB = require("./src/config/db");
 
-const loginRouter = require("./src/modules/auth/login");
 const authRoutes = require("./src/modules/auth/auth.routes");
 const lookupRouter = require("./src/modules/lookup/lookup.router");
 const bookingRouter = require("./src/modules/bookings/booking.router");
@@ -27,7 +26,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-app.use("/api/auth", loginRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/lookup", lookupRouter);
 app.use("/api/bookings", bookingRouter);

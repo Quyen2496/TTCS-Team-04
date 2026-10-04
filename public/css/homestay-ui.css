@@ -1,0 +1,352 @@
+:root {
+    --hs-text: #26332d;
+    --hs-muted: #737c77;
+    --hs-primary: #34764d;
+    --hs-primary-hover: #28623e;
+    --hs-border: #dfe6df;
+    --hs-border-card: #e4e8e4;
+    --hs-light-green: #e8f2eb;
+    --hs-cream: #fff0dc;
+    --hs-error: #a73737;
+    --hs-white: #ffffff;
+    --hs-shadow: 0 8px 26px rgba(35, 48, 40, .055);
+    --hs-radius: 14px;
+    --hs-control-radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: var(--hs-text);
+    background:
+        linear-gradient(
+            135deg,
+            #edf4ef 0%,
+            #f7f2e9 52%,
+            #edf3f6 100%
+        );
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: .65;
+}
+
+a {
+    color: var(--hs-primary);
+}
+
+a:hover {
+    color: var(--hs-primary-hover);
+}
+
+.hs-header {
+    min-height: 82px;
+    background: var(--hs-white);
+    border-bottom: 1px solid var(--hs-border);
+}
+
+.hs-header-inner {
+    width: min(1120px, calc(100% - 40px));
+    min-height: 82px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.hs-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--hs-text);
+    text-decoration: none;
+}
+
+.hs-brand:hover {
+    color: var(--hs-text);
+}
+
+.hs-brand-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+}
+
+.hs-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hs-brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hs-brand-caption {
+    color: var(--hs-muted);
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.hs-nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.hs-nav a {
+    color: var(--hs-text);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.hs-nav a:hover {
+    color: var(--hs-primary);
+}
+
+.hs-main {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 36px 0 48px;
+}
+
+.hs-page-title {
+    margin-bottom: 22px;
+}
+
+.hs-page-title h1,
+.hs-page-title h2 {
+    margin: 0 0 8px;
+    color: var(--hs-text);
+}
+
+.hs-page-title p {
+    margin: 0;
+    color: var(--hs-muted);
+    line-height: 1.55;
+}
+
+.hs-card {
+    background: var(--hs-white);
+    border: 1px solid var(--hs-border-card);
+    border-radius: var(--hs-radius);
+    padding: 26px;
+    box-shadow: var(--hs-shadow);
+}
+
+.hs-form-group {
+    margin-bottom: 18px;
+}
+
+.hs-label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--hs-text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hs-input,
+.hs-select,
+.hs-textarea {
+    width: 100%;
+    min-height: 45px;
+    padding: 10px 13px;
+    color: var(--hs-text);
+    background: var(--hs-white);
+    border: 1px solid var(--hs-border);
+    border-radius: var(--hs-control-radius);
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.hs-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.hs-input::placeholder,
+.hs-textarea::placeholder {
+    color: #9aa29d;
+}
+
+.hs-input:focus,
+.hs-select:focus,
+.hs-textarea:focus {
+    border-color: var(--hs-primary);
+    box-shadow: 0 0 0 3px rgba(52, 118, 77, .12);
+}
+
+.hs-button {
+    min-height: 45px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--hs-control-radius);
+    font-weight: 600;
+    line-height: 1.2;
+    transition: background-color .15s ease, border-color .15s ease;
+}
+
+.hs-button-primary {
+    color: #fff;
+    background: var(--hs-primary);
+    border-color: var(--hs-primary);
+}
+
+.hs-button-primary:hover:not(:disabled) {
+    background: var(--hs-primary-hover);
+    border-color: var(--hs-primary-hover);
+}
+
+.hs-button-secondary {
+    color: var(--hs-text);
+    background: var(--hs-white);
+    border-color: var(--hs-border);
+}
+
+.hs-button-secondary:hover:not(:disabled) {
+    background: #f7f9f7;
+}
+
+.hs-message {
+    margin-top: 14px;
+    padding: 11px 13px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.hs-message:empty {
+    display: none;
+}
+
+.hs-message-error {
+    color: var(--hs-error);
+    background: #fff3f3;
+    border: 1px solid #edcccc;
+}
+
+.hs-message-success {
+    color: var(--hs-primary-hover);
+    background: var(--hs-light-green);
+    border: 1px solid #cfe1d4;
+}
+
+.hs-message-info {
+    color: var(--hs-text);
+    background: #f5f7f5;
+    border: 1px solid var(--hs-border);
+}
+
+.hs-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: var(--hs-light-green);
+    color: var(--hs-primary-hover);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hs-divider {
+    height: 1px;
+    margin: 22px 0;
+    background: var(--hs-border);
+}
+
+.hs-required {
+    color: var(--hs-error);
+}
+
+.hs-footer {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 0 0 28px;
+    color: var(--hs-muted);
+    text-align: center;
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .hs-header-inner,
+    .hs-main,
+    .hs-footer {
+        width: min(100% - 32px, 1120px);
+    }
+
+    .hs-main {
+        padding-top: 28px;
+    }
+
+    .hs-card {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hs-header-inner {
+        min-height: 72px;
+        width: min(100% - 24px, 1120px);
+    }
+
+    .hs-header {
+        min-height: 72px;
+    }
+
+    .hs-brand-caption {
+        display: none;
+    }
+
+    .hs-nav {
+        gap: 10px;
+    }
+
+    .hs-nav a {
+        font-size: 13px;
+    }
+
+    .hs-main {
+        width: calc(100% - 24px);
+        padding: 22px 0 36px;
+    }
+
+    .hs-card {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .hs-page-title h1,
+    .hs-page-title h2 {
+        font-size: 24px;
+    }
+
+    .hs-button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - HomeStay</title>
+
+    <link rel="stylesheet" href="/css/homestay-ui.css">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+
+<header class="hs-header">
+    <div class="hs-header-inner">
+        <a class="hs-brand" href="/login.html">
+            <svg class="hs-brand-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <path
+                    d="M6 22.5 24 7l18 15.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+                <path
+                    d="M10.5 20.5V40h27V20.5M19 40V27h10v13"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+
+            <span class="hs-brand-text">
+                <span class="hs-brand-name">HomeStay</span>
+                <span class="hs-brand-caption">Hệ thống quản lý lưu trú</span>
+            </span>
+        </a>
+    </div>
+</header>
+
+<main class="hs-main register-main">
+
+    <section class="register-card hs-card">
+
+        <div class="register-heading">
+            <h1>Đăng ký tài khoản</h1>
+            <p>Tạo tài khoản để sử dụng các chức năng của HomeStay.</p>
+        </div>
+
+        <form id="registerForm" novalidate>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="username">
+                    Tên đăng nhập
+                    <span class="hs-required">*</span>
+                </label>
+
+                <input
+                    class="hs-input"
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Nhập tên đăng nhập"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="email">
+                    Email
+                    <span class="hs-required">*</span>
+                </label>
+
+                <input
+                    class="hs-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Nhập email"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="password">
+                    Mật khẩu
+                    <span class="hs-required">*</span>
+                </label>
+
+                <input
+                    class="hs-input"
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Ít nhất 6 ký tự"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+            </div>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="confirmPassword">
+                    Xác nhận mật khẩu
+                    <span class="hs-required">*</span>
+                </label>
+
+                <input
+                    class="hs-input"
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Nhập lại mật khẩu"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+            </div>
+
+            <button
+                type="submit"
+                id="registerButton"
+                class="hs-button hs-button-primary register-button"
+            >
+                <span id="registerButtonText">Đăng ký</span>
+            </button>
+
+            <div
+                id="message"
+                class="hs-message"
+                role="alert"
+                aria-live="polite"
+            ></div>
+
+        </form>
+
+        <div class="register-divider">
+            <span>Đã có tài khoản?</span>
+        </div>
+
+        <a
+            href="/login.html"
+            class="hs-button hs-button-secondary back-login-button"
+        >
+            Quay lại đăng nhập
+        </a>
+
+    </section>
+
+</main>
+
+<footer class="hs-footer">
+    HomeStay · Hệ thống quản lý lưu trú
+</footer>
+
+<script src="/js/register.js"></script>
+</body>
+</html>
