@@ -1,352 +1,128 @@
-:root {
-    --hs-text: #26332d;
-    --hs-muted: #737c77;
-    --hs-primary: #34764d;
-    --hs-primary-hover: #28623e;
-    --hs-border: #dfe6df;
-    --hs-border-card: #e4e8e4;
-    --hs-light-green: #e8f2eb;
-    --hs-cream: #fff0dc;
-    --hs-error: #a73737;
-    --hs-white: #ffffff;
-    --hs-shadow: 0 8px 26px rgba(35, 48, 40, .055);
-    --hs-radius: 14px;
-    --hs-control-radius: 8px;
+/* HomeStay shared UI. Opt in with <body class="homestay-ui">.
+ * Keep tokens and shared components consistent across modules.
+ * Source: the T4 booking UI; :where preserves selector specificity. */
+.homestay-ui{--ink:#26332d;--muted:#737c77;--green:#34764d;--green-dark:#28623e;--line:#dfe6df;--soft:#e8f2eb;--cream:#fff0dc;--danger:#a73737;--radius:14px}
+:where(.homestay-ui), :where(.homestay-ui) *{box-sizing:border-box}
+body:where(.homestay-ui){min-height:100vh;margin:0;color:var(--ink);font:15px/1.55 Arial,sans-serif;background:linear-gradient(135deg,#edf4ef 0%,#f7f2e9 52%,#edf3f6 100%);background-attachment:fixed}
+:where(.homestay-ui) a{color:var(--green);text-underline-offset:3px}
+:where(.homestay-ui) button,:where(.homestay-ui) input,:where(.homestay-ui) textarea{font:inherit}
+:where(.homestay-ui) button,:where(.homestay-ui) a,:where(.homestay-ui) input,:where(.homestay-ui) textarea{touch-action:manipulation}
+:where(.homestay-ui) button{cursor:pointer}
+:where(.homestay-ui) button:disabled{cursor:wait;opacity:.65}
+:where(.homestay-ui) input:disabled,:where(.homestay-ui) textarea:disabled{background:#f5f6f4;color:#58665c}
+:where(.homestay-ui) [hidden]{display:none!important}
+:where(.homestay-ui) :focus-visible{outline:3px solid #5a986d;outline-offset:3px}
+:where(.homestay-ui) .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:where(.homestay-ui) .skip-link{position:fixed;top:12px;transform:translateY(-200%);clip-path:inset(50%);left:16px;z-index:10;padding:10px 16px;background:white}
+:where(.homestay-ui) .skip-link:focus{transform:translateY(0);clip-path:none}
+:where(.homestay-ui) .topbar{min-height:82px;background:rgba(255,255,255,.94);border-bottom:2px solid #dce9de;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px max(24px,calc((100% - 1120px)/2))}
+:where(.homestay-ui) .brand{display:flex;gap:12px;align-items:center;color:var(--ink);text-decoration:none}
+:where(.homestay-ui) .brand strong{display:block;font-size:23px;line-height:1.2;letter-spacing:-.5px}
+:where(.homestay-ui) .brand small{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+:where(.homestay-ui) .brand-mark{display:grid;place-items:center;width:43px;height:43px;border-radius:12px;background:var(--soft);color:var(--green)}
+:where(.homestay-ui) .brand svg{width:25px;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:where(.homestay-ui) .topbar nav{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:600}
+:where(.homestay-ui) .topbar nav a{text-decoration:none;color:#667169}
+:where(.homestay-ui) .topbar nav .nav-current{color:var(--green)}
+:where(.homestay-ui) .topbar nav .staff-link{padding:8px 15px;border-radius:24px;background:var(--cream);color:#87552c}
+:where(.homestay-ui) .container{max-width:1120px;margin:auto;padding:36px 24px 24px}
+:where(.homestay-ui) .page-title{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px}
+:where(.homestay-ui) .eyebrow{display:block;font-size:10px;font-weight:700;letter-spacing:1.7px;color:#68846e;margin-bottom:8px}
+:where(.homestay-ui) h1{font-size:clamp(26px,3vw,34px);letter-spacing:-.6px;line-height:1.2;margin:0 0 10px}
+:where(.homestay-ui) h2{font-size:21px;line-height:1.35;margin:0 0 4px}
+:where(.homestay-ui) h3{font-size:15px;margin:0 0 8px}
+:where(.homestay-ui) p{margin:0;color:var(--muted)}
+:where(.homestay-ui) .note-pill,:where(.homestay-ui) .count-pill{font-size:12px;white-space:nowrap;padding:8px 13px;background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:20px;color:#5d7463}
+:where(.homestay-ui) .card{background:#fff;border:1px solid #e4e8e4;border-radius:var(--radius);padding:26px;margin-bottom:24px;box-shadow:0 8px 26px rgba(35,48,40,.055)}
+:where(.homestay-ui) .section-title{display:flex;align-items:center;gap:13px;margin-bottom:22px}
+:where(.homestay-ui) .section-title p{font-size:13px}
+:where(.homestay-ui) .step{flex:0 0 36px;height:36px;display:grid;place-items:center;border-radius:50%;background:var(--soft);color:var(--green);font-weight:bold}
+:where(.homestay-ui) .field{display:flex;flex-direction:column;gap:7px;min-width:0}
+:where(.homestay-ui) label{font-size:13px;font-weight:600}
+:where(.homestay-ui) label>span[aria-hidden]{color:#ba4545}
+:where(.homestay-ui) .optional{font-weight:400;color:var(--muted)}
+:where(.homestay-ui) input:not([type=checkbox]),:where(.homestay-ui) textarea{display:block;width:100%;min-width:0;border:1px solid #d9dfda;border-radius:8px;padding:11px 12px;background:white;color:var(--ink);outline:none;font-size:14px;min-height:45px}
+:where(.homestay-ui) input:focus,:where(.homestay-ui) textarea:focus{border-color:#57916a;box-shadow:0 0 0 3px rgba(87,145,106,.1)}
+:where(.homestay-ui) textarea{resize:vertical}
+:where(.homestay-ui) .field small{font-size:11px;color:var(--muted)}
+:where(.homestay-ui) .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:45px;border:1px solid transparent;border-radius:8px;padding:11px 17px;font-weight:600;font-size:13px;text-decoration:none;line-height:1.5}
+:where(.homestay-ui) .btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;flex-shrink:0}
+:where(.homestay-ui) .primary{background:var(--green);color:white}
+:where(.homestay-ui) .primary:hover:not(:disabled){background:var(--green-dark)}
+:where(.homestay-ui) .secondary{border-color:#d4ded5;background:#fff;color:#385746}
+:where(.homestay-ui) .secondary:hover:not(:disabled){background:#f1f6f1}
+:where(.homestay-ui) .text-button{border:0;background:none;padding:0;color:var(--green);text-decoration:underline;font-size:12px}
+:where(.homestay-ui) .notice{border-radius:9px;padding:13px 15px;margin-top:16px;font-size:13px;color:#4e6255;background:#edf5ef;border:1px solid #d9e8dc;overflow-wrap:anywhere}
+:where(.homestay-ui) .notice.error{background:#fff1ee;color:var(--danger);border-color:#efd8d2}
+:where(.homestay-ui) .notice.warning{background:#fff7e8;color:#875c25;border-color:#efe1c7}
+:where(.homestay-ui) .notice.loading{display:flex;align-items:center;gap:9px}
+:where(.homestay-ui) .notice.loading:before{content:"";flex-shrink:0;width:13px;height:13px;border:2px solid #b4cab9;border-top-color:var(--green);border-radius:50%;animation:homestay-ui-spin .8s linear infinite}
+@keyframes homestay-ui-spin{to{transform:rotate(360deg)}}
+:where(.homestay-ui) .results-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:28px 0 16px}
+:where(.homestay-ui) .results-heading p{font-size:12px}
+:where(.homestay-ui) .room-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:28px}
+:where(.homestay-ui) .room-card{background:white;border:1px solid #dfe5e0;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0;box-shadow:0 5px 18px rgba(35,48,40,.025)}
+:where(.homestay-ui) .room-card.selected{border-color:var(--green);box-shadow:0 0 0 2px var(--green)}
+:where(.homestay-ui) .room-image{display:block;width:100%;height:160px;object-fit:cover;background:var(--soft)}
+:where(.homestay-ui) .room-content{padding:18px;display:flex;flex-direction:column;flex:1;gap:12px}
+:where(.homestay-ui) .room-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted)}
+:where(.homestay-ui) .status{display:inline-block;white-space:nowrap;border-radius:16px;padding:4px 9px;color:#2b7849;background:#e7f5eb;font-weight:600;font-size:11px}
+:where(.homestay-ui) .room-card h3{font-size:17px;line-height:1.4;overflow-wrap:anywhere;margin:0}
+:where(.homestay-ui) .capacity{font-size:12px}
+:where(.homestay-ui) .room-price{margin-top:auto;display:flex;flex-wrap:wrap;align-items:baseline;gap:5px;color:var(--green);font-size:11px}
+:where(.homestay-ui) .room-price strong{font-size:20px;letter-spacing:-.6px}
+:where(.homestay-ui) .room-card .btn{width:100%;margin-top:2px}
+:where(.homestay-ui) .room-caption{font-size:10px;color:var(--muted)}
+:where(.homestay-ui) .table-scroll{overflow:auto;border:1px solid #e1e7e1;border-radius:10px}
+:where(.homestay-ui) table{border-collapse:collapse;width:100%;font-size:12px;white-space:nowrap}
+:where(.homestay-ui) th{background:#f5f8f4;text-align:left;font-weight:600;color:#647167}
+:where(.homestay-ui) th,:where(.homestay-ui) td{padding:12px 14px;border-bottom:1px solid #e6ebe6}
+:where(.homestay-ui) tbody tr:last-child td{border-bottom:0}
+:where(.homestay-ui) .money{text-align:right;font-variant-numeric:tabular-nums}
+:where(.homestay-ui) .price-label{background:#eef4ef;padding:4px 7px;border-radius:5px;color:#50705a;font-size:10px}
+:where(.homestay-ui) .muted{font-size:12px;color:var(--muted)}
+:where(.homestay-ui) dl{margin:0}
+:where(.homestay-ui) .totals{background:#f7f9f7;border:1px solid #e3e8e4;padding:18px;border-radius:10px;font-size:12px;align-self:start}
+:where(.homestay-ui) .totals>div{display:flex;justify-content:space-between;gap:16px;margin-bottom:10px}
+:where(.homestay-ui) .totals dd{margin:0;font-weight:600;white-space:nowrap}
+:where(.homestay-ui) .totals .grand-total{border-top:1px solid var(--line);padding-top:13px;margin:13px 0 0;align-items:baseline;font-weight:bold}
+:where(.homestay-ui) .grand-total dd{color:var(--green);font-size:23px;letter-spacing:-.7px}
+:where(.homestay-ui) .actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin-top:22px}
+:where(.homestay-ui) .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+:where(.homestay-ui) .full{grid-column:1/-1}
+:where(.homestay-ui) .checkbox-label{display:flex;align-items:flex-start;gap:10px;font-size:12px;font-weight:400;margin-top:20px}
+:where(.homestay-ui) .checkbox-label input{width:17px;height:17px;flex-shrink:0;accent-color:var(--green);margin:1px 0 0}
+:where(.homestay-ui) .checkbox-label span[aria-hidden]{color:#ba4545}
+:where(.homestay-ui) .footer{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding:20px 0 8px;border-top:1px solid #dfe6df;font-size:11px;color:#819084}
+:where(.homestay-ui) .footer strong{color:#637a69}
+@media(max-width:900px){
+:where(.homestay-ui) .room-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+:where(.homestay-ui) .note-pill{display:none}
 }
-
-* {
-    box-sizing: border-box;
+@media(max-width:600px){
+:where(.homestay-ui) .topbar{padding:14px 18px;gap:12px;flex-wrap:wrap}
+:where(.homestay-ui) .brand strong{font-size:21px}
+:where(.homestay-ui) .topbar nav{width:100%;justify-content:space-between;gap:10px;font-size:12px}
+:where(.homestay-ui) .topbar nav .staff-link{padding:6px 11px}
+:where(.homestay-ui) .container{padding:26px 16px 20px}
+:where(.homestay-ui) .page-title{margin-bottom:20px}
+:where(.homestay-ui) .page-title p{font-size:13px}
+:where(.homestay-ui) .card{padding:19px 16px;border-radius:12px}
+:where(.homestay-ui) .section-title{gap:10px;align-items:flex-start}
+:where(.homestay-ui) .section-title h2{font-size:18px}
+:where(.homestay-ui) .section-title p{font-size:12px}
+:where(.homestay-ui) .step{flex-basis:31px;height:31px;font-size:13px}
+:where(.homestay-ui) .room-grid{grid-template-columns:1fr}
+:where(.homestay-ui) .room-image{height:185px}
+:where(.homestay-ui) .results-heading h2{font-size:19px}
+:where(.homestay-ui) .count-pill{font-size:10px;padding:6px 10px}
+:where(.homestay-ui) .form-grid{grid-template-columns:1fr}
+:where(.homestay-ui) .full{grid-column:auto}
+:where(.homestay-ui) .actions .btn{width:100%}
+:where(.homestay-ui) .footer{font-size:10px;flex-wrap:wrap}
+:where(.homestay-ui) .table-scroll{max-width:100%}
+:where(.homestay-ui) th,:where(.homestay-ui) td{padding:10px}
 }
-
-html {
-    min-width: 320px;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    color: var(--hs-text);
-    background:
-        linear-gradient(
-            135deg,
-            #edf4ef 0%,
-            #f7f2e9 52%,
-            #edf3f6 100%
-        );
-}
-
-button,
-input,
-select,
-textarea {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-button:disabled {
-    cursor: not-allowed;
-    opacity: .65;
-}
-
-a {
-    color: var(--hs-primary);
-}
-
-a:hover {
-    color: var(--hs-primary-hover);
-}
-
-.hs-header {
-    min-height: 82px;
-    background: var(--hs-white);
-    border-bottom: 1px solid var(--hs-border);
-}
-
-.hs-header-inner {
-    width: min(1120px, calc(100% - 40px));
-    min-height: 82px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-.hs-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--hs-text);
-    text-decoration: none;
-}
-
-.hs-brand:hover {
-    color: var(--hs-text);
-}
-
-.hs-brand-icon {
-    width: 38px;
-    height: 38px;
-    flex: 0 0 38px;
-}
-
-.hs-brand-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.hs-brand-name {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.hs-brand-caption {
-    color: var(--hs-muted);
-    font-size: 13px;
-    line-height: 1.2;
-}
-
-.hs-nav {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.hs-nav a {
-    color: var(--hs-text);
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.hs-nav a:hover {
-    color: var(--hs-primary);
-}
-
-.hs-main {
-    width: min(1120px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 36px 0 48px;
-}
-
-.hs-page-title {
-    margin-bottom: 22px;
-}
-
-.hs-page-title h1,
-.hs-page-title h2 {
-    margin: 0 0 8px;
-    color: var(--hs-text);
-}
-
-.hs-page-title p {
-    margin: 0;
-    color: var(--hs-muted);
-    line-height: 1.55;
-}
-
-.hs-card {
-    background: var(--hs-white);
-    border: 1px solid var(--hs-border-card);
-    border-radius: var(--hs-radius);
-    padding: 26px;
-    box-shadow: var(--hs-shadow);
-}
-
-.hs-form-group {
-    margin-bottom: 18px;
-}
-
-.hs-label {
-    display: block;
-    margin-bottom: 7px;
-    color: var(--hs-text);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.hs-input,
-.hs-select,
-.hs-textarea {
-    width: 100%;
-    min-height: 45px;
-    padding: 10px 13px;
-    color: var(--hs-text);
-    background: var(--hs-white);
-    border: 1px solid var(--hs-border);
-    border-radius: var(--hs-control-radius);
-    outline: none;
-    transition: border-color .15s ease, box-shadow .15s ease;
-}
-
-.hs-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.hs-input::placeholder,
-.hs-textarea::placeholder {
-    color: #9aa29d;
-}
-
-.hs-input:focus,
-.hs-select:focus,
-.hs-textarea:focus {
-    border-color: var(--hs-primary);
-    box-shadow: 0 0 0 3px rgba(52, 118, 77, .12);
-}
-
-.hs-button {
-    min-height: 45px;
-    padding: 10px 18px;
-    border: 1px solid transparent;
-    border-radius: var(--hs-control-radius);
-    font-weight: 600;
-    line-height: 1.2;
-    transition: background-color .15s ease, border-color .15s ease;
-}
-
-.hs-button-primary {
-    color: #fff;
-    background: var(--hs-primary);
-    border-color: var(--hs-primary);
-}
-
-.hs-button-primary:hover:not(:disabled) {
-    background: var(--hs-primary-hover);
-    border-color: var(--hs-primary-hover);
-}
-
-.hs-button-secondary {
-    color: var(--hs-text);
-    background: var(--hs-white);
-    border-color: var(--hs-border);
-}
-
-.hs-button-secondary:hover:not(:disabled) {
-    background: #f7f9f7;
-}
-
-.hs-message {
-    margin-top: 14px;
-    padding: 11px 13px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.hs-message:empty {
-    display: none;
-}
-
-.hs-message-error {
-    color: var(--hs-error);
-    background: #fff3f3;
-    border: 1px solid #edcccc;
-}
-
-.hs-message-success {
-    color: var(--hs-primary-hover);
-    background: var(--hs-light-green);
-    border: 1px solid #cfe1d4;
-}
-
-.hs-message-info {
-    color: var(--hs-text);
-    background: #f5f7f5;
-    border: 1px solid var(--hs-border);
-}
-
-.hs-badge {
-    display: inline-flex;
-    align-items: center;
-    min-height: 28px;
-    padding: 4px 9px;
-    border-radius: 999px;
-    background: var(--hs-light-green);
-    color: var(--hs-primary-hover);
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.hs-divider {
-    height: 1px;
-    margin: 22px 0;
-    background: var(--hs-border);
-}
-
-.hs-required {
-    color: var(--hs-error);
-}
-
-.hs-footer {
-    width: min(1120px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 0 0 28px;
-    color: var(--hs-muted);
-    text-align: center;
-    font-size: 13px;
-}
-
-@media (max-width: 900px) {
-    .hs-header-inner,
-    .hs-main,
-    .hs-footer {
-        width: min(100% - 32px, 1120px);
-    }
-
-    .hs-main {
-        padding-top: 28px;
-    }
-
-    .hs-card {
-        padding: 22px;
-    }
-}
-
-@media (max-width: 600px) {
-    .hs-header-inner {
-        min-height: 72px;
-        width: min(100% - 24px, 1120px);
-    }
-
-    .hs-header {
-        min-height: 72px;
-    }
-
-    .hs-brand-caption {
-        display: none;
-    }
-
-    .hs-nav {
-        gap: 10px;
-    }
-
-    .hs-nav a {
-        font-size: 13px;
-    }
-
-    .hs-main {
-        width: calc(100% - 24px);
-        padding: 22px 0 36px;
-    }
-
-    .hs-card {
-        padding: 18px;
-        border-radius: 12px;
-    }
-
-    .hs-page-title h1,
-    .hs-page-title h2 {
-        font-size: 24px;
-    }
-
-    .hs-button {
-        width: 100%;
-    }
+@media(prefers-reduced-motion:reduce){
+:where(.homestay-ui), :where(.homestay-ui) *,:where(.homestay-ui) *:before,:where(.homestay-ui) *:after{animation-duration:.01ms!important;scroll-behavior:auto!important}
 }
