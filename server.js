@@ -1,46 +1,23 @@
-require("dotenv").config();
-
-const express = require("express");
-const path = require("path");
-const mongoose = require("mongoose");
-
-const loginRouter = require("./src/modules/auth/login");
-const lookupRouter = require("./src/modules/lookup/lookup.router");
-const bookingRouter = require("./src/modules/bookings/booking.router");
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
-const PORT = Number(process.env.PORT || 3000);
-const HOST = process.env.HOST || "127.0.0.1";
+const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/homestay';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-app.use("/api/auth", loginRouter);
-app.use("/api/lookup", lookupRouter);
-app.use("/api/bookings", bookingRouter);
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('Kết nối MongoDB thành công!'))
+  .catch((err) => console.error('Lỗi kết nối MongoDB:', err));
 
-app.use(express.static(path.join(__dirname, "public")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "login.html"));
+app.get('/', (req, res) => {
+  res.send('<h1>Hệ thống quản lý HomeStay - TTCS Team 04</h1>');
 });
 
-async function startServer() {
-  try {
-    if (!process.env.MONGODB_URI) {
-      throw new Error("Chưa cấu hình MONGODB_URI trong .env");
-    }
-
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log("Đã kết nối MongoDB");
-
-    app.listen(PORT, HOST, () => {
-      console.log(`Server đang chạy tại http://${HOST}:${PORT}`);
-    });
-  } catch (error) {
-    console.error("Không thể khởi động server:", error.message);
-    process.exit(1);
-  }
-}
-
-startServer();
+app.listen(PORT, () => {
+  console.log(`Server đang chạy tại http://${process.env.HOST || '127.0.0.1'}:${PORT}`);
+});
