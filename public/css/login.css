@@ -1,4 +1,7 @@
 .login-main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 36px 24px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,6 +11,11 @@
 .login-card,
 .forgot-card {
     width: min(100%, 460px);
+    background: #fff;
+    border: 1px solid #e4e8e4;
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: 0 8px 26px rgba(35, 48, 40, .055);
 }
 
 .login-heading,
@@ -18,7 +26,7 @@
 .login-heading h1,
 .forgot-heading h2 {
     margin: 0 0 8px;
-    color: var(--hs-text);
+    color: var(--ink);
 }
 
 .login-heading h1 {
@@ -34,11 +42,104 @@
 .login-heading p,
 .forgot-heading p {
     margin: 0;
-    color: var(--hs-muted);
+    color: var(--muted);
     line-height: 1.55;
     font-size: 14px;
 }
 
+/* Header dành cho trang đăng nhập */
+.hs-header {
+    min-height: 82px;
+    background: rgba(255, 255, 255, .94);
+    border-bottom: 2px solid #dce9de;
+    display: flex;
+    align-items: center;
+}
+
+.hs-header-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 16px 24px;
+}
+
+.hs-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.hs-brand-icon {
+    width: 43px;
+    height: 43px;
+    padding: 9px;
+    border-radius: 12px;
+    background: var(--soft);
+    color: var(--green);
+}
+
+.hs-brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.hs-brand-name {
+    display: block;
+    font-size: 23px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -.5px;
+}
+
+.hs-brand-caption {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* Form */
+.hs-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 17px;
+}
+
+.hs-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.hs-required {
+    color: #ba4545;
+}
+
+.hs-input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 45px;
+    padding: 11px 12px;
+    border: 1px solid #d9dfda;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    outline: none;
+    font: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.hs-input:focus {
+    border-color: #57916a;
+    box-shadow: 0 0 0 3px rgba(87, 145, 106, .1);
+}
+
+/* Password */
 .password-field {
     position: relative;
 }
@@ -60,17 +161,18 @@
     justify-content: center;
     border: 0;
     border-radius: 7px;
-    color: var(--hs-muted);
+    color: var(--muted);
     background: transparent;
+    cursor: pointer;
 }
 
 .password-toggle:hover {
-    color: var(--hs-primary);
-    background: var(--hs-light-green);
+    color: var(--green);
+    background: var(--soft);
 }
 
 .password-toggle:focus-visible {
-    outline: 2px solid var(--hs-primary);
+    outline: 2px solid var(--green);
     outline-offset: 1px;
 }
 
@@ -79,6 +181,7 @@
     height: 20px;
 }
 
+/* Login options */
 .login-options {
     min-height: 28px;
     margin: -2px 0 18px;
@@ -93,7 +196,7 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    color: var(--hs-muted);
+    color: var(--muted);
     cursor: pointer;
 }
 
@@ -101,28 +204,72 @@
     width: 15px;
     height: 15px;
     margin: 0;
-    accent-color: var(--hs-primary);
+    accent-color: var(--green);
 }
 
 .text-button {
     padding: 0;
     border: 0;
-    color: var(--hs-primary);
+    color: var(--green);
     background: transparent;
+    font: inherit;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
 }
 
 .text-button:hover {
-    color: var(--hs-primary-hover);
+    color: var(--green-dark);
     text-decoration: underline;
 }
 
 .text-button:focus-visible {
-    outline: 2px solid var(--hs-primary);
+    outline: 2px solid var(--green);
     outline-offset: 3px;
     border-radius: 3px;
+}
+
+/* Buttons */
+.hs-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 45px;
+    padding: 11px 17px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.5;
+    cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.hs-button-primary {
+    background: var(--green);
+    color: #fff;
+}
+
+.hs-button-primary:hover:not(:disabled) {
+    background: var(--green-dark);
+}
+
+.hs-button-secondary {
+    border-color: #d4ded5;
+    background: #fff;
+    color: #385746;
+}
+
+.hs-button-secondary:hover:not(:disabled) {
+    background: #f1f6f1;
+}
+
+.hs-button:disabled {
+    cursor: wait;
+    opacity: .65;
 }
 
 .login-button,
@@ -130,12 +277,30 @@
     width: 100%;
 }
 
+/* Messages */
+.hs-message {
+    border-radius: 9px;
+    padding: 13px 15px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #4e6255;
+    background: #edf5ef;
+    border: 1px solid #d9e8dc;
+    overflow-wrap: anywhere;
+}
+
+#message:empty,
+#forgotMessage:empty {
+    display: none;
+}
+
+/* Divider */
 .login-divider {
     display: flex;
     align-items: center;
     gap: 12px;
     margin: 22px 0 18px;
-    color: var(--hs-muted);
+    color: var(--muted);
     font-size: 13px;
 }
 
@@ -144,35 +309,44 @@
     content: "";
     flex: 1;
     height: 1px;
-    background: var(--hs-border);
+    background: var(--line);
 }
 
 .login-divider span {
     flex: 0 0 auto;
 }
 
+.hs-divider {
+    height: 1px;
+    margin: 22px 0;
+    background: var(--line);
+}
+
+/* Register */
 .register-link {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    color: var(--hs-muted);
+    color: var(--muted);
     font-size: 14px;
     text-align: center;
 }
 
 .register-link a {
-    color: var(--hs-primary);
+    color: var(--green);
     font-weight: 600;
     text-decoration: none;
 }
 
 .register-link a:hover {
-    color: var(--hs-primary-hover);
+    color: var(--green-dark);
     text-decoration: underline;
 }
 
-.forgot-card[hidden] {
+/* Forgot password */
+.forgot-card[hidden],
+#otpSection[hidden] {
     display: none;
 }
 
@@ -185,15 +359,6 @@
     min-height: 0;
 }
 
-#message:empty,
-#forgotMessage:empty {
-    display: none;
-}
-
-#otpSection[hidden] {
-    display: none;
-}
-
 #forgotPasswordForm {
     scroll-margin-top: 20px;
 }
@@ -203,15 +368,43 @@
     font-weight: 600;
 }
 
+/* Footer */
+.hs-footer {
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* Accessibility */
+.hs-header a:focus-visible,
+.hs-footer a:focus-visible,
+.hs-button:focus-visible,
+.hs-input:focus-visible {
+    outline: 3px solid #5a986d;
+    outline-offset: 3px;
+}
+
+/* Mobile */
 @media (max-width: 600px) {
+    .hs-header-inner {
+        padding: 14px 18px;
+    }
+
+    .hs-brand-name {
+        font-size: 20px;
+    }
+
     .login-main {
         align-items: stretch;
+        padding: 24px 16px 32px;
         gap: 16px;
     }
 
     .login-card,
     .forgot-card {
         width: 100%;
+        padding: 22px 18px;
     }
 
     .login-heading h1 {
@@ -222,10 +415,7 @@
         align-items: flex-start;
     }
 
-    .remember-option {
-        min-height: 32px;
-    }
-
+    .remember-option,
     .text-button {
         min-height: 32px;
     }
