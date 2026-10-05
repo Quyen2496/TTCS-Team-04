@@ -153,3 +153,202 @@ resetFilterButton.addEventListener('click', () => {
 });
 
 loadRooms();
+// ===================================================
+// S2-09: LOGIC XỬ LÝ ẢNH LOẠI PHÒNG
+// ===================================================
+let currentImages = [];
+let draggedItemIndex = null;
+
+const imageFileInput = document.getElementById('imageFileInput');
+const uploadDropzone = document.getElementById('uploadDropzone');
+const imageGrid = document.getElementById('imageGrid');
+const emptyImageState = document.getElementById('emptyImageState');
+const imageStatusMsg = document.getElementById('imageStatusMsg');
+const uploadProgress = document.getElementById('uploadProgress');
+const uploadProgressBar = document.getElementById('uploadProgressBar');
+
+if (uploadDropzone) {
+  uploadDropzone.addEventListener('click', () => imageFileInput.click());
+}
+
+if (imageFileInput) {
+  imageFileInput.addEventListener('change', (e) => {
+    handleFileUpload(e.target.files);
+  });
+}
+
+function showStatus(msg, type = 'error') {
+  if (!imageStatusMsg) return;
+  imageStatusMsg.className = `status-message ${type}`;
+  imageStatusMsg.innerText = msg;
+  setTimeout(() => {
+    imageStatusMsg.className = 'status-message';
+    imageStatusMsg.innerText = '';
+  }, 5000);
+}
+
+async function loadRoomTypeImages(roomTypeId) {
+  document.getElementById('currentRoomTypeId').value = roomTypeId;
+  try {
+    const res = await fetch(`/api/rooms/room-types/${roomTypeId}`);
+    if (!res.ok) throw new Error('Không thể lấy thông tin loại phòng');
+    const data = await res.json();
+    
+    currentImages = (data.images || []).sort((a, b) => a.order - b.order);
+    renderImageGrid();
+  } catch (err) {
+    showStatus(err.message, 'error');
+  }
+}
+
+function renderImageGrid() {
+  if (!imageGrid) return;
+  imageGrid.innerHTML = '';
+  
+  if (!currentImages || currentImages.length === 0) {
+    if (emptyImageState) emptyImageState.style.display = 'block';
+    imageGrid.appendChild(emptyImageState);
+    return;
+  }
+
+  if (emptyImageState) emptyImageState.style.display = 'none';
+
+  currentImages.forEach((img, index) => {
+    const item = document.createElement('div');
+    item.className = 'image-item';
+    item.setAttribute('draggable', 'true');
+    item.dataset.id = img._id;
+    item.dataset.index = index;
+
+    item.innerHTML = `
+      ${img.isPrimary ? '<span class="primary-badge">Đại diện</span>' : ''}
+      <img src="${img.thumbUrl || img.url}" alt="Ảnh loại phòng" />
+      <button class="btn-delete-img" onclick="deleteImage('${img._id}')" title="Xoá ảnh">✕</button>
+    `;
+
+    item.addEventListener('dragstart', () => {
+      draggedItemIndex = index;
+      item.classList.add('dragging');
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('dragging');
+    });
+
+    item.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    item.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const targetIndex = index;
+      if (draggedItemIndex !== null && draggedItemIndex !== targetIndex) {
+        reorderImagesUI(draggedItemIndex, targetIndex);
+      }
+    });
+
+    imageGrid.appendChild(item);
+  });
+}
+
+async function handleFileUpload(files) {
+  const roomTypeId = document.getElementById('currentRoomTypeId').value;
+  if (!roomTypeId) return showStatus('Chưa chọn loại phòng!', 'error');
+
+  if (files.length === 0) return;
+
+  if (currentImages.length + files.length > 8) {
+    return showStatus('Số lượng ảnh vượt quá giới hạn 8 ảnh/loại phòng!', 'error');
+  }
+
+  const formData = new FormData();
+  for (let file of files) {
+    if (!['image/jpeg', 'image/png'].includes(file.type)) {
+      return showStatus(`File ${file.name} không đúng định dạng JPG/PNG!`, 'error');
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      return showStatus(`File ${file.name} vượt quá dung lượng 5MB!`, 'error');
+    }
+    formData.append('images', file);
+  }
+
+  uploadDropzone.classList.add('disabled');
+  uploadProgress.style.display = 'block';
+  uploadProgressBar.style.width = '30%';
+
+  try {
+    const res = await fetch(`/api/rooms/room-types/${roomTypeId}/images`, {
+      method: 'POST',
+      body: formData
+    });
+
+    uploadProgressBar.style.width = '100%';
+    const result = await res.json();
+
+    if (!res.ok) throw new Error(result.message || 'Upload thất bại');
+
+    currentImages = result.images.sort((a, b) => a.order - b.order);
+    renderImageGrid();
+    showStatus('Upload ảnh thành công!', 'success');
+  } catch (err) {
+    showStatus(err.message, 'error');
+  } finally {
+    uploadDropzone.classList.remove('disabled');
+    setTimeout(() => {
+      uploadProgress.style.display = 'none';
+      uploadProgressBar.style.width = '0%';
+    }, 500);
+    imageFileInput.value = '';
+  }
+}
+
+async function reorderImagesUI(fromIndex, toIndex) {
+  const roomTypeId = document.getElementById('currentRoomTypeId').value;
+  
+  const movedItem = currentImages.splice(fromIndex, 1)[0];
+  currentImages.splice(toIndex, 0, movedItem);
+
+  renderImageGrid();
+
+  const imageIds = currentImages.map(img => img._id);
+
+  try {
+    const res = await fetch(`/api/rooms/room-types/${roomTypeId}/images/reorder`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ imageIds })
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.message || 'Lưu thứ tự thất bại');
+
+    currentImages = result.images.sort((a, b) => a.order - b.order);
+    renderImageGrid();
+    showStatus('Đã lưu thứ tự ảnh mới!', 'success');
+  } catch (err) {
+    showStatus(err.message, 'error');
+    loadRoomTypeImages(roomTypeId);
+  }
+}
+
+async function deleteImage(imageId) {
+  const roomTypeId = document.getElementById('currentRoomTypeId').value;
+
+  const confirmDelete = confirm('Bạn có chắc chắn muốn xoá ảnh này không?');
+  if (!confirmDelete) return;
+
+  try {
+    const res = await fetch(`/api/rooms/room-types/${roomTypeId}/images/${imageId}`, {
+      method: 'DELETE'
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.message || 'Xoá ảnh thất bại');
+
+    currentImages = result.images.sort((a, b) => a.order - b.order);
+    renderImageGrid();
+    showStatus('Xoá ảnh thành công!', 'success');
+  } catch (err) {
+    showStatus(err.message, 'error');
+  }
+}
