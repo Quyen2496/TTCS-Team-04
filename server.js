@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./src/config/db");
 const receptionRoutes = require("./src/modules/reception/routes");
+const roomRoutes = require("./src/modules/rooms/room.router");
 const { notFound, errorHandler } = require("./src/middleware/errorHandler");
 
 const app = express();
@@ -20,6 +21,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/reception", receptionRoutes);
+app.use("/api/rooms", roomRoutes);
 
 app.get("/", (req, res) => res.sendFile(require("path").join(process.cwd(), "public", "index.html")));
 app.use(notFound);
@@ -35,7 +37,4 @@ async function start() {
   });
 }
 
-start().catch((error) => {
-  console.error("Cannot start server:", error.message);
-  process.exit(1);
-});
+start();

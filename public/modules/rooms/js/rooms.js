@@ -1,155 +1,278 @@
-const API_URL = '/api/rooms';
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý phòng</title>
+    <link rel="stylesheet" href="./css/room.css">
+</head>
 
-const roomTypeIdInput = document.getElementById('roomTypeId');
-const floorInput = document.getElementById('floor');
-const statusSelect = document.getElementById('status');
+<body>
 
-const filterButton = document.getElementById('filterButton');
-const resetFilterButton = document.getElementById('resetFilter');
-const reloadButton = document.getElementById('reloadButton');
+<header class="page-header">
+    <div>
+        <h1>Quản lý phòng</h1>
+        <p>Quản lý phòng vật lý và trạng thái phòng</p>
+    </div>
+</header>
 
-const roomCount = document.getElementById('roomCount');
-const roomTableBody = document.getElementById('roomTableBody');
+<main class="container">
 
-const loading = document.getElementById('loading');
-const error = document.getElementById('error');
-const empty = document.getElementById('empty');
-const roomTableWrapper = document.getElementById('roomTableWrapper');
+    <!-- BỘ LỌC -->
+    <section class="filter-card">
+        <div class="filter-header">
+            <h2>Bộ lọc</h2>
 
-const statusLabels = {
-    CLEAN_VACANT: 'Sạch - Trống',
-    DIRTY_VACANT: 'Bẩn - Trống',
-    OCCUPIED: 'Đang có khách',
-    MAINTENANCE: 'Bảo trì'
-};
+            <button id="resetFilter" type="button" class="btn-secondary">
+                Xóa bộ lọc
+            </button>
+        </div>
 
-function showOnly(element) {
-    loading.classList.add('hidden');
-    error.classList.add('hidden');
-    empty.classList.add('hidden');
-    roomTableWrapper.classList.add('hidden');
+        <div class="filter-grid">
 
-    if (element) {
-        element.classList.remove('hidden');
-    }
-}
+            <div class="form-group">
+                <label for="roomTypeId">Loại phòng</label>
 
-function getStatusClass(status) {
-    switch (status) {
-        case 'CLEAN_VACANT':
-            return 'status status-clean';
+                <input
+                    id="roomTypeId"
+                    type="text"
+                    placeholder="Nhập roomTypeId"
+                >
+            </div>
 
-        case 'DIRTY_VACANT':
-            return 'status status-dirty';
+            <div class="form-group">
+                <label for="floor">Tầng</label>
 
-        case 'OCCUPIED':
-            return 'status status-occupied';
+                <input
+                    id="floor"
+                    type="number"
+                    min="1"
+                    placeholder="Ví dụ: 1"
+                >
+            </div>
 
-        case 'MAINTENANCE':
-            return 'status status-maintenance';
+            <div class="form-group">
+                <label for="status">Trạng thái</label>
 
-        default:
-            return 'status';
-    }
-}
+                <select id="status">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="CLEAN_VACANT">Sạch - Trống</option>
+                    <option value="DIRTY_VACANT">Bẩn - Trống</option>
+                    <option value="OCCUPIED">Đang có khách</option>
+                    <option value="MAINTENANCE">Bảo trì</option>
+                </select>
+            </div>
 
-function getStatusLabel(status) {
-    return statusLabels[status] || status;
-}
+            <div class="filter-action">
+                <button
+                    id="filterButton"
+                    type="button"
+                    class="btn-primary"
+                >
+                    Lọc phòng
+                </button>
+            </div>
 
-function renderRooms(rooms) {
-    roomTableBody.innerHTML = '';
+        </div>
+    </section>
 
-    roomCount.textContent = `${rooms.length} phòng`;
+    <!-- DANH SÁCH PHÒNG -->
+    <section class="room-card">
 
-    if (rooms.length === 0) {
-        showOnly(empty);
-        return;
-    }
+        <div class="room-card-header">
 
-    rooms.forEach((room, index) => {
-        const row = document.createElement('tr');
+            <div>
+                <h2>Danh sách phòng</h2>
+                <span id="roomCount">0 phòng</span>
+            </div>
 
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td><strong>${escapeHtml(room.roomNumber)}</strong></td>
-            <td>${escapeHtml(room.roomTypeId || '')}</td>
-            <td>${room.floor}</td>
-            <td>
-                <span class="${getStatusClass(room.status)}">
-                    ${escapeHtml(getStatusLabel(room.status))}
-                </span>
-            </td>
-        `;
+            <div>
+                <button
+                    id="addRoomButton"
+                    type="button"
+                    class="btn-primary"
+                >
+                    + Thêm phòng
+                </button>
 
-        roomTableBody.appendChild(row);
-    });
+                <button
+                    id="reloadButton"
+                    type="button"
+                    class="btn-secondary"
+                >
+                    Làm mới
+                </button>
+            </div>
 
-    showOnly(roomTableWrapper);
-}
+        </div>
 
-function escapeHtml(value) {
-    return String(value)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-}
+        <!-- LOADING -->
+        <div id="loading" class="state-message hidden">
+            Đang tải danh sách phòng...
+        </div>
 
-async function loadRooms() {
-    showOnly(loading);
+        <!-- ERROR -->
+        <div id="error" class="state-message error hidden"></div>
 
-    const params = new URLSearchParams();
+        <!-- EMPTY -->
+        <div id="empty" class="state-message hidden">
+            Không có phòng phù hợp.
+        </div>
 
-    const roomTypeId = roomTypeIdInput.value.trim();
-    const floor = floorInput.value.trim();
-    const status = statusSelect.value;
+        <!-- TABLE -->
+        <div id="roomTableWrapper" class="table-wrapper hidden">
 
-    if (roomTypeId) {params.set('roomTypeId', roomTypeId);
-    }
+            <table>
 
-    if (floor) {
-        params.set('floor', floor);
-    }
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Số phòng</th>
+                        <th>Loại phòng</th>
+                        <th>Tầng</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
 
-    if (status) {
-        params.set('status', status);
-    }
+                <tbody id="roomTableBody"></tbody>
 
-    const query = params.toString();
+            </table>
 
-    const url = query
-        ? `${API_URL}?${query}`
-        : API_URL;
+        </div>
 
-    try {
-        const response = await fetch(url);
+    </section>
 
-        const result = await response.json();
+</main>
 
-        if (!response.ok) {
-            throw new Error(result.message || 'Không thể lấy danh sách phòng');
-        }
+<!-- MODAL THÊM / SỬA PHÒNG -->
+<div id="roomModal" class="modal hidden">
 
-        renderRooms(result.data || []);
-    } catch (err) {
-        roomCount.textContent = '0 phòng';
-        error.textContent = err.message || 'Đã xảy ra lỗi khi tải danh sách phòng';
-        showOnly(error);
-    }
-}
+    <div class="modal-content">
 
-filterButton.addEventListener('click', loadRooms);
+        <div class="modal-header">
 
-reloadButton.addEventListener('click', loadRooms);
+            <h2 id="modalTitle">Thêm phòng</h2>
 
-resetFilterButton.addEventListener('click', () => {
-    roomTypeIdInput.value = '';
-    floorInput.value = '';
-    statusSelect.value = '';
+            <button
+                id="closeModalButton"
+                type="button"
+                class="btn-secondary"
+            >
+                Đóng
+            </button>
 
-    loadRooms();
-});
+        </div>
 
-loadRooms();
+        <form id="roomForm">
+
+            <input
+                type="hidden"
+                id="roomId"
+            >
+
+            <div class="form-group">
+                <label for="roomNumber">
+                    Số phòng <span>*</span>
+                </label>
+
+                <input
+                    id="roomNumber"
+                    type="text"
+                    placeholder="Ví dụ: 101"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="formRoomTypeId">
+                    Loại phòng <span>*</span>
+                </label>
+
+                <input
+                    id="formRoomTypeId"
+                    type="text"
+                    placeholder="Nhập RoomType ID"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="formFloor">
+                    Tầng <span>*</span>
+                </label>
+
+                <input
+                    id="formFloor"
+                    type="number"
+                    min="1"
+                    placeholder="Ví dụ: 1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="formStatus">
+                    Trạng thái
+                </label>
+
+                <select id="formStatus">
+                    <option value="CLEAN_VACANT">
+                        Sạch - Trống
+                    </option>
+
+                    <option value="DIRTY_VACANT">
+                        Bẩn - Trống
+                    </option>
+
+                    <option value="OCCUPIED">
+                        Đang có khách
+                    </option>
+
+                    <option value="MAINTENANCE">
+                        Bảo trì
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="note">
+                    Ghi chú
+                </label>
+
+                <textarea
+                    id="note"
+                    rows="4"
+                    placeholder="Nhập ghi chú cho phòng..."
+                ></textarea>
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelRoomButton"
+                    class="btn-secondary"
+                >
+                    Hủy
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Lưu phòng
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="./js/rooms.js"></script>
+
+</body>
+</html>

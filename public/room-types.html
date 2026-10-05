@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Loại Phòng</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-gradient">
+  <!-- Header dùng chung -->
+  <header class="main-header">
+    <h1>HỆ THỐNG QUẢN LÝ KHÁCH SẠN</h1>
+    <nav>
+      <a href="./rooms.html">Quản lý Phòng</a>
+      <a href="./room-types.html" class="active">Loại Phòng</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card-header">
+      <h2>Danh sách Loại phòng</h2>
+      <button class="btn btn-primary" onclick="openAddModal()">+ Thêm loại phòng mới</button>
+    </div>
+
+    <!-- Bảng danh sách Loại phòng -->
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Mã loại</th>
+            <th>Tên loại phòng</th>
+            <th>Sức chứa (Tiêu chuẩn / Tối đa)</th>
+            <th>Thông tin giường</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="roomTypeTableBody">
+          <!-- Dữ liệu sẽ được tự động đổ từ API vào đây -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="./js/room-types.js"></script>
+</body>
+</html>
+<!-- Modal Popup Thêm/Sửa Loại Phòng -->
+<div id="roomTypeModal" class="modal" style="display: none;">
+  <div class="modal-content card">
+    <h3 id="modalTitle">Thêm loại phòng mới</h3>
+    <form id="roomTypeForm" onsubmit="handleSaveRoomType(event)">
+      <input type="hidden" id="roomTypeId">
+
+      <div class="form-group">
+        <label>Mã loại phòng (*):</label>
+        <input type="text" id="code" required placeholder="VD: DELUXE, VIP..." class="input-control">
+      </div>
+
+      <div class="form-group">
+        <label>Tên loại phòng (*):</label>
+        <input type="text" id="name" required placeholder="VD: Phòng Đôi VIP" class="input-control">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Sức chứa tiêu chuẩn (*):</label>
+          <input type="number" id="standardCapacity" min="1" required class="input-control" value="2">
+        </div>
+        <div class="form-group">
+          <label>Sức chứa tối đa (*):</label>
+          <input type="number" id="maxCapacity" min="1" required class="input-control" value="2">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Thông tin giường:</label>
+        <input type="text" id="bedInfo" placeholder="VD: 1 Giường Đôi Large" class="input-control">
+      </div>
+
+      <div class="form-group">
+        <label>Mô tả:</label>
+        <textarea id="description" class="input-control" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Trạng thái kinh doanh:</label>
+        <select id="status" class="input-control">
+          <option value="ACTIVE">Đang kinh doanh</option>
+          <option value="STOP_SELLING">Ngừng bán</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Hủy</button>
+        <button type="submit" class="btn btn-primary">Lưu loại phòng</button>
+      </div>
+    </form>
+  </div>
+</div>
