@@ -1,28 +1,22 @@
 {
-  "name": "ttcs-team-04",
+  "name": "ttcs-team-04-reception-backend",
   "version": "1.0.0",
-  "description": "TTCS Team 04 - HomeStay",
+  "private": true,
+  "description": "Backend API check-in cho module reception - T2 Quang",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
     "dev": "node --watch server.js",
-    "seed": "node scripts/seed.js"
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Quyen2496/TTCS-Team-04.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "bcrypt": "^6.0.0",
-    "cookie-parser": "^1.4.7",
-    "dotenv": "^17.2.2",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.18.1",
-    "multer": "^2.0.2"
-  }
+  "bcrypt": "^6.0.0",
+  "cookie-parser": "^1.4.7",
+  "cors": "^2.8.6",
+  "dotenv": "^16.4.5",
+  "express": "^4.21.2",
+  "jsonwebtoken": "^9.0.3",
+  "mongoose": "^8.8.4",
+  "multer": "^2.4.0",
+  "nodemailer": "^10.0.14"
+}
 }

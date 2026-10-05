@@ -1,0 +1,46 @@
+.reception-filter-row{display:grid;grid-template-columns:260px minmax(220px,1fr);gap:14px;margin-bottom:16px}
+.reception-room-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.reception-room-card{position:relative;overflow:hidden;border:1px solid #e4e9f5;border-radius:16px;padding:16px;background:linear-gradient(145deg,#fff 60%,#f4f7ff);box-shadow:0 8px 22px rgba(46,57,104,.07);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.reception-room-card::before{position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,#6254d9,#31b6b0);content:""}
+.reception-room-card:hover{transform:translateY(-3px);border-color:#c9c5f5;box-shadow:0 14px 30px rgba(46,57,104,.13)}
+.reception-room-card-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.reception-room-number{font-weight:800;font-size:17px;color:#342d75}
+.reception-status{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;border:1px solid transparent;letter-spacing:.01em}
+.reception-status-clean{background:#e3f8ee;color:#14734a;border-color:#b7ebd0}
+.reception-status-dirty{background:#fff2d8;color:#98600b;border-color:#f4d99a}
+.reception-status-occupied{background:#e6efff;color:#315db5;border-color:#c6d7ff}
+.reception-status-maintenance{background:#ffe8ed;color:#b22f58;border-color:#ffc7d3}
+.reception-room-meta{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:12px;margin:14px 0}
+.reception-room-meta strong{color:#384367}
+.reception-room-actions{display:flex;gap:8px;flex-wrap:wrap}
+.reception-small-btn{padding:8px 10px;font-size:12px}
+.reception-history{margin-top:13px;border-top:1px solid #e8e9f3;padding-top:10px;font-size:12px}
+.reception-history summary{cursor:pointer;font-weight:700;color:#5145a5}
+.reception-history-list{display:grid;gap:8px;margin-top:9px}
+.reception-history-item{padding:9px;border-radius:10px;background:#f4f5ff;display:flex;flex-direction:column;gap:3px}
+.reception-history-item span{color:var(--muted)}
+.reception-booking-filters{display:grid;grid-template-columns:1fr 1fr 1fr 1.4fr;gap:12px;margin-bottom:16px}
+.table-wrap{overflow:auto;border:1px solid #e2e5f1;border-radius:14px}
+.reception-table{width:100%;border-collapse:collapse;min-width:900px;background:#fff}
+.reception-table th,.reception-table td{padding:12px 13px;text-align:left;border-bottom:1px solid #eceef5;font-size:13px;white-space:nowrap}
+.reception-table th{background:linear-gradient(90deg,#f0efff,#e8f7f7);color:#454078;font-size:12px}
+.reception-table tbody tr:nth-child(even){background:#fbfbff}
+.reception-table tbody tr:hover{background:#f0f1ff}
+.pagination{display:flex;align-items:center;justify-content:center;gap:14px;padding-top:15px}
+.pagination span{font-size:13px;color:var(--muted);font-weight:700}
+.reception-assign-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:13px;align-items:end;margin-top:15px}
+.hs-section[aria-labelledby="rooms-title"] .section-title>.step{background:#e8e6ff;color:#5546c7}
+.hs-section[aria-labelledby="maintenance-title"] .section-title>.step{background:#ffefda;color:#c16b12}
+.hs-section[aria-labelledby="booking-title"] .section-title>.step{background:#dff5f3;color:#16837d}
+.hs-section[aria-labelledby="assign-title"] .section-title>.step{background:#ffe6ed;color:#be4167}
+.hs-section[aria-labelledby="rooms-title"]{border-top:3px solid #6558d8}
+.hs-section[aria-labelledby="maintenance-title"]{border-top:3px solid #f0a23a}
+.hs-section[aria-labelledby="booking-title"]{border-top:3px solid #28aaa2}
+.hs-section[aria-labelledby="assign-title"]{border-top:3px solid #e36c91}
+.hs-section .step{border-radius:10px}
+.reception-refresh{background:#f0efff!important;color:#4d42b3!important;border-color:#d6d2ff!important}
+.reception-refresh:hover:not(:disabled){background:#e5e2ff!important}
+.page-title .note-pill{background:linear-gradient(110deg,#eeeaff,#e2f8f5);border-color:#d4d0fb;color:#5145aa}
+@media(max-width:1000px){.reception-room-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.reception-booking-filters{grid-template-columns:1fr 1fr}.reception-assign-grid{grid-template-columns:1fr 1fr}.reception-assign-grid>.btn{grid-column:1/-1;justify-self:start}}
+@media(max-width:640px){.reception-filter-row,.reception-booking-filters,.reception-assign-grid{grid-template-columns:1fr}.reception-room-grid{grid-template-columns:1fr}.reception-section-title{gap:9px}.reception-section-title>div{min-width:0}.reception-section-title h2{font-size:17px}.reception-section-title p{font-size:12px}.reception-refresh{font-size:12px;padding:8px 10px}.reception-room-card{padding:14px}}
+@media(prefers-reduced-motion:reduce){.reception-room-card{transition:none}.reception-room-card:hover{transform:none}}

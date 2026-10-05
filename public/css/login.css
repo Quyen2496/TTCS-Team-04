@@ -1,0 +1,243 @@
+.login-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.login-card,
+.forgot-card {
+    width: min(100%, 460px);
+}
+
+.login-heading,
+.forgot-heading {
+    margin-bottom: 24px;
+}
+
+.login-heading h1,
+.forgot-heading h2 {
+    margin: 0 0 8px;
+    color: var(--hs-text);
+}
+
+.login-heading h1 {
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+.forgot-heading h2 {
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.login-heading p,
+.forgot-heading p {
+    margin: 0;
+    color: var(--hs-muted);
+    line-height: 1.55;
+    font-size: 14px;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field .hs-input {
+    padding-right: 48px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 7px;
+    color: var(--hs-muted);
+    background: transparent;
+}
+
+.password-toggle:hover {
+    color: var(--hs-primary);
+    background: var(--hs-light-green);
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid var(--hs-primary);
+    outline-offset: 1px;
+}
+
+.password-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.login-options {
+    min-height: 28px;
+    margin: -2px 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 13px;
+}
+
+.remember-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--hs-muted);
+    cursor: pointer;
+}
+
+.remember-option input {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: var(--hs-primary);
+}
+
+.text-button {
+    padding: 0;
+    border: 0;
+    color: var(--hs-primary);
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.text-button:hover {
+    color: var(--hs-primary-hover);
+    text-decoration: underline;
+}
+
+.text-button:focus-visible {
+    outline: 2px solid var(--hs-primary);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+.login-button,
+.full-button {
+    width: 100%;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 18px;
+    color: var(--hs-muted);
+    font-size: 13px;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hs-border);
+}
+
+.login-divider span {
+    flex: 0 0 auto;
+}
+
+.register-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--hs-muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.register-link a {
+    color: var(--hs-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    color: var(--hs-primary-hover);
+    text-decoration: underline;
+}
+
+.forgot-card[hidden] {
+    display: none;
+}
+
+.close-forgot {
+    margin-top: 14px;
+}
+
+#message,
+#forgotMessage {
+    min-height: 0;
+}
+
+#message:empty,
+#forgotMessage:empty {
+    display: none;
+}
+
+#otpSection[hidden] {
+    display: none;
+}
+
+#forgotPasswordForm {
+    scroll-margin-top: 20px;
+}
+
+#resetOtp {
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .login-main {
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .login-card,
+    .forgot-card {
+        width: 100%;
+    }
+
+    .login-heading h1 {
+        font-size: 25px;
+    }
+
+    .login-options {
+        align-items: flex-start;
+    }
+
+    .remember-option {
+        min-height: 32px;
+    }
+
+    .text-button {
+        min-height: 32px;
+    }
+}
+
+@media (max-width: 380px) {
+    .login-options {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .login-heading h1 {
+        font-size: 23px;
+    }
+}

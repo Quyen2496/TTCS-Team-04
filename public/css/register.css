@@ -1,0 +1,72 @@
+.register-main {
+    display: flex;
+    justify-content: center;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 460px;
+}
+
+.register-heading {
+    margin-bottom: 24px;
+}
+
+.register-heading h1 {
+    margin: 0 0 8px;
+    color: var(--hs-text);
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+.register-heading p {
+    margin: 0;
+    color: var(--hs-muted);
+    line-height: 1.55;
+}
+
+.register-button {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.register-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 16px;
+    color: var(--hs-muted);
+    font-size: 13px;
+}
+
+.register-divider::before,
+.register-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hs-border);
+}
+
+.back-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+}
+
+.back-login-button:hover {
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .register-heading h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 380px) {
+    .register-card {
+        padding: 16px;
+    }
+}

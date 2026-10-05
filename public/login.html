@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - HomeStay</title>
+
+    <link rel="stylesheet" href="/css/homestay-ui.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body class="homestay-ui">
+
+<header class="hs-header">
+    <div class="hs-header-inner">
+        <a class="hs-brand" href="/">
+            <svg class="hs-brand-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <path
+                    d="M6 22.5 24 7l18 15.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+                <path
+                    d="M10.5 20.5V40h27V20.5M19 40V27h10v13"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+
+            <span class="hs-brand-text">
+                <span class="hs-brand-name">HomeStay</span>
+                <span class="hs-brand-caption">Hệ thống quản lý lưu trú</span>
+            </span>
+        </a>
+    </div>
+</header>
+
+<main class="hs-main login-main">
+
+    <section class="login-card hs-card">
+
+        <div class="login-heading">
+            <h1>Đăng nhập</h1>
+            <p>Đăng nhập để tiếp tục sử dụng hệ thống HomeStay.</p>
+        </div>
+
+        <form id="loginForm" novalidate>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="username">
+                    Tên đăng nhập
+                    <span class="hs-required">*</span>
+                </label>
+
+                <input
+                    class="hs-input"
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Nhập tên đăng nhập"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="password">
+                    Mật khẩu
+                    <span class="hs-required">*</span>
+                </label>
+
+                <div class="password-field">
+                    <input
+                        class="hs-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Nhập mật khẩu"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="password-toggle"
+                        aria-label="Hiển thị mật khẩu"
+                        title="Hiển thị mật khẩu"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M2.5 12s3.5-5.5 9.5-5.5S21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12Z"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="2.5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="login-options">
+                <label class="remember-option">
+                    <input type="checkbox" id="rememberMe">
+                    <span>Ghi nhớ đăng nhập</span>
+                </label>
+
+                <button
+                    type="button"
+                    id="forgotPassword"
+                    class="text-button"
+                >
+                    Quên mật khẩu?
+                </button>
+            </div>
+
+            <button
+                type="submit"
+                id="loginButton"
+                class="hs-button hs-button-primary login-button"
+            >
+                <span id="loginButtonText">Đăng nhập</span>
+            </button>
+
+            <div
+                id="message"
+                class="hs-message"
+                role="alert"
+                aria-live="polite"
+            ></div>
+
+        </form>
+
+        <div class="login-divider">
+            <span>hoặc</span>
+        </div>
+
+        <div class="register-link">
+            <span>Chưa có tài khoản?</span>
+            <a href="/register.html">Đăng ký ngay</a>
+        </div>
+
+    </section>
+
+    <!-- Quên mật khẩu -->
+    <section
+        id="forgotPasswordForm"
+        class="forgot-card hs-card"
+        hidden
+    >
+        <div class="forgot-heading">
+            <h2>Đặt lại mật khẩu</h2>
+            <p>
+                Nhập email đã đăng ký để nhận mã OTP đặt lại mật khẩu.
+            </p>
+        </div>
+
+        <div class="hs-form-group">
+            <label class="hs-label" for="resetEmail">
+                Email
+                <span class="hs-required">*</span>
+            </label>
+
+            <input
+                class="hs-input"
+                type="email"
+                id="resetEmail"
+                placeholder="Nhập email của bạn"
+                autocomplete="email"
+            >
+        </div>
+
+        <button
+            type="button"
+            id="sendOtpButton"
+            class="hs-button hs-button-primary full-button"
+        >
+            <span id="sendOtpButtonText">Gửi mã OTP</span>
+        </button>
+
+        <div
+            id="forgotMessage"
+            class="hs-message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+        <div id="otpSection" hidden>
+
+            <div class="hs-divider"></div>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="resetOtp">
+                    Mã OTP
+                    <span class="hs-required">*</span>
+                </label>
+
+                <input
+                    class="hs-input"
+                    type="text"
+                    id="resetOtp"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    maxlength="6"
+                    placeholder="Nhập mã OTP 6 số"
+                >
+            </div>
+
+            <div class="hs-form-group">
+                <label class="hs-label" for="newPassword">
+                    Mật khẩu mới
+                    <span class="hs-required">*</span>
+                </label>
+
+                <input
+                    class="hs-input"
+                    type="password"
+                    id="newPassword"
+                    autocomplete="new-password"
+                    placeholder="Nhập mật khẩu mới"
+                >
+            </div>
+
+            <button
+                type="button"
+                id="resetPasswordButton"
+                class="hs-button hs-button-primary full-button"
+            >
+                <span id="resetPasswordButtonText">Đặt lại mật khẩu</span>
+            </button>
+
+        </div>
+
+        <button
+            type="button"
+            id="closeForgotPassword"
+            class="hs-button hs-button-secondary full-button close-forgot"
+        >
+            Quay lại đăng nhập
+        </button>
+    </section>
+
+</main>
+
+<footer class="hs-footer">
+    HomeStay · Hệ thống quản lý lưu trú
+</footer>
+
+<script src="/js/login.js"></script>
+</body>
+</html>
