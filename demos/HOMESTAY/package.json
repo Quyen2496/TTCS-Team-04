@@ -1,0 +1,25 @@
+{
+  "name": "homestay-solo-test",
+  "version": "1.1.0",
+  "private": true,
+  "description": "HOMESTAY độc lập cho Quý kiểm thử",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test test/*.test.js",
+    "setup:demo": "bash scripts/setup.sh --demo",
+    "setup:mongo": "bash scripts/setup.sh --mongo",
+    "update-data": "node scripts/seed.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "express": "4.21.2",
+    "mongoose": "8.8.4",
+    "bcryptjs": "2.4.3",
+    "dotenv": "16.4.5",
+    "jsonwebtoken": "9.0.2"
+  }
+}
