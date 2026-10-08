@@ -1,5 +1,6 @@
 const Booking = require('./booking.model');
 const RoomModule = require('../rooms/room.model');
+const crypto = require('crypto');
 
 // Hỗ trợ linh hoạt cả 2 kiểu export từ nhóm T5
 const Room = RoomModule.Room || RoomModule;
@@ -142,7 +143,103 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
   };
 };
 
+/**
+ * SPRINT 3 - T4: Tính báo giá chênh lệch khi đổi ngày / loại phòng
+ */
+const calculateModificationQuote = async ({ bookingId, newRoomTypeId, newCheckIn, newCheckOut }) => {
+  const booking = await Booking.findById(bookingId).lean();
+  if (!booking) {
+    throw new Error('Không tìm thấy đơn đặt phòng.');
+  }
+
+  const roomTypeId = newRoomTypeId || booking.roomTypeId;
+  const checkIn = newCheckIn || booking.checkIn;
+  const checkOut = newCheckOut || booking.checkOut;
+
+  const newQuote = await calculateQuote({
+    roomTypeId,
+    checkIn,
+    checkOut,
+    quantity: booking.quantity || 1
+  });
+
+  const priceDifference = newQuote.totalAmount - (booking.totalAmount || 0);
+
+  return {
+    oldTotalAmount: booking.totalAmount || 0,
+    newTotalAmount: newQuote.totalAmount,
+    priceDifference, // > 0: Khách cần trả thêm, < 0: Hoàn lại/giảm tiền
+    newQuoteDetails: newQuote
+  };
+};
+
+/**
+ * SPRINT 3 - T4: Cập nhật thông tin đặt phòng (Đổi ngày / loại phòng)
+ */
+const modifyBooking = async (bookingId, updateData) => {
+  const { newRoomTypeId, newCheckIn, newCheckOut, newTotalAmount } = updateData;
+
+  const updateFields = {};
+  if (newRoomTypeId) updateFields.roomTypeId = newRoomTypeId;
+  if (newCheckIn) updateFields.checkIn = new Date(newCheckIn);
+  if (newCheckOut) updateFields.checkOut = new Date(newCheckOut);
+  if (newTotalAmount !== undefined) updateFields.totalAmount = newTotalAmount;
+
+  const updatedBooking = await Booking.findByIdAndUpdate(
+    bookingId,
+    { $set: updateFields },
+    { new: true }
+  ).lean();
+
+  if (!updatedBooking) {
+    throw new Error('Không thể cập nhật đơn đặt phòng.');
+  }
+
+  return updatedBooking;
+};
+
+/**
+ * SPRINT 3 - T4: Tạo đơn đặt phòng trực tiếp cho khách vãng lai (Walk-in)
+ */
+const createWalkInBooking = async (walkInData) => {
+  const { guestName, phone, email, roomTypeId, checkIn, checkOut, guestCount, isPaidNow } = walkInData;
+
+  if (!guestName || !phone || !roomTypeId || !checkIn || !checkOut) {
+    throw new Error('Thiếu thông tin bắt buộc để tạo đơn khách vãng lai.');
+  }
+
+  // Tính báo giá tự động
+  const quote = await calculateQuote({
+    roomTypeId,
+    checkIn,
+    checkOut,
+    quantity: 1
+  });
+
+  // Sinh mã booking cho khách vãng lai (Ví dụ: WALK-A1B2C3)
+  const bookingCode = 'WALK-' + crypto.randomBytes(3).toString('hex').toUpperCase();
+
+  const newBooking = new Booking({
+    bookingCode,
+    guestName: guestName.trim(),
+    phone: phone.trim(),
+    email: email ? email.trim().toLowerCase() : 'walkin@homestay.com',
+    roomTypeId,
+    checkIn: new Date(checkIn),
+    checkOut: new Date(checkOut),
+    guestCount: parseInt(guestCount, 10) || 1,
+    totalAmount: quote.totalAmount,
+    status: isPaidNow ? 'CONFIRMED' : 'PENDING',
+    isWalkIn: true
+  });
+
+  return await newBooking.save();
+};
+
 module.exports = {
   getAvailableRoomTypes,
-  calculateQuote
+  calculateQuote,
+  calculateModificationQuote,
+  modifyBooking,
+  createWalkInBooking
 };

@@ -174,3 +174,89 @@ exports.getBookingByCodeAndEmail = async (req, res) => {
     return res.status(500).json({ message: 'Lỗi máy chủ', error: error.message });
   }
 };
+
+// 5. Task Sprint 3 (T4): Đổi ngày / loại phòng
+exports.modifyBooking = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    const { newRoomTypeId, newCheckIn, newCheckOut } = req.body;
+
+    if (!bookingId) {
+      return res.status(400).json({ success: false, message: 'Thiếu mã ID đặt phòng (bookingId).' });
+    }
+
+    if (!newRoomTypeId && !newCheckIn && !newCheckOut) {
+      return res.status(400).json({
+        success: false,
+        message: 'Vui lòng cung cấp thông tin mới cần thay đổi (loại phòng hoặc ngày checkIn/checkOut).'
+      });
+    }
+
+    // 1. Tính toán giá mới và chênh lệch từ Service
+    const quoteDiff = await bookingService.calculateModificationQuote({
+      bookingId,
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut
+    });
+
+    // 2. Cập nhật thông tin vào DB
+    const updatedBooking = await bookingService.modifyBooking(bookingId, {
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut,
+      newTotalAmount: quoteDiff.newTotalAmount
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Thay đổi thông tin đặt phòng thành công!',
+      priceDifference: quoteDiff.priceDifference,
+      oldTotalAmount: quoteDiff.oldTotalAmount,
+      newTotalAmount: quoteDiff.newTotalAmount,
+      data: updatedBooking
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'Lỗi máy chủ khi thay đổi thông tin đặt phòng.'
+    });
+  }
+};
+
+// 6. Task Sprint 3 (T4): Đặt phòng cho khách vãng lai (Walk-in Guest)
+exports.createWalkInBooking = async (req, res) => {
+  try {
+    const { guestName, phone, roomTypeId, checkIn, checkOut } = req.body;
+
+    if (!guestName || !phone || !roomTypeId || !checkIn || !checkOut) {
+      return res.status(400).json({
+        success: false,
+        message: 'Vui lòng cung cấp đầy đủ thông tin: Tên khách, SĐT, loại phòng, ngày checkIn và checkOut.'
+      });
+    }
+
+    // Validate định dạng SĐT
+    const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+    if (!phoneRegex.test(phone.trim())) {
+      return res.status(400).json({
+        success: false,
+        message: 'Số điện thoại không đúng định dạng (10 chữ số Việt Nam).'
+      });
+    }
+
+    // Gọi service tạo đơn vãng lai
+    const booking = await bookingService.createWalkInBooking(req.body);
+
+    return res.status(201).json({
+      success: true,
+      message: 'Tạo đơn đặt phòng cho khách vãng lai thành công!',
+      data: booking
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'Lỗi máy chủ khi tạo đơn khách vãng lai.'
+    });
+  }
+};

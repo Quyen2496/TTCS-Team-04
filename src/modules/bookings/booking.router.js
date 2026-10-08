@@ -14,4 +14,12 @@ router.post('/create', bookingController.createBooking);
 // Route S2-08: GET /api/bookings/lookup (Tra cứu thông tin đặt phòng)
 router.get('/lookup', bookingController.getBookingByCodeAndEmail);
 
+// --- SPRINT 3 (T4 - PHÚ) ---
+
+// Route Sprint 3: PUT /api/bookings/:bookingId/modify (Đổi ngày / loại phòng)
+router.put('/:bookingId/modify', bookingController.modifyBooking);
+
+// Route Sprint 3: POST /api/bookings/walk-in (Tạo đơn đặt phòng cho khách vãng lai tại quầy)
+router.post('/walk-in', bookingController.createWalkInBooking);
+
 module.exports = router;
