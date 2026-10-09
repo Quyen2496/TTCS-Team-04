@@ -135,23 +135,3 @@ exports.getBookingByCodeAndEmail = async (req, res) => {
     return res.status(500).json({ message: 'Lỗi máy chủ', error: error.message });
   }
 };
-
-// 5. Task S3-02: Hủy booking
-exports.cancelBooking = async (req, res) => {
-  try {
-    const { bookingId } = req.params;
-    const cancelledBooking = await bookingService.cancelBookingService(bookingId);
-
-    return res.status(200).json({
-      success: true,
-      message: 'Hủy booking thành công, phòng đã được giải phóng!',
-      data: cancelledBooking
-    });
-  } catch (error) {
-    const statusCode = error.statusCode || 500;
-    return res.status(statusCode).json({
-      success: false,
-      message: error.message || 'Lỗi khi hủy booking.'
-    });
-  }
-};

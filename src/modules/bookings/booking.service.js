@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Booking = require('./booking.model');
 const RoomModule = require('../rooms/room.model');
+const crypto = require('crypto');
 
 const Room = RoomModule.Room || RoomModule;
 const RoomType = RoomModule.RoomType || RoomModule;
@@ -127,78 +128,7 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
   };
 };
 
-/**
- * S3-02: Tạo Booking dùng Transaction kiểm tra trùng lịch đồng thời
- */
-const createBookingService = async (bookingData) => {
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
-  try {
-    const { roomTypeId, checkIn, checkOut } = bookingData;
-    const start = new Date(checkIn);
-    const end = new Date(checkOut);
-
-    if (start >= end) {
-      const error = new Error('Ngày trả phòng phải sau ngày nhận phòng.');
-      error.statusCode = 400;
-      throw error;
-    }
-
-    // Kiểm tra khoảng ngày giao nhau fél-open [start, end)
-    const overlappingBooking = await Booking.findOne({
-      roomTypeId: roomTypeId,
-      status: { $in: ['PENDING', 'CONFIRMED', 'PAID', 'CHECKED_IN'] },
-      $and: [
-        { checkIn: { $lt: end } },
-        { checkOut: { $gt: start } }
-      ]
-    }).session(session);
-
-    if (overlappingBooking) {
-      const error = new Error('Hết phòng');
-      error.statusCode = 409; // Trả lỗi 409 theo tiêu chí AC
-      throw error;
-    }
-
-    const newBooking = new Booking({
-      ...bookingData,
-      checkIn: start,
-      checkOut: end,
-      status: bookingData.status || 'PENDING'
-    });
-
-    await newBooking.save({ session });
-    await session.commitTransaction();
-    session.endSession();
-
-    return newBooking;
-  } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
-    throw error;
-  }
-};
-
-/**
- * S3-02: Hủy Booking (Giải phóng phòng ngay lập tức)
- */
-const cancelBookingService = async (bookingId) => {
-  const booking = await Booking.findById(bookingId);
-  if (!booking) {
-    const error = new Error('Không tìm thấy thông tin đặt phòng.');
-    error.statusCode = 404;
-    throw error;
-  }
-
-  booking.status = 'CANCELLED';
-  await booking.save();
-  return booking;
-};
-
 module.exports = {
   getAvailableRoomTypes,
-  calculateQuote,
-  createBookingService,
-  cancelBookingService
+  calculateQuote
 };

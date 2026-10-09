@@ -8,7 +8,4 @@ router.post('/quote', bookingController.calculateQuote);
 router.post('/create', bookingController.createBooking);
 router.get('/lookup', bookingController.getBookingByCodeAndEmail);
 
-// Task S3-02: Route Hủy booking
-router.patch('/:bookingId/cancel', verifyToken, bookingController.cancelBooking);
-
 module.exports = router;
