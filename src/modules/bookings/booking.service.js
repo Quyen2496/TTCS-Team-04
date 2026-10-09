@@ -1,7 +1,7 @@
+const mongoose = require('mongoose');
 const Booking = require('./booking.model');
 const RoomModule = require('../rooms/room.model');
 
-// Hỗ trợ linh hoạt cả 2 kiểu export từ nhóm T5
 const Room = RoomModule.Room || RoomModule;
 const RoomType = RoomModule.RoomType || RoomModule;
 
@@ -12,7 +12,6 @@ const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
   const start = new Date(checkIn);
   const end = new Date(checkOut);
 
-  // 1. Kiểm tra ngày hợp lệ
   if (isNaN(start.getTime()) || isNaN(end.getTime())) {
     throw new Error('Ngày nhận hoặc trả phòng không đúng định dạng.');
   }
@@ -21,25 +20,21 @@ const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
   }
 
   const parsedGuestCount = parseInt(guestCount, 10) || 1;
-
-  // 2. Lấy danh sách tất cả loại phòng
   const allRoomTypes = await RoomType.find({}).lean();
 
   if (!allRoomTypes || allRoomTypes.length === 0) {
     return [];
   }
 
-  // Lọc loại phòng theo sức chứa nếu Schema có khai báo trường capacity
   const eligibleRoomTypes = allRoomTypes.filter(rt => {
     if (rt.capacity !== undefined) {
       return rt.capacity >= parsedGuestCount;
     }
-    return true; // Nếu loại phòng không định nghĩa capacity thì vẫn giữ lại
+    return true;
   });
 
   const eligibleTypeIds = eligibleRoomTypes.map(rt => rt._id);
 
-  // 3. Lấy danh sách các phòng thực tế không bị bảo trì
   const activeRooms = await Room.find({
     $or: [
       { roomTypeId: { $in: eligibleTypeIds } },
@@ -49,7 +44,6 @@ const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
     status: { $ne: 'MAINTENANCE' }
   }).lean();
 
-  // 4. Tìm các Booking trùng lịch
   const overlappingBookings = await Booking.find({
     status: { $in: ['PENDING', 'CONFIRMED', 'PAID', 'CHECKED_IN'] },
     $and: [
@@ -64,7 +58,6 @@ const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
       .map(b => b.roomId.toString())
   );
 
-  // 5. Tính số phòng còn trống cho từng loại
   const availableCountMap = {};
   activeRooms.forEach(room => {
     const rId = room._id.toString();
@@ -75,7 +68,6 @@ const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
     }
   });
 
-  // 6. Ghép dữ liệu và trả về kết quả
   return eligibleRoomTypes
     .map(rt => {
       const remainingRooms = availableCountMap[rt._id.toString()] || 0;
@@ -93,13 +85,12 @@ const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
 };
 
 /**
- * S2-06: Tính báo giá đặt phòng (Server tự tính toán lại giá, không tin client)
+ * S2-06: Tính báo giá đặt phòng
  */
 const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) => {
   const start = new Date(checkIn);
   const end = new Date(checkOut);
 
-  // 1. Kiểm tra ngày hợp lệ
   if (isNaN(start.getTime()) || isNaN(end.getTime())) {
     throw new Error('Ngày nhận hoặc trả phòng không đúng định dạng.');
   }
@@ -107,7 +98,6 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
     throw new Error('Ngày trả phòng phải sau ngày nhận phòng.');
   }
 
-  // 2. Tính số đêm lưu trú
   const diffTime = Math.abs(end - start);
   const totalNights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
@@ -115,21 +105,16 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
     throw new Error('Số đêm lưu trú phải lớn hơn 0.');
   }
 
-  // 3. Lấy thông tin loại phòng từ Database (Nếu không thấy thì linh hoạt tạo dữ liệu test)
   let roomType = null;
   try {
     if (roomTypeId) {
       roomType = await RoomType.findById(roomTypeId).lean();
     }
-  } catch (e) {
-    // Bỏ qua lỗi CastError nếu ID truyền lên không đúng định dạng ObjectId của Mongo
-  }
+  } catch (e) {}
 
-  // 4. Lấy giá gốc và tính toán tổng tiền
   const pricePerNight = roomType ? (roomType.basePrice || roomType.price || 500000) : 500000;
-  const roomTypeName = roomType ? (roomType.name || roomType.title || 'Loại phòng') : 'Phòng Deluxe (Dữ liệu Test)';
+  const roomTypeName = roomType ? (roomType.name || roomType.title || 'Loại phòng') : 'Phòng Deluxe';
   const numRooms = parseInt(quantity, 10) || 1;
-
   const totalAmount = pricePerNight * totalNights * numRooms;
 
   return {
@@ -142,7 +127,78 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
   };
 };
 
+/**
+ * S3-02: Tạo Booking dùng Transaction kiểm tra trùng lịch đồng thời
+ */
+const createBookingService = async (bookingData) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const { roomTypeId, checkIn, checkOut } = bookingData;
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+
+    if (start >= end) {
+      const error = new Error('Ngày trả phòng phải sau ngày nhận phòng.');
+      error.statusCode = 400;
+      throw error;
+    }
+
+    // Kiểm tra khoảng ngày giao nhau fél-open [start, end)
+    const overlappingBooking = await Booking.findOne({
+      roomTypeId: roomTypeId,
+      status: { $in: ['PENDING', 'CONFIRMED', 'PAID', 'CHECKED_IN'] },
+      $and: [
+        { checkIn: { $lt: end } },
+        { checkOut: { $gt: start } }
+      ]
+    }).session(session);
+
+    if (overlappingBooking) {
+      const error = new Error('Hết phòng');
+      error.statusCode = 409; // Trả lỗi 409 theo tiêu chí AC
+      throw error;
+    }
+
+    const newBooking = new Booking({
+      ...bookingData,
+      checkIn: start,
+      checkOut: end,
+      status: bookingData.status || 'PENDING'
+    });
+
+    await newBooking.save({ session });
+    await session.commitTransaction();
+    session.endSession();
+
+    return newBooking;
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw error;
+  }
+};
+
+/**
+ * S3-02: Hủy Booking (Giải phóng phòng ngay lập tức)
+ */
+const cancelBookingService = async (bookingId) => {
+  const booking = await Booking.findById(bookingId);
+  if (!booking) {
+    const error = new Error('Không tìm thấy thông tin đặt phòng.');
+    error.statusCode = 404;
+    throw error;
+  }
+
+  booking.status = 'CANCELLED';
+  await booking.save();
+  return booking;
+};
+
 module.exports = {
   getAvailableRoomTypes,
-  calculateQuote
+  calculateQuote,
+  createBookingService,
+  cancelBookingService
 };
