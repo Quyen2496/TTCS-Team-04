@@ -26,7 +26,10 @@ async function request(path, options) {
 }
 
 async function testConcurrentBooking() {
-  await mongoose.connect(MONGODB_URI);
+  await mongoose.connect(MONGODB_URI, {
+    family: 4,
+    serverSelectionTimeoutMS: 5000
+  });
   let createdBookingIdsToCancel = [];
 
   try {
