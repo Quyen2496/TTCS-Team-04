@@ -12,7 +12,8 @@ const bookingRoomNightSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Booking',
       required: true
-    }
+    },
+    createdAt: { type: Date, default: Date.now }
   },
   { versionKey: false }
 );

@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Booking = require('./booking.model');
 const BookingRoomNight = require('./booking-room-night.model');
 const Room = require('../rooms/room.model');
@@ -17,7 +16,39 @@ const isReservationConflict = error => {
   );
 };
 
+const cleanupReleasedReservations = async () => {
+  const staleBefore = new Date(Date.now() - 10 * 60 * 1000);
+  const staleReservationBookingIds = await BookingRoomNight.distinct('bookingId', {
+    $or: [
+      { createdAt: { $lt: staleBefore } },
+      { createdAt: { $exists: false } }
+    ]
+  });
+
+  if (staleReservationBookingIds.length) {
+    const existingBookingIds = new Set((await Booking.distinct('_id', {
+      _id: { $in: staleReservationBookingIds }
+    })).map(id => id.toString()));
+    const orphanBookingIds = staleReservationBookingIds.filter(
+      id => !existingBookingIds.has(id.toString())
+    );
+
+    if (orphanBookingIds.length) {
+      await BookingRoomNight.deleteMany({ bookingId: { $in: orphanBookingIds } });
+    }
+  }
+
+  const releasedBookingIds = await Booking.distinct('_id', {
+    status: { $in: ['CANCELLED', 'COMPLETED'] }
+  });
+  if (releasedBookingIds.length) {
+    await BookingRoomNight.deleteMany({ bookingId: { $in: releasedBookingIds } });
+  }
+};
+
 const migrateActiveBookings = async () => {
+  await cleanupReleasedReservations();
+
   const bookings = await Booking.find({
     status: { $in: ACTIVE_BOOKING_STATUSES }
   }).sort({ checkIn: 1, _id: 1 });
@@ -53,32 +84,27 @@ const migrateActiveBookings = async () => {
 
     let reserved = false;
     for (const room of candidates) {
-      const session = await mongoose.startSession();
       try {
-        await session.withTransaction(async () => {
-          if (existingReservations.length) {
-            await BookingRoomNight.deleteMany({ bookingId: booking._id }, { session });
-          }
+        if (existingReservations.length) {
+          await BookingRoomNight.deleteMany({ bookingId: booking._id });
+        }
 
-          await BookingRoomNight.insertMany(
-            nights.map(night => ({ roomId: room._id, night, bookingId: booking._id })),
-            { session, ordered: true }
+        await BookingRoomNight.insertMany(
+          nights.map(night => ({ roomId: room._id, night, bookingId: booking._id })),
+          { ordered: true }
+        );
+
+        if (!booking.roomId || booking.roomId.toString() !== room._id.toString()) {
+          await Booking.updateOne(
+            { _id: booking._id },
+            { $set: { roomId: room._id, checkIn: start, checkOut: end } }
           );
-
-          if (!booking.roomId || booking.roomId.toString() !== room._id.toString()) {
-            await Booking.updateOne(
-              { _id: booking._id },
-              { $set: { roomId: room._id, checkIn: start, checkOut: end } },
-              { session }
-            );
-          }
-        });
+        }
         reserved = true;
         break;
       } catch (error) {
+        await BookingRoomNight.deleteMany({ bookingId: booking._id });
         if (!isReservationConflict(error)) throw error;
-      } finally {
-        await session.endSession();
       }
     }
 

@@ -13,18 +13,6 @@ const httpError = (message, statusCode) => {
   return error;
 };
 
-const isDuplicateKey = error => {
-  const candidates = [
-    error,
-    ...(error?.writeErrors || []).map(writeError => writeError.err || writeError),
-    ...(error?.result?.getWriteErrors?.() || [])
-  ];
-
-  return candidates.some(candidate =>
-    candidate?.code === 11000 || candidate?.code === 112 || candidate?.codeName === 'WriteConflict'
-  );
-};
-
 const isRoomNightIndexConflict = error => {
   const candidates = [
     error,
@@ -113,9 +101,9 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
 };
 
 /**
- * Reserve all calendar nights and save the booking in one MongoDB transaction.
- * The unique (roomId, night) index is the final concurrency guard; the initial
- * availability lookup is only advisory.
+ * Reserve all calendar nights before saving the booking. The unique
+ * (roomId, night) index is the final concurrency guard; the initial availability
+ * lookup is only advisory. Compensation releases partial reservations on error.
  */
 const createBookingService = async bookingData => {
   const { roomTypeId } = bookingData;
@@ -134,66 +122,61 @@ const createBookingService = async bookingData => {
 
   const bookingId = new mongoose.Types.ObjectId();
   for (const room of rooms) {
-    const session = await mongoose.startSession();
-    let newBooking;
+    try {
+      await BookingRoomNight.insertMany(
+        nights.map(night => ({ roomId: room._id, night, bookingId })),
+        { ordered: true }
+      );
+    } catch (error) {
+      await BookingRoomNight.deleteMany({ bookingId });
+      if (isRoomNightIndexConflict(error)) continue;
+      throw error;
+    }
+
+    const newBooking = new Booking({
+      ...bookingData,
+      _id: bookingId,
+      roomId: room._id,
+      checkIn: start,
+      checkOut: end,
+      status: bookingData.status || 'PENDING'
+    });
 
     try {
-      await session.withTransaction(async () => {
-        try {
-          await BookingRoomNight.insertMany(
-            nights.map(night => ({ roomId: room._id, night, bookingId })),
-            { session, ordered: true }
-          );
-        } catch (error) {
-          if (isDuplicateKey(error)) error.roomNightConflict = true;
-          throw error;
-        }
-
-        newBooking = new Booking({
-          ...bookingData,
-          _id: bookingId,
-          roomId: room._id,
-          checkIn: start,
-          checkOut: end,
-          status: bookingData.status || 'PENDING'
-        });
-        await newBooking.save({ session });
-      });
-
+      await newBooking.save();
       return newBooking;
     } catch (error) {
-      if (!error.roomNightConflict && !isRoomNightIndexConflict(error)) throw error;
-    } finally {
-      await session.endSession();
+      // Resolve an ambiguous network result before releasing a potentially live hold.
+      let persistedBooking;
+      try {
+        persistedBooking = await Booking.findById(bookingId).lean();
+      } catch (lookupError) {
+        throw error;
+      }
+
+      if (persistedBooking) return persistedBooking;
+
+      await BookingRoomNight.deleteMany({ bookingId });
+      throw error;
     }
   }
 
   throw httpError('Hết phòng', 409);
 };
 
-/** Cancel and release every reserved night atomically. */
+/** Mark a booking cancelled and release its reserved nights before returning. */
 const cancelBookingService = async bookingId => {
-  const session = await mongoose.startSession();
-  let booking;
+  const booking = await Booking.findById(bookingId);
+  if (!booking) throw httpError('Không tìm thấy thông tin đặt phòng.', 404);
 
-  try {
-    await session.withTransaction(async () => {
-      booking = await Booking.findById(bookingId).session(session);
-      if (!booking) throw httpError('Không tìm thấy thông tin đặt phòng.', 404);
+  await Booking.updateOne(
+    { _id: booking._id },
+    { $set: { status: 'CANCELLED' } }
+  );
+  await BookingRoomNight.deleteMany({ bookingId: booking._id });
 
-      booking.status = 'CANCELLED';
-      await Booking.updateOne(
-        { _id: booking._id },
-        { $set: { status: 'CANCELLED' } },
-        { session }
-      );
-      await BookingRoomNight.deleteMany({ bookingId: booking._id }, { session });
-    });
-
-    return booking;
-  } finally {
-    await session.endSession();
-  }
+  booking.status = 'CANCELLED';
+  return booking;
 };
 
 module.exports = {
