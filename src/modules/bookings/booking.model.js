@@ -6,6 +6,7 @@ const bookingSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   roomTypeId: { type: mongoose.Schema.Types.ObjectId, ref: 'RoomType', required: true },
+  roomId: { type: mongoose.Schema.Types.ObjectId, ref: 'Room', required: true },
   checkIn: { type: Date, required: true },
   checkOut: { type: Date, required: true },
   guestCount: { type: Number, required: true },
