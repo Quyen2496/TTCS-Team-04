@@ -11,6 +11,9 @@ const lookupRouter = require("./src/modules/lookup/lookup.router");
 const bookingRouter = require("./src/modules/bookings/booking.router");
 const roomRouter = require("./src/modules/rooms/room.router");
 const receptionRouter = require("./src/modules/reception/routes");
+const cancellationRouter = require("./src/modules/cancellation/cancellation.router");
+const roomWarningRouter = require("./src/modules/report/roomWarning.route");
+const roomBoardRouter = require("./src/modules/roomBoard/roomBoard.router");
 
 const app = express();
 app.use(cors());
@@ -26,11 +29,15 @@ app.use("/api/lookup", lookupRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/rooms", roomRouter);
 app.use("/api/reception", receptionRouter);
+app.use("/api/admin", cancellationRouter);
+app.use("/api/admin/reports", roomWarningRouter);
+app.use("/api/admin/room-board", roomBoardRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
 app.use(notFound);
 app.use(errorHandler);
 
