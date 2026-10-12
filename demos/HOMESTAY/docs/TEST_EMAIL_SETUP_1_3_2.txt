@@ -1,0 +1,8 @@
+HOMESTAY 1.3.2 — 11/10/2026
+
+Node 22: 82 ca, 81 đạt + 1 bỏ qua khi không có MongoDB.
+MongoDB replica set 7.0.16: 82/82 đạt.
+5 ca thiết lập email đều đạt: xác thực + gửi SMTP trước khi lưu, bảo toàn Mongo/JWT/biến khác, backup, lỗi không ghi, ngăn ghi đè sửa đồng thời, giá trị không hợp lệ, Nodemailer thật qua SMTP TLS cục bộ và API gửi/đặt lại mã.
+Kiểm thử CLI trong terminal: email nhận đúng, mật khẩu nhận đúng và không xuất hiện trong đầu ra.
+Kiểm thử trình duyệt: 22 trạng thái ở 1440 và 360 px; 0 lỗi JavaScript, 0 tràn ngang. Đã xác nhận Chủ homestay trên sidebar, tổng quan, danh sách và chọn vai trò; cảnh báo email mẫu ở danh sách tài khoản.
+Chưa có mật khẩu ứng dụng người dùng; chưa xác minh thư gửi qua Gmail thật hoặc SMTP trên máy người dùng.

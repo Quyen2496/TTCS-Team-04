@@ -1,0 +1,12 @@
+{
+  "upgradedFrom": "v2",
+  "nodeTests": "40 pass, 0 fail",
+  "configAndDataPreserved": true,
+  "installerVersions": [
+    "v2",
+    "v3",
+    "v3-local-edit"
+  ],
+  "idempotent": true,
+  "rollbackVerified": true
+}

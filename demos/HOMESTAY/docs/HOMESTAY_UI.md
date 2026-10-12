@@ -1,33 +1,23 @@
-# HomeStay — UI dùng chung
+# Giao diện dùng chung — HOMESTAY v4
 
-Mẫu chuẩn: booking T4 của Quý, PR #17. Giữ màu, font và kích thước mẫu.
-Trong head, tải /css/homestay-ui.css trước CSS riêng của module.
-Gắn class="homestay-ui" vào body để bật giao diện chung.
+Quy chuẩn hiện tại ở [DESIGN.md](../DESIGN.md); chức năng và giới hạn ở [PRODUCT.md](../PRODUCT.md). Bản v4 thay bố cục xanh lá/sidebar của trang khách bằng header trên, tìm phòng theo ngày/số khách, thẻ phòng theo nhóm và trang chi tiết riêng.
 
-Thành phần dùng chung:
-- Header: topbar, brand, brand-mark, nav-current, staff-link.
-- Khung: container, page-title, eyebrow, section-title, card, footer.
-- Form: form-grid, field, full, optional, checkbox-label.
-- Nút: btn primary, btn secondary, text-button; nhóm nút: actions.
-- Thông báo: notice, notice error, notice warning, notice loading.
-- Phòng: room-grid, room-card, room-image, room-content, status.
-- Bảng/tiền: table-scroll, money, price-label, totals, grand-total.
-- Tiện ích: muted, sr-only, skip-link.
+## Tích hợp
 
-Sao chép header và SVG thương hiệu từ HTML booking; đổi nội dung/điều hướng
-theo chức năng, giữ thiết kế. Thông báo dùng role="status" aria-live="polite".
-Không dùng thanh bước booking trên trang không có quy trình nhiều bước.
+Body giữ `class="homestay-ui"`. Nạp `/css/homestay-ui.css`, `/css/shell.css`, CSS module (nếu có), rồi `/css/travel-ui.css` cuối cùng. Nạp `/js/common.js` trước `/js/shell.js`; shell tự chọn header khách hoặc sidebar nhân sự theo đường dẫn.
 
-Font Arial/sans-serif; chữ #26332d; chữ phụ #737c77; xanh #34764d;
-hover #28623e; viền #dfe6df; xanh nhạt #e8f2eb; kem #fff0dc; lỗi #a73737.
-Card bo 14px; input/nút bo 8px, cao tối thiểu 45px; khung max-width 1120px.
-Breakpoint 900px và 600px, kiểm tra ở 360px. Bảng cuộn trong table-scroll.
+`travel-ui.css` là theme cuối cùng; không thêm stylesheet/theme bên ngoài để đổi font và màu theo từng trang. Font Be Vietnam Pro được lưu cùng giấy phép trong `public/assets/fonts`.
 
-Không ghi đè token, font, màu, header, card và nút trong CSS module.
-Không nạp Bootstrap/theme khác gây xung đột. Chuyển markup sang thành phần
-chung và bỏ CSS cũ xung đột; chỉ link stylesheet chưa đủ để đồng nhất.
-CSS chung chỉ tác động bên trong .homestay-ui; :where giữ độ ưu tiên selector.
+## Thành phần
 
-booking.css chỉ giữ progress, bố cục tìm/báo giá/chính sách và kết quả booking.
-JavaScript và các lời gọi API không đổi. Kiểm thử CSS dùng API giả lập
-không chứng minh nghiệp vụ database; xem T4_BOOKING_API_CONTRACT.md.
+- Header khách: thương hiệu, menu điều hướng, burger trên màn hình nhỏ. Không sidebar; liên kết đăng nhập quản lý ở footer.
+- Quản trị: sidebar 216px, menu theo quyền, nhóm Phòng / loại phòng / tiện nghi.
+- Phòng: `room-grid`, `room-card`, `room-image`, `room-content`; liên kết Xem chi tiết tới `room-detail.html?id=...`.
+- Form: `form-grid`, `field`, `full`, `checkbox-label`; nút `btn primary`, `btn secondary`.
+- Trạng thái: `notice`, `notice error`, `notice warning`, `notice loading`; nội dung động dùng `role="status"` / `aria-live` khi phù hợp.
+- Bảng: `table-scroll`; phân trang dùng `HS.pager`. Trang hiện tại và đầu/cuối không khả dụng có `disabled` thật. Trạng thái trang riêng cho mỗi bảng.
+- Khả năng truy cập: `skip-link`, `sr-only`, focus ring; menu hỗ trợ Escape, giữ Tab trong menu đang mở, `inert` khi đóng trên màn hình nhỏ.
+
+Danh sách khách hiển thị đủ kết quả theo nhóm, không dùng phân trang. Giá booking tiếp tục tính ở server theo lịch v3; giao diện không tự quyết định tổng tiền.
+
+Kiểm chứng: [CAP_NHAT_UI_V4.md](CAP_NHAT_UI_V4.md). Ảnh đã chụp và JSON kết quả trình duyệt nằm trong `docs/previews-v4`.

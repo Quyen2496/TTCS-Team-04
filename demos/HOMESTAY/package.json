@@ -1,8 +1,8 @@
 {
   "name": "homestay-solo-test",
-  "version": "1.1.0",
+  "version": "1.3.2",
   "private": true,
-  "description": "HOMESTAY độc lập cho Quý kiểm thử",
+  "description": "HOMESTAY Sprint 3 đầy đủ — bản kiểm thử độc lập",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
@@ -10,16 +10,20 @@
     "test": "node --test test/*.test.js",
     "setup:demo": "bash scripts/setup.sh --demo",
     "setup:mongo": "bash scripts/setup.sh --mongo",
-    "update-data": "node scripts/seed.js"
+    "update-data": "node scripts/seed.js",
+    "test:sprint3": "node --test test/sprint3.test.js",
+    "setup:email": "bash scripts/setup-email.sh",
+    "check:email": "node scripts/check-email.js"
   },
   "engines": {
     "node": ">=22"
   },
   "dependencies": {
-    "express": "4.21.2",
-    "mongoose": "8.8.4",
     "bcryptjs": "2.4.3",
     "dotenv": "16.4.5",
-    "jsonwebtoken": "9.0.2"
+    "express": "4.21.2",
+    "jsonwebtoken": "9.0.2",
+    "mongoose": "8.8.4",
+    "nodemailer": "^7.0.13"
   }
 }
