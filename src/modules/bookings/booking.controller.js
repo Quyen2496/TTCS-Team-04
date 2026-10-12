@@ -136,22 +136,53 @@ exports.getBookingByCodeAndEmail = async (req, res) => {
   }
 };
 
-// 5. Task S3-02: Cancel a booking and release its reserved nights.
-exports.cancelBooking = async (req, res) => {
+// 5. SPRINT 3: Cập nhật đổi ngày / loại phòng
+exports.modifyBookingHandler = async (req, res) => {
   try {
     const { bookingId } = req.params;
-    const cancelledBooking = await bookingService.cancelBookingService(bookingId);
+    const { newRoomTypeId, newCheckIn, newCheckOut } = req.body;
+
+    const quoteResult = await bookingService.calculateModificationQuote({
+      bookingId,
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut
+    });
+
+    const updatedBooking = await bookingService.modifyBooking(bookingId, {
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut,
+      newTotalAmount: quoteResult.newTotalAmount
+    });
 
     return res.status(200).json({
       success: true,
-      message: 'Hủy booking thành công, phòng đã được giải phóng!',
-      data: cancelledBooking
+      message: 'Cập nhật thông tin đặt phòng thành công.',
+      priceDifference: quoteResult.priceDifference,
+      data: updatedBooking
     });
   } catch (error) {
-    const statusCode = error.statusCode || 500;
-    return res.status(statusCode).json({
+    return res.status(400).json({
       success: false,
-      message: error.message || 'Lỗi khi hủy booking.'
+      message: error.message || 'Lỗi khi cập nhật đặt phòng.'
+    });
+  }
+};
+
+// 6. SPRINT 3: Tạo đơn đặt phòng trực tiếp tại quầy (Walk-in)
+exports.createWalkInBookingHandler = async (req, res) => {
+  try {
+    const booking = await bookingService.createWalkInBooking(req.body);
+    return res.status(201).json({
+      success: true,
+      message: 'Tạo đơn đặt phòng tại quầy thành công.',
+      data: booking
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi khi tạo đơn khách vãng lai.'
     });
   }
 };

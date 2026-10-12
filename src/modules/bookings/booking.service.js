@@ -101,88 +101,101 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
 };
 
 /**
- * Reserve all calendar nights before saving the booking. The unique
- * (roomId, night) index is the final concurrency guard; the initial availability
- * lookup is only advisory. Compensation releases partial reservations on error.
+ * SPRINT 3: Tính chênh lệch giá khi sửa đặt phòng
  */
-const createBookingService = async bookingData => {
-  const { roomTypeId } = bookingData;
-  const { start, end } = getStayRange(bookingData.checkIn, bookingData.checkOut);
-  const nights = getNights(start, end);
-
-  if (!mongoose.Types.ObjectId.isValid(roomTypeId)) {
-    throw httpError('Loại phòng không hợp lệ.', 400);
+const calculateModificationQuote = async ({ bookingId, newRoomTypeId, newCheckIn, newCheckOut }) => {
+  const booking = await Booking.findById(bookingId).lean();
+  if (!booking) {
+    throw new Error('Không tìm thấy đơn đặt phòng.');
   }
 
-  const rooms = await Room.find({
+  const roomTypeId = newRoomTypeId || booking.roomTypeId;
+  const checkIn = newCheckIn || booking.checkIn;
+  const checkOut = newCheckOut || booking.checkOut;
+
+  const newQuote = await calculateQuote({
     roomTypeId,
-    isMaintenance: { $ne: true },
-    status: { $ne: 'MAINTENANCE' }
-  }).select('_id').lean();
+    checkIn,
+    checkOut,
+    quantity: booking.quantity || 1
+  });
 
-  const bookingId = new mongoose.Types.ObjectId();
-  for (const room of rooms) {
-    try {
-      await BookingRoomNight.insertMany(
-        nights.map(night => ({ roomId: room._id, night, bookingId })),
-        { ordered: true }
-      );
-    } catch (error) {
-      await BookingRoomNight.deleteMany({ bookingId });
-      if (isRoomNightIndexConflict(error)) continue;
-      throw error;
-    }
+  const priceDifference = newQuote.totalAmount - (booking.totalAmount || 0);
 
-    const newBooking = new Booking({
-      ...bookingData,
-      _id: bookingId,
-      roomId: room._id,
-      checkIn: start,
-      checkOut: end,
-      status: bookingData.status || 'PENDING'
-    });
-
-    try {
-      await newBooking.save();
-      return newBooking;
-    } catch (error) {
-      // Resolve an ambiguous network result before releasing a potentially live hold.
-      let persistedBooking;
-      try {
-        persistedBooking = await Booking.findById(bookingId).lean();
-      } catch (lookupError) {
-        throw error;
-      }
-
-      if (persistedBooking) return persistedBooking;
-
-      await BookingRoomNight.deleteMany({ bookingId });
-      throw error;
-    }
-  }
-
-  throw httpError('Hết phòng', 409);
+  return {
+    oldTotalAmount: booking.totalAmount || 0,
+    newTotalAmount: newQuote.totalAmount,
+    priceDifference,
+    newQuoteDetails: newQuote
+  };
 };
 
-/** Mark a booking cancelled and release its reserved nights before returning. */
-const cancelBookingService = async bookingId => {
-  const booking = await Booking.findById(bookingId);
-  if (!booking) throw httpError('Không tìm thấy thông tin đặt phòng.', 404);
+/**
+ * SPRINT 3: Cập nhật đơn đặt phòng
+ */
+const modifyBooking = async (bookingId, updateData) => {
+  const { newRoomTypeId, newCheckIn, newCheckOut, newTotalAmount } = updateData;
 
-  await Booking.updateOne(
-    { _id: booking._id },
-    { $set: { status: 'CANCELLED' } }
-  );
-  await BookingRoomNight.deleteMany({ bookingId: booking._id });
+  const updateFields = {};
+  if (newRoomTypeId) updateFields.roomTypeId = newRoomTypeId;
+  if (newCheckIn) updateFields.checkIn = new Date(newCheckIn);
+  if (newCheckOut) updateFields.checkOut = new Date(newCheckOut);
+  if (newTotalAmount !== undefined) updateFields.totalAmount = newTotalAmount;
 
-  booking.status = 'CANCELLED';
-  return booking;
+  const updatedBooking = await Booking.findByIdAndUpdate(
+    bookingId,
+    { $set: updateFields },
+    { new: true }
+  ).lean();
+
+  if (!updatedBooking) {
+    throw new Error('Không thể cập nhật đơn đặt phòng.');
+  }
+
+  return updatedBooking;
+};
+
+/**
+ * SPRINT 3: Đặt phòng trực tiếp tại quầy (Walk-in)
+ */
+const createWalkInBooking = async (walkInData) => {
+  const { guestName, phone, email, roomTypeId, checkIn, checkOut, guestCount, isPaidNow } = walkInData;
+
+  if (!guestName || !phone || !roomTypeId || !checkIn || !checkOut) {
+    throw new Error('Thiếu thông tin bắt buộc để tạo đơn khách vãng lai.');
+  }
+
+  const quote = await calculateQuote({
+    roomTypeId,
+    checkIn,
+    checkOut,
+    quantity: 1
+  });
+
+  const bookingCode = 'WALK-' + crypto.randomBytes(3).toString('hex').toUpperCase();
+
+  const newBooking = new Booking({
+    bookingCode,
+    guestName: guestName.trim(),
+    phone: phone.trim(),
+    email: email ? email.trim().toLowerCase() : 'walkin@homestay.com',
+    roomTypeId,
+    checkIn: new Date(checkIn),
+    checkOut: new Date(checkOut),
+    guestCount: parseInt(guestCount, 10) || 1,
+    totalAmount: quote.totalAmount,
+    status: isPaidNow ? 'CONFIRMED' : 'PENDING',
+    isWalkIn: true
+  });
+
+  return await newBooking.save();
 };
 
 module.exports = {
   ACTIVE_BOOKING_STATUSES,
   getAvailableRoomTypes,
   calculateQuote,
-  createBookingService,
-  cancelBookingService
+  calculateModificationQuote,
+  modifyBooking,
+  createWalkInBooking
 };
