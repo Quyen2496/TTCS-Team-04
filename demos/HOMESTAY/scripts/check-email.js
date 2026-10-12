@@ -1,0 +1,4 @@
+'use strict';
+require('dotenv').config({path:require('node:path').join(__dirname,'../.env')});
+const Mail=require('../src/mail');
+(async()=>{let sender;try{sender=Mail.transport();await sender.verify();console.log('Kết nối SMTP và đăng nhập thành công.');const i=process.argv.indexOf('--to');if(i!==-1){const to=process.argv[i+1];if(!to||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to))throw Error('Dùng --to email-nhan-hop-le.');const r=await sender.sendMail({from:process.env.MAIL_FROM||process.env.SMTP_USER,to,subject:'Kiểm tra email HOMESTAY',text:'SMTP của HOMESTAY đã gửi được email kiểm tra. Hãy thử Quên mật khẩu với email đúng trên tài khoản.'});if(!r.accepted?.length)throw Error('Máy chủ từ chối người nhận.');console.log('Máy chủ SMTP đã chấp nhận thư kiểm tra. Kiểm tra hộp thư và thư rác của địa chỉ đã nhập.');}}catch(e){console.error(e.code==='MAIL_UNAVAILABLE'?e.message:Mail.failure(e).message);process.exitCode=1;}finally{sender?.close();}})();
