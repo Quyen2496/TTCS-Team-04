@@ -41,10 +41,15 @@ app.get("/", (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
-connectDB();
-
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error("Failed to initialize the database:", error);
+    process.exit(1);
+  });

@@ -7,6 +7,7 @@ router.get('/availability', bookingController.checkAvailability);
 router.post('/quote', bookingController.calculateQuote);
 router.post('/create', bookingController.createBooking);
 router.get('/lookup', bookingController.getBookingByCodeAndEmail);
+router.patch('/:bookingId/cancel', verifyToken, bookingController.cancelBooking);
 
 // SPRINT 3: Route đổi ngày / loại phòng
 router.put('/:bookingId/modify', bookingController.modifyBookingHandler);
