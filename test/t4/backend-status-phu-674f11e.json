@@ -1,0 +1,47 @@
+{
+  "base": "develop e2b8204 / Phú 674f11e",
+  "mode": "Read-only runtime/schema inspection; no MongoDB connection",
+  "checks": [
+    {
+      "name": "Router khởi động",
+      "status": "blocked",
+      "evidence": "Route.patch() requires a callback function but got a [object Undefined]"
+    },
+    {
+      "name": "Controller huỷ booking",
+      "status": "blocked",
+      "evidence": "typeof = undefined"
+    },
+    {
+      "name": "Service tạo booking online",
+      "status": "blocked",
+      "evidence": "typeof = undefined"
+    },
+    {
+      "name": "Walk-in tạo mã",
+      "status": "blocked",
+      "evidence": "crypto.randomBytes is not a function"
+    },
+    {
+      "name": "Walk-in payload đáp ứng Booking schema",
+      "status": "blocked",
+      "evidence": "Booking validation failed: holdExpiresAt: Path `holdExpiresAt` is required., roomId: Path `roomId` is required."
+    },
+    {
+      "name": "Sức chứa và giá loại phòng",
+      "status": "blocked",
+      "evidence": "Schema thiếu: capacity, basePrice"
+    },
+    {
+      "name": "Auth/role cho modify và walk-in",
+      "status": "blocked",
+      "evidence": "Hai route mới hiện chưa gắn verifyToken/requireRoles."
+    },
+    {
+      "name": "Lịch sử thay đổi phía server",
+      "status": "blocked",
+      "evidence": "Booking schema hiện chưa có changeHistory; modify chỉ $set ngày/loại/tiền."
+    }
+  ],
+  "readyForRealEndToEnd": false
+}
