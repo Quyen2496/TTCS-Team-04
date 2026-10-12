@@ -2,111 +2,78 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yêu cầu đặt phòng | HomeStay</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Đặt phòng | Homestay</title>
+  <link rel="stylesheet" href="/css/homestay-ui.css">
   <link rel="stylesheet" href="css/booking.css">
+  <script src="js/booking.js" defer></script>
 </head>
-<body class="bg-light">
-  <main class="container py-4">
-    <div class="booking-container mx-auto">
-      <h1 class="h3 mb-2">Yêu cầu đặt phòng</h1>
-      <p class="text-secondary">
-        Nhập thông tin liên hệ và kỳ lưu trú của bạn.
-      </p>
+<body class="homestay-ui">
+  <a class="skip-link" href="#main">Đến nội dung chính</a>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Homestay, trang đặt phòng">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/></svg></span>
+      <span><strong>Homestay</strong><small>Tìm phòng và đặt chỗ</small></span>
+    </a>
+    <nav aria-label="Điều hướng"><a class="nav-current" href="./index.html" aria-current="page">Đặt phòng</a><a href="../lookup/index.html">Tra cứu booking</a><a class="staff-link" href="/login.html">Nhân viên</a></nav>
+  </header>
+  <main class="container" id="main">
+    <div class="page-title"><div><span class="eyebrow">KỲ NGHỈ CỦA BẠN</span><h1>Tìm một căn phòng phù hợp</h1><p>Chọn ngày lưu trú, xem báo giá và gửi yêu cầu giữ chỗ.</p></div><span class="note-pill">Một yêu cầu · Một phòng</span></div>
+    <ol class="progress" aria-label="Các bước đặt phòng"><li id="progress-search" aria-current="step"><span>1</span>Tìm phòng</li><li id="progress-quote"><span>2</span>Xem báo giá</li><li id="progress-booking"><span>3</span>Đặt phòng</li></ol>
 
-      <div class="alert alert-warning">
-        Bản xem thử biểu mẫu. Chưa gửi yêu cầu đặt phòng.
-      </div>
-
-      <form id="booking-form" class="card card-body shadow-sm" novalidate>
-        <div class="row g-3">
-          <div class="col-12">
-            <label for="guestName" class="form-label">
-              Họ và tên *
-            </label>
-            <input id="guestName" name="guestName"
-              class="form-control" autocomplete="name" required>
-          </div>
-
-          <div class="col-md-6">
-            <label for="phone" class="form-label">
-              Số điện thoại *
-            </label>
-            <input id="phone" name="phone"
-              class="form-control" type="tel"
-              inputmode="numeric" autocomplete="tel"
-              placeholder="Ví dụ: 0912345678" required>
-          </div>
-
-          <div class="col-md-6">
-            <label for="email" class="form-label">
-              Email *
-            </label>
-            <input id="email" name="email"
-              class="form-control" type="email"
-              autocomplete="email" required>
-          </div>
-
-          <div class="col-md-6">
-            <label for="checkIn" class="form-label">
-              Ngày nhận phòng *
-            </label>
-            <input id="checkIn" name="checkIn"
-              class="form-control" type="date" required>
-          </div>
-
-          <div class="col-md-6">
-            <label for="checkOut" class="form-label">
-              Ngày trả phòng *
-            </label>
-            <input id="checkOut" name="checkOut"
-              class="form-control" type="date" required>
-          </div>
-
-          <div class="col-md-6">
-            <label for="guestCount" class="form-label">
-              Số khách *
-            </label>
-            <input id="guestCount" name="guestCount"
-              class="form-control" type="number"
-              min="1" step="1" value="1" required>
-          </div>
-
-          <div class="col-12">
-            <label for="notes" class="form-label">
-              Ghi chú
-            </label>
-            <textarea id="notes" name="notes"
-              class="form-control" rows="3"
-              placeholder="Yêu cầu thêm của bạn, nếu có"></textarea>
-          </div>
-
-          <div class="col-12">
-            <div class="form-check">
-              <input id="policyAccepted" name="policyAccepted"
-                class="form-check-input" type="checkbox" required>
-              <label for="policyAccepted" class="form-check-label">
-                Tôi đã đọc và đồng ý với chính sách huỷ đặt phòng *
-              </label>
-            </div>
-            <p class="small text-secondary mt-2 mb-0">
-              Nội dung chính sách sẽ được bổ sung trước khi mở đặt phòng.
-            </p>
-          </div>
-
-          <div class="col-12">
-            <button class="btn btn-primary w-100" type="submit">
-              Kiểm tra thông tin
-            </button>
-          </div>
+    <section class="card search-card" aria-labelledby="search-title">
+      <div class="section-title"><span class="step" aria-hidden="true">1</span><div><h2 id="search-title">Bạn dự định ở khi nào?</h2><p>Tìm phòng trống cho toàn bộ kỳ lưu trú, từ 1 đến 30 đêm.</p></div></div>
+      <form id="search-form">
+        <div class="search-grid">
+          <div class="field"><label for="checkIn">Ngày nhận phòng <span aria-hidden="true">*</span></label><input id="checkIn" name="checkIn" type="date" required aria-describedby="stay-hint"></div>
+          <div class="field"><label for="checkOut">Ngày trả phòng <span aria-hidden="true">*</span></label><input id="checkOut" name="checkOut" type="date" required aria-describedby="stay-hint"></div>
+          <div class="field"><label for="guestCount">Số khách <span aria-hidden="true">*</span></label><input id="guestCount" name="guestCount" type="number" min="1" step="1" value="1" required></div>
+          <button class="btn primary" id="search-button" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>Tìm phòng trống</button>
         </div>
+        <div class="search-footer"><p id="stay-hint">Giá tính theo đêm, không tính đêm trả phòng.</p><span id="selected-type-hint" hidden></span><button id="clear-type-filter" class="text-button" type="button" hidden>Xem tất cả loại phòng</button></div>
       </form>
+      <div id="search-message" class="notice" role="status" aria-live="polite" hidden></div>
+    </section>
 
-      <div id="feedback" class="alert mt-3"
-        role="status" hidden></div>
-    </div>
+    <section id="results-section" aria-labelledby="results-title" hidden>
+      <div class="results-heading"><div><h2 id="results-title">Phòng phù hợp với bạn</h2><p id="results-description"></p></div><span class="count-pill" id="results-count"></span></div>
+      <div id="room-results" class="room-grid"></div>
+    </section>
+
+    <section id="quote-section" class="card" aria-labelledby="quote-title" hidden>
+      <div class="section-title"><span class="step" aria-hidden="true">2</span><div><h2 id="quote-title" tabindex="-1">Báo giá kỳ lưu trú</h2><p id="quote-description"></p></div></div>
+      <div id="quote-message" class="notice" role="status" aria-live="polite" hidden></div>
+      <div id="quote-content" hidden>
+        <div class="table-scroll" role="region" aria-label="Giá từng đêm" tabindex="0"><table><caption class="sr-only">Giá phòng và phụ thu từng đêm</caption><thead><tr><th scope="col">Đêm lưu trú</th><th scope="col">Nguồn giá</th><th scope="col" class="money">Tiền phòng</th><th scope="col" class="money">Phụ thu</th><th scope="col" class="money">Thành tiền</th></tr></thead><tbody id="nightly-prices"></tbody></table></div>
+        <div class="quote-bottom"><div class="policy-box"><h3>Thông tin lưu trú và chính sách huỷ</h3><div id="policy-content"></div><p class="muted">Yêu cầu được giữ chỗ trong 24 giờ, chờ homestay xác nhận.</p></div><dl class="totals"><div><dt>Tiền phòng</dt><dd id="room-total"></dd></div><div><dt>Phụ thu thêm người</dt><dd id="extra-total"></dd></div><div class="grand-total"><dt>Tổng tiền</dt><dd id="quote-total"></dd></div></dl></div>
+        <div class="actions"><button id="continue-button" class="btn primary" type="button">Tiếp tục đặt phòng <span aria-hidden="true">→</span></button></div>
+      </div>
+    </section>
+
+    <section id="booking-section" class="card" aria-labelledby="booking-title" hidden>
+      <div class="section-title"><span class="step" aria-hidden="true">3</span><div><h2 id="booking-title" tabindex="-1">Thông tin người đặt phòng</h2><p>Thông tin có dấu * là bắt buộc. Bạn không cần tạo tài khoản.</p></div></div>
+      <div class="selection-summary" id="selection-summary"></div>
+      <form id="booking-form">
+        <div class="form-grid">
+          <div class="field full"><label for="guestName">Họ và tên <span aria-hidden="true">*</span></label><input id="guestName" name="guestName" autocomplete="name" maxlength="255" required></div>
+          <div class="field"><label for="phone">Số điện thoại <span aria-hidden="true">*</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" pattern="0[35789][0-9]{8}" maxlength="10" placeholder="Ví dụ: 0912345678" required aria-describedby="phone-hint"><small id="phone-hint">Số điện thoại Việt Nam gồm 10 chữ số.</small></div>
+          <div class="field"><label for="email">Email <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="email-hint"><small id="email-hint">Dùng email này cùng mã booking để tra cứu.</small></div>
+          <div class="field full"><label for="notes">Ghi chú <span class="optional">(không bắt buộc)</span></label><textarea id="notes" name="notes" rows="3" maxlength="2000" placeholder="Yêu cầu thêm của bạn, nếu có"></textarea></div>
+        </div>
+        <label class="checkbox-label"><input type="checkbox" id="policyAccepted" name="policyAccepted" required><span>Tôi đã đọc và đồng ý với <a href="#quote-section">chính sách huỷ đặt phòng</a>. <span aria-hidden="true">*</span></span></label>
+        <div id="booking-message" class="notice" role="status" aria-live="polite" hidden></div>
+        <div class="actions booking-actions"><button id="change-room-button" class="btn secondary" type="button">Chọn lại phòng</button><button id="booking-button" class="btn primary" type="submit">Gửi yêu cầu đặt phòng</button></div>
+      </form>
+    </section>
+
+    <section id="success-section" class="card success-card" aria-labelledby="success-title" hidden>
+      <span class="success-icon" aria-hidden="true">✓</span><span class="eyebrow">ĐÃ GỬI YÊU CẦU</span><h2 id="success-title" tabindex="-1">Phòng của bạn đang được giữ chỗ</h2><p>Hãy lưu mã booking và email để tra cứu yêu cầu.</p>
+      <div class="booking-code"><span>Mã booking</span><strong id="success-code"></strong><button class="btn secondary" id="copy-code" type="button">Sao chép mã</button></div>
+      <p id="copy-message" class="muted" role="status" aria-live="polite"></p><dl id="success-details" class="success-details"></dl>
+      <div class="notice warning">Đây là yêu cầu chờ xác nhận, chưa phải xác nhận đặt phòng hoặc thanh toán.</div>
+      <div class="actions"><a class="btn secondary" href="../lookup/index.html">Tra cứu booking</a><button class="btn primary" id="new-booking-button" type="button">Đặt thêm phòng</button></div>
+    </section>
+    <footer class="footer"><strong>Homestay</strong><span>Tìm phòng · Xem báo giá · Giữ chỗ 24 giờ</span></footer>
   </main>
-  <script src="js/booking.js"></script>
 </body>
 </html>

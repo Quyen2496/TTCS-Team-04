@@ -4,9 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./src/config/db");
-const { notFound, errorHandler } = require("./src/middleware/errorHandler");
 
-const loginRouter = require("./src/modules/auth/login");
+const authRoutes = require("./src/modules/auth/auth.routes");
 const lookupRouter = require("./src/modules/lookup/lookup.router");
 const bookingRouter = require("./src/modules/bookings/booking.router");
 const roomRouter = require("./src/modules/rooms/room.router");
@@ -15,16 +14,22 @@ const cancellationRouter = require("./src/modules/cancellation/cancellation.rout
 const roomWarningRouter = require("./src/modules/report/roomWarning.route");
 const roomBoardRouter = require("./src/modules/roomBoard/roomBoard.router");
 
+const { notFound, errorHandler } = require("./src/middleware/errorHandler");
+
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/health", (req, res) => {
-  res.json({ success: true, message: "TTCS Team 04 shared API is running" });
+  res.json({
+    success: true,
+    message: "TTCS Team 04 shared API is running"
+  });
 });
 
-app.use("/api/auth", loginRouter);
+app.use("/api/auth", authRoutes);
 app.use("/api/lookup", lookupRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/rooms", roomRouter);
@@ -34,6 +39,7 @@ app.use("/api/admin/reports", roomWarningRouter);
 app.use("/api/admin/room-board", roomBoardRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -41,13 +47,19 @@ app.get("/", (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
-async function start() {
-  await connectDB();
-  const port = Number(process.env.PORT || 3000);
-  const host = process.env.HOST || "127.0.0.1";
-  return app.listen(port, host, () => {
-    console.log(`Server running at http://${host}:${port}`);
+const PORT = process.env.PORT || 3000;
+
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error("Failed to initialize the database:", error);
+    process.exit(1);
   });
+ feature/t3-quynh-audit-log-api
 }
 
 if (require.main === module) {
@@ -58,3 +70,4 @@ if (require.main === module) {
 }
 
 module.exports = { app, start };
+develop

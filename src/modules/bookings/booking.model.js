@@ -6,8 +6,14 @@ const bookingSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   roomTypeId: { type: mongoose.Schema.Types.ObjectId, ref: 'RoomType', required: true },
+feature/t3-quynh-audit-log-api
   checkInDate: { type: Date, required: true },
   checkOutDate: { type: Date, required: true },
+
+  roomId: { type: mongoose.Schema.Types.ObjectId, ref: 'Room', required: true },
+  checkIn: { type: Date, required: true },
+  checkOut: { type: Date, required: true },
+develop
   guestCount: { type: Number, required: true },
   totalAmount: { type: Number, default: 0 },
   totalDeposit: { type: Number, default: 0 },

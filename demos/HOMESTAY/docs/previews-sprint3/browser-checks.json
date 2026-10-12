@@ -1,0 +1,133 @@
+{
+  "checks": [
+    {
+      "name": "reception-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "deposit-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "assign-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "checkin-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "counter-preview-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "counter-success-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "change-preview-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "change-history-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "cancel-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "board-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "board-booking-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "housekeeping-desktop",
+      "width": 1440,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "housekeeping-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "reception-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "board-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "rooms-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "users-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "counter-preview-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "change-preview-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "login-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    },
+    {
+      "name": "register-360",
+      "width": 360,
+      "overflow": false,
+      "errors": 0
+    }
+  ],
+  "errors": [],
+  "boardMs": 8,
+  "flow": "deposit-confirm-assign-checkin-move-checkout-clean-counter-change-cancel"
+}

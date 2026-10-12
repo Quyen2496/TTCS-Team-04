@@ -106,6 +106,34 @@
 
     </section>
 
+    <!-- =================================================== -->
+    <!-- S2-09: KHUNG QUẢN LÝ ẢNH LOẠI PHÒNG (IMAGE SECTION) -->
+    <!-- =================================================== -->
+    <section id="roomTypeImageModal" class="room-type-image-section">
+        <h3>Quản Lý Ảnh Loại Phòng</h3>
+        <input type="hidden" id="currentRoomTypeId" value="" />
+
+        <!-- Vùng Chọn & Drop File Upload -->
+        <div class="upload-dropzone" id="uploadDropzone">
+            <p>Nhấp vào đây hoặc kéo thả ảnh JPG/PNG (Tối đa 5MB/file, tối đa 8 ảnh)</p>
+            <input type="file" id="imageFileInput" multiple accept="image/jpeg,image/png" style="display: none;" />
+        </div>
+
+        <!-- Tiến trình upload (Progress Bar) -->
+        <div class="upload-progress" id="uploadProgress">
+            <div class="upload-progress-bar" id="uploadProgressBar"></div>
+        </div>
+
+        <!-- Thông báo trạng thái (Lỗi / Thành công) -->
+        <div id="imageStatusMsg" class="status-message"></div>
+
+        <!-- Danh sách lưới ảnh (Hỗ trợ Kéo & Thả sắp xếp) -->
+        <div class="image-grid" id="imageGrid">
+            <!-- Hiển thị Empty State mặc định khi chưa có ảnh -->
+            <div class="empty-image-state" id="emptyImageState">Loại phòng này chưa có ảnh nào.</div>
+        </div>
+    </section>
+
 </main>
 
 <script src="./js/rooms.js"></script>

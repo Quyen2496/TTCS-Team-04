@@ -228,3 +228,184 @@ td {
         flex-direction: column;
     }
 }
+/* =================================================== */
+/* S2-09: CẤU HÌNH GIAO DIỆN QUẢN LÝ ẢNH LOẠI PHÒNG   */
+/* =================================================== */
+
+/* Container quản lý ảnh loại phòng */
+.room-type-image-section {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Khu vực upload (Dropzone) */
+.upload-dropzone {
+  border: 2px dashed #4a90e2;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.upload-dropzone:hover {
+  background-color: #f1f5f9;
+}
+
+.upload-dropzone.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Lưới hiển thị danh sách ảnh */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Item ảnh thẻ */
+.image-item {
+  position: relative;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #f8fafc;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.image-item:active {
+  cursor: grabbing;
+}
+
+.image-item.dragging {
+  opacity: 0.4;
+  border-color: #3b82f6;
+}
+
+.image-item img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Badge Ảnh Đại Diện */
+.primary-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #22c55e;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Nút xoá ảnh */
+.btn-delete-img {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-delete-img:hover {
+  background: #dc2626;
+}
+
+/* Tiến trình Upload (Progress Bar) */
+.upload-progress {
+  width: 100%;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  height: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+  display: none;
+}
+
+.upload-progress-bar {
+  height: 100%;
+  background-color: #3b82f6;
+  width: 0%;
+  transition: width 0.2s;
+}
+
+/* Trạng thái trống (Empty State) */
+.empty-image-state {
+  text-align: center;
+  color: #64748b;
+  padding: 24px 0;
+  font-size: 14px;
+}
+
+/* Thông báo lỗi / thành công */
+.status-message {
+  font-size: 13px;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  display: none;
+}
+
+.status-message.error {
+  display: block;
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.status-message.success {
+  display: block;
+  background-color: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+/* Hỗ trợ hiển thị trên thiết bị di động 360px */
+@media (max-width: 480px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* S2-09: CẤU HÌNH GIAO DIỆN QUẢN LÝ ẢNH LOẠI PHÒNG */
+.room-type-image-section { background: #ffffff; border-radius: 8px; padding: 16px; margin-top: 20px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+.upload-dropzone { border: 2px dashed #4a90e2; border-radius: 6px; padding: 20px; text-align: center; background: #f8fafc; cursor: pointer; transition: background-color 0.2s; }
+.upload-dropzone:hover { background-color: #f1f5f9; }
+.upload-dropzone.disabled { pointer-events: none; opacity: 0.6; }
+.image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-top: 16px; }
+.image-item { position: relative; border: 2px solid #e2e8f0; border-radius: 6px; overflow: hidden; background-color: #f8fafc; cursor: grab; user-select: none; transition: transform 0.15s, border-color 0.15s; }
+.image-item:active { cursor: grabbing; }
+.image-item.dragging { opacity: 0.4; border-color: #3b82f6; }
+.image-item img { width: 100%; height: 110px; object-fit: cover; display: block; }
+.primary-badge { position: absolute; top: 6px; left: 6px; background: #22c55e; color: #ffffff; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.btn-delete-img { position: absolute; top: 6px; right: 6px; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.btn-delete-img:hover { background: #dc2626; }
+.upload-progress { width: 100%; background-color: #e2e8f0; border-radius: 4px; height: 8px; margin-top: 10px; overflow: hidden; display: none; }
+.upload-progress-bar { height: 100%; background-color: #3b82f6; width: 0%; transition: width 0.2s; }
+.empty-image-state { text-align: center; color: #64748b; padding: 24px 0; font-size: 14px; }
+.status-message { font-size: 13px; margin-top: 8px; padding: 8px; border-radius: 4px; display: none; }
+.status-message.error { display: block; background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.status-message.success { display: block; background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+@media (max-width: 480px) { .image-grid { grid-template-columns: repeat(2, 1fr); } }

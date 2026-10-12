@@ -1,171 +1,243 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+.login-main {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
+    gap: 20px;
 }
 
-.login-container {
-    width: 100%;
-    max-width: 430px;
+.login-card,
+.forgot-card {
+    width: min(100%, 460px);
 }
 
-.login-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 40px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+.login-heading,
+.forgot-heading {
+    margin-bottom: 24px;
 }
 
-.logo {
-    text-align: center;
-    margin-bottom: 30px;
+.login-heading h1,
+.forgot-heading h2 {
+    margin: 0 0 8px;
+    color: var(--hs-text);
 }
 
-.logo-icon {
-    font-size: 48px;
-    margin-bottom: 10px;
+.login-heading h1 {
+    font-size: 28px;
+    line-height: 1.25;
 }
 
-.logo h1 {
-    font-size: 25px;
-    color: #222;
-    margin-bottom: 7px;
+.forgot-heading h2 {
+    font-size: 22px;
+    line-height: 1.3;
 }
 
-.logo p {
-    color: #777;
+.login-heading p,
+.forgot-heading p {
+    margin: 0;
+    color: var(--hs-muted);
+    line-height: 1.55;
     font-size: 14px;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-}
-
-.form-group input[type="text"],
-.form-group input[type="password"] {
-    width: 100%;
-    height: 48px;
-    border: 1px solid #ddd;
-    border-radius: 9px;
-    padding: 0 14px;
-    font-size: 15px;
-    outline: none;
-    transition: 0.2s;
-}
-
-.form-group input:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.12);
-}
-
-.password-wrapper {
+.password-field {
     position: relative;
 }
 
-.password-wrapper input {
-    padding-right: 50px !important;
+.password-field .hs-input {
+    padding-right: 48px;
 }
 
-.toggle-password {
+.password-toggle {
     position: absolute;
-    right: 10px;
     top: 50%;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
     transform: translateY(-50%);
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 7px;
+    color: var(--hs-muted);
     background: transparent;
-    cursor: pointer;
-    font-size: 18px;
+}
+
+.password-toggle:hover {
+    color: var(--hs-primary);
+    background: var(--hs-light-green);
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid var(--hs-primary);
+    outline-offset: 1px;
+}
+
+.password-toggle svg {
+    width: 20px;
+    height: 20px;
 }
 
 .login-options {
+    min-height: 28px;
+    margin: -2px 0 18px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 22px;
+    justify-content: space-between;
+    gap: 16px;
     font-size: 13px;
 }
 
-.login-options label {
-    display: flex;
+.remember-option {
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: #555;
+    gap: 7px;
+    color: var(--hs-muted);
+    cursor: pointer;
 }
 
-.login-options a,
-.register-link a {
-    color: #667eea;
-    text-decoration: none;
+.remember-option input {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: var(--hs-primary);
+}
+
+.text-button {
+    padding: 0;
+    border: 0;
+    color: var(--hs-primary);
+    background: transparent;
+    font-size: 13px;
     font-weight: 600;
+    cursor: pointer;
 }
 
-.login-options a:hover,
-.register-link a:hover {
+.text-button:hover {
+    color: var(--hs-primary-hover);
     text-decoration: underline;
 }
 
-.login-button {
+.text-button:focus-visible {
+    outline: 2px solid var(--hs-primary);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+.login-button,
+.full-button {
     width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 9px;
-    background: #667eea;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
 }
 
-.login-button:hover {
-    background: #5568d8;
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 18px;
+    color: var(--hs-muted);
+    font-size: 13px;
 }
 
-.login-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.login-divider::before,
+.login-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hs-border);
 }
 
-.message {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-    min-height: 20px;
+.login-divider span {
+    flex: 0 0 auto;
 }
 
 .register-link {
-    margin-top: 25px;
-    text-align: center;
-    color: #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--hs-muted);
     font-size: 14px;
+    text-align: center;
 }
 
-@media (max-width: 480px) {
-    .login-card {
-        padding: 28px 22px;
+.register-link a {
+    color: var(--hs-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    color: var(--hs-primary-hover);
+    text-decoration: underline;
+}
+
+.forgot-card[hidden] {
+    display: none;
+}
+
+.close-forgot {
+    margin-top: 14px;
+}
+
+#message,
+#forgotMessage {
+    min-height: 0;
+}
+
+#message:empty,
+#forgotMessage:empty {
+    display: none;
+}
+
+#otpSection[hidden] {
+    display: none;
+}
+
+#forgotPasswordForm {
+    scroll-margin-top: 20px;
+}
+
+#resetOtp {
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .login-main {
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .login-card,
+    .forgot-card {
+        width: 100%;
+    }
+
+    .login-heading h1 {
+        font-size: 25px;
     }
 
     .login-options {
-        flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+    }
+
+    .remember-option {
+        min-height: 32px;
+    }
+
+    .text-button {
+        min-height: 32px;
+    }
+}
+
+@media (max-width: 380px) {
+    .login-options {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .login-heading h1 {
+        font-size: 23px;
     }
 }

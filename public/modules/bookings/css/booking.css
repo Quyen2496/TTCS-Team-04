@@ -1,11 +1,51 @@
-.booking-container {
-  max-width: 760px;
+/* Booking-only layout. Load /css/homestay-ui.css before this file. */
+:where(.homestay-ui) .progress{list-style:none;display:flex;gap:32px;padding:0;margin:0 0 24px;font-size:12px;font-weight:600;color:#8a918b}
+:where(.homestay-ui) .progress li{display:flex;align-items:center;gap:8px}
+:where(.homestay-ui) .progress span{display:grid;place-items:center;width:25px;height:25px;background:#e4e8e2;border-radius:50%;font-size:11px}
+:where(.homestay-ui) .progress [aria-current]{color:var(--green)}
+:where(.homestay-ui) .progress [aria-current] span{background:var(--green);color:white}
+:where(.homestay-ui) .progress .done{color:var(--green)}
+:where(.homestay-ui) .progress .done span{background:#dcebdd;color:var(--green)}
+:where(.homestay-ui) .search-grid{display:grid;grid-template-columns:1.15fr 1.15fr .75fr 1.15fr;gap:16px;align-items:end}
+:where(.homestay-ui) .search-footer{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:12px;font-size:11px}
+:where(.homestay-ui) .search-footer p{margin-right:auto}
+:where(.homestay-ui) .quote-bottom{display:grid;grid-template-columns:1fr 310px;gap:30px;margin-top:22px}
+:where(.homestay-ui) .policy-box{font-size:12px}
+:where(.homestay-ui) .policy-box p{margin-bottom:6px}
+:where(.homestay-ui) .policy-box ul{padding-left:18px;margin:8px 0;color:#647167}
+:where(.homestay-ui) .selection-summary{background:#f4f8f3;border:1px solid #e0e9df;border-radius:9px;padding:12px 15px;margin-bottom:20px;font-size:12px;color:#4c6655}
+:where(.homestay-ui) .selection-summary strong{display:block;font-size:14px;margin-bottom:2px}
+:where(.homestay-ui) .success-card{text-align:center;max-width:800px;margin:32px auto}
+:where(.homestay-ui) .success-icon{display:grid;place-items:center;margin:0 auto 18px;width:62px;height:62px;font-size:31px;color:var(--green);background:var(--soft);border-radius:50%}
+:where(.homestay-ui) .success-card h2{font-size:26px}
+:where(.homestay-ui) .success-card>p{font-size:13px}
+:where(.homestay-ui) .booking-code{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 20px;margin:24px 0 8px;background:#f4f8f3;border:1px dashed #b7ceb8;border-radius:10px;padding:20px}
+:where(.homestay-ui) .booking-code>span{font-size:12px;color:var(--muted)}
+:where(.homestay-ui) .booking-code strong{font-size:28px;color:var(--green);letter-spacing:3px;font-variant-numeric:tabular-nums}
+:where(.homestay-ui) .booking-code .btn{font-size:11px;min-height:36px;padding:7px 12px}
+:where(.homestay-ui) .success-details{max-width:520px;margin:22px auto;text-align:left;font-size:13px}
+:where(.homestay-ui) .success-details>div{display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid #e5ebe5}
+:where(.homestay-ui) .success-details dt{color:var(--muted)}
+:where(.homestay-ui) .success-details dd{margin:0;font-weight:600;text-align:right;overflow-wrap:anywhere;max-width:65%}
+:where(.homestay-ui) .success-card .actions{justify-content:center}
+@media(max-width:900px){
+:where(.homestay-ui) .search-grid{grid-template-columns:1fr 1fr}
+:where(.homestay-ui) .quote-bottom{grid-template-columns:1fr 280px;gap:20px}
 }
-
-.form-check-label {
-  overflow-wrap: anywhere;
-}
-
-#feedback {
-  overflow-wrap: anywhere;
+@media(max-width:600px){
+:where(.homestay-ui) .progress{gap:20px;font-size:11px}
+:where(.homestay-ui) .progress li{gap:6px}
+:where(.homestay-ui) .progress span{width:23px;height:23px}
+:where(.homestay-ui) .search-grid{gap:14px 10px}
+:where(.homestay-ui) .search-grid .btn{font-size:12px;padding:10px 7px;white-space:normal}
+:where(.homestay-ui) .search-footer{font-size:10px}
+:where(.homestay-ui) .quote-bottom{grid-template-columns:1fr}
+:where(.homestay-ui) .booking-actions{flex-direction:column-reverse}
+:where(.homestay-ui) .success-card h2{font-size:23px}
+:where(.homestay-ui) .booking-code{gap:10px;padding:16px}
+:where(.homestay-ui) .booking-code>span{width:100%}
+:where(.homestay-ui) .booking-code strong{font-size:24px}
+:where(.homestay-ui) .success-details{font-size:12px}
+:where(.homestay-ui) .success-details>div{gap:12px}
+:where(.homestay-ui) .success-details dd{max-width:63%}
 }

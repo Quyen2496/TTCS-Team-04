@@ -1,66 +1,115 @@
 const Booking = require('./booking.model');
+const bookingService = require('./booking.service');
 const crypto = require('crypto');
 
-// Hàm sinh mã booking ngẫu nhiên 8 ký tự duy nhất
 const generateBookingCode = () => {
   return crypto.randomBytes(4).toString('hex').toUpperCase();
 };
 
-// 1. Task S2-07: Tạo yêu cầu đặt phòng (Gửi thông tin, nhận mã 8 ký tự và giữ chỗ 24 tiếng)
-exports.createBooking = async (req, res) => {
+// 1. Task S2-05: Tìm phòng trống
+exports.checkAvailability = async (req, res) => {
   try {
-    const { guestName, phone, email, roomTypeId, checkIn, checkOut, guestCount, totalAmount } = req.body;
+    const { checkIn, checkOut, guestCount } = req.query;
 
-    // Kiểm tra thông tin bắt buộc
-    if (!guestName || !phone || !email || !checkIn || !checkOut || !roomTypeId) {
-      return res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin bắt buộc.' });
+    if (!checkIn || !checkOut) {
+      return res.status(400).json({
+        success: false,
+        message: 'Vui lòng cung cấp đầy đủ checkIn và checkOut.'
+      });
     }
 
-    // Kiểm tra định dạng số điện thoại Việt Nam (10 chữ số)
-    const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-    if (!phoneRegex.test(phone)) {
-      return res.status(400).json({ message: 'Số điện thoại không đúng định dạng (10 chữ số).' });
-    }
+    const data = await bookingService.getAvailableRoomTypes({ checkIn, checkOut, guestCount });
 
-    // Tạo mã booking 8 ký tự
-    const bookingCode = generateBookingCode();
-
-    // Tính thời gian hết hạn giữ chỗ (24 tiếng từ thời điểm tạo)
-    const holdExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
-
-    const newBooking = new Booking({
-      bookingCode,
-      guestName,
-      phone,
-      email: email.trim().toLowerCase(),
-      roomTypeId,
-      checkIn: new Date(checkIn),
-      checkOut: new Date(checkOut),
-      guestCount,
-      totalAmount,
-      status: 'PENDING',
-      holdExpiresAt
-    });
-
-    await newBooking.save();
-
-    res.status(201).json({
-      message: 'Tạo yêu cầu đặt phòng thành công!',
-      booking: {
-        bookingCode: newBooking.bookingCode,
-        guestName: newBooking.guestName,
-        checkIn: newBooking.checkIn,
-        checkOut: newBooking.checkOut,
-        totalAmount: newBooking.totalAmount,
-        holdExpiresAt: newBooking.holdExpiresAt
-      }
+    return res.status(200).json({
+      success: true,
+      count: data.length,
+      data: data
     });
   } catch (error) {
-    res.status(500).json({ message: 'Lỗi máy chủ', error: error.message });
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi khi kiểm tra phòng trống.'
+    });
   }
 };
 
-// 2. Task S2-08: Tra cứu booking bằng CẶP Mã booking + Email
+// 2. Task S2-06: Báo giá
+exports.calculateQuote = async (req, res) => {
+  try {
+    const { roomTypeId, checkIn, checkOut, quantity } = req.body;
+
+    if (!roomTypeId || !checkIn || !checkOut) {
+      return res.status(400).json({
+        success: false,
+        message: 'Vui lòng truyền đầy đủ roomTypeId, checkIn, và checkOut.'
+      });
+    }
+
+    const quote = await bookingService.calculateQuote({
+      roomTypeId,
+      checkIn,
+      checkOut,
+      quantity
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: quote
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi tính báo giá.'
+    });
+  }
+};
+
+// 3. Task S2-07 & S3-02: Tạo yêu cầu đặt phòng (Có kiểm tra trùng lặp & Trả lỗi 409)
+exports.createBooking = async (req, res) => {
+  try {
+    const { guestName, phone, email, roomTypeId, checkIn, checkOut, guestCount } = req.body;
+
+    if (!guestName || !phone || !email || !checkIn || !checkOut || !roomTypeId) {
+      return res.status(400).json({ success: false, message: 'Vui lòng điền đầy đủ thông tin bắt buộc.' });
+    }
+
+    const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).json({ success: false, message: 'Số điện thoại không đúng định dạng (10 chữ số).' });
+    }
+
+    const quote = await bookingService.calculateQuote({ roomTypeId, checkIn, checkOut });
+    const bookingCode = generateBookingCode();
+    const holdExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+    const newBooking = await bookingService.createBookingService({
+      bookingCode,
+      guestName: guestName.trim(),
+      phone: phone.trim(),
+      email: email.trim().toLowerCase(),
+      roomTypeId,
+      checkIn,
+      checkOut,
+      guestCount: parseInt(guestCount, 10) || 1,
+      totalAmount: quote.totalAmount,
+      holdExpiresAt
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: 'Tạo yêu cầu đặt phòng thành công!',
+      booking: newBooking
+    });
+  } catch (error) {
+    const statusCode = error.statusCode || 500;
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message || 'Lỗi máy chủ khi tạo đặt phòng.'
+    });
+  }
+};
+
+// 4. Task S2-08: Tra cứu booking
 exports.getBookingByCodeAndEmail = async (req, res) => {
   try {
     const { bookingCode, email } = req.query;
@@ -69,30 +118,71 @@ exports.getBookingByCodeAndEmail = async (req, res) => {
       return res.status(400).json({ message: 'Vui lòng nhập cả mã đặt phòng và email.' });
     }
 
-    // Khai báo đối chiếu đồng thời cả mã booking và email
     const booking = await Booking.findOne({ 
       bookingCode: bookingCode.trim().toUpperCase(), 
       email: email.trim().toLowerCase() 
-    }).populate('roomTypeId', 'name');
+    }).lean();
 
-    // Trả cùng một thông báo lỗi nếu nhập sai mã hoặc email để đảm bảo bảo mật
     if (!booking) {
       return res.status(404).json({ message: 'Không tìm thấy thông tin đặt phòng hợp lệ.' });
     }
 
-    // Trả về thông tin công khai, loại bỏ thông tin nhạy cảm/giấy tờ/ghi chú nội bộ
-    res.status(200).json({
-      bookingCode: booking.bookingCode,
-      guestName: booking.guestName,
-      roomType: booking.roomTypeId ? booking.roomTypeId.name : 'Loại phòng',
-      checkIn: booking.checkIn,
-      checkOut: booking.checkOut,
-      guestCount: booking.guestCount,
-      totalAmount: booking.totalAmount,
-      depositAmount: booking.depositAmount,
-      status: booking.status
+    return res.status(200).json({
+      success: true,
+      data: booking
     });
   } catch (error) {
-    res.status(500).json({ message: 'Lỗi máy chủ', error: error.message });
+    return res.status(500).json({ message: 'Lỗi máy chủ', error: error.message });
+  }
+};
+
+// 5. SPRINT 3: Cập nhật đổi ngày / loại phòng
+exports.modifyBookingHandler = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    const { newRoomTypeId, newCheckIn, newCheckOut } = req.body;
+
+    const quoteResult = await bookingService.calculateModificationQuote({
+      bookingId,
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut
+    });
+
+    const updatedBooking = await bookingService.modifyBooking(bookingId, {
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut,
+      newTotalAmount: quoteResult.newTotalAmount
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Cập nhật thông tin đặt phòng thành công.',
+      priceDifference: quoteResult.priceDifference,
+      data: updatedBooking
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi khi cập nhật đặt phòng.'
+    });
+  }
+};
+
+// 6. SPRINT 3: Tạo đơn đặt phòng trực tiếp tại quầy (Walk-in)
+exports.createWalkInBookingHandler = async (req, res) => {
+  try {
+    const booking = await bookingService.createWalkInBooking(req.body);
+    return res.status(201).json({
+      success: true,
+      message: 'Tạo đơn đặt phòng tại quầy thành công.',
+      data: booking
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi khi tạo đơn khách vãng lai.'
+    });
   }
 };
