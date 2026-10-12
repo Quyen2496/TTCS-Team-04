@@ -128,7 +128,101 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
   };
 };
 
+/**
+ * SPRINT 3: Tính chênh lệch giá khi sửa đặt phòng
+ */
+const calculateModificationQuote = async ({ bookingId, newRoomTypeId, newCheckIn, newCheckOut }) => {
+  const booking = await Booking.findById(bookingId).lean();
+  if (!booking) {
+    throw new Error('Không tìm thấy đơn đặt phòng.');
+  }
+
+  const roomTypeId = newRoomTypeId || booking.roomTypeId;
+  const checkIn = newCheckIn || booking.checkIn;
+  const checkOut = newCheckOut || booking.checkOut;
+
+  const newQuote = await calculateQuote({
+    roomTypeId,
+    checkIn,
+    checkOut,
+    quantity: booking.quantity || 1
+  });
+
+  const priceDifference = newQuote.totalAmount - (booking.totalAmount || 0);
+
+  return {
+    oldTotalAmount: booking.totalAmount || 0,
+    newTotalAmount: newQuote.totalAmount,
+    priceDifference,
+    newQuoteDetails: newQuote
+  };
+};
+
+/**
+ * SPRINT 3: Cập nhật đơn đặt phòng
+ */
+const modifyBooking = async (bookingId, updateData) => {
+  const { newRoomTypeId, newCheckIn, newCheckOut, newTotalAmount } = updateData;
+
+  const updateFields = {};
+  if (newRoomTypeId) updateFields.roomTypeId = newRoomTypeId;
+  if (newCheckIn) updateFields.checkIn = new Date(newCheckIn);
+  if (newCheckOut) updateFields.checkOut = new Date(newCheckOut);
+  if (newTotalAmount !== undefined) updateFields.totalAmount = newTotalAmount;
+
+  const updatedBooking = await Booking.findByIdAndUpdate(
+    bookingId,
+    { $set: updateFields },
+    { new: true }
+  ).lean();
+
+  if (!updatedBooking) {
+    throw new Error('Không thể cập nhật đơn đặt phòng.');
+  }
+
+  return updatedBooking;
+};
+
+/**
+ * SPRINT 3: Đặt phòng trực tiếp tại quầy (Walk-in)
+ */
+const createWalkInBooking = async (walkInData) => {
+  const { guestName, phone, email, roomTypeId, checkIn, checkOut, guestCount, isPaidNow } = walkInData;
+
+  if (!guestName || !phone || !roomTypeId || !checkIn || !checkOut) {
+    throw new Error('Thiếu thông tin bắt buộc để tạo đơn khách vãng lai.');
+  }
+
+  const quote = await calculateQuote({
+    roomTypeId,
+    checkIn,
+    checkOut,
+    quantity: 1
+  });
+
+  const bookingCode = 'WALK-' + crypto.randomBytes(3).toString('hex').toUpperCase();
+
+  const newBooking = new Booking({
+    bookingCode,
+    guestName: guestName.trim(),
+    phone: phone.trim(),
+    email: email ? email.trim().toLowerCase() : 'walkin@homestay.com',
+    roomTypeId,
+    checkIn: new Date(checkIn),
+    checkOut: new Date(checkOut),
+    guestCount: parseInt(guestCount, 10) || 1,
+    totalAmount: quote.totalAmount,
+    status: isPaidNow ? 'CONFIRMED' : 'PENDING',
+    isWalkIn: true
+  });
+
+  return await newBooking.save();
+};
+
 module.exports = {
   getAvailableRoomTypes,
-  calculateQuote
+  calculateQuote,
+  calculateModificationQuote,
+  modifyBooking,
+  createWalkInBooking
 };

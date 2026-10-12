@@ -135,3 +135,54 @@ exports.getBookingByCodeAndEmail = async (req, res) => {
     return res.status(500).json({ message: 'Lỗi máy chủ', error: error.message });
   }
 };
+
+// 5. SPRINT 3: Cập nhật đổi ngày / loại phòng
+exports.modifyBookingHandler = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    const { newRoomTypeId, newCheckIn, newCheckOut } = req.body;
+
+    const quoteResult = await bookingService.calculateModificationQuote({
+      bookingId,
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut
+    });
+
+    const updatedBooking = await bookingService.modifyBooking(bookingId, {
+      newRoomTypeId,
+      newCheckIn,
+      newCheckOut,
+      newTotalAmount: quoteResult.newTotalAmount
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Cập nhật thông tin đặt phòng thành công.',
+      priceDifference: quoteResult.priceDifference,
+      data: updatedBooking
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi khi cập nhật đặt phòng.'
+    });
+  }
+};
+
+// 6. SPRINT 3: Tạo đơn đặt phòng trực tiếp tại quầy (Walk-in)
+exports.createWalkInBookingHandler = async (req, res) => {
+  try {
+    const booking = await bookingService.createWalkInBooking(req.body);
+    return res.status(201).json({
+      success: true,
+      message: 'Tạo đơn đặt phòng tại quầy thành công.',
+      data: booking
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi khi tạo đơn khách vãng lai.'
+    });
+  }
+};
