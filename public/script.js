@@ -4,21 +4,269 @@ const rooms = [
 const roomImages={standard:"https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=85",deluxe:"https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=900&q=85",superior:"https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=900&q=85",family:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"};
 let selectedRoom=null; let stays=[]; const closedRoomCodes=new Set(JSON.parse(localStorage.getItem("homestayClosedRooms")||"[]"));
 const $=id=>document.getElementById(id); const roomList=$("roomList"),selectedRoomText=$("selectedRoom"),selectedPrice=$("selectedPrice"),nightsText=$("nights"),totalText=$("total"),checkinDate=$("checkinDate"),checkoutDate=$("checkoutDate"),stayList=$("stayList");
+
 function localDateString(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
 function addDays(s,n){const [y,m,d]=s.split("-").map(Number),x=new Date(y,m-1,d);x.setDate(x.getDate()+n);return localDateString(x)}
 function nightsBetween(a,b){const [ay,am,ad]=a.split("-").map(Number),[by,bm,bd]=b.split("-").map(Number);return(Date.UTC(by,bm-1,bd)-Date.UTC(ay,am-1,ad))/86400000}
-function overlaps(a,b,c,d){return a<d&&c<b} function money(v){return new Intl.NumberFormat("vi-VN").format(v)+" đ"} function active(s){return s.status==="reserved"||s.status==="checkedIn"}
+function overlaps(a,b,c,d){return a<d&&c<b} 
+function money(v){return new Intl.NumberFormat("vi-VN").format(v)+" đ"} 
+function active(s){return s.status==="reserved"||s.status==="checkedIn"}
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-async function api(url,options={}){const r=await fetch(url,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});const j=await r.json().catch(()=>({message:"Lỗi máy chủ"}));if(!r.ok)throw new Error((j.errors||[j.message])[0]);return j}
-async function loadStays(){try{const r=await api("/api/reception/checkins");stays=r.data||[];renderStays();renderRooms();}catch(e){showToast("Không tải được dữ liệu: "+e.message)}}
-function renderRooms(){roomList.innerHTML=rooms.map(room=>{const stay=stays.find(s=>s.roomCode===room.code&&active(s)&&overlaps(s.checkinDate,s.checkoutDate,checkinDate.value,checkoutDate.value));const closed=closedRoomCodes.has(room.code),unavailable=closed||!!stay,status=closed?"closed":stay?(stay.status==="checkedIn"?"busy":"reserved"):"available",label={available:"Trống",busy:"Đang sử dụng",reserved:"Đã đặt",closed:"Đã đóng"}[status],hasActive=stays.some(s=>s.roomCode===room.code&&active(s));return `<div class="room ${unavailable?"disabled":""} ${selectedRoom?.code===room.code?"selected":""}" data-code="${room.code}"><img class="room-image" src="${roomImages[room.imageType]}" alt="Không gian ${room.name}" loading="lazy"><div class="room-top"><span class="room-code">Phòng ${room.code}</span><span class="status ${status}">${label}</span></div><h4>${room.name}</h4><p>${room.type}</p><div class="price">${money(room.price)} / đêm</div><button type="button" class="room-toggle" data-code="${room.code}" ${hasActive?"disabled":""}>${closed?"Mở phòng":hasActive?"Có lưu trú":"Đóng phòng"}</button></div>`}).join("");
-document.querySelectorAll(".room:not(.disabled)").forEach(c=>c.addEventListener("click",()=>{selectedRoom=rooms.find(r=>r.code===c.dataset.code);renderRooms();updateSummary()}));document.querySelectorAll(".room-toggle:not(:disabled)").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const c=b.dataset.code;if(closedRoomCodes.has(c))closedRoomCodes.delete(c);else{closedRoomCodes.add(c);if(selectedRoom?.code===c)selectedRoom=null}localStorage.setItem("homestayClosedRooms",JSON.stringify([...closedRoomCodes]));renderRooms();updateSummary()}))}
-function renderStays(){const list=stays.filter(active).sort((a,b)=>a.checkinDate.localeCompare(b.checkinDate));if(!list.length){stayList.innerHTML='<p class="empty-state">Chưa có lượt lưu trú hoặc đặt phòng nào.</p>';return}stayList.innerHTML=list.map(s=>{const room=rooms.find(r=>r.code===s.roomCode),due=s.status==="reserved"&&s.checkinDate<=localDateString(),label=s.status==="checkedIn"?"Đang lưu trú":"Đã đặt",action=s.status==="checkedIn"?'<button type="button" class="stay-action" data-action="checkout">Trả phòng</button>':due?'<button type="button" class="stay-action" data-action="checkin">Xác nhận khách đến</button>':'<button type="button" class="stay-action secondary-action" data-action="cancel">Hủy đặt</button>';return `<article class="stay-item"><div class="stay-details"><strong>${escapeHtml(s.guestName)} · Phòng ${escapeHtml(s.roomCode)}</strong><span>${escapeHtml(room?.name||"Phòng")} · ${escapeHtml(s.guests)} người · ${escapeHtml(s.checkinDate)} đến ${escapeHtml(s.checkoutDate)}</span><span class="stay-status ${s.status}">${label}</span></div><div class="stay-controls" data-stay-id="${s._id}">${action}</div></article>`}).join("");stayList.querySelectorAll(".stay-action").forEach(b=>b.addEventListener("click",()=>handleStayAction(b)))}
-async function handleStayAction(b){const id=b.closest(".stay-controls").dataset.stayId,action=b.dataset.action;if(action==="checkout"&&!confirm("Xác nhận trả phòng?"))return;if(action==="cancel"&&!confirm("Xác nhận hủy đặt phòng?"))return;try{await api(`/api/reception/checkins/${id}/${action}`,{method:"PATCH"});showToast("Đã cập nhật trạng thái");await loadStays()}catch(e){showToast(e.message)}}
-function updateSummary(){if(!selectedRoom){selectedRoomText.textContent="Chưa chọn phòng";selectedPrice.textContent="-";totalText.textContent="-"}else{selectedRoomText.textContent=`Phòng ${selectedRoom.code} - ${selectedRoom.name}`;selectedPrice.textContent=money(selectedRoom.price)}if(checkinDate.value&&checkoutDate.value&&checkoutDate.value>checkinDate.value){const n=nightsBetween(checkinDate.value,checkoutDate.value);nightsText.textContent=`${n} đêm`;totalText.textContent=selectedRoom?money(n*selectedRoom.price):"-"}else{nightsText.textContent="-";totalText.textContent="-"}}
-function showToast(m){const t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000)}
-$("today").textContent=new Date().toLocaleDateString("vi-VN",{weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"});function setDefaultDates(){checkinDate.value=localDateString();checkoutDate.value=addDays(checkinDate.value,1);checkinDate.min=checkinDate.value;checkoutDate.min=checkoutDate.value}
-function refresh(){if(selectedRoom&&(closedRoomCodes.has(selectedRoom.code)||stays.some(s=>s.roomCode===selectedRoom.code&&active(s)&&overlaps(s.checkinDate,s.checkoutDate,checkinDate.value,checkoutDate.value))))selectedRoom=null;renderRooms();updateSummary()}
-setDefaultDates();checkinDate.addEventListener("change",()=>{checkinDate.min=localDateString();if(!checkinDate.value){checkoutDate.value="";checkoutDate.min=addDays(localDateString(),1)}else{if(checkoutDate.value<=checkinDate.value)checkoutDate.value=addDays(checkinDate.value,1);checkoutDate.min=addDays(checkinDate.value,1)}refresh()});checkoutDate.addEventListener("change",refresh);
-$("checkinForm").addEventListener("submit",async function(e){e.preventDefault();document.querySelectorAll(".error").forEach(x=>x.textContent="");let valid=true;const name=$("guestName").value.trim(),phone=$("phone").value.trim(),idNumber=$("idNumber").value.trim(),guests=Number($("guests").value),today=localDateString();if(!selectedRoom){showToast("Vui lòng chọn phòng.");valid=false}if(!name){$("guestNameError").textContent="Vui lòng nhập họ và tên.";valid=false}if(!/^0\d{9,10}$/.test(phone)){$("phoneError").textContent="Số điện thoại không hợp lệ.";valid=false}if(!/^\d{9,12}$/.test(idNumber)){$("idError").textContent="CCCD/CMND không hợp lệ.";valid=false}if(!Number.isInteger(guests)||guests<1||(selectedRoom&&guests>Number(selectedRoom.type.match(/\d+/)[0]))){$("guestsError").textContent="Số người vượt quá sức chứa phòng.";valid=false}if(!checkinDate.value||checkinDate.value<today){$("checkinDateError").textContent="Vui lòng chọn ngày nhận phòng từ hôm nay trở đi.";valid=false}if(!(checkinDate.value&&checkoutDate.value&&checkoutDate.value>checkinDate.value)){$("dateError").textContent="Ngày trả phòng phải sau ngày nhận phòng.";valid=false}if(!valid)return;try{const r=await api("/api/reception/checkins",{method:"POST",body:JSON.stringify({roomCode:selectedRoom.code,guestName:name,phone,idNumber,guests,checkinDate:checkinDate.value,checkoutDate:checkoutDate.value})});showToast(r.message);this.reset();setDefaultDates();selectedRoom=null;await loadStays();updateSummary()}catch(err){showToast(err.message)}});
-$("resetBtn").addEventListener("click",()=>{$("checkinForm").reset();setDefaultDates();selectedRoom=null;document.querySelectorAll(".error").forEach(x=>x.textContent="");renderRooms();updateSummary()});renderRooms();updateSummary();loadStays();
+
+async function api(url,options={}){
+    const r=await fetch(url,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options});
+    const j=await r.json().catch(()=>({message:"Lỗi máy chủ"}));
+    if(!r.ok)throw new Error((j.errors||[j.message])[0]);
+    return j;
+}
+
+async function loadStays(){
+    try{
+        const r=await api("/api/reception/checkins");
+        stays=r.data||[];
+        renderStays();
+        renderRooms();
+    }catch(e){
+        showToast("Không tải được dữ liệu: "+e.message);
+    }
+}
+
+function renderRooms(){
+    roomList.innerHTML=rooms.map(room=>{
+        const stay=stays.find(s=>s.roomCode===room.code&&active(s)&&overlaps(s.checkinDate,s.checkoutDate,checkinDate.value,checkoutDate.value));
+        const closed=closedRoomCodes.has(room.code),unavailable=closed||!!stay,status=closed?"closed":stay?(stay.status==="checkedIn"?"busy":"reserved"):"available",label={available:"Trống",busy:"Đang sử dụng",reserved:"Đã đặt",closed:"Đã đóng"}[status],hasActive=stays.some(s=>s.roomCode===room.code&&active(s));
+        return `<div class="room ${unavailable?"disabled":""} ${selectedRoom?.code===room.code?"selected":""}" data-code="${room.code}"><img class="room-image" src="${roomImages[room.imageType]}" alt="Không gian ${room.name}" loading="lazy"><div class="room-top"><span class="room-code">Phòng ${room.code}</span><span class="status ${status}">${label}</span></div><h4>${room.name}</h4><p>${room.type}</p><div class="price">${money(room.price)} / đêm</div><button type="button" class="room-toggle" data-code="${room.code}" ${hasActive?"disabled":""}>${closed?"Mở phòng":hasActive?"Có lưu trú":"Đóng phòng"}</button></div>`
+    }).join("");
+    
+    document.querySelectorAll(".room:not(.disabled)").forEach(c=>c.addEventListener("click",()=>{selectedRoom=rooms.find(r=>r.code===c.dataset.code);renderRooms();updateSummary()}));
+    document.querySelectorAll(".room-toggle:not(:disabled)").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const c=b.dataset.code;if(closedRoomCodes.has(c))closedRoomCodes.delete(c);else{closedRoomCodes.add(c);if(selectedRoom?.code===c)selectedRoom=null}localStorage.setItem("homestayClosedRooms",JSON.stringify([...closedRoomCodes]));renderRooms();updateSummary()}))
+}
+
+function renderStays(){
+    const list=stays.filter(active).sort((a,b)=>a.checkinDate.localeCompare(b.checkinDate));
+    if(!list.length){
+        stayList.innerHTML='<p class="empty-state">Chưa có lượt lưu trú hoặc đặt phòng nào.</p>';
+        return;
+    }
+    stayList.innerHTML=list.map(s=>{
+        const room=rooms.find(r=>r.code===s.roomCode),
+              due=s.status==="reserved"&&s.checkinDate<=localDateString(),
+              label=s.status==="checkedIn"?"Đang lưu trú":"Đã đặt",
+              invoiceBtn = (s.status === 'closed' || s.status === 'checkedOut') 
+                  ? `<button type="button" class="stay-action" onclick="viewInvoice('${s._id}')" style="background: #198754; color: white; margin-left: 5px;">Xem hóa đơn</button>` 
+                  : '';
+              action=s.status==="checkedIn"?'<button type="button" class="stay-action" data-action="checkout">Trả phòng</button>':due?'<button type="button" class="stay-action" data-action="checkin">Xác nhận khách đến</button>':'<button type="button" class="stay-action secondary-action" data-action="cancel">Hủy đặt</button>';
+        return `<article class="stay-item"><div class="stay-details"><strong>${escapeHtml(s.guestName)} · Phòng ${escapeHtml(s.roomCode)}</strong><span>${escapeHtml(room?.name||"Phòng")} · ${escapeHtml(s.guests)} người · ${escapeHtml(s.checkinDate)} đến ${escapeHtml(s.checkoutDate)}</span><span class="stay-status ${s.status}">${label}</span></div><div class="stay-controls" data-stay-id="${s._id}">${action} ${invoiceBtn}</div></article>`
+    }).join("");
+    
+    stayList.querySelectorAll(".stay-action[data-action]").forEach(b=>b.addEventListener("click",()=>handleStayAction(b)));
+}
+
+async function handleStayAction(b){
+    const id=b.closest(".stay-controls").dataset.stayId,action=b.dataset.action;
+    if(action==="checkout"&&!confirm("Xác nhận trả phòng?"))return;
+    if(action==="cancel"&&!confirm("Xác nhận hủy đặt phòng?"))return;
+    try{
+        await api(`/api/reception/checkins/${id}/${action}`,{method:"PATCH"});
+        showToast("Đã cập nhật trạng thái");
+        await loadStays();
+    }catch(e){
+        showToast(e.message);
+    }
+}
+
+function updateSummary(){
+    if(!selectedRoom){
+        selectedRoomText.textContent="Chưa chọn phòng";
+        selectedPrice.textContent="-";
+        totalText.textContent="-";
+    }else{
+        selectedRoomText.textContent=`Phòng ${selectedRoom.code}\n${selectedRoom.name}`;
+        selectedPrice.textContent=money(selectedRoom.price);
+    }
+    if(checkinDate.value&&checkoutDate.value&&checkoutDate.value>checkinDate.value){
+        const n=nightsBetween(checkinDate.value,checkoutDate.value);
+        nightsText.textContent=`${n} đêm`;
+        totalText.textContent=selectedRoom?money(n*selectedRoom.price):"-";
+    }else{
+        nightsText.textContent="-";
+        totalText.textContent="-";
+    }
+}
+
+function showToast(m){
+    const t=$("toast");
+    t.textContent=m;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"),3000);
+}
+
+$("today").textContent=new Date().toLocaleDateString("vi-VN",{weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"});
+
+function setDefaultDates(){
+    checkinDate.value=localDateString();
+    checkoutDate.value=addDays(checkinDate.value,1);
+    checkinDate.min=checkinDate.value;
+    checkoutDate.min=checkinDate.value;
+}
+
+function refresh(){
+    if(selectedRoom&&(closedRoomCodes.has(selectedRoom.code)||stays.some(s=>s.roomCode===selectedRoom.code&&active(s)&&overlaps(s.checkinDate,s.checkoutDate,checkinDate.value,checkoutDate.value))))selectedRoom=null;
+    renderRooms();
+    updateSummary();
+}
+
+setDefaultDates();
+checkinDate.addEventListener("change",()=>{checkinDate.min=localDateString();if(!checkinDate.value){checkoutDate.value="";checkoutDate.min=addDays(localDateString(),1)}else{if(checkoutDate.value<=checkinDate.value)checkoutDate.value=addDays(checkinDate.value,1);checkoutDate.min=addDays(checkinDate.value,1)}refresh()});
+checkoutDate.addEventListener("change",refresh);
+
+$("checkinForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    document.querySelectorAll(".error").forEach(x=>x.textContent="");
+    let valid=true;
+    const name=$("guestName").value.trim(),phone=$("phone").value.trim(),idNumber=$("idNumber").value.trim(),guests=Number($("guests").value),today=localDateString();
+    if(!selectedRoom){showToast("Vui lòng chọn phòng.");valid=false}
+    if(!name){$("guestNameError").textContent="Vui lòng nhập họ và tên.";valid=false}
+    if(!/^0\d{9,10}$/.test(phone)){$("phoneError").textContent="Số điện thoại không hợp lệ.";valid=false}
+    if(!/^\d{9,12}$/.test(idNumber)){$("idError").textContent="CCCD/CMND không hợp lệ.";valid=false}
+    if(!Number.isInteger(guests)||guests<1||(selectedRoom&&guests>Number(selectedRoom.type.match(/\d+/)[0]))){$("guestsError").textContent="Số người vượt quá sức chứa phòng.";valid=false}
+    if(!checkinDate.value||checkinDate.value<today){$("checkinDateError").textContent="Vui lòng chọn ngày nhận phòng từ hôm nay trở đi.";valid=false}
+    if(!(checkinDate.value&&checkoutDate.value&&checkoutDate.value>checkinDate.value)){$("dateError").textContent="Ngày trả phòng phải sau ngày nhận phòng.";valid=false}
+    if(!valid)return;
+    try{
+        const r=await api("/api/reception/checkins",{method:"POST",body:JSON.stringify({roomCode:selectedRoom.code,guestName:name,phone,idNumber,guests,checkinDate:checkinDate.value,checkoutDate:checkoutDate.value})});
+        showToast(r.message);
+        this.reset();
+        setDefaultDates();
+        selectedRoom=null;
+        await loadStays();
+        updateSummary();
+    }catch(err){
+        showToast(err.message);
+    }
+});
+
+$("resetBtn").addEventListener("click",()=>{$("checkinForm").reset();setDefaultDates();selectedRoom=null;document.querySelectorAll(".error").forEach(x=>x.textContent="");renderRooms();updateSummary()});
+
+// ==========================================
+// PBI S4-03: XEM HÓA ĐƠN & TẢI PDF (FRONTEND)
+// ==========================================
+let currentInvoiceBookingId = null;
+
+async function viewInvoice(bookingId) {
+    currentInvoiceBookingId = bookingId;
+    const container = document.getElementById('invoiceModalContent');
+    const actionsDiv = document.getElementById('invoiceActions');
+    const btnRetry = document.getElementById('btnRetryInvoice');
+
+    if (!container) return;
+
+    container.innerHTML = '<p style="text-align: center; padding: 20px;">⏳ Đang tải thông tin hóa đơn...</p>';
+    document.getElementById('invoiceModal').style.display = 'block';
+    if (actionsDiv) actionsDiv.style.display = 'none';
+    if (btnRetry) btnRetry.style.display = 'none';
+
+    try {
+        const res = await fetch(`/api/invoices/booking/${bookingId}`);
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+            container.innerHTML = `
+                <div style="padding: 20px; background: #f8d7da; color: #842029; border-radius: 6px;">
+                    <h3 style="margin-top: 0;">⚠️ Chưa thể xuất hóa đơn</h3>
+                    <p>${data.message || 'Booking này chưa ở trạng thái đóng (CLOSED) hoặc không tìm thấy dữ liệu hóa đơn.'}</p>
+                </div>
+            `;
+            if (actionsDiv) actionsDiv.style.display = 'block';
+            if (btnRetry) btnRetry.style.display = 'inline-block';
+            return;
+        }
+
+        const invoice = data.data;
+
+        container.innerHTML = `
+            <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.5;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 10px;">
+                    <div>
+                        <h2 style="margin: 0;">HOMESTAY MANAGEMENT</h2>
+                        <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Hệ thống Quản lý Homestay</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <h3 style="margin: 0; color: #0d6efd;">HÓA ĐƠN THANH TOÁN</h3>
+                        <p style="margin: 5px 0 0 0; font-weight: bold;">Số HĐ: ${invoice.invoiceNumber || '---'}</p>
+                    </div>
+                </div>
+
+                <div style="margin: 20px 0; display: flex; justify-content: space-between; font-size: 14px;">
+                    <div>
+                        <p style="margin: 4px 0;"><strong>Khách hàng:</strong> ${invoice.guestName || 'N/A'}</p>
+                        <p style="margin: 4px 0;"><strong>Mã Booking:</strong> ${invoice.bookingCode || 'N/A'}</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="margin: 4px 0;"><strong>Phòng số:</strong> ${invoice.roomNumber || 'N/A'}</p>
+                        <p style="margin: 4px 0;"><strong>Thời gian:</strong> ${invoice.checkInDate} ➔ ${invoice.checkOutDate}</p>
+                    </div>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+                    <thead>
+                        <tr style="background: #f2f2f2; border-bottom: 2px solid #ccc;">
+                            <th style="padding: 8px; text-align: left;">Nội dung</th>
+                            <th style="padding: 8px; text-align: right;">Đơn giá</th>
+                            <th style="padding: 8px; text-align: center;">SL</th>
+                            <th style="padding: 8px; text-align: right;">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${(invoice.lineItems || []).map(item => `
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px;">${item.description}</td>
+                                <td style="padding: 8px; text-align: right;">${Number(item.unitPrice).toLocaleString('vi-VN')} đ</td>
+                                <td style="padding: 8px; text-align: center;">${item.quantity}</td>
+                                <td style="padding: 8px; text-align: right;">${Number(item.amount).toLocaleString('vi-VN')} đ</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+
+                <div style="text-align: right; border-top: 2px solid #333; padding-top: 10px;">
+                    <h3 style="margin: 0 0 5px 0;">Tổng cộng: <span style="color: #d63384;">${Number(invoice.totalAmount).toLocaleString('vi-VN')} VNĐ</span></h3>
+                    <p style="margin: 0; font-style: italic; font-size: 13px; color: #555;">(Bằng chữ: ${invoice.totalAmountInWords || '---'})</p>
+                </div>
+            </div>
+        `;
+
+        if (actionsDiv) actionsDiv.style.display = 'block';
+
+    } catch (err) {
+        console.error('Lỗi khi xem hóa đơn:', err);
+        container.innerHTML = `
+            <div style="padding: 20px; background: #f8d7da; color: #842029; border-radius: 6px;">
+                <p style="margin: 0;">❌ Lỗi kết nối máy chủ khi tải dữ liệu hóa đơn.</p>
+            </div>
+        `;
+        if (actionsDiv) actionsDiv.style.display = 'block';
+        if (btnRetry) btnRetry.style.display = 'inline-block';
+    }
+}
+
+function downloadInvoicePDF() {
+    if (!currentInvoiceBookingId) return;
+    const pdfUrl = `/api/invoices/booking/${currentInvoiceBookingId}/pdf`;
+    window.open(pdfUrl, '_blank');
+}
+
+function retryLoadInvoice() {
+    if (currentInvoiceBookingId) {
+        viewInvoice(currentInvoiceBookingId);
+    }
+}
+
+function closeInvoiceModal() {
+    const modal = document.getElementById('invoiceModal');
+    if (modal) modal.style.display = 'none';
+}
+
+renderRooms();
+updateSummary();
+loadStays();
