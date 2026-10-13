@@ -1,0 +1,16 @@
+{
+  "mode": "FRONTEND API FIXTURE, NOT MONGODB END-TO-END",
+  "pass": true,
+  "checks": [
+    "Lookup and server quote show old/new price and 1,400,000 VND difference; save requires consent",
+    "Editing dates invalidates quote and consent",
+    "409 retains proposed dates and does not report saved",
+    "One PUT on double click; only BE-supported fields; history from API result",
+    "Walk-in validation error preserves guest form",
+    "Walk-in no-email -> one POST and server status/code; check-in shortcut does not claim direct state transition",
+    "Uncertain write freezes form and never auto-retries",
+    "360px mobile has no overflow, sidebar burger and Escape close",
+    "Customer role cannot enter staff UI"
+  ],
+  "jsErrors": []
+}
