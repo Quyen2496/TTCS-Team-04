@@ -1,0 +1,287 @@
+.t4-staff {
+  --layout-green: #34764d;
+  --layout-green-dark: #28623e;
+}
+.t4-staff .staff-container {
+  max-width: 1180px;
+  margin: auto;
+}
+.t4-staff .hs-layout-main {
+  min-width: 0;
+}
+.t4-staff .staff-sidebar-footer {
+  padding: 18px;
+}
+.t4-staff #staff-identity {
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 36%;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+.t4-staff fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.t4-staff select {
+  font: inherit;
+  min-height: 45px;
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid #d9dfda;
+  border-radius: 8px;
+  background: white;
+}
+.t4-staff .staff-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #d5e3d8;
+  padding-bottom: 10px;
+}
+.t4-staff .staff-tabs button {
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: none;
+  color: #617568;
+  padding: 12px 18px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 45px;
+}
+.t4-staff .staff-tabs button[aria-selected="true"] {
+  border-color: #c8dccd;
+  background: #edf5ef;
+  color: #28623e;
+}
+.t4-staff .staff-lookup {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr auto;
+  gap: 16px;
+  align-items: end;
+}
+.t4-staff .staff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.t4-staff .staff-grid .full {
+  grid-column: 1/-1;
+}
+.t4-staff #walk-form .staff-grid {
+  grid-template-columns: 1fr 1fr;
+}
+.t4-staff .staff-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.t4-staff .staff-summary,
+.t4-staff .staff-preview {
+  margin-top: 22px;
+  padding: 20px;
+  border: 1px solid #d8e6dc;
+  border-radius: 12px;
+  background: #f5faf6;
+  min-width: 0;
+}
+.t4-staff .staff-caption {
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 12px 0;
+  color: #708175;
+}
+.t4-staff .staff-summary dl,
+.t4-staff .staff-receipt {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  margin: 16px 0 0;
+}
+.t4-staff dt {
+  font-size: 11px;
+  color: #6c7e70;
+}
+.t4-staff dd {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.t4-staff .staff-status {
+  display: inline-block;
+  font-size: 11px;
+  background: #e3eee5;
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: #315d3e;
+  margin-left: 10px;
+}
+.t4-staff .staff-difference {
+  margin: 14px 0;
+  background: #e6f0e9;
+  padding: 14px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+.t4-staff .staff-difference strong {
+  font-size: 22px;
+  display: block;
+  color: #2b6340;
+}
+.t4-staff .staff-difference small {
+  font-size: 12px;
+}
+.t4-staff .staff-preview .checkbox-label {
+  margin-top: 18px;
+}
+.t4-staff .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 18px 0;
+  font-size: 13px;
+  font-weight: 400;
+}
+.t4-staff .checkbox-label input {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin: 2px 0;
+  accent-color: #34764d;
+}
+.t4-staff .staff-table-wrap {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid #dce6df;
+  border-radius: 9px;
+  margin-top: 14px;
+}
+.t4-staff table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 540px;
+  font-size: 12px;
+}
+.t4-staff td,
+.t4-staff th {
+  padding: 13px;
+  text-align: left;
+  border-bottom: 1px solid #e2eae4;
+  overflow-wrap: anywhere;
+  max-width: 300px;
+}
+.t4-staff th {
+  background: #eef5ef;
+}
+.t4-staff .staff-room-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.t4-staff .staff-room-card {
+  border: 1px solid #d7e5db;
+  border-radius: 12px;
+  padding: 18px;
+  background: #fcfdfb;
+  min-width: 0;
+}
+.t4-staff .staff-room-card p {
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 8px 0 15px;
+}
+.t4-staff .staff-room-card h3 {
+  overflow-wrap: anywhere;
+}
+.t4-staff .staff-room-card .btn {
+  width: 100%;
+}
+.t4-staff .staff-success {
+  background: #f4faf5;
+  border-color: #b8d5c0;
+  padding: 22px;
+  border-radius: 12px;
+  margin-top: 22px;
+}
+.t4-staff .staff-booking-code {
+  display: block;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: #2a6540;
+  margin-top: 16px;
+  overflow-wrap: anywhere;
+}
+.t4-staff #auth-gate .btn {
+  margin-top: 20px;
+}
+.t4-staff .staff-error-link {
+  display: block;
+  margin-top: 10px;
+}
+.t4-staff .hs-layout-menu-toggle,
+.t4-staff .hs-layout-sidebar-close {
+  font: inherit;
+}
+.t4-staff .hs-layout-sidebar-close {
+  font-size: 24px;
+}
+@media (max-width: 1100px) {
+  .t4-staff .staff-room-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .t4-staff .staff-lookup {
+    grid-template-columns: 1fr 1fr;
+  }
+  .t4-staff .staff-lookup > .btn {
+    grid-column: 1/-1;
+    justify-self: end;
+  }
+}
+@media (max-width: 650px) {
+  .t4-staff .hs-layout-header-title {
+    font-size: 13px;
+  }
+  .t4-staff .staff-tabs {
+    gap: 4px;
+  }
+  .t4-staff .staff-tabs button {
+    padding: 10px;
+    font-size: 12px;
+    flex: 1;
+  }
+  .t4-staff .staff-grid,
+  .t4-staff #walk-form .staff-grid,
+  .t4-staff .staff-lookup,
+  .t4-staff .staff-room-options {
+    grid-template-columns: 1fr;
+  }
+  .t4-staff .staff-summary dl,
+  .t4-staff .staff-receipt {
+    grid-template-columns: 1fr 1fr;
+  }
+  .t4-staff .staff-actions > .btn,
+  .t4-staff .staff-lookup > .btn {
+    width: 100%;
+  }
+  .t4-staff .staff-summary,
+  .t4-staff .staff-preview {
+    padding: 15px;
+  }
+  .t4-staff .page-title {
+    align-items: flex-start;
+  }
+  .t4-staff .note-pill {
+    display: none;
+  }
+  .t4-staff #change-preview > .btn {
+    width: 100%;
+  }
+}

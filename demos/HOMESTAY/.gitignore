@@ -11,3 +11,11 @@ data/
 *.zip
 *.bak
 *backup*
+
+# Cau hinh va du lieu tren may ca nhan
+.env*
+!.env.example
+/node_modules/
+/data/
+/backups/
+/public/assets/uploads/

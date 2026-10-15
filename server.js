@@ -10,6 +10,10 @@ const lookupRouter = require("./src/modules/lookup/lookup.router");
 const bookingRouter = require("./src/modules/bookings/booking.router");
 const roomRouter = require("./src/modules/rooms/room.router");
 const receptionRouter = require("./src/modules/reception/routes");
+const cancellationRouter = require("./src/modules/cancellation/cancellation.router");
+const roomWarningRouter = require("./src/modules/report/roomWarning.route");
+const roomBoardRouter = require("./src/modules/roomBoard/roomBoard.router");
+const revenueRouter = require("./src/modules/report/revenue.router");
 
 const { notFound, errorHandler } = require("./src/middleware/errorHandler");
 
@@ -31,6 +35,10 @@ app.use("/api/lookup", lookupRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/rooms", roomRouter);
 app.use("/api/reception", receptionRouter);
+app.use("/api/admin", cancellationRouter);
+app.use("/api/admin/reports", roomWarningRouter);
+app.use("/api/admin/room-board", roomBoardRouter);
+app.use("/api/admin/reports", revenueRouter); // <-- MỚI: Đăng ký route doanh thu: GET /api/admin/reports/revenue
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -41,10 +49,27 @@ app.get("/", (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
-connectDB();
-
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error("Failed to initialize the database:", error);
+    process.exit(1);
+  });
+ feature/t3-quynh-audit-log-api
+}
+
+if (require.main === module) {
+  start().catch((error) => {
+    console.error("Cannot start server:", error.message);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = { app, start };
+develop

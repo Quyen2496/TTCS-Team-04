@@ -1,136 +1,94 @@
+const mongoose = require('mongoose');
 const Booking = require('./booking.model');
-const RoomModule = require('../rooms/room.model');
+const BookingRoomNight = require('./booking-room-night.model');
+const Room = require('../rooms/room.model');
+const RoomType = require('../rooms/roomType.model');
+const { getStayRange, getNights } = require('./booking-dates');
 
-// Hỗ trợ linh hoạt cả 2 kiểu export từ nhóm T5
-const Room = RoomModule.Room || RoomModule;
-const RoomType = RoomModule.RoomType || RoomModule;
+const ACTIVE_BOOKING_STATUSES = ['PENDING', 'CONFIRMED', 'PAID', 'CHECKED_IN'];
 
-/**
- * S2-05: Tìm loại phòng trống theo checkIn, checkOut, guestCount
- */
-const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
-  const start = new Date(checkIn);
-  const end = new Date(checkOut);
-
-  // 1. Kiểm tra ngày hợp lệ
-  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-    throw new Error('Ngày nhận hoặc trả phòng không đúng định dạng.');
-  }
-  if (start >= end) {
-    throw new Error('Ngày trả phòng phải sau ngày nhận phòng.');
-  }
-
-  const parsedGuestCount = parseInt(guestCount, 10) || 1;
-
-  // 2. Lấy danh sách tất cả loại phòng
-  const allRoomTypes = await RoomType.find({}).lean();
-
-  if (!allRoomTypes || allRoomTypes.length === 0) {
-    return [];
-  }
-
-  // Lọc loại phòng theo sức chứa nếu Schema có khai báo trường capacity
-  const eligibleRoomTypes = allRoomTypes.filter(rt => {
-    if (rt.capacity !== undefined) {
-      return rt.capacity >= parsedGuestCount;
-    }
-    return true; // Nếu loại phòng không định nghĩa capacity thì vẫn giữ lại
-  });
-
-  const eligibleTypeIds = eligibleRoomTypes.map(rt => rt._id);
-
-  // 3. Lấy danh sách các phòng thực tế không bị bảo trì
-  const activeRooms = await Room.find({
-    $or: [
-      { roomTypeId: { $in: eligibleTypeIds } },
-      { roomType: { $in: eligibleTypeIds } }
-    ],
-    isMaintenance: { $ne: true },
-    status: { $ne: 'MAINTENANCE' }
-  }).lean();
-
-  // 4. Tìm các Booking trùng lịch
-  const overlappingBookings = await Booking.find({
-    status: { $in: ['PENDING', 'CONFIRMED', 'PAID', 'CHECKED_IN'] },
-    $and: [
-      { checkIn: { $lt: end } },
-      { checkOut: { $gt: start } }
-    ]
-  }).select('roomId roomTypeId').lean();
-
-  const occupiedRoomIds = new Set(
-    overlappingBookings
-      .filter(b => b.roomId)
-      .map(b => b.roomId.toString())
-  );
-
-  // 5. Tính số phòng còn trống cho từng loại
-  const availableCountMap = {};
-  activeRooms.forEach(room => {
-    const rId = room._id.toString();
-    const rtId = (room.roomTypeId || room.roomType || '').toString();
-
-    if (rtId && !occupiedRoomIds.has(rId)) {
-      availableCountMap[rtId] = (availableCountMap[rtId] || 0) + 1;
-    }
-  });
-
-  // 6. Ghép dữ liệu và trả về kết quả
-  return eligibleRoomTypes
-    .map(rt => {
-      const remainingRooms = availableCountMap[rt._id.toString()] || 0;
-      return {
-        roomTypeId: rt._id,
-        name: rt.name || rt.title || 'Loại phòng',
-        capacity: rt.capacity || parsedGuestCount,
-        description: rt.description || '',
-        images: rt.images || [],
-        basePrice: rt.basePrice || rt.price || 0,
-        availableRooms: remainingRooms
-      };
-    })
-    .filter(item => item.availableRooms > 0);
+const httpError = (message, statusCode) => {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
 };
 
-/**
- * S2-06: Tính báo giá đặt phòng (Server tự tính toán lại giá, không tin client)
- */
-const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) => {
-  const start = new Date(checkIn);
-  const end = new Date(checkOut);
+const isRoomNightIndexConflict = error => {
+  const candidates = [
+    error,
+    ...(error?.writeErrors || []).map(writeError => writeError.err || writeError),
+    ...(error?.result?.getWriteErrors?.() || [])
+  ];
 
-  // 1. Kiểm tra ngày hợp lệ
-  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-    throw new Error('Ngày nhận hoặc trả phòng không đúng định dạng.');
-  }
-  if (start >= end) {
-    throw new Error('Ngày trả phòng phải sau ngày nhận phòng.');
-  }
+  return candidates.some(candidate => {
+    if (candidate?.code !== 11000) return false;
+    const pattern = candidate.keyPattern || {};
+    return (pattern.roomId === 1 && pattern.night === 1) ||
+      candidate.message?.includes('room_night_unique') ||
+      candidate.message?.includes('roomId_1_night_1');
+  });
+};
 
-  // 2. Tính số đêm lưu trú
-  const diffTime = Math.abs(end - start);
-  const totalNights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+/** Return room types that have at least one free physical room for every night. */
+const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
+  const { start, end } = getStayRange(checkIn, checkOut);
+  const parsedGuestCount = parseInt(guestCount, 10) || 1;
+  const allRoomTypes = await RoomType.find({}).lean();
 
-  if (totalNights <= 0) {
-    throw new Error('Số đêm lưu trú phải lớn hơn 0.');
-  }
+  if (!allRoomTypes.length) return [];
 
-  // 3. Lấy thông tin loại phòng từ Database (Nếu không thấy thì linh hoạt tạo dữ liệu test)
-  let roomType = null;
-  try {
-    if (roomTypeId) {
-      roomType = await RoomType.findById(roomTypeId).lean();
+  const eligibleRoomTypes = allRoomTypes.filter(roomType =>
+    roomType.capacity === undefined || roomType.capacity >= parsedGuestCount
+  );
+  const eligibleTypeIds = eligibleRoomTypes.map(roomType => roomType._id);
+  const activeRooms = await Room.find({
+    roomTypeId: { $in: eligibleTypeIds },
+    isMaintenance: { $ne: true },
+    status: { $ne: 'MAINTENANCE' }
+  }).select('_id roomTypeId').lean();
+
+  const roomIds = activeRooms.map(room => room._id);
+  const occupiedRoomIds = roomIds.length
+    ? new Set((await BookingRoomNight.distinct('roomId', {
+      roomId: { $in: roomIds },
+      night: { $gte: start, $lt: end }
+    })).map(id => id.toString()))
+    : new Set();
+
+  const availableCountMap = new Map();
+  for (const room of activeRooms) {
+    const typeId = room.roomTypeId.toString();
+    if (!occupiedRoomIds.has(room._id.toString())) {
+      availableCountMap.set(typeId, (availableCountMap.get(typeId) || 0) + 1);
     }
-  } catch (e) {
-    // Bỏ qua lỗi CastError nếu ID truyền lên không đúng định dạng ObjectId của Mongo
   }
 
-  // 4. Lấy giá gốc và tính toán tổng tiền
-  const pricePerNight = roomType ? (roomType.basePrice || roomType.price || 500000) : 500000;
-  const roomTypeName = roomType ? (roomType.name || roomType.title || 'Loại phòng') : 'Phòng Deluxe (Dữ liệu Test)';
-  const numRooms = parseInt(quantity, 10) || 1;
+  return eligibleRoomTypes
+    .map(roomType => ({
+      roomTypeId: roomType._id,
+      name: roomType.name || roomType.title || 'Loại phòng',
+      capacity: roomType.capacity || parsedGuestCount,
+      description: roomType.description || '',
+      images: roomType.images || [],
+      basePrice: roomType.basePrice || roomType.price || 0,
+      availableRooms: availableCountMap.get(roomType._id.toString()) || 0
+    }))
+    .filter(roomType => roomType.availableRooms > 0);
+};
 
-  const totalAmount = pricePerNight * totalNights * numRooms;
+/** Calculate the quote using calendar nights in the half-open stay interval. */
+const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) => {
+  const { start, end } = getStayRange(checkIn, checkOut);
+  const totalNights = getNights(start, end).length;
+  let roomType = null;
+
+  if (roomTypeId && mongoose.Types.ObjectId.isValid(roomTypeId)) {
+    roomType = await RoomType.findById(roomTypeId).lean();
+  }
+
+  const pricePerNight = roomType ? (roomType.basePrice || roomType.price || 500000) : 500000;
+  const roomTypeName = roomType ? (roomType.name || roomType.title || 'Loại phòng') : 'Phòng Deluxe';
+  const numRooms = parseInt(quantity, 10) || 1;
 
   return {
     roomTypeId: roomType ? roomType._id : roomTypeId,
@@ -138,11 +96,106 @@ const calculateQuote = async ({ roomTypeId, checkIn, checkOut, quantity = 1 }) =
     pricePerNight,
     totalNights,
     quantity: numRooms,
-    totalAmount
+    totalAmount: pricePerNight * totalNights * numRooms
   };
 };
 
+/**
+ * SPRINT 3: Tính chênh lệch giá khi sửa đặt phòng
+ */
+const calculateModificationQuote = async ({ bookingId, newRoomTypeId, newCheckIn, newCheckOut }) => {
+  const booking = await Booking.findById(bookingId).lean();
+  if (!booking) {
+    throw new Error('Không tìm thấy đơn đặt phòng.');
+  }
+
+  const roomTypeId = newRoomTypeId || booking.roomTypeId;
+  const checkIn = newCheckIn || booking.checkIn;
+  const checkOut = newCheckOut || booking.checkOut;
+
+  const newQuote = await calculateQuote({
+    roomTypeId,
+    checkIn,
+    checkOut,
+    quantity: booking.quantity || 1
+  });
+
+  const priceDifference = newQuote.totalAmount - (booking.totalAmount || 0);
+
+  return {
+    oldTotalAmount: booking.totalAmount || 0,
+    newTotalAmount: newQuote.totalAmount,
+    priceDifference,
+    newQuoteDetails: newQuote
+  };
+};
+
+/**
+ * SPRINT 3: Cập nhật đơn đặt phòng
+ */
+const modifyBooking = async (bookingId, updateData) => {
+  const { newRoomTypeId, newCheckIn, newCheckOut, newTotalAmount } = updateData;
+
+  const updateFields = {};
+  if (newRoomTypeId) updateFields.roomTypeId = newRoomTypeId;
+  if (newCheckIn) updateFields.checkIn = new Date(newCheckIn);
+  if (newCheckOut) updateFields.checkOut = new Date(newCheckOut);
+  if (newTotalAmount !== undefined) updateFields.totalAmount = newTotalAmount;
+
+  const updatedBooking = await Booking.findByIdAndUpdate(
+    bookingId,
+    { $set: updateFields },
+    { new: true }
+  ).lean();
+
+  if (!updatedBooking) {
+    throw new Error('Không thể cập nhật đơn đặt phòng.');
+  }
+
+  return updatedBooking;
+};
+
+/**
+ * SPRINT 3: Đặt phòng trực tiếp tại quầy (Walk-in)
+ */
+const createWalkInBooking = async (walkInData) => {
+  const { guestName, phone, email, roomTypeId, checkIn, checkOut, guestCount, isPaidNow } = walkInData;
+
+  if (!guestName || !phone || !roomTypeId || !checkIn || !checkOut) {
+    throw new Error('Thiếu thông tin bắt buộc để tạo đơn khách vãng lai.');
+  }
+
+  const quote = await calculateQuote({
+    roomTypeId,
+    checkIn,
+    checkOut,
+    quantity: 1
+  });
+
+  const bookingCode = 'WALK-' + crypto.randomBytes(3).toString('hex').toUpperCase();
+
+  const newBooking = new Booking({
+    bookingCode,
+    guestName: guestName.trim(),
+    phone: phone.trim(),
+    email: email ? email.trim().toLowerCase() : 'walkin@homestay.com',
+    roomTypeId,
+    checkIn: new Date(checkIn),
+    checkOut: new Date(checkOut),
+    guestCount: parseInt(guestCount, 10) || 1,
+    totalAmount: quote.totalAmount,
+    status: isPaidNow ? 'CONFIRMED' : 'PENDING',
+    isWalkIn: true
+  });
+
+  return await newBooking.save();
+};
+
 module.exports = {
+  ACTIVE_BOOKING_STATUSES,
   getAvailableRoomTypes,
-  calculateQuote
+  calculateQuote,
+  calculateModificationQuote,
+  modifyBooking,
+  createWalkInBooking
 };
