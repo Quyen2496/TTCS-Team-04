@@ -51,18 +51,12 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 
-connectDB()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
-  .catch(error => {
-    console.error("Failed to initialize the database:", error);
-    process.exit(1);
+const start = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
- feature/t3-quynh-audit-log-api
-}
+};
 
 if (require.main === module) {
   start().catch((error) => {
@@ -72,4 +66,3 @@ if (require.main === module) {
 }
 
 module.exports = { app, start };
-develop
