@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lễ tân | Homestay</title>
+    <link rel="stylesheet" href="homestay-ui.css">
+    <link rel="stylesheet" href="homestay-layout.css">
+    <link rel="stylesheet" href="reception.css">
+    <script src="homestay-layout.js" defer></script>
+    <script src="reception.js" defer></script>
+  </head>
+  <body><a class="hs-skip" href="#main">Đến nội dung chính</a>
+    <aside class="hs-sidebar" id="homestay-sidebar" data-hs-sidebar aria-hidden="true">
+      <div class="hs-sidebar-head"><a class="hs-brand" href="/"><span class="hs-brand-mark">
+        <svg viewBox="0 0 24 24">
+          <path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/>
+        </svg></span><span class="hs-brand-text"><strong>Homestay</strong><small>Hệ thống quản lý</small></span></a><button class="hs-close-button" data-hs-menu-close aria-label="Đóng menu">
+        <svg viewBox="0 0 24 24">
+          <path d="m6 6 12 12M18 6 6 18"/>
+        </svg></button>
+      </div>
+      <nav class="hs-nav">
+        <div class="hs-nav-section">Nhân viên</div><a class="hs-nav-link" href="/modules/bookings/index.html"><span class="hs-nav-icon">▣</span>Đặt phòng</a><a class="hs-nav-link" href="./index.html" aria-current="page"><span class="hs-nav-icon">⌂</span>Lễ tân</a><a class="hs-nav-link" href="/modules/lookup/index.html"><span class="hs-nav-icon">⌕</span>Tra cứu booking</a>
+        <div class="hs-nav-section">Tài khoản</div><a class="hs-nav-link" href="/login.html"><span class="hs-nav-icon">↪</span>Đăng nhập / tài khoản</a>
+      </nav>
+      <div class="hs-sidebar-foot">Khu vực nhân viên · T2 / Cặp 4</div>
+    </aside>
+    <div class="hs-backdrop" data-hs-backdrop></div>
+    <header class="hs-header"><button class="hs-menu-button" data-hs-menu-open aria-controls="homestay-sidebar" aria-expanded="false" aria-label="Mở menu">☰</button>
+      <div class="hs-header-title"><strong>Nghiệp vụ lễ tân</strong><span>Quản lý phòng · booking · thao tác tại quầy</span></div>
+    </header>
+    <main class="hs-main" id="main">
+      <div class="hs-content">
+        <div class="page-title">
+          <div><span class="eyebrow">NGHIỆP VỤ LỄ TÂN</span>
+            <h1>Quản lý phòng và booking</h1>
+            <p>Theo dõi phòng, cập nhật trạng thái và xử lý booking theo quyền lễ tân.</p>
+          </div><span class="note-pill">Sprint 1–2</span>
+        </div>
+        <div id="global-message" class="notice" hidden></div>
+        <section class="hs-card hs-section" aria-labelledby="rooms-title">
+          <div class="section-title reception-section-title"><span class="step">1</span>
+            <div>
+              <h2 id="rooms-title">Danh sách phòng</h2>
+              <p>Trạng thái luôn hiển thị bằng chữ: trống sạch, trống bẩn, đang ở, bảo trì.</p>
+            </div><button class="btn secondary reception-refresh" id="reload-rooms" type="button">↻ Làm mới</button>
+          </div>
+          <div class="reception-filter-row">
+            <div class="field"><label for="room-status-filter">Trạng thái</label><select id="room-status-filter"><option value="">Tất cả</option><option value="CLEAN_VACANT">Trống sạch</option><option value="DIRTY_VACANT">Trống bẩn</option><option value="OCCUPIED">Đang ở</option><option value="MAINTENANCE">Bảo trì</option></select></div>
+            <div class="field"><label for="room-search">Số phòng</label><input id="room-search" type="search" placeholder="Ví dụ 101"></div>
+          </div>
+          <div id="rooms-loading" class="notice loading" hidden>Đang tải phòng...</div>
+          <div id="rooms-error" class="notice error" hidden></div>
+          <div id="rooms-empty" class="empty-state" hidden>Không có phòng phù hợp.</div>
+          <div id="room-list" class="reception-room-grid"></div>
+        </section>
+        <section class="hs-card hs-section" aria-labelledby="maintenance-title">
+          <div class="section-title"><span class="step">2</span>
+            <div>
+              <h2 id="maintenance-title">Bảo trì phòng</h2>
+              <p>Nhập lý do và khoảng ngày. Backend sẽ kiểm tra quy tắc chuyển trạng thái.</p>
+            </div>
+          </div>
+          <form id="maintenance-form" class="form-grid">
+            <div class="field"><label for="maintenance-room">Phòng *</label><select id="maintenance-room" required><option value="">Đang tải danh sách phòng...</option></select></div>
+            <div class="field"><label for="maintenance-reason">Lý do *</label><input id="maintenance-reason" maxlength="500" placeholder="Ví dụ: Điều hòa hỏng" required></div>
+            <div class="field"><label for="maintenance-start">Ngày bắt đầu *</label><input id="maintenance-start" type="date" required></div>
+            <div class="field"><label for="maintenance-end">Ngày dự kiến hoàn thành *</label><input id="maintenance-end" type="date" required></div>
+            <div class="full">
+              <div id="maintenance-message" class="notice" hidden></div>
+            </div>
+            <div class="actions full"><button class="btn secondary" id="maintenance-clear" type="button">Xóa</button><button class="btn primary" id="maintenance-submit" type="submit">Đưa phòng vào bảo trì</button></div>
+          </form>
+          <div class="section-title">
+            <div>
+              <h3>Phòng đang bảo trì</h3>
+              <p>Hoàn thành bảo trì để chuyển phòng về trạng thái trống sạch.</p>
+            </div>
+          </div>
+          <div id="maintenance-rooms-empty" class="empty-state" hidden>Hiện không có phòng đang bảo trì.</div>
+          <div id="maintenance-rooms-list" class="reception-room-grid"></div>
+        </section>
+        <section class="hs-card hs-section" aria-labelledby="booking-title">
+          <div class="section-title reception-section-title"><span class="step">3</span>
+            <div>
+              <h2 id="booking-title">Booking dành cho lễ tân</h2>
+              <p>Lọc theo trạng thái, ngày nhận và tên/số điện thoại; ưu tiên booking mới nhất.</p>
+            </div><button class="btn secondary reception-refresh" id="reload-bookings" type="button">↻ Làm mới</button>
+          </div>
+          <div class="reception-booking-filters">
+            <div class="field"><label for="booking-status">Trạng thái</label><select id="booking-status"><option value="">Tất cả</option><option value="PENDING">Chờ xác nhận</option><option value="CONFIRMED">Đã xác nhận</option><option value="CHECKED_IN">Đang ở</option><option value="CANCELLED">Đã hủy</option></select></div>
+            <div class="field"><label for="booking-from">Từ ngày nhận</label><input id="booking-from" type="date"></div>
+            <div class="field"><label for="booking-to">Đến ngày nhận</label><input id="booking-to" type="date"></div>
+            <div class="field"><label for="booking-keyword">Tên / điện thoại</label><input id="booking-keyword" type="search" placeholder="Nhập từ khóa"></div>
+          </div>
+          <div id="bookings-loading" class="notice loading" hidden>Đang tải booking...</div>
+          <div id="bookings-error" class="notice error" hidden></div>
+          <div class="table-wrap">
+            <table class="reception-table">
+              <thead>
+                <tr><th>Mã booking</th><th>Khách</th><th>Loại phòng</th><th>Nhận phòng</th><th>Trả phòng</th><th>Tổng tiền</th><th>Trạng thái</th></tr>
+              </thead>
+              <tbody id="booking-table-body"></tbody>
+            </table>
+          </div>
+          <div id="bookings-empty" class="empty-state" hidden>Không có booking phù hợp.</div>
+          <div class="pagination"><button class="btn secondary" id="booking-prev" type="button">← Trước</button><span id="booking-page-label">Trang 1</span><button class="btn secondary" id="booking-next" type="button">Sau →</button></div>
+        </section>
+        <section class="hs-card hs-section" aria-labelledby="assign-title">
+          <div class="section-title"><span class="step">4</span>
+            <div>
+              <h2 id="assign-title">Gán phòng</h2>
+              <p>Chọn booking và phòng đang ở trạng thái <strong>trống sạch</strong>. Bản giao diện này chỉ mô phỏng thao tác, chưa lưu vào backend.</p>
+            </div>
+          </div>
+          <div id="assign-message" class="notice warning">Chọn booking và phòng từ dữ liệu backend để xem trước thao tác gán. Kết quả chỉ lưu tạm trên trang và sẽ mất khi tải lại; chưa có thay đổi nào gửi lên backend.</div>
+          <div class="reception-assign-grid">
+            <div class="field"><label for="assign-booking">Booking</label><select id="assign-booking"><option value="">Đang tải booking...</option></select></div>
+            <div class="field"><label for="assign-room">Phòng trống sạch</label><select id="assign-room"><option value="">Đang tải phòng...</option></select></div><button class="btn primary" id="assign-submit" type="button" disabled>Gán phòng</button>
+          </div>
+          <div id="assignment-results" class="reception-assignment-list" aria-live="polite"></div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
