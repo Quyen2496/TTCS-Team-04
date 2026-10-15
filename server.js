@@ -13,6 +13,7 @@ const receptionRouter = require("./src/modules/reception/routes");
 const cancellationRouter = require("./src/modules/cancellation/cancellation.router");
 const roomWarningRouter = require("./src/modules/report/roomWarning.route");
 const roomBoardRouter = require("./src/modules/roomBoard/roomBoard.router");
+const revenueRouter = require("./src/modules/report/revenue.router");
 
 const { notFound, errorHandler } = require("./src/middleware/errorHandler");
 
@@ -37,6 +38,7 @@ app.use("/api/reception", receptionRouter);
 app.use("/api/admin", cancellationRouter);
 app.use("/api/admin/reports", roomWarningRouter);
 app.use("/api/admin/room-board", roomBoardRouter);
+app.use("/api/admin/reports", revenueRouter); // <-- MỚI: Đăng ký route doanh thu: GET /api/admin/reports/revenue
 
 app.use(express.static(path.join(__dirname, "public")));
 
