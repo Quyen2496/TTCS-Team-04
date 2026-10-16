@@ -1,0 +1,7 @@
+HOMESTAY AI 1.4.1 — sửa kết nối Groq, 12/10/2026
+
+Kiểm thử mới: Node 24.19.0, chế độ file: 103 ca tổng cộng; 102 đạt, 0 lỗi, 1 ca Mongo-only bỏ qua.
+21 ca AI gồm 17 ca nền và 4 ca mới: tham số GPT-OSS/Ollama, HTTP/JSON/token limit, DNS/TLS/timeout/mạng, setup lỗi giữ nguyên .env và lưu đúng default GPT-OSS khi verify đạt.
+Không in lỗi gốc chứa bí mật. Không bỏ qua xác minh TLS. Lỗi xác minh không tạo bản .env mới hoặc backup.
+Không đổi giao diện, truy vấn dữ liệu hoặc các thao tác booking. Không gọi Groq bằng key thật; không chạy lại MongoDB/UI trong lần sửa này. Kiểm chứng MongoDB/UI trước đó thuộc bản 1.4.0, xem TEST_AI_1_4_0.txt.
+Node 22 là lệnh khởi động trên Windows đã dùng ở bản nền; lần này môi trường kiểm thử có Node 24, không có Node 22 cài sẵn.

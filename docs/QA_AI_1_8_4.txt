@@ -1,0 +1,38 @@
+HOMESTAY 1.8.4 — kết quả kiểm thử
+
+1. Tự động
+- Node 24: 224 bài, 222 đạt, 0 lỗi, 2 bỏ qua do cần MongoDB QA riêng.
+- Node 22.23.3: 224 bài, 222 đạt, 0 lỗi, 2 bỏ qua do cần MongoDB QA riêng.
+- Riêng AI: 70 bài đạt, gồm 33 bài trước và 37 bài bổ sung.
+- Kiểm tra quyền doanh thu, quyền xuất riêng, thu hồi quyền và cơ sở, lịch sử cũ, quyền sở hữu booking, vai trò buồng phòng/lễ tân/khách.
+- Kiểm tra thu hồi quyền trong khi mô hình còn xử lý; kết quả cuối không lộ dữ liệu đã bị thu hồi.
+- Kiểm tra budget/tiện nghi/người lớn/trẻ em/ngày lưu trú, hỏi tiếp và đổi cơ sở/chủ đề.
+- Kiểm tra phản hồi mô hình sai, timeout, token bắt buộc, số tiền bịa, che số điện thoại viết có dấu cách và dữ liệu không gửi sang mô hình.
+- CSV chống công thức kể cả ô bắt đầu bằng khoảng trắng hoặc tab.
+
+2. Trình duyệt Chromium thật với mô hình mô phỏng
+12 nhóm đạt:
+- Gia đình 2 người lớn + 2 trẻ em hỏi tuổi, giữ tổng 4 khách.
+- Giữ nhu cầu sau câu hỏi chính sách rồi quay lại ngày lưu trú.
+- Ngân sách không đủ không hiển thị phương án vượt mức.
+- Khách hỏi doanh thu bị chặn, giữ câu hỏi để sửa.
+- Báo cáo năm xem trước 200 dòng và tải Excel/PDF thật sau đồng ý xuất.
+- Thu hồi quyền doanh thu che kết quả lịch sử và bỏ nút tải.
+- Lễ tân chỉ xem doanh thu hôm nay; không xuất khi chưa có quyền.
+- Buồng phòng có gợi ý phù hợp, bị chặn giá/booking/tài chính.
+- Không tràn ngang ở 360/390/768px.
+- Khung chat nổi trong trang phòng hoạt động với bộ lọc mới.
+- Khoá nhập/gửi khi khởi tạo chậm để tránh mất câu hỏi/nhầm hội thoại.
+- Không lỗi JavaScript; mô hình không nhận giá trị tài chính trong dữ liệu thử.
+
+3. Nội dung file
+- Kiểm tra XML bên trong Excel: đủ 365 ngày năm 2026, gồm 01/01 và 31/12.
+- Kiểm tra toàn bộ văn bản PDF: đủ 365 ngày khác nhau năm 2026.
+- Kết quả cũ chỉ có một phần bảng được từ chối xuất với thông báo hỏi lại, tránh file thiếu âm thầm.
+
+4. Gói cập nhật
+- 13 nhóm kiểm tra đạt: nâng từ 1.8.2 và 1.8.3, giữ cấu hình/dữ liệu/ảnh/sao lưu, sao lưu nguồn trước ghi, hash toàn bộ payload, áp dụng lại an toàn, chặn payload hỏng/phiên bản sai/symlink.
+- 83 bài AI và hồi quy 1.8.3 đạt trên chính mã nguồn vừa cài từ mỗi phiên bản.
+
+5. Giới hạn
+Tất cả dùng dữ liệu giả lập và server loopback riêng. Không kết nối MongoDB Atlas thật, không gửi email hoặc giao dịch payOS thật. Nhà cung cấp mô hình trong kiểm thử được mô phỏng; chưa kiểm tra API key/Groq thật trên máy người dùng. Có scripts/check-ai.js để người dùng kiểm tra mô hình thật bằng dữ liệu giả lập và cấu hình đang có, không gửi key qua chat.

@@ -1,0 +1,11 @@
+HOMESTAY AI 1.5.0 — kiểm thử 12/10/2026
+
+Node 24.19.0, chế độ file: 114 ca; 113 đạt, 1 Mongo-only bỏ qua, 0 lỗi. 32 ca AI đạt, gồm 10 ca mới cho gợi ý/chọn phòng/đổi khách/ngày/nhóm đông/xuất có đồng ý/quyền/chỉ số phòng có khách/SQL.
+Kiểm tra số người viết số và chữ, từ chối số âm/lẻ/0/101; gợi ý nhóm thiếu số người hỏi lại; tên/thứ tự và nút thẻ chọn đúng phòng; tiện nghi từ dữ liệu; không giả định trống khi thiếu ngày; nhóm 10 chia đúng sức chứa và tổng giá từng phòng, không tạo booking; thiếu phòng cho 100 người trả kết quả trống.
+Kiểm tra greeting không có tải file; báo cáo hỏi trước; Có/Để sau/yêu cầu xuất ngay/sau gắn đúng kết quả nguồn; XLSX và PDF thật; chọn nguồn ngoài cuộc chat/ngoài cơ sở bị từ chối; phòng tắt không trả chi tiết; thu hồi quyền xuất ẩn định dạng và chặn consent.
+Số phòng có khách tách trạng thái hiện tại với lịch booking trong kỳ; booking lặp cùng phòng không đếm hai lần; khách/lễ tân/buồng phòng bị chặn báo cáo. Lệnh DROP không nhầm hướng dẫn booking; tổng tiền booking không nhầm báo cáo.
+Chromium 153 headless, API thật và dữ liệu kiểm thử AI_PROVIDER=disabled: máy tính 1440px, điện thoại 360px và iframe chat nổi. 8 luồng giao diện đạt, 0 lỗi JavaScript, không tràn ngang. Chọn phòng xem chi tiết/tiện nghi; đồng ý hiện 2 định dạng và tải XLSX; nhóm 10 người; báo cáo admin; bảng lớn có link đúng hội thoại; thu gọn/mở lại giữ chi tiết và câu đang nhập; lời chào lễ tân không mời xem báo cáo và truy cập báo cáo bị chặn. Ảnh render chỉ dùng kiểm tra nội bộ.
+Giữ API key/email/Mongo/JWT; không thêm dependency, không chạy seed. Bộ đóng gói kiểm tra áp dụng/lặp/hoàn tác và bảo toàn dữ liệu; xem PACKAGING_TESTS_1_5_0.json trong ZIP.
+Không dùng Groq key thật trong lần kiểm thử này; model routing dùng mock trong ca provider, giao diện dùng rules. Không chạy lại Atlas/Mongo hoặc bàn phím ảo điện thoại thật. Không tuyên bố đã chạy 500 câu hỏi vai trò.
+
+Bổ sung kiểm tra lịch giá sự kiện và phụ thu riêng cơ sở thứ hai khi khách/chủ homestay chọn phạm vi; tổng 2.700.000 VND khớp hàm báo giá của nghiệp vụ.

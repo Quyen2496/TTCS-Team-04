@@ -1,0 +1,25 @@
+HOMESTAY 1.9.0 — kết quả kiểm thử trên dữ liệu giả, độc lập dữ liệu của người dùng
+
+1. Bộ kiểm thử tự động: 232 bài, 230 đạt, 0 lỗi, 2 bỏ qua vì chưa cấu hình Mongo QA riêng.
+   Chạy bằng Node 24.19.0 và Node 22.23.3.
+   Hai bài bỏ qua: unique room-night Mongo thật; unique invoice và restore Mongo QA thật.
+   Không khẳng định đã kiểm tra trực tiếp MongoDB Atlas của người dùng.
+2. Bộ kiểm thử mới về danh mục: 8 bài, tất cả đạt.
+   Hai cơ sở cũ + tám cơ sở mới, 100 loại, 410 phòng khi giữ 50 phòng gốc.
+   Danh mục rỗng tạo 400 phòng. Tất cả loại có 3–5 phòng.
+   Giữ ID phòng/cơ sở/loại; giữ booking, tài khoản, quyền, giao dịch và lịch giá.
+   Chạy lại không nhân bản và không ghi đè chỉnh sửa mới.
+   Dư phòng/giá lịch xung đột bị chặn trước đổi dữ liệu.
+   50 ảnh và 50 thumbnail WebP hợp lệ; không dùng ảnh upload riêng khác cơ sở.
+   API tạo booking ở ba cơ sở, trừ đúng tồn phòng; mã hoá/đọc lại dữ liệu sao lưu.
+3. Trình duyệt Chromium: 10 nhóm kiểm tra đạt.
+   Trang chủ, danh sách cơ sở, trang cơ sở, 100 loại phòng, bộ lọc, phân trang, xem ảnh,
+   chuyển sang tìm phòng/báo giá, tham số ngày, ID sai, dữ liệu rỗng.
+   Năm trang tại 360px không tràn ngang; không lỗi JavaScript hoặc ảnh/API 404.
+4. Bộ cài: cài thử từ 1.8.2, 1.8.3, 1.8.4; giữ .env, data, uploads.
+   Đọc lại bản sao dữ liệu mã hoá trước chuyển đổi; chạy lại không nhân bản.
+   Chạy toàn bộ 230 bài đạt trên mã nguồn đã cài từ 1.8.4.
+   Chặn phiên bản không phù hợp; xác minh checksum ZIP/payload.
+
+Không tạo thanh toán payOS thật hoặc gửi email thật trong các kiểm thử này.
+Giá, địa chỉ, cơ sở và hình ảnh là dữ liệu minh hoạ. Kênh payOS mới cần cấu hình đúng cơ sở.
