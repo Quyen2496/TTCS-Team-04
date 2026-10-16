@@ -1,0 +1,8 @@
+HOMESTAY 1.3.1 — 11/10/2026
+
+Node 22: 77 ca, 76 đạt + 1 bỏ qua khi không có MongoDB.
+MongoDB replica set 7.0.16: 77/77 đạt.
+Kiểm thử gồm OTP 10 phút, 5 lần sai, 3 lượt gửi, mã mới thay mã cũ, sử dụng một lần, hai yêu cầu đồng thời, phiên cũ bị hủy, SMTP lỗi/thiếu cấu hình; hồ sơ khách và khách đi cùng, quyền xem, khách không email.
+Kiểm thử giao diện Chromium 136: 20 trạng thái, desktop 1440 và mobile 360 px; không lỗi JavaScript hoặc tràn ngang. Tương tác nút hiện/ẩn mật khẩu ở form tĩnh/động; gửi mã, mã sai, gửi lại, đặt lại, đăng nhập; nhận phòng lưu dữ liệu, hồ sơ khách/lịch sử.
+Ảnh chỉ dùng kiểm tra nội bộ, không nằm trong gói cập nhật.
+Chưa kiểm thử SMTP gửi tới hộp thư thật hoặc Atlas trên máy người dùng.

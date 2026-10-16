@@ -1,0 +1,14 @@
+HOMESTAY 1.8.3 — kết quả kiểm tra bản vá
+
+- 13 bài kiểm thử hồi quy mới cho 4 lỗi đã xác nhận.
+- Chạy cùng 13 bài trên mã nguồn 1.8.2 gốc: cả 13 thất bại, tái hiện các thiếu sót trước vá.
+- Node 22: 187 bài tổng, 185 đạt, 0 lỗi, 2 bỏ qua do cần MongoDB QA riêng.
+- Node 24: 187 bài tổng, 185 đạt, 0 lỗi, 2 bỏ qua do cần MongoDB QA riêng.
+- Trình duyệt Chromium: 12 nhóm UI/hóa đơn/checkbox/mobile của 1.8.1 đạt.
+- Trình duyệt Chromium: 12 nhóm OCR/QR của 1.8.2 đạt, OCR WASM và QR thực trên dữ liệu ảnh giả lập; không gửi ảnh lên dịch vụ ngoài.
+- Trình duyệt Chromium: 8 nhóm mới đạt, gồm các tổ hợp quyền khách và số dư ở tài khoản/tra cứu/thanh toán.
+
+- Gói cập nhật: 10 nhóm đạt — giữ cấu hình/dữ liệu/ảnh/sao lưu, sao lưu mã nguồn cũ, kiểm tra hash, áp dụng lại an toàn, từ chối gói hỏng/đích sai/symlink và khởi động server sau cài.
+- 13 bài hồi quy cũng chạy đạt trên chính mã nguồn vừa cài từ gói cập nhật.
+
+Dùng dữ liệu thử, tài khoản thử và server loopback riêng. Không sử dụng dữ liệu cá nhân hoặc thanh toán thật.

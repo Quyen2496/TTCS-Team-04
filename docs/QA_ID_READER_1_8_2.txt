@@ -1,0 +1,37 @@
+HOMESTAY 1.8.2 — KẾT QUẢ KIỂM THỬ
+
+Node 24: 174 bài, 172 đạt, 2 bỏ qua, 0 lỗi.
+Node 22: 174 bài, 172 đạt, 2 bỏ qua, 0 lỗi.
+Hai bài bỏ qua cần MongoDB QA riêng (unique index và restore); không kết nối MongoDB Atlas của người dùng.
+
+GIAO DIỆN VÀ BỘ ĐỌC THẬT
+1. Chọn ảnh QR thật ở mặt sau, tách họ tên/số giấy tờ/ngày sinh/giới tính/địa chỉ/ngày cấp; không tự điền hoặc ghi đè
+2. Tick đối chiếu rồi chọn điền mới cập nhật form, bỏ tick khóa nút; chưa Lưu thì database chưa đổi; ảnh được xóa khỏi phần đọc sau khi áp dụng
+3. Lưu hồ sơ bằng API thật giữ ngày cấp/quê quán/hạn dùng/nơi cấp, tăng version, không lưu ảnh hoặc chữ OCR gốc
+4. Xem giấy tờ hiển thị hồ sơ chi tiết và ghi audit khi truy cập
+5. Đọc riêng cho khách đi cùng, đúng nhóm trường và không đổi thông tin khách đứng tên
+6. Từ chối SVG, xoay ảnh và xóa ảnh hoạt động; giữ dữ liệu đang nhập
+7. OCR tiếng Việt và Anh chạy thật trong trình duyệt bằng WASM, đọc ảnh không QR ra đúng số/tên/ngày sinh/giới tính
+8. Không trộn thông tin khi ảnh OCR và QR có số giấy tờ khác nhau
+9. Đọc thêm OCR hai mặt bổ sung thông tin còn thiếu, ưu tiên số và thông tin từ QR khi có QR phù hợp
+10. Bảng đối chiếu và hai mặt giấy tờ dùng được ở 390px, không tràn ngang trang
+11. Dừng đọc và đóng hộp thoại không xóa hồ sơ đang nhập hoặc giữ khóa nút Lưu
+12. Không gọi CDN hoặc dịch vụ OCR ngoài, không gửi ảnh lên API, không có lỗi JavaScript
+
+GIỚI HẠN
+Kiểm thử trên Chromium desktop và viewport mobile 390px, chưa thử camera trên điện thoại thật hoặc Safari. Nút camera sử dụng file input capture của trình duyệt.
+Ảnh QR và OCR đều là dữ liệu giả lập; không dùng ảnh căn cước thật. Ảnh OCR là chữ sạch để kiểm tra đường xử lý thực tế. So sánh họ tên OCR sau bỏ dấu; OCR có thể sai dấu và không chứng minh độ chính xác trên mọi mẫu thẻ/ảnh. Cần đối chiếu thủ công trước lưu.
+Không kiểm thử máy in vật lý hoặc WPS.
+
+TRÌNH CẬP NHẬT
+1. Cập nhật từ 1.8.0 lên 1.8.2
+2. Giữ nguyên .env và địa chỉ công khai
+3. Giữ dữ liệu và ảnh tải lên
+4. Sao lưu mã nguồn gốc trước ghi
+5. Xác minh hash mọi tệp cập nhật
+6. Chạy lại không ghi trùng hay tạo backup dư
+7. Từ chối gói hỏng và đích chưa có Sprint 4 trước khi ghi
+8. Server sau cập nhật khởi động, API health 200
+9. Cập nhật từ bản 1.8.1 thật, bộ QR/OCR và mọi hash đúng
+
+Các kiểm thử dùng dữ liệu cô lập, không giao dịch ngân hàng hoặc gửi email thật. Giữ kiểm tra quyền hiện có: đọc giấy tờ đầy đủ chỉ chủ homestay hoặc lễ tân có quyền xem khách và đúng phạm vi; phản hồi thông thường vẫn che số giấy tờ.

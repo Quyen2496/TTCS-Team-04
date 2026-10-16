@@ -1,0 +1,9 @@
+HOMESTAY AI 1.4.2 — chat nổi, kiểm thử 12/10/2026
+
+Node 24.19.0 / chế độ file: tổng 104 ca; 103 đạt, 1 ca Mongo-only bỏ qua, 0 lỗi. Có ca mới xác minh chỉ assistant.html được nhúng cùng origin; admin/API vẫn chặn nhúng.
+Chromium 153 headless, dùng API thật với dữ liệu kiểm thử và AI_PROVIDER=disabled: admin 1440x900, admin 360x740, guest 360x740, housekeeping 360x640. Cả 4 luồng đạt, 0 lỗi JavaScript, 0 tràn ngang trong trang và iframe.
+Kiểm tra: kéo nút tròn không mở nhầm chat; kéo chuột trên desktop và cảm ứng native qua CDP trên các viewport điện thoại; bấm mở/thu gọn; không tạo thêm iframe khi mở lại; gửi Enter; lịch sử/câu hỏi nháp vẫn còn khi chuyển trang; Escape trong iframe thu gọn cửa sổ; kéo tiêu đề; thu màn hình xuống 320x568 không vượt biên; cơ sở trong AI không đổi cơ sở nghiệp vụ; bảng lớn không bị nhồi trong khung; liên kết mở đúng session/tin nhắn trên trang lớn và tải Excel; tạo cuộc chat mới; không hiện widget khi chưa đăng nhập.
+Kiểm tra ảnh render desktop và điện thoại; iframe không có sidebar/widget lặp, ô nhập luôn ở đáy khung, báo cáo có liên kết màn hình lớn. Ảnh chỉ dùng kiểm tra nội bộ.
+Đóng gói: apply từ bản AI 1.4.1 và Sprint 3 1.3.2; kiểm tra SHA payload, áp dụng lại không đổi, restore về mã gốc, payload hỏng bị từ chối trước khi ghi. .env/dữ liệu/ảnh/node_modules và quy tắc gitignore riêng được giữ.
+Không cần nhập lại Groq key hoặc cấu hình email khi nâng từ AI đã hoạt động. Không chạy seed. Không thay đổi tham số/model Groq đã sửa ở bản 1.4.1.
+Không dùng key thật trong lần kiểm thử này. Chưa chạy lại MongoDB hoặc kiểm tra bàn phím ảo trên điện thoại thật; kiểm tra MongoDB nền thuộc bản 1.4.0. VisualViewport resize được hỗ trợ để điều chỉnh khung khi vùng hiển thị thay đổi.

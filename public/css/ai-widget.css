@@ -1,0 +1,22 @@
+#hs-ai-widget{font-family:inherit;color:#234638;position:relative;z-index:90}
+#hs-ai-widget *{box-sizing:border-box}
+#hs-ai-widget [hidden]{display:none!important}
+#hs-ai-widget .hs-ai-bubble{position:fixed;width:56px;height:56px;min-height:0;padding:15px;border:2px solid #fff;border-radius:50%;background:#246749;color:#fff;box-shadow:0 5px 20px #173d3240;display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;z-index:2}
+#hs-ai-widget .hs-ai-bubble svg{display:block;width:26px;height:26px}
+#hs-ai-widget .hs-ai-bubble:hover{background:#185b3e;box-shadow:0 6px 24px #173d3255}
+#hs-ai-widget button:focus-visible,#hs-ai-widget a:focus-visible{outline:3px solid #79b797;outline-offset:3px}
+#hs-ai-widget .hs-ai-panel{position:fixed;display:flex;flex-direction:column;border:1px solid #c9ddcf;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 12px 46px #173d3238;z-index:1;max-width:calc(100vw - 20px)}
+#hs-ai-widget .hs-ai-widget-header{display:flex;align-items:center;gap:4px;flex:none;background:#edf5ef;border-bottom:1px solid #d6e6db;padding:6px 8px}
+#hs-ai-widget .hs-ai-drag-handle{display:flex;align-items:center;gap:10px;flex:1;min-width:0;border:0;background:transparent;color:#234638;padding:5px 3px;text-align:left;cursor:grab;touch-action:none;user-select:none;font:inherit}
+#hs-ai-widget .hs-ai-drag-handle>span:first-child{display:grid;place-items:center;width:35px;height:35px;border-radius:11px;background:#d9ebde;font-size:24px;flex:none}
+#hs-ai-widget .hs-ai-drag-handle strong{display:block;font-size:13px}
+#hs-ai-widget .hs-ai-drag-handle small{display:block;font-size:10px;color:#667b6e;margin-top:3px}
+#hs-ai-widget .hs-ai-expand,#hs-ai-widget .hs-ai-minimize{display:grid;place-items:center;width:38px;height:38px;min-height:38px;border:0;border-radius:9px;background:transparent;color:#285942;text-decoration:none;font-size:23px;cursor:pointer;flex:none}
+#hs-ai-widget .hs-ai-expand:hover,#hs-ai-widget .hs-ai-minimize:hover{background:#dcebe0}
+#hs-ai-widget .hs-ai-frame-wrap{position:relative;flex:1;min-height:0}
+#hs-ai-widget iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+#hs-ai-widget .hs-ai-frame-loading{position:absolute;inset:25px 15px auto;font-size:13px;color:#667b6e;text-align:center;pointer-events:none}
+#hs-ai-widget.hs-ai-dragging iframe{pointer-events:none}
+#hs-ai-widget.hs-ai-dragging .hs-ai-bubble,#hs-ai-widget.hs-ai-dragging .hs-ai-drag-handle{cursor:grabbing}
+body.menu-open #hs-ai-widget{visibility:hidden}
+@media(prefers-reduced-motion:no-preference){#hs-ai-widget .hs-ai-bubble{transition:background .15s,box-shadow .15s}}

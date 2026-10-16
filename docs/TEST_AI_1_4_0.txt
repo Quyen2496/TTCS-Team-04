@@ -1,0 +1,14 @@
+HOMESTAY AI 1.4.0 — kiểm thử ngày 12/10/2026
+
+Node 22 và MongoDB replica set 7.0.16: 99/99 ca đạt, 0 bỏ qua.
+Node 22 chế độ file: 98 đạt, 1 ca Mongo-only bỏ qua, 0 lỗi.
+17 ca AI mới: báo cáo tháng/năm từ dữ liệu thật, không trả PII, phạm vi cơ sở, quyền vai trò, chat riêng, replay, thu hồi quyền và chặn xuất, tìm/báo giá không ghi booking, kỳ trước/ngày sai/chính sách cơ sở, không tự thao tác ghi, model phân loại và che input, đầu ra model sai/key lỗi fallback, yêu cầu đồng thời/khóa tài khoản trong lúc gọi model, rate limit, Excel/PDF thật, setup bảo toàn .env, chữ Đ/ngày dd/MM, công suất loại bảo trì/ngày trả và giới hạn dung lượng lịch sử rollback nguyên vẹn.
+
+Browser Chromium headless: admin 1440px và 360px, khách 360px, buồng phòng 360px. Không lỗi JavaScript, không tràn ngang toàn trang. Thử gửi/Enter, hỏi tiếp kỳ trước, tải Excel/PDF, reload giữ lịch sử và từ chối báo cáo trái quyền. Bảng cuộn ngang trong vùng riêng trên điện thoại.
+Excel mở bằng openpyxl, kiểm tra ô số tiền/kỳ; PDF A4 đọc được tiếng Việt bằng pdftotext và kiểm tra ảnh render, không lỗi font/clipping ở báo cáo mẫu.
+CLI thiết lập Groq thử với key giả ở terminal: nhận đúng lựa chọn/model/key, key không xuất hiện trong đầu ra. API setup thử mô phỏng verify trước khi lưu; lỗi không ghi .env, giữ SMTP/Mongo/JWT, sao lưu riêng có ignore.
+Cài dependencies từ lock bằng npm ci đã thành công.
+
+Đóng gói: kiểm tra SHA payload; áp dụng trên bản Sprint 3 1.3.2; .env/dữ liệu/ảnh/node_modules giữ nguyên; quy tắc .gitignore riêng được giữ; chạy lại không thay đổi; restore khôi phục đúng mã gốc; payload hỏng bị từ chối trước khi ghi.
+
+Chưa sử dụng API key thật của Quý hoặc dịch vụ Ollama trên máy Quý. Luồng Groq/Ollama thật được thử bằng setup-ai.sh khi người dùng cấu hình; đầu ra mô hình trong ca kiểm thử là HTTP giả lập. Không xác nhận đã kết nối Atlas của Quý hoặc cập nhật repo nhóm.

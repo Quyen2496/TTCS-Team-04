@@ -1,0 +1,119 @@
+TAP version 13
+# Subtest: S4-01 12:00/12:01/13:00/18:00/18:01 và qua ngày: chỉ một loại phí muộn
+ok 1 - S4-01 12:00/12:01/13:00/18:00/18:01 và qua ngày: chỉ một loại phí muộn
+  ---
+  duration_ms: 18.266311
+  type: 'test'
+  ...
+# Subtest: S4-01 early checkout keeps booked nights; requires reason, method, exact paid amount, and version
+ok 2 - S4-01 early checkout keeps booked nights; requires reason, method, exact paid amount, and version
+  ---
+  duration_ms: 3.143184
+  type: 'test'
+  ...
+# Subtest: S4-02 extra bed and person periods, override reasons, capacity by night and void ledger
+ok 3 - S4-02 extra bed and person periods, override reasons, capacity by night and void ledger
+  ---
+  duration_ms: 2.542193
+  type: 'test'
+  ...
+# Subtest: S4-01 API preview token, tamper, repeated checkout and closed surcharge rejection
+ok 4 - S4-01 API preview token, tamper, repeated checkout and closed surcharge rejection
+  ---
+  duration_ms: 313.745452
+  type: 'test'
+  ...
+# Subtest: S4-03 concurrent invoice requests stable and contiguous; PDF A4 and Vietnamese money words
+ok 5 - S4-03 concurrent invoice requests stable and contiguous; PDF A4 and Vietnamese money words
+  ---
+  duration_ms: 296.907161
+  type: 'test'
+  ...
+# Subtest: S4 invoice counters rollback when mutation fails and year sequences restart
+ok 6 - S4 invoice counters rollback when mutation fails and year sequences restart
+  ---
+  duration_ms: 71.41035
+  type: 'test'
+  ...
+# Subtest: S4-04 outbox committed once, rollback no job, SMTP does not run inside booking mutation
+ok 7 - S4-04 outbox committed once, rollback no job, SMTP does not run inside booking mutation
+  ---
+  duration_ms: 98.112336
+  type: 'test'
+  ...
+# Subtest: S4-04 retry exactly 5 minutes and 3 retries, no send before due, timeout uncertain
+ok 8 - S4-04 retry exactly 5 minutes and 3 retries, no send before due, timeout uncertain
+  ---
+  duration_ms: 155.312083
+  type: 'test'
+  ...
+# Subtest: S4-05 08:59/09:00 VN reminder once, no cancelled mail, cancellation snapshot
+ok 9 - S4-05 08:59/09:00 VN reminder once, no cancelled mail, cancellation snapshot
+  ---
+  duration_ms: 2.251623
+  type: 'test'
+  ...
+# Subtest: S4-06 occupancy historical maintenance, weighted totals, half-open dates, N/A and CSV formula
+ok 10 - S4-06 occupancy historical maintenance, weighted totals, half-open dates, N/A and CSV formula
+  ---
+  duration_ms: 2.16407
+  type: 'test'
+  ...
+# Subtest: S4-07 revenue settled only, no deposit double count, VN date, equal previous period
+ok 11 - S4-07 revenue settled only, no deposit double count, VN date, equal previous period
+  ---
+  duration_ms: 3.026506
+  type: 'test'
+  ...
+# Subtest: S4-08 >=20 forbidden cases on API, downloads, PII and property scope
+ok 12 - S4-08 >=20 forbidden cases on API, downloads, PII and property scope
+  ---
+  duration_ms: 155.371007
+  type: 'test'
+  ...
+# Subtest: S4-09 dataset exact 4/20/30 three months and deterministic reset counts
+ok 13 - S4-09 dataset exact 4/20/30 three months and deterministic reset counts
+  ---
+  duration_ms: 171.557045
+  type: 'test'
+  ...
+# Subtest: S4-10 backup encrypted, retains 7 good copies; restore QA counts/financial totals; corrupt fails
+ok 14 - S4-10 backup encrypted, retains 7 good copies; restore QA counts/financial totals; corrupt fails
+  ---
+  duration_ms: 90.340503
+  type: 'test'
+  ...
+# Subtest: S4-10 scheduler 01:59/02:00 local, daily idempotency and failed backup keeps good files
+ok 15 - S4-10 scheduler 01:59/02:00 local, daily idempotency and failed backup keeps good files
+  ---
+  duration_ms: 51.779682
+  type: 'test'
+  ...
+# Subtest: S4-08 expired and invalid tokens never return report, email, invoice or guest data
+ok 16 - S4-08 expired and invalid tokens never return report, email, invoice or guest data
+  ---
+  duration_ms: 31.81404
+  type: 'test'
+  ...
+# MongoDB QA restore actual: {"summary":{"bookings":1,"rooms":50,"invoices":1,"deposit":210000,"settled":700000},"roomNights":0,"invoiceDocuments":1,"durationMs":23}
+# Subtest: S4-03 Mongo unique invoice number and real restore to separate Mongo QA
+ok 17 - S4-03 Mongo unique invoice number and real restore to separate Mongo QA
+  ---
+  duration_ms: 61.420774
+  type: 'test'
+  ...
+# Subtest: S4-04 booking outbox sends through real Nodemailer TLS to isolated SMTP fixture
+ok 18 - S4-04 booking outbox sends through real Nodemailer TLS to isolated SMTP fixture
+  ---
+  duration_ms: 201.015299
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1947.395495
