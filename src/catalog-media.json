@@ -1,0 +1,957 @@
+{
+  "notice": "Danh mục cơ sở và giá mẫu phục vụ trải nghiệm đặt phòng. Ảnh minh hoạ từ Unsplash, không xác nhận là ảnh thực tế tại cơ sở.",
+  "photos": [
+    {
+      "path": "/assets/catalog190/photo-001.webp",
+      "thumbnail": "/assets/catalog190/photo-001-thumb.webp",
+      "source": "https://unsplash.com/photos/Yrxr3bsPdS0",
+      "credit": "vojtech-bruzek-Yrxr3bsPdS0",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-002.webp",
+      "thumbnail": "/assets/catalog190/photo-002-thumb.webp",
+      "source": "https://unsplash.com/photos/T5pL6ciEn-I",
+      "credit": "visualsofdana-T5pL6ciEn-I",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-003.webp",
+      "thumbnail": "/assets/catalog190/photo-003-thumb.webp",
+      "source": "https://unsplash.com/photos/p3UWyaujtQo",
+      "credit": "linus-mimietz-p3UWyaujtQo",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-004.webp",
+      "thumbnail": "/assets/catalog190/photo-004-thumb.webp",
+      "source": "https://unsplash.com/photos/oxeCZrodz78",
+      "credit": "point3d-commercial-imaging-ltd-oxeCZrodz78",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-005.webp",
+      "thumbnail": "/assets/catalog190/photo-005-thumb.webp",
+      "source": "https://unsplash.com/photos/Id2IIl1jOB0",
+      "credit": "mark-champs-Id2IIl1jOB0",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-006.webp",
+      "thumbnail": "/assets/catalog190/photo-006-thumb.webp",
+      "source": "https://unsplash.com/photos/qifUgNsrWmU",
+      "credit": "lisha-riabinina-qifUgNsrWmU",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-007.webp",
+      "thumbnail": "/assets/catalog190/photo-007-thumb.webp",
+      "source": "https://unsplash.com/photos/5BV56SdvLmo",
+      "credit": "point3d-commercial-imaging-ltd-5BV56SdvLmo",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-008.webp",
+      "thumbnail": "/assets/catalog190/photo-008-thumb.webp",
+      "source": "https://unsplash.com/photos/w72a24brINI",
+      "credit": "olexandr-ignatov-w72a24brINI",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-009.webp",
+      "thumbnail": "/assets/catalog190/photo-009-thumb.webp",
+      "source": "https://unsplash.com/photos/aI6Su7Mu9Ro",
+      "credit": "reisetopia-aI6Su7Mu9Ro",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-010.webp",
+      "thumbnail": "/assets/catalog190/photo-010-thumb.webp",
+      "source": "https://unsplash.com/photos/lTrbjFd8Iwo",
+      "credit": "gabriel-alenius-lTrbjFd8Iwo",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1576354302919-96748cb8299e?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-011.webp",
+      "thumbnail": "/assets/catalog190/photo-011-thumb.webp",
+      "source": "https://unsplash.com/photos/6MYm-cUJRB0",
+      "credit": "dave-photoz-6MYm-cUJRB0",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1630660664869-c9d3cc676880?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-012.webp",
+      "thumbnail": "/assets/catalog190/photo-012-thumb.webp",
+      "source": "https://unsplash.com/photos/gwV9eklemSg",
+      "credit": "febrian-zakaria-gwV9eklemSg",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1578898886225-c7c894047899?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-013.webp",
+      "thumbnail": "/assets/catalog190/photo-013-thumb.webp",
+      "source": "https://unsplash.com/photos/AUF6Gl4wwzA",
+      "credit": "mky-moody-AUF6Gl4wwzA",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-014.webp",
+      "thumbnail": "/assets/catalog190/photo-014-thumb.webp",
+      "source": "https://unsplash.com/photos/4LLHJHyXQVk",
+      "credit": "don-kaveen-4LLHJHyXQVk",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1688653802629-5360086bf632?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-015.webp",
+      "thumbnail": "/assets/catalog190/photo-015-thumb.webp",
+      "source": "https://unsplash.com/photos/eRwZ6cX6MYA",
+      "credit": "antonio-araujo-eRwZ6cX6MYA",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1728048756806-6832d2f5054c?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-016.webp",
+      "thumbnail": "/assets/catalog190/photo-016-thumb.webp",
+      "source": "https://unsplash.com/photos/74db2s4okvc",
+      "credit": "shawn-74db2s4okvc",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1692736933732-ad902fc34626?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-017.webp",
+      "thumbnail": "/assets/catalog190/photo-017-thumb.webp",
+      "source": "https://unsplash.com/photos/nyceoSzBZxk",
+      "credit": "jusuf-bachtiar-nyceoSzBZxk",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1719887805632-de5be825f72b?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-018.webp",
+      "thumbnail": "/assets/catalog190/photo-018-thumb.webp",
+      "source": "https://unsplash.com/photos/ksa5r_xt8cg",
+      "credit": "sanju-pandita-ksa5r_xt8cg",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1721989519334-40923a0ee1c0?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-019.webp",
+      "thumbnail": "/assets/catalog190/photo-019-thumb.webp",
+      "source": "https://unsplash.com/photos/oVnKC7wiQjA",
+      "credit": "kadek-wahyudi-oVnKC7wiQjA",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1759372945658-1e9f56e751bd?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-020.webp",
+      "thumbnail": "/assets/catalog190/photo-020-thumb.webp",
+      "source": "https://unsplash.com/photos/pm3vGgDnb3o",
+      "credit": "dinuka-lankaloka-pm3vGgDnb3o",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1582610191340-fa501e6e5040?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-021.webp",
+      "thumbnail": "/assets/catalog190/photo-021-thumb.webp",
+      "source": "https://unsplash.com/photos/UbfL4BUmI4o",
+      "credit": "antonio-araujo-UbfL4BUmI4o",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1728048756938-de1ccee0ab15?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-022.webp",
+      "thumbnail": "/assets/catalog190/photo-022-thumb.webp",
+      "source": "https://unsplash.com/photos/Pfp0MP8QB7M",
+      "credit": "sergei-bezzubov-Pfp0MP8QB7M",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1766937754720-4d30de201fd1?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-023.webp",
+      "thumbnail": "/assets/catalog190/photo-023-thumb.webp",
+      "source": "https://unsplash.com/photos/VoHbPTldlsI",
+      "credit": "alexander-nrjwolf-VoHbPTldlsI",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1669279261386-6be88fb8fc65?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-024.webp",
+      "thumbnail": "/assets/catalog190/photo-024-thumb.webp",
+      "source": "https://unsplash.com/photos/4UqT9kDg83U",
+      "credit": "valentin-lacoste-4UqT9kDg83U",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1778166166324-550d324133ea?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-025.webp",
+      "thumbnail": "/assets/catalog190/photo-025-thumb.webp",
+      "source": "https://unsplash.com/photos/7p1SsCbJxjc",
+      "credit": "antonio-araujo-7p1SsCbJxjc",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1728049006562-236e5b0dddea?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-026.webp",
+      "thumbnail": "/assets/catalog190/photo-026-thumb.webp",
+      "source": "https://unsplash.com/photos/2Dap560LfoU",
+      "credit": "antonio-araujo-2Dap560LfoU",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1728048756910-c1d157bd24cf?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-027.webp",
+      "thumbnail": "/assets/catalog190/photo-027-thumb.webp",
+      "source": "https://unsplash.com/photos/UjUmHt1MIhM",
+      "credit": "antonio-araujo-UjUmHt1MIhM",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1728049006339-1cc328a28ab0?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-028.webp",
+      "thumbnail": "/assets/catalog190/photo-028-thumb.webp",
+      "source": "https://unsplash.com/photos/ccKvfKSKH-k",
+      "credit": "Ish Consul",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1718359759373-1b2670b7478b?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-029.webp",
+      "thumbnail": "/assets/catalog190/photo-029-thumb.webp",
+      "source": "https://unsplash.com/photos/u_839GEiFXA",
+      "credit": "Brian Jacobs",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1701527318649-3dab97f88226?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-030.webp",
+      "thumbnail": "/assets/catalog190/photo-030-thumb.webp",
+      "source": "https://unsplash.com/photos/P1-yh8uIzlw",
+      "credit": "Alex Tyson",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1723639905267-4969dcba30ef?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-031.webp",
+      "thumbnail": "/assets/catalog190/photo-031-thumb.webp",
+      "source": "https://unsplash.com/photos/lF9gIHcw8HM",
+      "credit": "Shutter Speed",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1760743323631-3b3a3e80dca9?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-032.webp",
+      "thumbnail": "/assets/catalog190/photo-032-thumb.webp",
+      "source": "https://unsplash.com/photos/zAjdgNXsMeg",
+      "credit": "luca-bravo-zAjdgNXsMeg",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-033.webp",
+      "thumbnail": "/assets/catalog190/photo-033-thumb.webp",
+      "source": "https://unsplash.com/photos/AZDyU1hXtCE",
+      "credit": "clay-banks-AZDyU1hXtCE",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1697462248369-254119899872?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-034.webp",
+      "thumbnail": "/assets/catalog190/photo-034-thumb.webp",
+      "source": "https://unsplash.com/photos/kiv1ggvkgQk",
+      "credit": "clay-banks-kiv1ggvkgQk",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1697807650304-907257330a3e?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-035.webp",
+      "thumbnail": "/assets/catalog190/photo-035-thumb.webp",
+      "source": "https://unsplash.com/photos/s-k-2N90yuY",
+      "credit": "saso-tusar-s-k-2N90yuY",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1470748085385-5fbb3018c796?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-036.webp",
+      "thumbnail": "/assets/catalog190/photo-036-thumb.webp",
+      "source": "https://unsplash.com/photos/dc0leu1QSFA",
+      "credit": "roberto-nickson-dc0leu1QSFA",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1504643039591-52948e3ddb47?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-037.webp",
+      "thumbnail": "/assets/catalog190/photo-037-thumb.webp",
+      "source": "https://unsplash.com/photos/qHlUwZLS5F4",
+      "credit": "kristin-ellis-qHlUwZLS5F4",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1525113990976-399835c43838?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-038.webp",
+      "thumbnail": "/assets/catalog190/photo-038-thumb.webp",
+      "source": "https://unsplash.com/photos/ZyCBB6jVCh4",
+      "credit": "mikel-ibarluzea-ZyCBB6jVCh4",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1518107784960-eb57c673a7ba?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-039.webp",
+      "thumbnail": "/assets/catalog190/photo-039-thumb.webp",
+      "source": "https://unsplash.com/photos/DhFHtkECn7Q",
+      "credit": "sonnie-hiles-DhFHtkECn7Q",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1531835551805-16d864c8d311?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-040.webp",
+      "thumbnail": "/assets/catalog190/photo-040-thumb.webp",
+      "source": "https://unsplash.com/photos/1EJXSLUfqU0",
+      "credit": "aquilion-property-1EJXSLUfqU0",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1702014859878-5d4743176d28?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-041.webp",
+      "thumbnail": "/assets/catalog190/photo-041-thumb.webp",
+      "source": "https://unsplash.com/photos/ABohRftG_Os",
+      "credit": "julia-ABohRftG_Os",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1585128792103-0b591f96512e?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-042.webp",
+      "thumbnail": "/assets/catalog190/photo-042-thumb.webp",
+      "source": "https://unsplash.com/photos/1UH-uVzTiDU",
+      "credit": "eduardo-freire-1UH-uVzTiDU",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1619989652700-9984844cb0ea?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-043.webp",
+      "thumbnail": "/assets/catalog190/photo-043-thumb.webp",
+      "source": "https://unsplash.com/photos/dEuvqNbwRuw",
+      "credit": "aquilion-property-dEuvqNbwRuw",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1702014857653-dcea938d51f0?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-044.webp",
+      "thumbnail": "/assets/catalog190/photo-044-thumb.webp",
+      "source": "https://unsplash.com/photos/NngNVT74o6s",
+      "credit": "andrea-davis-NngNVT74o6s",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1620332372374-f108c53d2e03?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-045.webp",
+      "thumbnail": "/assets/catalog190/photo-045-thumb.webp",
+      "source": "https://unsplash.com/photos/hrY-pZqFGyI",
+      "credit": "aquilion-property-hrY-pZqFGyI",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1702014859908-d48b9b844240?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-046.webp",
+      "thumbnail": "/assets/catalog190/photo-046-thumb.webp",
+      "source": "https://unsplash.com/photos/178j8tJrNlc",
+      "credit": "todd-kent-178j8tJrNlc",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-047.webp",
+      "thumbnail": "/assets/catalog190/photo-047-thumb.webp",
+      "source": "https://unsplash.com/photos/mR1CIDduGLc",
+      "credit": "frames-for-your-heart-mR1CIDduGLc",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-048.webp",
+      "thumbnail": "/assets/catalog190/photo-048-thumb.webp",
+      "source": "https://unsplash.com/photos/JuP0ZG0UNi0",
+      "credit": "werner-sevenster-JuP0ZG0UNi0",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1451440063999-77a8b2960d2b?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-049.webp",
+      "thumbnail": "/assets/catalog190/photo-049-thumb.webp",
+      "source": "https://unsplash.com/photos/ITzfgP77DTg",
+      "credit": "aubrey-odom-ITzfgP77DTg",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1584738766473-61c083514bf4?w=1000&q=72&fit=max&fm=webp"
+    },
+    {
+      "path": "/assets/catalog190/photo-050.webp",
+      "thumbnail": "/assets/catalog190/photo-050-thumb.webp",
+      "source": "https://unsplash.com/photos/Bkp3gLygyeA",
+      "credit": "bailey-anselme-Bkp3gLygyeA",
+      "license": "https://unsplash.com/license",
+      "download": "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=1000&q=72&fit=max&fm=webp"
+    }
+  ],
+  "properties": {
+    "tan-cuong": [
+      "/assets/catalog190/photo-014.webp",
+      "/assets/catalog190/photo-020.webp",
+      "/assets/catalog190/photo-025.webp"
+    ],
+    "da-lat": [
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-034.webp",
+      "/assets/catalog190/photo-036.webp"
+    ],
+    "sa-pa": [
+      "/assets/catalog190/photo-032.webp",
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-031.webp"
+    ],
+    "ninh-binh": [
+      "/assets/catalog190/photo-020.webp",
+      "/assets/catalog190/photo-014.webp",
+      "/assets/catalog190/photo-016.webp"
+    ],
+    "hoi-an": [
+      "/assets/catalog190/photo-016.webp",
+      "/assets/catalog190/photo-020.webp",
+      "/assets/catalog190/photo-017.webp"
+    ],
+    "da-nang": [
+      "/assets/catalog190/photo-024.webp",
+      "/assets/catalog190/photo-047.webp",
+      "/assets/catalog190/photo-022.webp"
+    ],
+    "quy-nhon": [
+      "/assets/catalog190/photo-017.webp",
+      "/assets/catalog190/photo-024.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "phu-quoc": [
+      "/assets/catalog190/photo-018.webp",
+      "/assets/catalog190/photo-021.webp",
+      "/assets/catalog190/photo-026.webp"
+    ],
+    "vung-tau": [
+      "/assets/catalog190/photo-047.webp",
+      "/assets/catalog190/photo-024.webp",
+      "/assets/catalog190/photo-022.webp"
+    ],
+    "can-tho": [
+      "/assets/catalog190/photo-014.webp",
+      "/assets/catalog190/photo-020.webp",
+      "/assets/catalog190/photo-019.webp"
+    ]
+  },
+  "types": {
+    "tan-cuong-01": [
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-02": [
+      "/assets/catalog190/photo-002.webp",
+      "/assets/catalog190/photo-005.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-03": [
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-04": [
+      "/assets/catalog190/photo-006.webp",
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-05": [
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-06": [
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-040.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-07": [
+      "/assets/catalog190/photo-034.webp",
+      "/assets/catalog190/photo-036.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-08": [
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-09": [
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "tan-cuong-10": [
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "da-lat-01": [
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-02": [
+      "/assets/catalog190/photo-005.webp",
+      "/assets/catalog190/photo-006.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-03": [
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-04": [
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-05": [
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-009.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-06": [
+      "/assets/catalog190/photo-040.webp",
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-07": [
+      "/assets/catalog190/photo-036.webp",
+      "/assets/catalog190/photo-037.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-08": [
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-09": [
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "da-lat-10": [
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-034.webp"
+    ],
+    "sa-pa-01": [
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-010.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-02": [
+      "/assets/catalog190/photo-006.webp",
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-03": [
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-04": [
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-05": [
+      "/assets/catalog190/photo-009.webp",
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-06": [
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-043.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-07": [
+      "/assets/catalog190/photo-037.webp",
+      "/assets/catalog190/photo-014.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-08": [
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-09": [
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "sa-pa-10": [
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "ninh-binh-01": [
+      "/assets/catalog190/photo-010.webp",
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-02": [
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-03": [
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-04": [
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-05": [
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-042.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-06": [
+      "/assets/catalog190/photo-043.webp",
+      "/assets/catalog190/photo-045.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-07": [
+      "/assets/catalog190/photo-014.webp",
+      "/assets/catalog190/photo-033.webp"
+    ],
+    "ninh-binh-08": [
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-09": [
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "ninh-binh-10": [
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-014.webp"
+    ],
+    "hoi-an-01": [
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-02": [
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-03": [
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-04": [
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-001.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-05": [
+      "/assets/catalog190/photo-042.webp",
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-06": [
+      "/assets/catalog190/photo-045.webp",
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-07": [
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-034.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-08": [
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-09": [
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "hoi-an-10": [
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "da-nang-01": [
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-02": [
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-03": [
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-04": [
+      "/assets/catalog190/photo-001.webp",
+      "/assets/catalog190/photo-002.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-05": [
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-06": [
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-040.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-07": [
+      "/assets/catalog190/photo-034.webp",
+      "/assets/catalog190/photo-036.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-08": [
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-09": [
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "da-nang-10": [
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-047.webp"
+    ],
+    "quy-nhon-01": [
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-02": [
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-001.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-03": [
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-04": [
+      "/assets/catalog190/photo-002.webp",
+      "/assets/catalog190/photo-005.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-05": [
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-009.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-06": [
+      "/assets/catalog190/photo-040.webp",
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-07": [
+      "/assets/catalog190/photo-036.webp",
+      "/assets/catalog190/photo-037.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-08": [
+      "/assets/catalog190/photo-044.webp",
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-09": [
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "quy-nhon-10": [
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "phu-quoc-01": [
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-010.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-02": [
+      "/assets/catalog190/photo-001.webp",
+      "/assets/catalog190/photo-002.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-03": [
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-04": [
+      "/assets/catalog190/photo-005.webp",
+      "/assets/catalog190/photo-006.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-05": [
+      "/assets/catalog190/photo-009.webp",
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-06": [
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-043.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-07": [
+      "/assets/catalog190/photo-037.webp",
+      "/assets/catalog190/photo-014.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-08": [
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-09": [
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "phu-quoc-10": [
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-021.webp"
+    ],
+    "vung-tau-01": [
+      "/assets/catalog190/photo-010.webp",
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-02": [
+      "/assets/catalog190/photo-002.webp",
+      "/assets/catalog190/photo-005.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-03": [
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-04": [
+      "/assets/catalog190/photo-006.webp",
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-05": [
+      "/assets/catalog190/photo-012.webp",
+      "/assets/catalog190/photo-042.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-06": [
+      "/assets/catalog190/photo-043.webp",
+      "/assets/catalog190/photo-045.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-07": [
+      "/assets/catalog190/photo-014.webp",
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-08": [
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-09": [
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "vung-tau-10": [
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-024.webp"
+    ],
+    "can-tho-01": [
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-02": [
+      "/assets/catalog190/photo-005.webp",
+      "/assets/catalog190/photo-006.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-03": [
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-028.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-04": [
+      "/assets/catalog190/photo-008.webp",
+      "/assets/catalog190/photo-011.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-05": [
+      "/assets/catalog190/photo-042.webp",
+      "/assets/catalog190/photo-029.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-06": [
+      "/assets/catalog190/photo-045.webp",
+      "/assets/catalog190/photo-030.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-07": [
+      "/assets/catalog190/photo-033.webp",
+      "/assets/catalog190/photo-034.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-08": [
+      "/assets/catalog190/photo-039.webp",
+      "/assets/catalog190/photo-041.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-09": [
+      "/assets/catalog190/photo-013.webp",
+      "/assets/catalog190/photo-004.webp",
+      "/assets/catalog190/photo-020.webp"
+    ],
+    "can-tho-10": [
+      "/assets/catalog190/photo-003.webp",
+      "/assets/catalog190/photo-007.webp",
+      "/assets/catalog190/photo-020.webp"
+    ]
+  }
+}

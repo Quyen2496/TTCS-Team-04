@@ -1,0 +1,171 @@
+{
+  "checks": 41,
+  "guestBookingFlow": "passed",
+  "javascriptErrors": [],
+  "results": [
+    {
+      "name": "home-1440",
+      "overflow": false
+    },
+    {
+      "name": "login-1440",
+      "overflow": false
+    },
+    {
+      "name": "register-1440",
+      "overflow": false
+    },
+    {
+      "name": "forgot-password-1440",
+      "overflow": false
+    },
+    {
+      "name": "homestays-1440",
+      "overflow": false
+    },
+    {
+      "name": "rooms-1440",
+      "overflow": false
+    },
+    {
+      "name": "home-360",
+      "overflow": false
+    },
+    {
+      "name": "login-360",
+      "overflow": false
+    },
+    {
+      "name": "register-360",
+      "overflow": false
+    },
+    {
+      "name": "forgot-password-360",
+      "overflow": false
+    },
+    {
+      "name": "homestays-360",
+      "overflow": false
+    },
+    {
+      "name": "rooms-360",
+      "overflow": false
+    },
+    {
+      "name": "guest-account-desktop",
+      "overflow": false
+    },
+    {
+      "name": "guest-booking-success-desktop",
+      "overflow": false
+    },
+    {
+      "name": "guest-account-mobile",
+      "overflow": false
+    },
+    {
+      "name": "admin-homestays-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-homestays-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-users-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-users-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-rooms-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-rooms-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-types-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-types-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-settings-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-settings-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-customers-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-customers-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-reception-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-reception-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-reports-1440",
+      "overflow": false
+    },
+    {
+      "name": "admin-reports-360",
+      "overflow": false
+    },
+    {
+      "name": "admin-user-editor-mobile",
+      "overflow": false
+    },
+    {
+      "name": "admin-photo-editor-mobile",
+      "overflow": false
+    },
+    {
+      "name": "chunha-owner-1440",
+      "overflow": false
+    },
+    {
+      "name": "chunha-owner-360",
+      "overflow": false
+    },
+    {
+      "name": "chunha-rooms-1440",
+      "overflow": false
+    },
+    {
+      "name": "chunha-rooms-360",
+      "overflow": false
+    },
+    {
+      "name": "letan-reception-1440",
+      "overflow": false
+    },
+    {
+      "name": "letan-reception-360",
+      "overflow": false
+    },
+    {
+      "name": "baocao-reports-1440",
+      "overflow": false
+    },
+    {
+      "name": "baocao-reports-360",
+      "overflow": false
+    }
+  ]
+}

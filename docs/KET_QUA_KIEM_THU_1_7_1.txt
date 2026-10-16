@@ -1,0 +1,24 @@
+HOMESTAY 1.7.1 — KIỂM THỬ NGÀY 15/10/2026
+
+Node 24.19.0: 150 bài, 149 đạt, 0 lỗi, 1 bỏ qua.
+Node 22.23.3: 150 bài, 149 đạt, 0 lỗi, 1 bỏ qua.
+Bài bỏ qua: kiểm thử cạnh tranh MongoDB cần URI replica set kiểm thử riêng.
+payOS: 20/20 đạt với merchant giả lập và chữ ký webhook của SDK chính thức.
+
+Giao diện: 11 kiểm tra đạt (360px và màn hình AI 1440px):
+- QR payOS hiển thị ở 360px
+- Local tự đối chiếu API, cọc thiếu cập nhật sau 8 giây
+- QR phần thiếu đúng 110.000; đủ cọc 210.000; còn thanh toán 490.000
+- Header/footer và burger mobile không tràn ngang
+- Giấy tờ từ hồ sơ điền sẵn; chưa báo giá vẫn khoá nút đặt
+- Có báo giá: tích chính sách mở nút đặt; bỏ tích khoá lại
+- Sơ đồ chọn ngày; sai ngày giữ form; sửa lại tải được
+- Modal lịch sử đổi có trước/sau, người sửa và cọc
+- Lễ tân nhận phòng được điền sẵn CCCD từ booking
+- AI hiển thị kết quả không phân trang
+- Không có lỗi JavaScript trong các màn hình đã kiểm tra
+
+Updater: 5/5 đạt — cập nhật đúng, giữ .env/data/uploads, sao lưu mã nguồn, chạy lại không đổi, chặn payload hỏng.
+Khởi động server.js với dữ liệu file: /api/ready trả 200.
+
+Chưa thực hiện giao dịch ngân hàng/kênh payOS thật; chưa chạy MongoDB Atlas của người dùng. Không triển khai Docker/VPS.

@@ -1,0 +1,23 @@
+.pricing-controls{display:flex;flex-wrap:wrap;gap:14px;align-items:end;margin:20px 0}
+.pricing-controls .field{flex:1 1 200px;min-width:0}
+.pricing-controls .btn{margin-bottom:1px}
+.rate-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}
+.rate-summary>div{border:1px solid var(--line);border-radius:12px;padding:15px;background:#f8faf8;display:flex;flex-direction:column;gap:4px}
+.rate-summary strong{font-size:20px;color:var(--green)}
+.rate-summary span,.rate-summary small{color:var(--muted);font-size:12px}
+.price-legend{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 16px;font-size:12px}
+.price-legend span{border-radius:20px;padding:5px 12px;border:1px solid var(--line)}
+.legend-weekday{background:#f8faf8}.legend-weekend{background:#e9f1fa}.legend-event{background:#fff0dc}
+.calendar-head,.calendar-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.calendar-head{margin-bottom:8px;text-align:center;font-size:12px;font-weight:bold;color:var(--muted)}
+.price-day{min-width:0;min-height:124px;text-align:left;border:1px solid #dce5dc;border-radius:10px;background:#f8faf8;padding:10px;display:flex;flex-direction:column;gap:5px;color:var(--ink)}
+.price-day:hover{box-shadow:0 0 0 2px var(--green)}
+.price-day .day-number{font-size:18px;font-weight:bold}
+.day-full-date{display:none}
+.price-day .daily-kind{font-size:11px;line-height:1.4;overflow-wrap:anywhere;flex:1}
+.price-day strong{font-size:12px;overflow-wrap:anywhere}
+.price-day .day-source{font-size:10px;color:#5d6b64}
+.price-day.kind-saturday,.price-day.kind-sunday{background:#e9f1fa;border-color:#cadaec}
+.price-day.kind-event{background:#fff0dc;border-color:#e9cba0}
+@media(max-width:900px){.rate-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.price-day{padding:7px}.price-day strong{font-size:11px}}
+@media(max-width:600px){.calendar-head,.calendar-blank{display:none}.calendar-days{grid-template-columns:1fr;gap:8px}.day-full-date{display:inline}.price-day{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:4px 8px;min-height:65px;padding:12px}.price-day .day-number{grid-row:1/3;align-self:center}.price-day .daily-kind{font-size:12px;align-self:center}.price-day strong{font-size:13px;align-self:center}.price-day .day-source{grid-column:2/4}.rate-summary strong{font-size:18px}.pricing-controls .btn{flex:1 1 100%}}

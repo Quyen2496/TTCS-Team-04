@@ -1,0 +1,3 @@
+'use strict';
+const path=require('node:path'),Setup=require('../src/ai-setup');
+(async()=>{const provider=process.env.HS_AI_PROVIDER,model=process.env.HS_AI_MODEL,key=process.env.HS_AI_KEY,base=process.env.HS_AI_BASE;for(const k of ['HS_AI_PROVIDER','HS_AI_MODEL','HS_AI_KEY','HS_AI_BASE'])delete process.env[k];const r=await Setup.configure({envPath:path.join(__dirname,'../.env'),provider,model,key,base});console.log('Đã lưu cấu hình '+r.provider+(r.model?' / '+r.model:'')+'. Giữ nguyên MongoDB, JWT và email.');console.log('Dừng server bằng Ctrl+C rồi chạy lại. Đăng nhập và mở /assistant.html.');})().catch(e=>{console.error(e.message);process.exitCode=1;});

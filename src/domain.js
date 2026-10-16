@@ -1,0 +1,80 @@
+const crypto = require('node:crypto');
+const Pricing = require('./pricing');
+class AppError extends Error { constructor(status,code,message,retryAfter=0){super(message); Object.assign(this,{status,code,retryAfter});} }
+const fail=(message,code='VALIDATION_ERROR',status=400)=>{throw new AppError(status,code,message)};
+const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const day=(s)=> typeof s==='string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && Number.isFinite(Date.parse(s)) && new Date(s).toISOString().slice(0,10)===s;
+const add=(d,n)=>new Date(Date.parse(d)+n*86400000).toISOString().slice(0,10);
+const money=n=>Number.isSafeInteger(n)&&n>=0;
+const id=()=>crypto.randomBytes(12).toString('hex');
+const statusLabels={PENDING:'Chờ xác nhận',CONFIRMED:'Đã xác nhận',CHECKED_IN:'Đang ở',COMPLETED:'Đã trả phòng',CLOSED:'Đã đóng',CANCELLED:'Đã huỷ',EXPIRED:'Hết hạn giữ chỗ'};
+const {amenityCatalog,typeCatalog}=require('./catalog');
+function upgradeData(s){
+ if(s.datasetVersion>=2){Pricing.upgradePricing(s);return {addedRooms:0,addedTypes:0,addedAmenities:0};}
+ const counts={addedRooms:0,addedTypes:0,addedAmenities:0};
+ s.amenities ||= [];s.roomTypes ||= [];s.rooms ||= [];
+ const amenityIds=amenityCatalog.map(([name,icon])=>{let a=s.amenities.find(x=>x.name.toLocaleLowerCase('vi')===name.toLocaleLowerCase('vi'));if(!a){a={_id:id(),name,icon,active:true};s.amenities.push(a);counts.addedAmenities++;}else if(['⌁','❄','☀','P'].includes(a.icon))a.icon=icon;return a._id;});
+ typeCatalog.forEach(([name,standardCapacity,maxCapacity,weekdayPrice,weekendPrice,area,description,indexes],i)=>{
+  const typeId=(i+1).toString(16).padStart(24,'0'), photo=`/assets/rooms/type-${String(i+1).padStart(2,'0')}.jpg`;
+  let t=s.roomTypes.find(x=>x._id===typeId);
+  const images=[photo,`/assets/rooms/type-${String((i+3)%10+1).padStart(2,'0')}.jpg`,`/assets/rooms/type-${String((i+6)%10+1).padStart(2,'0')}.jpg`];
+  if(!t){t={_id:typeId,name,standardCapacity,maxCapacity,weekdayPrice,weekendPrice,area,description,amenityIds:indexes.map(n=>amenityIds[n]),active:true,photo,images};s.roomTypes.push(t);counts.addedTypes++;}
+  else {if(!t.photo||t.photo.includes('placeholder'))t.photo=photo;if(!t.images?.length)t.images=images;if(!t.area)t.area=area;if(t.description==='Không gian ấm cúng, sạch sẽ, phù hợp cho kỳ nghỉ của bạn.')t.description=description;}
+  for(let j=1;j<=5;j++){const roomNumber=`${i+1}${String(j).padStart(2,'0')}`;let r=s.rooms.find(x=>x.roomNumber===roomNumber);if(!r){r={_id:id(),roomNumber,floor:i+1,roomTypeId:typeId,status:'CLEAN_VACANT'};s.rooms.push(r);counts.addedRooms++;}if(!r.photo)r.photo=t.photo;if(!r.images?.length)r.images=t.images;}
+ });
+ s.datasetVersion=2;Pricing.upgradePricing(s);return counts;
+}
+function seedData(){
+ const s={users:[],amenities:[],roomTypes:[],rooms:[],bookings:[],audit:[],lookupFailures:{},settings:{version:1,checkInTime:'14:00',checkOutTime:'12:00',extraGuestPerNight:100000,cancellationRules:[{hoursBefore:48,refundPercent:100},{hoursBefore:24,refundPercent:50},{hoursBefore:0,refundPercent:0}]}};
+ upgradeData(s);require('./access').upgrade(s);return s;
+}
+function criteria(b){if(!day(b.checkIn)||b.checkIn<today()||!day(b.checkOut)) fail('Chọn ngày nhận từ hôm nay và ngày trả hợp lệ.');const n=(Date.parse(b.checkOut)-Date.parse(b.checkIn))/86400000;if(n<1||n>30)fail('Kỳ lưu trú phải từ 1 đến 30 đêm.');const guests=Number(b.guestCount);if(!Number.isSafeInteger(guests)||guests<1||guests>100)fail('Số khách không hợp lệ.'); if(b.roomTypeId && !/^[a-f0-9]{24}$/i.test(b.roomTypeId))fail('Loại phòng không hợp lệ.');return {...b,guestCount:guests,numberOfNights:n};}
+function expire(s){const now=Date.now();for(const b of s.bookings)if(b.status==='PENDING'&&Date.parse(b.holdExpiresAt)<=now)b.status='EXPIRED';}
+function segments(b){return b.roomSegments||[{roomId:b.roomId,checkIn:b.checkIn,checkOut:b.checkOut}];}
+function maintenance(r,from,to){if(r.incidents?.length)return r.incidents.some(x=>x.startDate<to&&(x.resolvedDate||x.endDate)>from);return r.status==='MAINTENANCE';}
+function freeRooms(s,c){expire(s);return s.rooms.filter(r=>r.roomTypeId===c.roomTypeId&&!maintenance(r,c.checkIn,c.checkOut)&&!s.bookings.some(b=>['PENDING','CONFIRMED','CHECKED_IN'].includes(b.status)&&segments(b).some(seg=>seg.roomId===r._id&&seg.checkIn<c.checkOut&&seg.checkOut>c.checkIn)));}
+
+function quote(s,body){
+ const c=criteria(body),t=s.roomTypes.find(t=>t._id===c.roomTypeId&&t.active);
+ if(!t||t.maxCapacity<c.guestCount||s.homestays&&!s.homestays.some(h=>h._id===t.homestayId&&h.active))fail('Loại phòng không phù hợp.');s=propertyState(s,t.homestayId);
+ const nightlyPrices=Array.from({length:c.numberOfNights},(_,i)=>{
+  const rate=Pricing.resolveNight(s,t,add(c.checkIn,i));
+  const extraGuestCount=Math.max(0,c.guestCount-t.standardCapacity),extraGuestUnitPrice=s.settings.extraGuestPerNight,surchargeAmount=extraGuestCount*extraGuestUnitPrice;
+  return {...rate,extraGuestCount,extraGuestUnitPrice,surchargeAmount,lineTotal:rate.basePrice+surchargeAmount};
+ });
+ const roomTotal=nightlyPrices.reduce((a,r)=>a+r.basePrice,0),extraGuestTotal=nightlyPrices.reduce((a,r)=>a+r.surchargeAmount,0);
+ if(!money(roomTotal)||!money(extraGuestTotal)||!money(roomTotal+extraGuestTotal))fail('Giá hoặc phụ thu vượt giới hạn hợp lệ.');
+ return {homestayId:t.homestayId,homestayName:s.homestays?.find(h=>h._id===t.homestayId)?.name||'',roomTypeId:t._id,roomTypeName:t.name,checkIn:c.checkIn,checkOut:c.checkOut,guestCount:c.guestCount,numberOfNights:c.numberOfNights,nightlyPrices,roomTotal,extraGuestTotal,totalAmount:roomTotal+extraGuestTotal,settingsSnapshot:structuredClone(s.settings)};
+}
+function propertyState(s,homestayId){const h=s.homestays?.find(h=>h._id===homestayId);return h&&h._id!==s.homestays[0]._id?{...s,settings:h.settings||s.settings,pricingCalendar:h.pricingCalendar||{}}:s;}
+function availability(s,body){const c=criteria(body);return {roomTypes:s.roomTypes.filter(t=>t.active&&(!s.homestays||s.homestays.some(h=>h._id===t.homestayId&&h.active))&&(!c.homestayId||t.homestayId===c.homestayId)&&t.maxCapacity>=c.guestCount&&(!c.roomTypeId||c.roomTypeId===t._id)).map(t=>{const availableCount=freeRooms(s,{...c,roomTypeId:t._id}).length;return {roomTypeId:t._id,name:t.name,homestayId:t.homestayId,homestayName:s.homestays?.find(h=>h._id===t.homestayId)?.name,standardCapacity:t.standardCapacity,maxCapacity:t.maxCapacity,availableCount,fromPrice:Math.min(...Array.from({length:c.numberOfNights},(_,i)=>Pricing.resolveNight(propertyState(s,t.homestayId),t,add(c.checkIn,i)).basePrice)),images:t.images||[],photo:{path:t.photo||'/modules/bookings/assets/room-placeholder.svg',alt:t.photo?'Ảnh '+t.name:'Chưa có ảnh'},amenities:s.amenities.filter(a=>a.active&&t.amenityIds.includes(a._id)).map(a=>({name:a.name,icon:a.icon})),area:t.area};}).filter(t=>t.availableCount>0)};}
+const bookingResult=b=>({homestayId:b.homestayId,homestayName:b.homestayName,bookingCode:b.bookingCode,roomTypeName:b.roomTypeName,checkInDay:b.checkIn,checkOutDay:b.checkOut,numberOfNights:b.numberOfNights,totalAmount:b.totalAmount,status:b.status,holdExpiresAt:b.holdExpiresAt,...require('./deposit').amounts(b)});
+function log(s,actor,action,detail){s.audit.unshift({_id:id(),at:new Date().toISOString(),actor,action,detail});s.audit=s.audit.slice(0,2000);}
+function createBooking(s,body,ip){
+ const fields=['roomTypeId','checkIn','checkOut','guestCount','guestName','phone','email','notes','policyAccepted','expectedTotalAmount','expectedSettingsVersion','requestKey','guestAddress','nationality','idNumber','documentType','birthDate','gender'];const b=Object.fromEntries(fields.map(k=>[k,body[k]??(['notes','guestAddress','nationality'].includes(k)?'':null)]));
+ if(typeof b.requestKey!=='string'||!/^[a-f0-9]{32}$/i.test(b.requestKey))fail('Mã yêu cầu không hợp lệ.');
+ if(typeof b.guestName!=='string'||!b.guestName.trim()||b.guestName.length>255||typeof b.phone!=='string'||!/^0[35789]\d{8}$/.test(b.phone)||typeof b.email!=='string'||b.email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)||typeof b.notes!=='string'||b.notes.length>2000||b.policyAccepted!==true||!money(b.expectedTotalAmount)||!Number.isInteger(b.expectedSettingsVersion))fail('Kiểm tra họ tên, điện thoại, email và đồng ý chính sách.');
+ b.email=b.email.trim().toLowerCase();b.guestName=b.guestName.trim();const fingerprint=crypto.createHash('sha256').update(JSON.stringify(b)).digest('hex');const old=s.bookings.find(x=>x.requestKey===b.requestKey);if(old){if(old.fingerprint!==fingerprint)fail('Mã yêu cầu đã được dùng với nội dung khác.','REQUEST_CONFLICT',409);return bookingResult(old);}
+ const q=quote(s,b);if(q.settingsSnapshot.version!==b.expectedSettingsVersion)fail('Giá, loại ngày hoặc chính sách đã thay đổi. Vui lòng lấy báo giá mới.','POLICY_CHANGED',409);if(q.totalAmount!==b.expectedTotalAmount)fail('Giá đã thay đổi. Vui lòng lấy báo giá mới.','PRICE_CHANGED',409);
+ const rooms=freeRooms(s,b);if(!rooms.length)fail('Không còn phòng trong khoảng ngày này.','NO_AVAILABILITY',409);
+ const recent=s.bookings.filter(x=>x.ip===ip&&Date.parse(x.createdAt)>Date.now()-3600000);if(recent.length>=5)throw new AppError(429,'RATE_LIMITED','Tối đa 5 yêu cầu đặt phòng trong một giờ.',3600);
+ let bookingCode;do{bookingCode=crypto.randomBytes(4).toString('hex').toUpperCase();}while(s.bookings.some(x=>x.bookingCode===bookingCode));
+ const extra=require('./guest-info').person(body);const booking={...b,...q,...extra,homestayId:s.roomTypes.find(t=>t._id===b.roomTypeId).homestayId,_id:id(),bookingCode,roomId:rooms[0]._id,status:'PENDING',createdAt:new Date().toISOString(),holdExpiresAt:new Date(Date.now()+(q.settingsSnapshot.holdHours||24)*3600000).toISOString(),depositAmount:0,ip,fingerprint,internalNotes:''};s.bookings.push(booking);log(s,'Khách','CREATE_BOOKING',bookingCode);return bookingResult(booking);
+}
+function lookup(s,body,ip){expire(s);const now=Date.now();for(const [k,v] of Object.entries(s.lookupFailures))if(v.until<=now)delete s.lookupFailures[k];let f=s.lookupFailures[ip];if(f&&f.count>=10) return {error:new AppError(429,'RATE_LIMITED','Bạn đã tra cứu sai 10 lần. Vui lòng thử lại sau 15 phút.',Math.ceil((f.until-now)/1000))};const code=String(body.bookingCode||'').trim().toUpperCase(),email=String(body.email||'').trim().toLowerCase(),b=s.bookings.find(b=>b.bookingCode===code&&b.email===email);if(!b){if(!f)f=s.lookupFailures[ip]={count:0,until:now+900000};f.count++;return {error:new AppError(404,'NOT_FOUND','Không tìm thấy thông tin đặt phòng hợp lệ.')};}return {data:{...require('./deposit').forBooking(s,b),...Object.fromEntries(['bookingCode','homestayId','homestayName','roomTypeName','checkIn','checkOut','numberOfNights','guestCount','totalAmount','depositAmount','status','holdExpiresAt'].map(k=>[k,b[k]]))}};}
+function transition(s,code,action,body,actor){expire(s);const b=s.bookings.find(b=>b.bookingCode===code);if(!b)fail('Không tìm thấy booking.','NOT_FOUND',404);const r=s.rooms.find(r=>r._id===b.roomId);
+ if(action==='deposit'){const amount=Number(body.amount);if(!money(amount)||amount===0||!['PENDING','CONFIRMED','CHECKED_IN'].includes(b.status)||b.depositAmount+amount>b.totalAmount)fail('Số tiền cọc hoặc trạng thái không hợp lệ.');b.depositAmount+=amount;}
+ else if(action==='confirm'){if(b.status!=='PENDING')fail('Chỉ xác nhận booking đang chờ.','STATE_CONFLICT',409);b.status='CONFIRMED';}
+ else if(action==='checkin'){if(b.status!=='CONFIRMED'||b.checkIn>today()||b.checkOut<=today()||r.status!=='CLEAN_VACANT')fail('Cần booking xác nhận, đúng kỳ lưu trú và phòng sạch trống.','STATE_CONFLICT',409);if(!/^\d{9}(\d{3})?$/.test(String(body.idNumber||'')))fail('Nhập CCCD 12 số hoặc CMND 9 số.');b.idNumber=body.idNumber;b.internalNotes=String(body.internalNotes||'').slice(0,2000);b.status='CHECKED_IN';r.status='OCCUPIED';b.actualCheckIn=new Date().toISOString();}
+ else if(action==='checkout'){if(b.status!=='CHECKED_IN')fail('Chỉ trả phòng cho khách đang ở.','STATE_CONFLICT',409);b.status='COMPLETED';b.actualCheckOut=new Date().toISOString();r.status='DIRTY_VACANT';}
+ else if(action==='cancel'){
+  if(!['PENDING','CONFIRMED'].includes(b.status))fail('Không thể huỷ booking ở trạng thái này.','STATE_CONFLICT',409);
+  const reason=String(body.reason||'Khách yêu cầu huỷ booking').trim();if(!reason||reason.length>1000)fail('Lý do huỷ cần từ 1 đến 1000 ký tự.');
+  const hours=(Date.parse(`${b.checkIn}T${b.settingsSnapshot.checkInTime}:00+07:00`)-Date.now())/3600000,rule=b.settingsSnapshot.cancellationRules.find(x=>hours>=x.hoursBefore),refundPercent=rule?.refundPercent||0;
+  Object.assign(b,{status:'CANCELLED',refundPercent,refundAmount:Math.floor((b.depositAmount||0)*refundPercent/100),cancelReason:reason,cancelledBy:actor,cancelledAt:new Date().toISOString()});
+  (b.events||=[]).push({id:id(),type:'BookingCancelled',at:b.cancelledAt});
+ }
+ else fail('Thao tác không hợp lệ.');b.version=(b.version||0)+1;log(s,actor,action.toUpperCase(),code);return b;
+}
+function report(s,month){if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(month))fail('Tháng phải có định dạng YYYY-MM.');expire(s);const bookings=s.bookings.filter(b=>b.checkIn.startsWith(month));const active=bookings.filter(b=>['CONFIRMED','CHECKED_IN','COMPLETED','CLOSED'].includes(b.status));return {month,byRoomType:s.roomTypes.map(t=>{const list=active.filter(b=>b.roomTypeId===t._id);return {name:t.name,count:list.length,nights:list.reduce((sum,b)=>sum+b.numberOfNights,0),totalAmount:list.reduce((sum,b)=>sum+b.totalAmount,0)};}),byDay:Array.from({length:new Date(Number(month.slice(0,4)),Number(month.slice(5,7)),0).getDate()},(_,i)=>{const date=month+'-'+String(i+1).padStart(2,'0');return {date,count:bookings.filter(b=>b.checkIn===date).length};}),bookingCount:bookings.length,confirmedCount:active.length,totalAmount:active.reduce((a,b)=>a+b.totalAmount,0),depositAmount:active.reduce((a,b)=>a+b.depositAmount,0),nights:active.reduce((a,b)=>a+b.numberOfNights,0),byStatus:Object.entries(statusLabels).map(([status,label])=>({status,label,count:bookings.filter(b=>b.status===status).length})),bookings};}
+module.exports={AppError,fail,today,day,add,money,id,statusLabels,seedData,upgradeData,criteria,expire,quote,availability,freeRooms,segments,maintenance,createBooking,lookup,transition,report,log};
