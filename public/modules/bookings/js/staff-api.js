@@ -124,7 +124,9 @@
         "CONFIRMED",
         "PAID",
         "CHECKED_IN",
+        "IN_HOUSE",
         "COMPLETED",
+        "CLOSED",
         "CANCELLED",
         "EXPIRED",
       ].includes(b.status)

@@ -8,6 +8,7 @@ const connectDB = require("./src/config/db");
 const authRoutes = require("./src/modules/auth/auth.routes");
 const lookupRouter = require("./src/modules/lookup/lookup.router");
 const bookingRouter = require("./src/modules/bookings/booking.router");
+const invoiceRouter = require("./src/modules/bookings/invoice.router");
 const roomRouter = require("./src/modules/rooms/room.router");
 const receptionRouter = require("./src/modules/reception/routes");
 const cancellationRouter = require("./src/modules/cancellation/cancellation.router");
@@ -33,6 +34,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/lookup", lookupRouter);
 app.use("/api/bookings", bookingRouter);
+app.use("/api/invoices", invoiceRouter);
 app.use("/api/rooms", roomRouter);
 app.use("/api/reception", receptionRouter);
 app.use("/api/admin", cancellationRouter);

@@ -27,7 +27,9 @@
     CONFIRMED: "Đã xác nhận",
     PAID: "Đã thanh toán",
     CHECKED_IN: "Đang ở",
+    IN_HOUSE: "Đang lưu trú",
     COMPLETED: "Đã trả phòng",
+    CLOSED: "Đã trả phòng",
     CANCELLED: "Đã huỷ",
     EXPIRED: "Hết giữ chỗ",
   };
@@ -42,6 +44,8 @@
     walkRooms: [],
     walkUnknown: false,
     changeUnknown: false,
+    surchargeDefaults: null,
+    checkoutPreview: null,
   };
   function notice(id, text, kind = "error") {
     const box = $(id);
@@ -155,6 +159,25 @@
   function renderCurrent() {
     const b = state.booking;
     $("current-booking").hidden = false;
+    const canManageStay = ["CHECKED_IN", "IN_HOUSE"].includes(b.status);
+    const stayTools = canManageStay
+      ? `<section class="staff-preview" aria-label="Phụ thu và trả phòng">
+          <h3>Phụ thu trong thời gian lưu trú</h3>
+          <p class="staff-caption">Giá mặc định được lấy từ tham số hệ thống. Nếu sửa đơn giá, hãy ghi rõ lý do.</p>
+          <form id="surcharge-form">
+            <div id="surcharge-rows">${surchargeRow(0, Math.max(1, Math.ceil((Date.parse(b.checkOut) - Date.parse(b.checkIn)) / 86400000)))}</div>
+            <div class="staff-actions">
+              <button type="button" class="btn secondary" data-action="add-surcharge-row">Thêm dòng phụ thu</button>
+              <button type="submit" class="btn primary">Lưu phụ thu</button>
+              <button type="button" class="btn secondary" data-action="checkout-preview">Xem bảng tính trả phòng</button>
+            </div>
+          </form>
+          <div id="surcharge-message" class="notice" role="status" aria-live="polite" hidden></div>
+          <div id="checkout-preview-content"></div>
+        </section>`
+      : b.status === "CLOSED" && b.checkoutSnapshot
+        ? `<section class="staff-preview"><h3>Hóa đơn</h3><button type="button" class="btn secondary" data-action="view-invoice">Xem hóa đơn</button><div id="invoice-content"></div></section>`
+        : "";
     $("current-booking").innerHTML =
       "<strong>" +
       esc(b.bookingCode) +
@@ -168,8 +191,102 @@
         ["Loại phòng", roomName(b)],
         ["Tổng tiền booking", money(b.totalAmount)],
         ["Tiền cọc đã ghi", deposit(b)],
-      ]);
+      ]) + stayTools;
     renderHistory(b);
+  }
+
+  function surchargeRow(index, nights) {
+    const defaults = state.surchargeDefaults;
+    return `<div class="staff-grid surcharge-row" data-surcharge-row>
+      <div class="field"><label>Loại phụ thu</label><select data-field="type"><option value="EXTRA_GUEST">Thêm người</option><option value="EXTRA_BED">Thêm giường</option></select></div>
+      <div class="field"><label>Số lượng</label><input data-field="quantity" type="number" min="1" max="20" step="1" value="1" required></div>
+      <div class="field"><label>Đơn giá (VNĐ)</label><input data-field="unitPrice" type="number" min="0" step="1" value="${defaults.EXTRA_GUEST}" required></div>
+      <div class="field"><label>Số đêm áp dụng</label><input data-field="nights" type="number" min="1" max="${nights}" step="1" value="${nights}" required></div>
+      <div class="field"><label>Ghi chú</label><input data-field="note" maxlength="300" placeholder="Lý do phát sinh"></div>
+      <div class="field"><label>Lý do sửa giá</label><input data-field="overrideReason" maxlength="300" placeholder="Bắt buộc nếu đổi đơn giá"></div>
+      <button type="button" class="btn secondary" data-action="remove-surcharge-row" ${index === 0 ? "disabled" : ""}>Xóa dòng</button>
+    </div>`;
+  }
+
+  function renderCheckoutPreview(data) {
+    state.checkoutPreview = data;
+    const rows = (data.lineItems || []).map((item) => `<tr><td>${esc(item.description)}</td><td>${money(item.unitPrice)}</td><td>${esc(item.quantity)}${item.nights ? ` × ${esc(item.nights)} đêm` : ""}</td><td>${money(item.amount)}</td></tr>`).join("");
+    const earlyField = data.isEarlyCheckout ? `<label class="field">Lý do trả phòng sớm<input id="early-checkout-reason" maxlength="500" required></label>` : "";
+    $("checkout-preview-content").innerHTML = `<h3>Bảng tính trả phòng</h3>
+      <div class="staff-table-wrap"><table><thead><tr><th>Khoản thu</th><th>Đơn giá</th><th>Số lượng / số đêm</th><th>Thành tiền</th></tr></thead><tbody>${rows || '<tr><td colspan="4">Chưa có khoản thu.</td></tr>'}</tbody></table></div>
+      <p><strong>Tổng tiền:</strong> ${money(data.summary.totalAmount)} · <strong>Đã cọc:</strong> ${money(data.summary.totalDeposit)} · <strong>Còn thu:</strong> ${money(data.summary.remainingAmount)}</p>
+      <div class="staff-grid"><label class="field">Hình thức thanh toán<select id="checkout-payment"><option value="CASH">Tiền mặt</option><option value="BANK_TRANSFER">Chuyển khoản</option></select></label>${earlyField}</div>
+      <div class="staff-actions"><button type="button" class="btn primary" data-action="confirm-checkout">Xác nhận trả phòng</button></div>`;
+  }
+
+  async function loadCheckoutPreview() {
+    if (!state.booking) return;
+    const result = await api(`/api/bookings/${encodeURIComponent(state.booking._id)}/checkout-preview`);
+    if (!result?.success || !result.data) throw new C.ApiError("Không tải được bảng tính trả phòng.");
+    renderCheckoutPreview(result.data);
+  }
+
+  async function loadInvoice() {
+    if (!state.booking) return;
+    const result = await api(`/api/invoices/booking/${encodeURIComponent(state.booking._id)}`);
+    const invoice = result.data;
+    const rows = (invoice.lineItems || []).map((item) => `<tr><td>${esc(item.description)}</td><td>${money(item.unitPrice)}</td><td>${esc(item.quantity)}${item.nights ? ` × ${esc(item.nights)} đêm` : ""}</td><td>${money(item.amount)}</td></tr>`).join("");
+    $("invoice-content").innerHTML = `<div class="staff-table-wrap"><table><thead><tr><th>Khoản thu</th><th>Đơn giá</th><th>Số lượng / số đêm</th><th>Thành tiền</th></tr></thead><tbody>${rows}</tbody></table></div><p><strong>Tổng thanh toán:</strong> ${money(invoice.totalAmount)}</p>`;
+  }
+
+  async function submitSurcharges(event) {
+    event.preventDefault();
+    if (!state.booking || state.busy) return;
+    const items = [...$("surcharge-rows").querySelectorAll("[data-surcharge-row]")].map((row) => Object.fromEntries(
+      [...row.querySelectorAll("[data-field]")].map((field) => [field.dataset.field, field.type === "number" ? Number(field.value) : field.value.trim()]),
+    ));
+    const invalidOverride = items.some((item) => item.unitPrice !== state.surchargeDefaults[item.type] && !item.overrideReason);
+    if (invalidOverride) return operationError("surcharge-message", new C.ApiError("Vui lòng nhập lý do cho mọi đơn giá đã sửa."));
+    busy(true);
+    notice("surcharge-message", "Đang lưu các dòng phụ thu…", "loading");
+    try {
+      const saved = await api(`/api/bookings/${encodeURIComponent(state.booking._id)}/surcharges`, { method: "POST", body: { items } });
+      state.booking.guestCount = saved.data.booking.guestCount;
+      const bookedNights = Math.max(1, Math.ceil((Date.parse(state.booking.checkOut) - Date.parse(state.booking.checkIn)) / 86400000));
+      $("surcharge-rows").innerHTML = surchargeRow(0, bookedNights);
+      notice("surcharge-message", "Đã thêm phụ thu. Đang tải lại bảng tính trả phòng…", "success");
+      await loadCheckoutPreview();
+    } catch (error) {
+      operationError("surcharge-message", error);
+    } finally {
+      busy(false);
+    }
+  }
+
+  async function confirmCheckout() {
+    if (!state.booking || !state.checkoutPreview || state.busy) return;
+    if (!window.confirm("Xác nhận thanh toán và hoàn tất trả phòng cho booking này?")) return;
+    const earlyCheckoutReason = $("early-checkout-reason")?.value.trim() || "";
+    if (state.checkoutPreview.isEarlyCheckout && !earlyCheckoutReason) {
+      return operationError("surcharge-message", new C.ApiError("Vui lòng nhập lý do trả phòng sớm."));
+    }
+    busy(true);
+    try {
+      const result = await api(`/api/bookings/${encodeURIComponent(state.booking._id)}/checkout-confirm`, {
+        method: "POST",
+        body: {
+          paymentMethod: $("checkout-payment").value,
+          earlyCheckoutReason,
+          actualCheckOut: new Date().toISOString(),
+        },
+      });
+      state.booking.status = result.data.status;
+      state.booking.checkoutSnapshot = result.data.checkout;
+      state.booking.actualCheckOutDate = result.data.checkout.actualCheckOut;
+      state.booking.totalAmount = result.data.checkout.totalAmount;
+      renderCurrent();
+      await loadInvoice();
+      notice("find-message", "Đã hoàn tất trả phòng. Hóa đơn đã được tải vào thông tin booking.", "success");
+    } catch (error) {
+      operationError("surcharge-message", error);
+    } finally {
+      busy(false);
+    }
   }
   function invalidateChange() {
     state.changeQuote = null;
@@ -253,6 +370,8 @@
         ),
         { code, email },
       );
+      const parameterResult = await api("/api/bookings/surcharge-parameters");
+      state.surchargeDefaults = parameterResult.data;
       state.booking = b;
       state.changeUnknown = false;
       state.changeRooms = [];
@@ -681,6 +800,48 @@
       $("panel-" + key).hidden = !on;
     }
   }
+  $("current-booking").onsubmit = (event) => {
+    if (event.target.id === "surcharge-form") void submitSurcharges(event);
+  };
+  $("current-booking").onchange = (event) => {
+    const row = event.target.closest("[data-surcharge-row]");
+    if (row && event.target.dataset.field === "type") {
+      row.querySelector('[data-field="unitPrice"]').value = state.surchargeDefaults[event.target.value];
+      row.querySelector('[data-field="overrideReason"]').value = "";
+    }
+  };
+  $("current-booking").onclick = async (event) => {
+    const button = event.target.closest("[data-action]");
+    if (!button || state.busy) return;
+    const action = button.dataset.action;
+    if (action === "add-surcharge-row") {
+      const rows = $("surcharge-rows");
+      if (rows.children.length >= 20) {
+        notice("surcharge-message", "Mỗi lần chỉ thêm tối đa 20 dòng phụ thu.", "warning");
+        return;
+      }
+      const nights = Math.max(1, Math.ceil((Date.parse(state.booking.checkOut) - Date.parse(state.booking.checkIn)) / 86400000));
+      rows.insertAdjacentHTML("beforeend", surchargeRow(rows.children.length, nights));
+      const removeButtons = rows.querySelectorAll('[data-action="remove-surcharge-row"]');
+      removeButtons.forEach((item) => { item.disabled = false; });
+    } else if (action === "remove-surcharge-row") {
+      const rows = $("surcharge-rows");
+      if (rows.children.length > 1) button.closest("[data-surcharge-row]").remove();
+      if (rows.children.length === 1) rows.querySelector('[data-action="remove-surcharge-row"]').disabled = true;
+    } else if (action === "checkout-preview") {
+      busy(true);
+      try { await loadCheckoutPreview(); }
+      catch (error) { operationError("surcharge-message", error); }
+      finally { busy(false); }
+    } else if (action === "confirm-checkout") {
+      await confirmCheckout();
+    } else if (action === "view-invoice") {
+      busy(true);
+      try { await loadInvoice(); }
+      catch (error) { notice("find-message", error.message, "error"); }
+      finally { busy(false); }
+    }
+  };
   $("find-booking-form").onsubmit = findBooking;
   $("change-form").onsubmit = previewChange;
   $("change-rooms").onclick = loadChangeRooms;

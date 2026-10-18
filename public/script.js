@@ -53,7 +53,7 @@ function renderStays(){
               due=s.status==="reserved"&&s.checkinDate<=localDateString(),
               label=s.status==="checkedIn"?"Đang lưu trú":"Đã đặt",
               invoiceBtn = (s.status === 'closed' || s.status === 'checkedOut') 
-                  ? `<button type="button" class="stay-action" onclick="viewInvoice('${s._id}')" style="background: #198754; color: white; margin-left: 5px;">Xem hóa đơn</button>` 
+                  ? '<a class="stay-action" href="/modules/bookings/staff.html">Tra cứu hóa đơn theo booking</a>'
                   : '';
               action=s.status==="checkedIn"?'<button type="button" class="stay-action" data-action="checkout">Trả phòng</button>':due?'<button type="button" class="stay-action" data-action="checkin">Xác nhận khách đến</button>':'<button type="button" class="stay-action secondary-action" data-action="cancel">Hủy đặt</button>';
         return `<article class="stay-item"><div class="stay-details"><strong>${escapeHtml(s.guestName)} · Phòng ${escapeHtml(s.roomCode)}</strong><span>${escapeHtml(room?.name||"Phòng")} · ${escapeHtml(s.guests)} người · ${escapeHtml(s.checkinDate)} đến ${escapeHtml(s.checkoutDate)}</span><span class="stay-status ${s.status}">${label}</span></div><div class="stay-controls" data-stay-id="${s._id}">${action} ${invoiceBtn}</div></article>`
@@ -167,7 +167,10 @@ async function viewInvoice(bookingId) {
     if (btnRetry) btnRetry.style.display = 'none';
 
     try {
-        const res = await fetch(`/api/invoices/booking/${bookingId}`);
+        const token = sessionStorage.getItem('authToken') || localStorage.getItem('authToken');
+        const res = await fetch(`/api/invoices/booking/${bookingId}`, {
+            headers: token ? { Authorization: `Bearer ${token}` } : {}
+        });
         const data = await res.json();
 
         if (!res.ok || !data.success) {
@@ -222,7 +225,7 @@ async function viewInvoice(bookingId) {
                             <tr style="border-bottom: 1px solid #eee;">
                                 <td style="padding: 8px;">${item.description}</td>
                                 <td style="padding: 8px; text-align: right;">${Number(item.unitPrice).toLocaleString('vi-VN')} đ</td>
-                                <td style="padding: 8px; text-align: center;">${item.quantity}</td>
+                                <td style="padding: 8px; text-align: center;">${item.quantity}${item.nights ? ` × ${item.nights} đêm` : ''}</td>
                                 <td style="padding: 8px; text-align: right;">${Number(item.amount).toLocaleString('vi-VN')} đ</td>
                             </tr>
                         `).join('')}
