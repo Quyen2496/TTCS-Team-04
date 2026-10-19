@@ -13,7 +13,13 @@ async function connectDB() {
   // Build the unique room/night index and assign legacy active bookings before
   // the HTTP server starts accepting requests.
   await BookingRoomNight.createIndexes();
-  await migrateActiveBookings();
+  
+  try {
+    await migrateActiveBookings();
+  } catch (error) {
+    console.warn("⚠️ Cảnh báo migration dữ liệu phòng-đêm cũ:", error.message);
+  }
+
   console.log("MongoDB connected");
 }
 
