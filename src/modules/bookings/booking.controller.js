@@ -82,7 +82,8 @@ exports.createBooking = async (req, res) => {
     const bookingCode = generateBookingCode();
     const holdExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-    const newBooking = await bookingService.createBookingService({
+    const createFunc = bookingService.createBookingService || bookingService.createWalkInBooking;
+    const newBooking = await createFunc({
       bookingCode,
       guestName: guestName.trim(),
       phone: phone.trim(),
@@ -136,7 +137,39 @@ exports.getBookingByCodeAndEmail = async (req, res) => {
   }
 };
 
-// 5. SPRINT 3: Cập nhật đổi ngày / loại phòng
+// 5. Hủy đơn đặt phòng
+exports.cancelBooking = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+
+    const booking = await Booking.findById(bookingId);
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        message: 'Không tìm thấy thông tin đặt phòng.'
+      });
+    }
+
+    booking.status = 'CANCELLED';
+    await booking.save();
+
+    const BookingRoomNight = require('./booking-room-night.model');
+    await BookingRoomNight.deleteMany({ bookingId: booking._id });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Hủy đơn đặt phòng thành công.',
+      data: booking
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi khi hủy đơn đặt phòng.'
+    });
+  }
+};
+
+// 6. SPRINT 3: Cập nhật đổi ngày / loại phòng
 exports.modifyBookingHandler = async (req, res) => {
   try {
     const { bookingId } = req.params;
@@ -163,14 +196,15 @@ exports.modifyBookingHandler = async (req, res) => {
       data: updatedBooking
     });
   } catch (error) {
-    return res.status(400).json({
+    const statusCode = error.statusCode || 400;
+    return res.status(statusCode).json({
       success: false,
       message: error.message || 'Lỗi khi cập nhật đặt phòng.'
     });
   }
 };
 
-// 6. SPRINT 3: Tạo đơn đặt phòng trực tiếp tại quầy (Walk-in)
+// 7. SPRINT 3: Tạo đơn đặt phòng trực tiếp tại quầy (Walk-in)
 exports.createWalkInBookingHandler = async (req, res) => {
   try {
     const booking = await bookingService.createWalkInBooking(req.body);
@@ -180,7 +214,8 @@ exports.createWalkInBookingHandler = async (req, res) => {
       data: booking
     });
   } catch (error) {
-    return res.status(400).json({
+    const statusCode = error.statusCode || 400;
+    return res.status(statusCode).json({
       success: false,
       message: error.message || 'Lỗi khi tạo đơn khách vãng lai.'
     });

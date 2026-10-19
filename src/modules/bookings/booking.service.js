@@ -4,6 +4,7 @@ const BookingRoomNight = require('./booking-room-night.model');
 const Room = require('../rooms/room.model');
 const RoomType = require('../rooms/roomType.model');
 const { getStayRange, getNights } = require('./booking-dates');
+const crypto = require('crypto');
 
 const ACTIVE_BOOKING_STATUSES = ['PENDING', 'CONFIRMED', 'PAID', 'CHECKED_IN'];
 
@@ -50,9 +51,9 @@ const getAvailableRoomTypes = async ({ checkIn, checkOut, guestCount }) => {
   const roomIds = activeRooms.map(room => room._id);
   const occupiedRoomIds = roomIds.length
     ? new Set((await BookingRoomNight.distinct('roomId', {
-      roomId: { $in: roomIds },
-      night: { $gte: start, $lt: end }
-    })).map(id => id.toString()))
+        roomId: { $in: roomIds },
+        night: { $gte: start, $lt: end }
+      })).map(id => id.toString()))
     : new Set();
 
   const availableCountMap = new Map();
@@ -131,38 +132,97 @@ const calculateModificationQuote = async ({ bookingId, newRoomTypeId, newCheckIn
 };
 
 /**
- * SPRINT 3: Cập nhật đơn đặt phòng
+ * SPRINT 3: Cập nhật đơn đặt phòng (Đổi ngày / loại phòng) kèm theo giữ khóa phòng-đêm
  */
 const modifyBooking = async (bookingId, updateData) => {
   const { newRoomTypeId, newCheckIn, newCheckOut, newTotalAmount } = updateData;
 
-  const updateFields = {};
-  if (newRoomTypeId) updateFields.roomTypeId = newRoomTypeId;
-  if (newCheckIn) updateFields.checkIn = new Date(newCheckIn);
-  if (newCheckOut) updateFields.checkOut = new Date(newCheckOut);
-  if (newTotalAmount !== undefined) updateFields.totalAmount = newTotalAmount;
-
-  const updatedBooking = await Booking.findByIdAndUpdate(
-    bookingId,
-    { $set: updateFields },
-    { new: true }
-  ).lean();
-
-  if (!updatedBooking) {
-    throw new Error('Không thể cập nhật đơn đặt phòng.');
+  const booking = await Booking.findById(bookingId);
+  if (!booking) {
+    throw new Error('Không tìm thấy đơn đặt phòng.');
   }
 
-  return updatedBooking;
+  const checkIn = newCheckIn ? newCheckIn : booking.checkIn;
+  const checkOut = newCheckOut ? newCheckOut : booking.checkOut;
+  const roomTypeId = newRoomTypeId ? newRoomTypeId : booking.roomTypeId;
+
+  const { start, end } = getStayRange(checkIn, checkOut);
+  const nights = getNights(start, end);
+
+  if (nights.length === 0) {
+    throw new Error('Số đêm lưu trú phải lớn hơn 0.');
+  }
+
+  // Xóa các record room-night cũ để đổi lịch mới
+  await BookingRoomNight.deleteMany({ bookingId: booking._id });
+
+  const activeRooms = await Room.find({
+    roomTypeId: roomTypeId,
+    isMaintenance: { $ne: true },
+    status: { $ne: 'MAINTENANCE' }
+  }).select('_id').lean();
+
+  if (!activeRooms.length) {
+    throw new Error('Không còn phòng trống cho loại phòng và thời gian này.');
+  }
+
+  let assignedRoomId = null;
+  for (const room of activeRooms) {
+    const occupiedNights = await BookingRoomNight.countDocuments({
+      roomId: room._id,
+      night: { $in: nights }
+    });
+    if (occupiedNights === 0) {
+      assignedRoomId = room._id;
+      break;
+    }
+  }
+
+  if (!assignedRoomId) {
+    throw new Error('Phòng thuộc loại này đã kín lịch trong khoảng thời gian bạn chọn.');
+  }
+
+  const roomNightDocs = nights.map(night => ({
+    bookingId: booking._id,
+    roomId: assignedRoomId,
+    night
+  }));
+
+  try {
+    await BookingRoomNight.insertMany(roomNightDocs, { ordered: true });
+  } catch (error) {
+    if (isRoomNightIndexConflict(error)) {
+      throw httpError('Phòng đã được đặt trong khoảng thời gian này.', 409);
+    }
+    throw error;
+  }
+
+  booking.roomTypeId = roomTypeId;
+  booking.roomId = assignedRoomId;
+  booking.checkIn = new Date(checkIn);
+  booking.checkOut = new Date(checkOut);
+  if (newTotalAmount !== undefined) {
+    booking.totalAmount = newTotalAmount;
+  }
+
+  await booking.save();
+  return booking.toObject();
 };
 
 /**
- * SPRINT 3: Đặt phòng trực tiếp tại quầy (Walk-in)
+ * SPRINT 3: Đặt phòng trực tiếp tại quầy (Walk-in) kèm theo phân bổ phòng-đêm
  */
 const createWalkInBooking = async (walkInData) => {
   const { guestName, phone, email, roomTypeId, checkIn, checkOut, guestCount, isPaidNow } = walkInData;
 
   if (!guestName || !phone || !roomTypeId || !checkIn || !checkOut) {
     throw new Error('Thiếu thông tin bắt buộc để tạo đơn khách vãng lai.');
+  }
+
+  const { start, end } = getStayRange(checkIn, checkOut);
+  const nights = getNights(start, end);
+  if (nights.length === 0) {
+    throw new Error('Số đêm lưu trú phải lớn hơn 0.');
   }
 
   const quote = await calculateQuote({
@@ -172,6 +232,28 @@ const createWalkInBooking = async (walkInData) => {
     quantity: 1
   });
 
+  const activeRooms = await Room.find({
+    roomTypeId: roomTypeId,
+    isMaintenance: { $ne: true },
+    status: { $ne: 'MAINTENANCE' }
+  }).select('_id').lean();
+
+  let assignedRoomId = null;
+  for (const room of activeRooms) {
+    const occupiedNights = await BookingRoomNight.countDocuments({
+      roomId: room._id,
+      night: { $in: nights }
+    });
+    if (occupiedNights === 0) {
+      assignedRoomId = room._id;
+      break;
+    }
+  }
+
+  if (!assignedRoomId) {
+    throw new Error('Không đủ phòng trống cho loại phòng này trong khoảng thời gian chọn.');
+  }
+
   const bookingCode = 'WALK-' + crypto.randomBytes(3).toString('hex').toUpperCase();
 
   const newBooking = new Booking({
@@ -180,6 +262,7 @@ const createWalkInBooking = async (walkInData) => {
     phone: phone.trim(),
     email: email ? email.trim().toLowerCase() : 'walkin@homestay.com',
     roomTypeId,
+    roomId: assignedRoomId,
     checkIn: new Date(checkIn),
     checkOut: new Date(checkOut),
     guestCount: parseInt(guestCount, 10) || 1,
@@ -188,7 +271,25 @@ const createWalkInBooking = async (walkInData) => {
     isWalkIn: true
   });
 
-  return await newBooking.save();
+  const savedBooking = await newBooking.save();
+
+  const roomNightDocs = nights.map(night => ({
+    bookingId: savedBooking._id,
+    roomId: assignedRoomId,
+    night
+  }));
+
+  try {
+    await BookingRoomNight.insertMany(roomNightDocs, { ordered: true });
+  } catch (error) {
+    await Booking.findByIdAndDelete(savedBooking._id);
+    if (isRoomNightIndexConflict(error)) {
+      throw httpError('Phòng đã được đặt trong khoảng thời gian này.', 409);
+    }
+    throw error;
+  }
+
+  return savedBooking;
 };
 
 module.exports = {
