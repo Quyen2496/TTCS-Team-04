@@ -1,0 +1,38 @@
+HOMESTAY 1.8.1 — kết quả kiểm thử ngày 15/10/2026
+
+Node.js 24: 170 test, 168 đạt, 2 bỏ qua, 0 lỗi.
+Node.js 22: 170 test, 168 đạt, 2 bỏ qua, 0 lỗi.
+Hai test bỏ qua cần MongoDB QA riêng; bản vá này không kiểm thử lại MongoDB Atlas thật.
+
+UI Chromium: 12 nhóm kiểm tra đạt.
+1. Logo header và toàn bộ footer nằm giữa ở 320/360/390/576/768/800px, menu mở đóng được, không tràn ngang
+2. Tài khoản lễ tân cũ được bổ sung quyền hóa đơn và sidebar cập nhật từ quyền máy chủ dù session cũ chưa có quyền
+3. Báo chuyển tiền chỉ mở khi tích; bỏ tích khóa lại; Enter/submit không vượt được; lỗi và đang gửi không tự bật nút; gửi thật chỉ lưu một báo cáo
+4. Đối soát chuyển khoản bắt buộc tick khi ghi cọc, đổi sang từ chối không bị khóa sai, lưu giao dịch thật
+5. Quyết toán khóa khi bảng tiền hết hiệu lực, chỉ mở sau tính lại; không ép tick hoàn cọc khi không có cọc dư
+6. Lễ tân cấp hóa đơn từ booking đóng, tải PDF thật, mở PDF để in và tải lại không sinh số hóa đơn mới
+7. Có cọc dư thì quyết toán chỉ mở sau xác nhận nghĩa vụ hoàn, bỏ tick khóa lại
+8. Đối soát payOS khóa ghi cọc tới khi tick; ghi tiền cần hoàn không bắt tick kiểm tra ghi cọc
+9. Trang Hoá đơn có cả mở để in và tải PDF cho lễ tân
+10. Hộp đối soát và nút disabled hoạt động trên mobile 360px
+11. Nút gửi booking tiếp tục bắt buộc đồng ý chính sách
+12. Không có lỗi JavaScript
+
+PDF tải và mở từ giao diện đã được xác minh là PDF thật. Môi trường headless nhận tệp qua tab mới; không kiểm thử máy in vật lý hoặc WPS trên máy Windows của người dùng.
+
+Trình cập nhật: 8 nhóm kiểm tra đạt.
+{
+  "passed": 8,
+  "checks": [
+    "Cập nhật từ 1.8.0 lên 1.8.1",
+    "Giữ nguyên .env và địa chỉ công khai",
+    "Giữ dữ liệu và ảnh tải lên",
+    "Sao lưu mã nguồn gốc trước ghi",
+    "Xác minh hash mọi tệp cập nhật",
+    "Chạy lại không ghi trùng hay tạo backup dư",
+    "Từ chối gói hỏng và đích chưa có Sprint 4 trước khi ghi",
+    "Server sau cập nhật khởi động, API health 200"
+  ]
+}
+
+Kiểm thử dùng dữ liệu file cô lập, không truy cập database người dùng, không phát sinh giao dịch ngân hàng hoặc gửi email thật.

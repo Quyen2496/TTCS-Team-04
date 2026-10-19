@@ -1,0 +1,16 @@
+{
+  "passed": 11,
+  "results": [
+    "Thêm giường 2 đêm qua UI, dữ liệu API thật",
+    "Quyết toán từ bảng tiền, ghi thu chuyển khoản, đóng booking và phòng bẩn",
+    "Cấp hoá đơn và tải PDF thật qua trình duyệt",
+    "Lễ tân chỉ thấy doanh thu hôm nay, sửa query bị 403",
+    "Báo cáo doanh thu/công suất và CSV qua UI",
+    "Lọc lịch sử email và trạng thái gửi",
+    "Cấu hình phí mới không đổi snapshot booking cũ",
+    "5 màn hình Sprint 4 dùng được ở 360px, không tràn ngang trang",
+    "Xem giấy tờ đầy đủ có phân quyền và audit",
+    "Lễ tân nhận phòng vẫn được điền sẵn giấy tờ, có audit khi đọc",
+    "Không có lỗi JavaScript"
+  ]
+}

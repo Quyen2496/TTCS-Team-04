@@ -1,75 +1,23 @@
-require("dotenv").config();
-
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const connectDB = require("./src/config/db");
-
-const authRoutes = require("./src/modules/auth/auth.routes");
-const lookupRouter = require("./src/modules/lookup/lookup.router");
-const bookingRouter = require("./src/modules/bookings/booking.router");
-const roomRouter = require("./src/modules/rooms/room.router");
-const receptionRouter = require("./src/modules/reception/routes");
-const cancellationRouter = require("./src/modules/cancellation/cancellation.router");
-const roomWarningRouter = require("./src/modules/report/roomWarning.route");
-const roomBoardRouter = require("./src/modules/roomBoard/roomBoard.router");
-const revenueRouter = require("./src/modules/report/revenue.router");
-
-const { notFound, errorHandler } = require("./src/middleware/errorHandler");
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/homestay';
 
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    message: "TTCS Team 04 shared API is running"
-  });
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('Kết nối MongoDB thành công!'))
+  .catch((err) => console.error('Lỗi kết nối MongoDB:', err));
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hệ thống quản lý HomeStay - TTCS Team 04</h1>');
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/lookup", lookupRouter);
-app.use("/api/bookings", bookingRouter);
-app.use("/api/rooms", roomRouter);
-app.use("/api/reception", receptionRouter);
-app.use("/api/admin", cancellationRouter);
-app.use("/api/admin/reports", roomWarningRouter);
-app.use("/api/admin/room-board", roomBoardRouter);
-app.use("/api/admin/reports", revenueRouter); // <-- MỚI: Đăng ký route doanh thu: GET /api/admin/reports/revenue
-
-app.use(express.static(path.join(__dirname, "public")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.listen(PORT, () => {
+  console.log(`Server đang chạy tại http://${process.env.HOST || '127.0.0.1'}:${PORT}`);
 });
-
-app.use(notFound);
-app.use(errorHandler);
-
-const PORT = process.env.PORT || 3000;
-
-connectDB()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
-  .catch(error => {
-    console.error("Failed to initialize the database:", error);
-    process.exit(1);
-  });
- feature/t3-quynh-audit-log-api
-}
-
-if (require.main === module) {
-  start().catch((error) => {
-    console.error("Cannot start server:", error.message);
-    process.exitCode = 1;
-  });
-}
-
-module.exports = { app, start };
-develop

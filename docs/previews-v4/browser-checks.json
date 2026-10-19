@@ -1,0 +1,156 @@
+[
+  {
+    "label": "desktop",
+    "page": "home",
+    "overflow": false,
+    "cards": 10,
+    "sidebar": 0,
+    "staffHeader": "Homestay.\nTrang chủ\nKhám phá phòng\nĐặt phòng\nTra cứu booking"
+  },
+  {
+    "label": "desktop",
+    "page": "rooms",
+    "overflow": false,
+    "cards": 10,
+    "sidebar": 0,
+    "staffHeader": "Homestay.\nTrang chủ\nKhám phá phòng\nĐặt phòng\nTra cứu booking"
+  },
+  {
+    "label": "desktop",
+    "page": "detail",
+    "overflow": false,
+    "cards": 0,
+    "sidebar": 0,
+    "staffHeader": "Homestay.\nTrang chủ\nKhám phá phòng\nĐặt phòng\nTra cứu booking"
+  },
+  {
+    "label": "desktop",
+    "booking": "success",
+    "overflow": false
+  },
+  {
+    "label": "desktop",
+    "page": "owner",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "desktop",
+    "page": "rooms",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "desktop",
+    "page": "types",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "desktop",
+    "page": "amenities",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "desktop",
+    "page": "reception",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "desktop",
+    "page": "users",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "desktop",
+    "page": "reports",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "desktop",
+    "page": "settings",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "home",
+    "overflow": false,
+    "cards": 10,
+    "sidebar": 0,
+    "staffHeader": "Homestay."
+  },
+  {
+    "label": "mobile",
+    "page": "rooms",
+    "overflow": false,
+    "cards": 10,
+    "sidebar": 0,
+    "staffHeader": "Homestay."
+  },
+  {
+    "label": "mobile",
+    "page": "detail",
+    "overflow": false,
+    "cards": 0,
+    "sidebar": 0,
+    "staffHeader": "Homestay."
+  },
+  {
+    "label": "mobile",
+    "booking": "success",
+    "overflow": false
+  },
+  {
+    "label": "mobile",
+    "page": "owner",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "rooms",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "types",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "amenities",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "reception",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "users",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "reports",
+    "overflow": false,
+    "error": false
+  },
+  {
+    "label": "mobile",
+    "page": "settings",
+    "overflow": false,
+    "error": false
+  }
+]
