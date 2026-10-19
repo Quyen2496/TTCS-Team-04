@@ -1,0 +1,16 @@
+HOMESTAY 1.8.0 — KẾT QUẢ KIỂM THỬ SPRINT 4
+Ngày thực hiện: 15/10/2026. Môi trường QA cô lập, dữ liệu giả, không dùng DB vận hành của Quý.
+
+1. Hồi quy toàn hệ thống: 168 ca; 166 đạt, 0 lỗi, 2 ca đặc thù Mongo bỏ qua khi chạy file. Đã chạy với Node 22.23.3 và Node 24. Các ca Mongo bỏ qua đã được chạy riêng bên dưới, không ghi là lỗi.
+2. MongoDB 7.0.14 replica set QA: 18/18 ca Sprint 4 và 25/25 ca Sprint 3 đạt. Bao gồm transaction, cạnh tranh checkout/invoice, unique invoice number, room-night unique và 200 yêu cầu tranh phòng cuối. Các số đếm này có ca trùng với bộ hồi quy, không phải cộng thành số ca duy nhất.
+3. Restore MongoDB QA thật từ backup mã hoá: 1 booking, 50 phòng, 1 invoice, cọc 210.000 VND, quyết toán 700.000 VND; room_nights=0 vì booking đã đóng; projection invoice=1. Thời gian phục hồi đo được 23 ms ở lần ghi log; đây là fixture nhỏ trên máy QA, không phải cam kết thời gian với DB của Quý. Database QA đích mới, DB nguồn không thay đổi.
+4. SMTP: Nodemailer thật gửi yêu cầu đặt và xác nhận qua máy chủ SMTP TLS test cô lập; cả hai SENT. Lỗi SMTP, retry 5 phút tối đa 3 lần sau lần đầu, timeout UNCERTAIN và claim nhiều worker có kiểm thử. Không gửi thư ra tài khoản thật của người dùng.
+5. Trình duyệt Chromium: 11 kiểm tra đạt, dùng API/backend thật với state file cô lập. Phụ thu giường 2 đêm; quyết toán chuyển khoản; đóng booking/phòng bẩn; tải PDF; doanh thu hôm nay lễ tân và query sai 403; công suất/CSV; lịch sử email; chỉnh phí không đổi snapshot; 5 màn hình ở 360px không tràn ngang; đọc giấy tờ có audit; lễ tân được điền sẵn giấy tờ khi nhận phòng; không lỗi JS.
+6. PDF: mở được khổ A4 595.28 x 841.89 pt, tiếng Việt và tiền bằng chữ. Bản thông thường 1 trang được render và xem trực quan. Fixture 80 dòng phụ thu dài xuất 14 trang, có header bảng trên 14 trang, đủ dòng cuối và Bằng chữ: Tám triệu đồng. Đây là chứng từ nội bộ.
+7. Updater: 8 kiểm tra đạt: 1.7.1→1.8.0; giữ .env/booking/ảnh; backup mã nguồn; idempotent; setup backup giữ Mongo/payOS/SMTP; không đổi khoá khi chạy lại; server đã cập nhật /api/ready=200; payload bị sửa được từ chối trước khi ghi.
+8. Dữ liệu demo: đúng 4 loại/20 phòng/30 booking, rải 3 tháng; mật khẩu băm; reset không nhân đôi và không ghi đè DB vận hành. CLI seed/reset + hai kiểm tra bảo vệ chạy thực tế 448 ms trong fixture riêng (<2 phút). CLI từ chối thư mục/file không có nhãn QA/demo phù hợp.
+9. Quyền: >=21 ca sai vai trò trên 7 nhóm endpoint mới, thêm các ca thiếu token/hết hạn/giả, quyền doanh thu hôm nay và scope homestay. API/PDF/email không trả dữ liệu khi bị từ chối. Admin không đọc đủ giấy tờ; Owner/Receptionist có endpoint audit riêng.
+
+Giới hạn nghiệm thu: chưa deploy Docker/VPS hoặc reboot máy chủ thật; chưa có staging công khai/review PR nhóm. Chưa thử lại trên Atlas, SMTP, payOS thật của Quý hoặc giao dịch ngân hàng thật. Phần đó cần diễn tập tại môi trường của người dùng/nhóm. Không tuyên bố production đã nghiệm thu.
+
+Xem docs/SPRINT_4.md để cập nhật, chạy demo và nghiệm thu theo vai trò.

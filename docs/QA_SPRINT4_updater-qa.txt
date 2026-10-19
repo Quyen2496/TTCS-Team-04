@@ -1,0 +1,13 @@
+{
+  "passed": 8,
+  "checks": [
+    "Cập nhật 1.7.1→1.8.0",
+    "Giữ .env/booking/ảnh",
+    "Sao lưu mã nguồn",
+    "Chạy lại không ghi trùng",
+    "Bật backup giữ Mongo/payOS/SMTP",
+    "Không thay khoá backup khi chạy lại",
+    "Khởi động server đã cập nhật, /api/ready=200",
+    "Từ chối payload hỏng trước khi ghi"
+  ]
+}

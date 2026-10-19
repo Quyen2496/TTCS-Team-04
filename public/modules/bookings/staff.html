@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Booking tại quầy & đổi lịch | Homestay</title>
+    <link rel="stylesheet" href="/css/homestay-ui.css" />
+    <link rel="stylesheet" href="/css/homestay-layout.css" />
+    <link rel="stylesheet" href="css/staff-booking.css" />
+    <script src="/js/homestay-layout.js" defer></script>
+    <script src="js/staff-api.js" defer></script>
+    <script src="js/staff-booking.js" defer></script>
+  </head>
+  <body class="homestay-ui hs-layout t4-staff">
+    <a class="skip-link" href="#main">Đến quản lý booking</a>
+    <header class="hs-layout-header">
+      <div class="hs-layout-header-inner">
+        <button
+          class="hs-layout-menu-toggle"
+          type="button"
+          aria-label="Mở menu"
+          aria-controls="staff-sidebar"
+          aria-expanded="false"
+        >
+          ☰</button
+        ><strong class="hs-layout-header-title">Booking & khách tại quầy</strong
+        ><span id="staff-identity"></span>
+      </div>
+    </header>
+    <aside
+      class="hs-layout-sidebar"
+      id="staff-sidebar"
+      aria-label="Điều hướng nhân viên"
+    >
+      <div class="hs-layout-sidebar-header">
+        <a class="hs-layout-brand" href="/"
+          ><span class="hs-layout-brand-icon" aria-hidden="true">H</span
+          ><span class="hs-layout-brand-text"
+            ><strong class="hs-layout-brand-name">Homestay</strong
+            ><small class="hs-layout-brand-caption"
+              >Không gian quản lý lưu trú</small
+            ></span
+          ></a
+        ><button
+          class="hs-layout-sidebar-close"
+          type="button"
+          aria-label="Đóng menu"
+        >
+          ×
+        </button>
+      </div>
+      <nav class="hs-layout-nav">
+        <div class="hs-layout-nav-title">LƯU TRÚ</div>
+        <ul class="hs-layout-nav-list">
+          <li>
+            <a
+              class="hs-layout-nav-link"
+              href="/modules/bookings/staff.html"
+              aria-current="page"
+              >Booking & khách tại quầy</a
+            >
+          </li>
+          <li><a class="hs-layout-nav-link" href="/">Nhận phòng</a></li>
+          <li>
+            <a class="hs-layout-nav-link" href="/modules/rooms/"
+              >Danh sách phòng</a
+            >
+          </li>
+          <li>
+            <a class="hs-layout-nav-link" href="/modules/bookings/index.html"
+              >Trang đặt phòng của khách</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="staff-sidebar-footer">
+        <a class="btn secondary" href="/login.html">Đăng nhập tài khoản khác</a>
+      </div>
+    </aside>
+    <div class="hs-layout-backdrop" aria-hidden="true"></div>
+    <main class="hs-layout-main" id="main">
+      <div class="hs-layout-content staff-container">
+        <div class="page-title">
+          <div>
+            <span class="eyebrow">QUẢN LÝ BOOKING</span>
+            <h1>Linh hoạt cho mỗi kỳ lưu trú</h1>
+            <p>
+              Đổi lịch cho khách đã đặt hoặc tạo booking khi khách tới trực
+              tiếp.
+            </p>
+          </div>
+          <span class="note-pill">Một booking · Một phòng</span>
+        </div>
+        <section id="auth-gate" class="card" hidden>
+          <h2 id="auth-title">Đăng nhập nhân viên</h2>
+          <p id="auth-message">
+            Bạn cần đăng nhập bằng tài khoản admin hoặc nhân viên để sử dụng màn
+            hình này.
+          </p>
+          <a class="btn primary" href="/login.html">Đến đăng nhập</a>
+        </section>
+        <div id="staff-workspace" hidden>
+          <div class="staff-tabs" role="tablist" aria-label="Nghiệp vụ booking">
+            <button
+              id="tab-change"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-change"
+            >
+              Đổi ngày / loại phòng</button
+            ><button
+              id="tab-walk"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-walk"
+              tabindex="-1"
+            >
+              Booking tại quầy
+            </button>
+          </div>
+          <section
+            id="panel-change"
+            role="tabpanel"
+            aria-labelledby="tab-change"
+          >
+            <section class="card">
+              <div class="section-title">
+                <span class="step">1</span>
+                <div>
+                  <h2>Tìm booking cần thay đổi</h2>
+                  <p>
+                    Nhập mã và email đã dùng khi đặt phòng. Chỉ đổi booking chưa
+                    nhận phòng.
+                  </p>
+                </div>
+              </div>
+              <form id="find-booking-form" class="staff-lookup">
+                <div class="field">
+                  <label for="find-code">Mã booking *</label
+                  ><input
+                    id="find-code"
+                    maxlength="32"
+                    autocomplete="off"
+                    required
+                    placeholder="Ví dụ: A1B2C3D4"
+                  />
+                </div>
+                <div class="field">
+                  <label for="find-email">Email đặt phòng *</label
+                  ><input
+                    id="find-email"
+                    type="email"
+                    maxlength="254"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <button class="btn primary" id="find-button" type="submit">
+                  Tìm booking
+                </button>
+              </form>
+              <div
+                id="find-message"
+                class="notice"
+                role="status"
+                aria-live="polite"
+                hidden
+              ></div>
+              <div id="current-booking" class="staff-summary" hidden></div>
+            </section>
+            <section id="change-section" class="card" hidden>
+              <div class="section-title">
+                <span class="step">2</span>
+                <div>
+                  <h2>Chọn lịch và loại phòng mới</h2>
+                  <p>Xem lại tổng tiền và chênh lệch trước khi xác nhận.</p>
+                </div>
+              </div>
+              <form id="change-form">
+                <fieldset id="change-fields">
+                  <div class="staff-grid">
+                    <div class="field">
+                      <label for="change-in">Ngày nhận mới *</label
+                      ><input id="change-in" type="date" required />
+                    </div>
+                    <div class="field">
+                      <label for="change-out">Ngày trả mới *</label
+                      ><input id="change-out" type="date" required />
+                    </div>
+                    <div class="field">
+                      <label for="change-type">Loại phòng mới *</label
+                      ><select id="change-type" required></select
+                      ><small id="change-type-hint"
+                        >Tải lại phòng phù hợp nếu đổi ngày.</small
+                      >
+                    </div>
+                  </div>
+                  <div class="staff-actions">
+                    <button
+                      class="btn secondary"
+                      id="change-rooms"
+                      type="button"
+                    >
+                      Kiểm tra loại phòng phù hợp</button
+                    ><button
+                      class="btn primary"
+                      id="change-preview-button"
+                      type="submit"
+                    >
+                      Xem giá thay đổi
+                    </button>
+                  </div>
+                </fieldset>
+              </form>
+              <div
+                id="change-message"
+                class="notice"
+                role="status"
+                aria-live="polite"
+                hidden
+              ></div>
+              <section
+                id="change-preview"
+                class="staff-preview"
+                aria-label="Đối chiếu trước và sau"
+                hidden
+              >
+                <h3>Kiểm tra trước khi lưu</h3>
+                <div id="change-comparison"></div>
+                <div id="change-difference" class="staff-difference"></div>
+                <label class="checkbox-label"
+                  ><input id="change-consent" type="checkbox" /><span
+                    >Tôi đã đối chiếu ngày, loại phòng và giá mới với
+                    khách.</span
+                  ></label
+                >
+                <p class="staff-caption">
+                  Chênh lệch này so sánh với tổng tiền booking cũ, chưa phải số
+                  tiền đã thu hoặc hoàn cho khách.
+                </p>
+                <button
+                  id="change-save"
+                  type="button"
+                  class="btn primary"
+                  disabled
+                >
+                  Xác nhận thay đổi
+                </button>
+              </section>
+              <section
+                id="change-success"
+                class="staff-success"
+                role="status"
+                tabindex="-1"
+                hidden
+              ></section>
+            </section>
+            <section id="history-section" class="card" hidden>
+              <h2>Lịch sử thay đổi</h2>
+              <p class="staff-caption">
+                Thông tin thay đổi được trả về cùng booking.
+              </p>
+              <div id="change-history"></div>
+            </section>
+          </section>
+          <section
+            id="panel-walk"
+            role="tabpanel"
+            aria-labelledby="tab-walk"
+            hidden
+          >
+            <section class="card">
+              <div class="section-title">
+                <span class="step">1</span>
+                <div>
+                  <h2>Khách tới trực tiếp</h2>
+                  <p>
+                    Ngày nhận mặc định hôm nay. Tìm phòng và xem giá trước khi
+                    tạo booking.
+                  </p>
+                </div>
+              </div>
+              <form id="walk-search-form">
+                <fieldset id="walk-search-fields">
+                  <div class="staff-grid">
+                    <div class="field">
+                      <label for="walk-in">Ngày nhận *</label
+                      ><input id="walk-in" type="date" required />
+                    </div>
+                    <div class="field">
+                      <label for="walk-out">Ngày trả *</label
+                      ><input id="walk-out" type="date" required />
+                    </div>
+                    <div class="field">
+                      <label for="walk-guests">Số khách *</label
+                      ><input
+                        id="walk-guests"
+                        type="number"
+                        value="1"
+                        min="1"
+                        max="100"
+                        step="1"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="btn primary"
+                    id="walk-search-button"
+                    type="submit"
+                  >
+                    Tìm phòng tại quầy
+                  </button>
+                </fieldset>
+              </form>
+              <div
+                id="walk-search-message"
+                class="notice"
+                role="status"
+                aria-live="polite"
+                hidden
+              ></div>
+              <div id="walk-results" class="staff-room-options"></div>
+            </section>
+            <section id="walk-details" class="card" hidden>
+              <div class="section-title">
+                <span class="step">2</span>
+                <div>
+                  <h2>Thông tin khách và báo giá</h2>
+                  <p>
+                    Giữ nguyên thông tin đã nhập nếu có lỗi để bạn kiểm tra lại.
+                  </p>
+                </div>
+              </div>
+              <div id="walk-quote" class="staff-summary"></div>
+              <form id="walk-form">
+                <fieldset id="walk-fields">
+                  <div class="staff-grid">
+                    <div class="field full">
+                      <label for="walk-name">Họ và tên *</label
+                      ><input
+                        id="walk-name"
+                        required
+                        maxlength="255"
+                        autocomplete="name"
+                      />
+                    </div>
+                    <div class="field">
+                      <label for="walk-phone">Điện thoại *</label
+                      ><input
+                        id="walk-phone"
+                        type="tel"
+                        required
+                        maxlength="10"
+                        pattern="0[35789][0-9]{8}"
+                        placeholder="0912345678"
+                        autocomplete="tel"
+                      />
+                    </div>
+                    <div class="field">
+                      <label for="walk-email"
+                        >Email
+                        <span class="optional">(không bắt buộc)</span></label
+                      ><input
+                        id="walk-email"
+                        type="email"
+                        maxlength="254"
+                        autocomplete="email"
+                      /><small>Chỉ nhập email thật do khách cung cấp.</small>
+                    </div>
+                  </div>
+                  <label class="checkbox-label"
+                    ><input id="walk-paid" type="checkbox" /><span
+                      >Đã thu đủ tiền của booking này.</span
+                    ></label
+                  ><label class="checkbox-label"
+                    ><input id="walk-consent" type="checkbox" required /><span
+                      >Tôi đã đối chiếu thông tin khách, ngày và báo giá.</span
+                    ></label
+                  >
+                  <div class="staff-actions">
+                    <button
+                      class="btn secondary"
+                      id="walk-requote"
+                      type="button"
+                    >
+                      Xem lại giá</button
+                    ><button class="btn primary" id="walk-create" type="submit">
+                      Tạo booking tại quầy
+                    </button>
+                  </div>
+                </fieldset>
+              </form>
+              <div
+                id="walk-message"
+                class="notice"
+                role="status"
+                aria-live="polite"
+                hidden
+              ></div>
+            </section>
+            <section
+              id="walk-success"
+              class="card staff-success"
+              role="status"
+              tabindex="-1"
+              hidden
+            >
+              <span class="eyebrow">ĐÃ TẠO BOOKING</span>
+              <h2>Lưu mã booking cho khách</h2>
+              <strong id="walk-code" class="staff-booking-code"></strong>
+              <div id="walk-receipt"></div>
+              <p id="walk-email-status" class="staff-caption"></p>
+              <div class="staff-actions">
+                <a id="walk-checkin" class="btn secondary" href="/"
+                  >Nhận phòng ở màn hình lễ tân ↗</a
+                ><button id="walk-new" type="button" class="btn primary">
+                  Tạo booking khác
+                </button>
+              </div>
+              <p class="staff-caption">
+                Mở màn hình lễ tân để chọn phòng và làm thủ tục. Liên kết này
+                chưa thay đổi trạng thái booking.
+              </p>
+            </section>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

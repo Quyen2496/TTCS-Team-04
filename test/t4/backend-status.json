@@ -1,0 +1,52 @@
+{
+  "base": "develop 5b04dd6; includes Phú 674f11e and later T3/T5 merges",
+  "mode": "Read-only runtime/source inspection; no MongoDB connection",
+  "checks": [
+    {
+      "name": "Cú pháp server.js",
+      "status": "blocked",
+      "evidence": "SyntaxError: Unexpected token '}'"
+    },
+    {
+      "name": "Cú pháp src/modules/bookings/booking.model.js",
+      "status": "blocked",
+      "evidence": "SyntaxError: Unexpected token '/'"
+    },
+    {
+      "name": "Cú pháp src/modules/bookings/booking.router.js",
+      "status": "pass",
+      "evidence": "Cú pháp hợp lệ."
+    },
+    {
+      "name": "Dòng thừa sau xử lý merge",
+      "status": "blocked",
+      "evidence": "8 dòng nhánh nằm trong mã thực thi."
+    },
+    {
+      "name": "Nạp model/controller booking",
+      "status": "blocked",
+      "evidence": "SyntaxError: Unexpected token '/'"
+    },
+    {
+      "name": "Service booking online trong source",
+      "status": "blocked",
+      "evidence": "Controller còn gọi createBookingService; service hiện không khai báo/export hàm này."
+    },
+    {
+      "name": "Import crypto cho walk-in",
+      "status": "blocked",
+      "evidence": "Dùng crypto.randomBytes; service chưa import node:crypto."
+    },
+    {
+      "name": "Auth/role cho modify và walk-in",
+      "status": "blocked",
+      "evidence": "Hai route mới hiện chưa gắn verifyToken/requireRoles."
+    },
+    {
+      "name": "Lịch sử thay đổi trong schema",
+      "status": "blocked",
+      "evidence": "Schema hiện chưa có changeHistory; modify chỉ $set ngày/loại/tiền."
+    }
+  ],
+  "readyForRealEndToEnd": false
+}

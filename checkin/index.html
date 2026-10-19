@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhận phòng - Homestay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1>Homestay</h1>
+        <p>Quản lý nhận phòng</p>
+      </div>
+      <div class="user">Lễ tân</div>
+    </header>
+
+    <main class="container">
+      <div class="page-title">
+        <div>
+          <h2>Nhận phòng</h2>
+          <p>Nhập thông tin khách và phòng để thực hiện nhận phòng.</p>
+        </div>
+        <span class="date" id="today"></span>
+      </div>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="step">1</span>
+          <div>
+            <h3>Chọn phòng</h3>
+            <p>Chọn phòng đang sẵn sàng để nhận khách.</p>
+          </div>
+        </div>
+
+        <div class="room-grid" id="roomList"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="step">2</span>
+          <div>
+            <h3>Thông tin khách</h3>
+            <p>Điền thông tin người nhận phòng.</p>
+          </div>
+        </div>
+
+        <form id="checkinForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="guestName">Họ và tên <b>*</b></label>
+              <input id="guestName" type="text" placeholder="Nhập họ và tên" autocomplete="name" required>
+              <small class="error" id="guestNameError"></small>
+            </div>
+
+            <div class="field">
+              <label for="phone">Số điện thoại <b>*</b></label>
+              <input id="phone" type="tel" placeholder="Ví dụ: 0987654321" autocomplete="tel" required>
+              <small class="error" id="phoneError"></small>
+            </div>
+
+            <div class="field">
+              <label for="idNumber">Số CCCD/CMND <b>*</b></label>
+              <input id="idNumber" type="text" placeholder="Nhập số CCCD/CMND" required>
+              <small class="error" id="idError"></small>
+            </div>
+
+            <div class="field">
+              <label for="guests">Số người ở <b>*</b></label>
+              <input id="guests" type="number" min="1" step="1" value="1" required>
+              <small class="error" id="guestsError"></small>
+            </div>
+
+            <div class="field">
+              <label for="checkinDate">Ngày nhận phòng <b>*</b></label>
+              <input id="checkinDate" type="date" required>
+              <small class="error" id="checkinDateError"></small>
+            </div>
+
+            <div class="field">
+              <label for="checkoutDate">Ngày trả phòng <b>*</b></label>
+              <input id="checkoutDate" type="date" required>
+              <small class="error" id="dateError"></small>
+            </div>
+
+          </div>
+
+          <div class="summary" id="summary">
+            <div>
+              <span>Phòng đã chọn</span>
+              <strong id="selectedRoom">Chưa chọn phòng</strong>
+            </div>
+            <div>
+              <span>Giá / đêm</span>
+              <strong id="selectedPrice">-</strong>
+            </div>
+            <div>
+              <span>Tổng số đêm</span>
+              <strong id="nights">-</strong>
+            </div>
+            <div class="total">
+              <span>Tạm tính</span>
+              <strong id="total">-</strong>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn secondary" id="resetBtn">Hủy</button>
+            <button type="submit" class="btn primary">Xác nhận nhận phòng</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <div>
+            <h3>Lưu trú và đặt phòng</h3>
+            <p>Theo dõi khách đang ở, khách sắp đến và hoàn tất trả phòng.</p>
+          </div>
+        </div>
+        <div class="stay-list" id="stayList"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
