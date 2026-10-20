@@ -3,7 +3,8 @@ require('dotenv').config({path:require('node:path').join(__dirname,'..','.env')}
 const P=require('../src/ai-provider'),D=require('../src/domain');
 (async()=>{
  const c=P.config();
- if(!c.ready){console.log('Chưa bật mô hình AI trong .env. Chạy npm run setup:ai nếu muốn kết nối Groq hoặc Ollama.');process.exitCode=1;return;}
+ if(!P.health().some(p=>p.configured)){console.log('Chưa bật mô hình AI trong .env. Chạy bash scripts/setup-ai-failover.sh để thiết lập Groq và Gemini.');process.exitCode=1;return;}
+ console.log('Chuỗi nhà cung cấp: '+P.health().map(p=>p.provider+': '+(p.configured?'đã cấu hình':'chưa có khoá')).join(' · '));
  console.log('Kiểm tra '+c.provider+' / '+c.model+' bằng dữ liệu giả lập; không kết nối database.');
  const result=await P.classify('Gợi ý phòng cho 2 người lớn và 2 trẻ em, ngân sách tối đa 1 triệu mỗi đêm, từ ngày mai trong 2 đêm.');
  if(result.fallback)throw Error('Bước hiểu câu hỏi chưa đạt: '+result.reason+(result.status?' (HTTP '+result.status+')':''));

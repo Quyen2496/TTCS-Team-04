@@ -1,0 +1,204 @@
+{
+  "at": "2026-10-19T17:37:28.804Z",
+  "database": "actual configured Atlas",
+  "readOnly": true,
+  "n": 3,
+  "samples": [
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 1,
+      "query": "ping",
+      "ms": 102.05,
+      "jsonBytes": 8,
+      "socketBytesReceived": 34,
+      "connectMs": 880
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 1,
+      "query": "minimal",
+      "ms": 104.28,
+      "jsonBytes": 15,
+      "socketBytesReceived": 267,
+      "connectMs": 880
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 1,
+      "query": "baselineOperational",
+      "ms": 7590.92,
+      "jsonBytes": 664562,
+      "socketBytesReceived": 690465,
+      "connectMs": 880,
+      "visibleMetrics": {
+        "rooms": 413,
+        "clean": 379,
+        "occupied": 14,
+        "pending": 0
+      }
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 1,
+      "query": "optimizedOperational",
+      "ms": 1187.41,
+      "jsonBytes": 100339,
+      "socketBytesReceived": 107612,
+      "connectMs": 880,
+      "visibleMetrics": {
+        "rooms": 413,
+        "clean": 379,
+        "occupied": 14,
+        "pending": 0
+      }
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 2,
+      "query": "ping",
+      "ms": 44.03,
+      "jsonBytes": 8,
+      "socketBytesReceived": 34,
+      "connectMs": 880
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 2,
+      "query": "minimal",
+      "ms": 49.7,
+      "jsonBytes": 15,
+      "socketBytesReceived": 267,
+      "connectMs": 880
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 2,
+      "query": "baselineOperational",
+      "ms": 7222.91,
+      "jsonBytes": 664562,
+      "socketBytesReceived": 690465,
+      "connectMs": 880,
+      "visibleMetrics": {
+        "rooms": 413,
+        "clean": 379,
+        "occupied": 14,
+        "pending": 0
+      }
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 2,
+      "query": "optimizedOperational",
+      "ms": 1299.49,
+      "jsonBytes": 100339,
+      "socketBytesReceived": 107612,
+      "connectMs": 880,
+      "visibleMetrics": {
+        "rooms": 413,
+        "clean": 379,
+        "occupied": 14,
+        "pending": 0
+      }
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 3,
+      "query": "ping",
+      "ms": 98.8,
+      "jsonBytes": 8,
+      "socketBytesReceived": 34,
+      "connectMs": 880
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 3,
+      "query": "minimal",
+      "ms": 101.2,
+      "jsonBytes": 15,
+      "socketBytesReceived": 267,
+      "connectMs": 880
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 3,
+      "query": "baselineOperational",
+      "ms": 7286.38,
+      "jsonBytes": 664562,
+      "socketBytesReceived": 690465,
+      "connectMs": 880,
+      "visibleMetrics": {
+        "rooms": 413,
+        "clean": 379,
+        "occupied": 14,
+        "pending": 0
+      }
+    },
+    {
+      "compressed": false,
+      "compressor": [
+        "none"
+      ],
+      "sample": 3,
+      "query": "optimizedOperational",
+      "ms": 1421.82,
+      "jsonBytes": 100339,
+      "socketBytesReceived": 107612,
+      "connectMs": 880,
+      "visibleMetrics": {
+        "rooms": 413,
+        "clean": 379,
+        "occupied": 14,
+        "pending": 0
+      }
+    },
+    {
+      "compressed": false,
+      "query": "explain",
+      "serverExecutionMs": 1,
+      "documentsExamined": 1
+    }
+  ],
+  "compressionProbe": {
+    "requested": [
+      "zlib"
+    ],
+    "negotiated": [
+      "none"
+    ],
+    "available": false
+  },
+  "sameVisibleMetrics": true
+}

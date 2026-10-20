@@ -1,0 +1,101 @@
+--- package/server.js
++++ current/server.js
+@@ -12,10 +12,11 @@
+  // Share only within one request; the next request always rechecks the account.
+  const readRaw=req=>{
+   if(!req.operationalRead){
+-   const screen=req.path==='/api/admin/state'?req.query.screen:undefined;
+-   const extra=req.path.includes('/invoices')?['invoices']:req.path.includes('/email-')?['emailJobs','schedulerRuns','mailWorkerRuns']:req.path.endsWith('/operations-status')?['backupRuns','backupLease','emailJobs']:[];
+-   const stateRequest=req.path==='/api/admin/state';
+-   const shape={screen,extra,users:A.can(req.user,'accounts.view')&&(req.path==='/api/admin/users'||stateRequest&&(!screen||screen==='users')),audit:A.can(req.user,'audit.view')&&stateRequest&&(!screen||screen==='audit')};
++   const routePath=A.requestPath(req),screen=routePath==='/api/admin/state'?req.query.screen:undefined;
++   const extra=routePath.includes('/invoices')?['invoices']:routePath.includes('/email-')?['emailJobs','schedulerRuns','mailWorkerRuns']:routePath.endsWith('/operations-status')?['backupRuns','backupLease','emailJobs']:[];
++   const stateRequest=routePath==='/api/admin/state';
++   const profile=routePath==='/api/reports/revenue'?'revenue':['/api/reports/occupancy','/api/reports/occupancy.csv','/api/admin/shortage-alerts','/api/admin/room-board'].includes(routePath)?'inventory':extra.length&&!routePath.includes('/bookings/')?'metadata':undefined;
++   const shape={screen,profile,extra,users:A.can(req.user,'accounts.view')&&(routePath==='/api/admin/users'||stateRequest&&(!screen||screen==='users')),audit:A.can(req.user,'audit.view')&&stateRequest&&(!screen||screen==='audit')};
+    req.operationalRead=Promise.resolve(store.readOperational?store.readOperational(shape):store.read()).then(s=>{A.upgrade(s);return s;});
+   }return req.operationalRead;
+  };
+@@ -141,7 +142,7 @@
+  if(!['mongo','file'].includes(mode))throw new Error('DATA_MODE phải là mongo hoặc file.');
+  const store=new Store({mode,uri:process.env.MONGODB_URI||'mongodb://127.0.0.1:27017/HOMESTAY_QUY_TEST',file:process.env.HOMESTAY_DATA_FILE||path.join(__dirname,'data/homestay.json')}),secret=process.env.JWT_SECRET;
+  try{
+-  await store.init();await store.mutate(s=>{D.upgradeData(s);A.upgrade(s);});
++  const existingOnly=process.argv.includes('--existing-data');await store.init({existingOnly});if(!existingOnly)await store.mutate(s=>{D.upgradeData(s);A.upgrade(s);});
+   if(!secret||secret==='replace-with-a-long-random-secret')throw new Error('Hãy chạy bash scripts/setup.sh để tạo JWT_SECRET riêng.');
+   if(process.env.NODE_ENV==='production'){
+    if(mode!=='mongo'||secret.length<32)throw Error('Production cần MongoDB transaction và JWT_SECRET riêng tối thiểu 32 ký tự.');
+--- package/src/store.js
++++ current/src/store.js
+@@ -24,18 +24,19 @@
+ }
+ class Store {
+  constructor({mode='mongo',uri,file}){Object.assign(this,{mode,uri,file});this.queue=Promise.resolve();}
+- async init(){
++ async init({existingOnly=false}={}){
+   if(this.mode==='file'){
+-   await fs.mkdir(path.dirname(this.file),{recursive:true});try{this.state=JSON.parse(await fs.readFile(this.file,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;this.state=D.seedData();await this.saveFile(this.state);}
++   await fs.mkdir(path.dirname(this.file),{recursive:true});try{this.state=JSON.parse(await fs.readFile(this.file,'utf8'));}catch(e){if(e.code!=='ENOENT'||existingOnly)throw e;this.state=D.seedData();await this.saveFile(this.state);}
+   }else{
+    const mongoose=require('mongoose');await mongoose.connect(this.uri,{serverSelectionTimeoutMS:6000});this.mongoose=mongoose;const db=mongoose.connection;
+    this.collection=db.collection('homestay_state');this.nights=db.collection('homestay_room_nights');this.invoices=db.collection('homestay_invoices');
++   if(existingOnly){if(!await this.collection.findOne({_id:'state'},{projection:{_id:1}}))throw Error('STATE_NOT_FOUND');return;}
+    await this.invoices.createIndex({year:1,sequence:1},{unique:true,name:'unique_invoice_number'});
+    await this.invoices.createIndex({bookingId:1},{unique:true,name:'unique_invoice_booking'});
+    await this.nights.createIndex({roomId:1,stayDate:1},{unique:true,name:'unique_room_night'});
+    await this.collection.updateOne({_id:'state'},{$setOnInsert:{revision:0,data:D.seedData()}},{upsert:true});
+   }
+-  await this.mutate(s=>{A.upgrade(s);S4.upgrade(s);s.emailJobs||=[];s.schedulerRuns||=[];});
++  if(!existingOnly)await this.mutate(s=>{A.upgrade(s);S4.upgrade(s);s.emailJobs||=[];s.schedulerRuns||=[];});
+  }
+  async saveFile(data){roomNights(data);const temp=this.file+'.tmp';await fs.writeFile(temp,JSON.stringify(data,null,2));await fs.rename(temp,this.file);}
+  async read(){return require('./ai-telemetry').time(this.mode==='file'?'file_read':'atlas_read',async()=>this.mode==='file'?structuredClone(this.state):(await this.collection.findOne({_id:'state'})).data);}
+--- package/src/read-model.js
++++ current/src/read-model.js
+@@ -6,21 +6,44 @@
+  overview:['rooms','roomTypes','bookings','amenities'],
+  owner:['roomTypes'],reports:['roomTypes'],'revenue-today':['roomTypes'],
+  homestays:[],customers:[],users:[],audit:[],emails:[],invoices:[],system:[],
+- reception:business,board:business,housekeeping:business,rooms:business,
++ reception:business,board:business,housekeeping:business,rooms:['rooms','roomTypes','amenities','pricingCalendar'],
+  types:business,amenities:business,settings:business
+ };
+ const userFields=['_id','username','email','role','active','permissions','homestayIds','fullName','phone','address','nationality','birthDate','gender'];
++const typeLabel=['_id','homestayId','name','active'];
++const roomStock=['_id','homestayId','roomTypeId','roomNumber','floor','status','incidents'];
++const bookingStock=['_id','homestayId','roomTypeId','roomId','bookingCode','guestName','status','checkIn','checkOut','holdExpiresAt','roomSegments','settlement','actualCheckOut'];
++const profiles={
++ metadata:{fields:[],columns:{}},
++ revenue:{fields:['roomTypes','bookings'],columns:{roomTypes:typeLabel,bookings:['_id','homestayId','roomTypeId','status','actualCheckOut','settlement']}},
++ inventory:{fields:['rooms','roomTypes','bookings'],columns:{rooms:roomStock,roomTypes:typeLabel,bookings:bookingStock}}
++};
++const screenColumns={
++ overview:{rooms:['_id','homestayId','roomTypeId','status'],roomTypes:typeLabel,bookings:['_id','homestayId','status','holdExpiresAt']},
++ owner:{roomTypes:typeLabel},reports:{roomTypes:typeLabel},'revenue-today':{roomTypes:typeLabel},
++ rooms:{roomTypes:[...typeLabel,'photo','images']},
++ reception:{rooms:roomStock,roomTypes:[...typeLabel,'standardCapacity','maxCapacity','weekdayPrice','weekendPrice','saturdayPrice','sundayPrice','eventPrice']}
++};
++// These fields were already removed from every bootstrap response. Keep full
++// booking detail/ledgers, but do not transfer nested idempotency snapshots.
++const internalBooking=['fingerprint','requestKey','ip','changeRequests','operationRequests'];
++const columnsFor=options=>profiles[options.profile]?.columns||screenColumns[options.screen]||{};
++const select=(row,fields)=>Object.fromEntries(fields.filter(k=>row[k]!==undefined).map(k=>[k,row[k]]));
+ function defaults(data={}){return {users:[],homestays:[],rooms:[],roomTypes:[],bookings:[],amenities:[],uploads:[],audit:[],aiConversations:[],settings:{},pricingCalendar:{},...data};}
+-function fieldsFor({screen,extra=[]}={}){return [...new Set([...base,...(screen&&Object.hasOwn(screens,screen)?screens[screen]:business),...extra])];}
++function fieldsFor({screen,profile,extra=[]}={}){return [...new Set([...base,...(profiles[profile]?.fields??(screen&&Object.hasOwn(screens,screen)?screens[screen]:business)),...extra])];}
+ function safeAccount(u){return Object.fromEntries(userFields.filter(k=>u[k]!==undefined).map(k=>[k,u[k]]));}
+ function operationalProjection(options={}){
+  const projection=Object.fromEntries(fieldsFor(options).map(k=>['data.'+k,1]));
++ for(const [key,fields]of Object.entries(columnsFor(options)))projection['data.'+key]={$map:{input:{$ifNull:['$data.'+key,[]]},as:'row',in:Object.fromEntries(fields.map(k=>[k,'$$row.'+k]))}};
++ if(options.screen&&projection['data.bookings']===1)projection['data.bookings']={$map:{input:{$ifNull:['$data.bookings',[]]},as:'row',in:{$arrayToObject:{$filter:{input:{$objectToArray:'$$row'},as:'field',cond:{$not:[{$in:['$$field.k',internalBooking]}]}}}}}};
+  if(options.users)projection['data.users']={$map:{input:{$ifNull:['$data.users',[]]},as:'user',in:Object.fromEntries(userFields.map(k=>[k,'$$user.'+k]))}};
+  if(options.audit)projection['data.audit']=1;
+  return projection;
+ }
+ function fromFile(state,options={}){
+  const data=Object.fromEntries(fieldsFor(options).filter(k=>state[k]!==undefined).map(k=>[k,state[k]]));
++ for(const [key,fields]of Object.entries(columnsFor(options)))data[key]=(data[key]||[]).map(row=>select(row,fields));
++ if(options.screen&&data.bookings&&!columnsFor(options).bookings)data.bookings=data.bookings.map(row=>Object.fromEntries(Object.entries(row).filter(([k])=>!internalBooking.includes(k))));
+  if(options.users)data.users=(state.users||[]).map(safeAccount);
+  if(options.audit)data.audit=state.audit||[];
+  return defaults(structuredClone(data));

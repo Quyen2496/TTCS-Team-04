@@ -136,7 +136,16 @@
     $("policy-content").innerHTML = `<p>Nhận phòng từ <strong>${esc(s.checkInTime)}</strong> · Trả phòng trước <strong>${esc(s.checkOutTime)}</strong>.</p><p>Phụ thu: ${esc(money(s.extraGuestPerNight))}/người/đêm khi vượt sức chứa tiêu chuẩn.${extraCount ? ` Kỳ lưu trú này có ${extraCount} khách vượt chuẩn trong ${q.numberOfNights} đêm.` : ""}</p><ul>${s.cancellationRules.map(r => `<li>Huỷ trước ít nhất ${r.hoursBefore} giờ: hoàn ${r.refundPercent}% tiền cọc đã ghi nhận.</li>`).join("")}</ul>`;
     $("selection-summary").innerHTML = `<strong>${esc(q.roomTypeName)}</strong>${dateLabel(q.checkIn)} – ${dateLabel(q.checkOut)} · ${q.numberOfNights} đêm · ${q.guestCount} khách · Tổng tiền ${esc(money(q.totalAmount))}`;
   }
-  function continueBooking() { if (!state.quote || state.busy || state.uncertain) return; $("booking-section").hidden = false; notice("booking-message", ""); progress(3); focusSection("booking-title"); }
+  let checkingLogin=false;
+  function loginForSelection(){sessionStorage.removeItem('hs_token');sessionStorage.removeItem('hs_user');HS.bookingReturn.login({roomTypeId:state.selected.roomTypeId,...(state.criteria.homestayId?{homestayId:state.criteria.homestayId}:{}),checkIn:state.criteria.checkIn,checkOut:state.criteria.checkOut,guestCount:state.criteria.guestCount});}
+  async function continueBooking() {
+    if (!state.quote || state.busy || state.uncertain || checkingLogin) return;
+    if(!sessionStorage.getItem('hs_token')){loginForSelection();return;}
+    const quoteAtStart=state.quote;checkingLogin=true;$("continue-button").disabled=true;
+    try{await HS.api('/api/auth/me');if(state.quote!==quoteAtStart)return;$("booking-section").hidden=false;notice("booking-message", "");progress(3);focusSection("booking-title");}
+    catch(error){if(state.quote!==quoteAtStart)return;if(error.status===401)loginForSelection();else notice('quote-message',error.message,'error');}
+    finally{checkingLogin=false;$("continue-button").disabled=!state.quote;}
+  }
   function randomKey() { const bytes = new Uint8Array(16); crypto.getRandomValues(bytes); return Array.from(bytes, b => b.toString(16).padStart(2, "0")).join(""); }
   function setBookingLock(locked) {
     for (const el of searchForm.elements) el.disabled = locked;
@@ -166,6 +175,7 @@
   }
   async function book(event) {
     event.preventDefault(); if (state.busy || !state.quote) return;
+    if(!sessionStorage.getItem('hs_token')){loginForSelection();return;}
     let body;
     if (state.uncertain) body = state.pending.body;
     else {
@@ -182,6 +192,7 @@
       if (!error.status || error.status >= 500) { state.uncertain = true; notice("booking-message", "Chưa xác nhận được yêu cầu đã được lưu hay chưa. Hãy thử lại cùng yêu cầu để tránh đặt trùng.", "warning"); }
       else {
         state.uncertain = false;
+        if(error.status===401){loginForSelection();return;}
         notice("booking-message", `${error.message}${error.retryAfter ? ` Bạn có thể thử lại sau khoảng ${Math.ceil(error.retryAfter / 60)} phút.` : ""}`, error.status === 429 ? "warning" : "error");
         if (error.status === 409) {
           state.quote = null; $("policyAccepted").checked = false; $("continue-button").disabled = true; $("booking-button").disabled = true;
@@ -223,5 +234,5 @@
     else notice("search-message", "Loại phòng trong liên kết không hợp lệ. Bạn có thể tìm trong tất cả loại phòng.", "warning");
   }
   if(sessionStorage.getItem('hs_token'))HS.api('/api/auth/me').then(u=>{if(u.role==='guest'){$('guestName').value=u.fullName||'';$('phone').value=u.phone||'';$('email').value=u.email;$('email').readOnly=true;if($('guestAddress'))$('guestAddress').value=u.address||'';if($('nationality'))$('nationality').value=u.nationality||'';HS.api('/api/guest/profile').then(p=>{for(const k of ['documentType','idNumber','birthDate','gender'])if($(k)&&p[k])$(k).value=p[k];}).catch(()=>{});}}).catch(()=>{});
-  if(state.filterTypeId) search().then(()=>{if(state.rooms.length===1)selectRoom(state.rooms[0].roomTypeId);});else if(params.has("checkIn")&&params.has("checkOut")) search();
+  if(state.filterTypeId) search().then(async()=>{if(state.rooms.length===1){await selectRoom(state.rooms[0].roomTypeId);if(params.get('resume')==='booking'&&state.quote&&sessionStorage.getItem('hs_token'))await continueBooking();}});else if(params.has("checkIn")&&params.has("checkOut")) search();
 })();

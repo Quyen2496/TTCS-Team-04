@@ -10,18 +10,47 @@ function validate(state){
 }
 function encode(payload,env){const iv=crypto.randomBytes(12),cipher=crypto.createCipheriv('aes-256-gcm',key(env),iv),bytes=Buffer.concat([cipher.update(zlib.gzipSync(Buffer.from(JSON.stringify(payload)))),cipher.final()]);return Buffer.concat([Buffer.from('HSBACKUP2\n'),iv,cipher.getAuthTag(),bytes]);}
 function decode(bytes,env){if(bytes.subarray(0,10).toString()!=='HSBACKUP2\n')throw Error('Không đúng định dạng sao lưu HOMESTAY.');const decipher=crypto.createDecipheriv('aes-256-gcm',key(env),bytes.subarray(10,22));decipher.setAuthTag(bytes.subarray(22,38));const zipped=Buffer.concat([decipher.update(bytes.subarray(38)),decipher.final()]);const data=JSON.parse(zlib.gunzipSync(zipped,{maxOutputLength:256*1024*1024}));validate(data.state);if(data.sha256!==crypto.createHash('sha256').update(JSON.stringify(data.state)).digest('hex'))throw Error('Sao lưu không khớp checksum.');return data;}
-async function backup(store,{directory=path.join(__dirname,'../backups/database'),env=process.env,now=Date.now()}={}){
+async function writeBackup(store,{directory=path.join(__dirname,'../backups/database'),env=process.env,now=Date.now()}={}){
  const started=performance.now(),state=await store.read(),summary=validate(state),payload={format:2,createdAt:new Date(now).toISOString(),version:require('../package.json').version,summary,state,sha256:crypto.createHash('sha256').update(JSON.stringify(state)).digest('hex')},bytes=encode(payload,env);
  await fs.mkdir(directory,{recursive:true,mode:0o700});const name='homestay-'+new Date(now).toISOString().replace(/[:.]/g,'-')+'-'+crypto.randomBytes(3).toString('hex')+'.hsbackup',file=path.join(directory,name),temp=file+'.tmp';
  try{await fs.writeFile(temp,bytes,{flag:'wx',mode:0o600});decode(await fs.readFile(temp),env);await fs.rename(temp,file);}finally{await fs.rm(temp,{force:true});}
  const names=(await fs.readdir(directory)).filter(n=>/^homestay-.*\.hsbackup$/.test(n)).sort().reverse();for(const old of names.slice(7))await fs.unlink(path.join(directory,old));
  return {name,...summary,bytes:bytes.length,durationMs:Math.round(performance.now()-started),at:new Date(now).toISOString(),status:'SUCCESS'};
 }
+const activeStores=new WeakSet();
+async function backup(store,options={}){
+ if(activeStores.has(store))throw new D.AppError(409,'BACKUP_BUSY','Một bản sao lưu đang được tạo. Bạn chờ hoàn tất rồi thử lại nhé.');
+ activeStores.add(store);const id=crypto.randomUUID(),now=options.now??Date.now();let claimed=false;
+ try{
+  await store.mutate(s=>{if(s.backupLease&&Date.parse(s.backupLease.until)>now)throw new D.AppError(409,'BACKUP_BUSY','Một bản sao lưu đang được tạo.');s.backupLease={id,until:new Date(now+600000).toISOString()};});claimed=true;
+  return await writeBackup(store,options);
+ }finally{
+  try{if(claimed)await store.mutate(s=>{if(s.backupLease?.id===id)delete s.backupLease;});}finally{activeStores.delete(store);}
+ }
+}
+async function manual(store,{requestKey,actor,env=process.env,directory}={}){
+ if(!/^[a-f0-9]{32}$/.test(requestKey||''))D.fail('Yêu cầu sao lưu chưa hợp lệ.');
+ const run=await store.mutate(s=>{
+  s.backupRuns||=[];const previous=s.backupRuns.find(r=>r.kind==='MANUAL'&&r.requestKey===requestKey&&r.actor===actor);
+  if(previous)return {previous:structuredClone(previous)};
+  if(s.backupRuns.some(r=>r.status==='RUNNING'&&Date.parse(r.leaseUntil)>Date.now())||s.backupLease&&Date.parse(s.backupLease.until)>Date.now())throw new D.AppError(409,'BACKUP_BUSY','Đang sao lưu. Bạn chờ hoàn tất nhé.');
+  const row={_id:D.id(),kind:'MANUAL',actor,requestKey,status:'RUNNING',at:new Date().toISOString(),leaseUntil:new Date(Date.now()+600000).toISOString()};s.backupRuns.push(row);s.backupRuns=s.backupRuns.slice(-50);return {row:structuredClone(row)};
+ });
+ if(run.previous)return run.previous;
+ try{
+  const result=await backup(store,{env,directory:directory||env.BACKUP_DIR||undefined});
+  return await store.mutate(s=>{const row=s.backupRuns.find(r=>r._id===run.row._id);Object.assign(row,result);delete row.leaseUntil;D.log(s,actor,'MANUAL_BACKUP',{name:result.name});return structuredClone(row);});
+ }catch(error){
+  await store.mutate(s=>{const row=s.backupRuns.find(r=>r._id===run.row._id);if(row){row.status='FAILED';row.error='Chưa sao lưu được. Kiểm tra thư mục, dung lượng và khoá mã hoá.';delete row.leaseUntil;}});
+  if(error instanceof D.AppError)throw error;
+  throw new D.AppError(503,'BACKUP_FAILED','Chưa sao lưu được. Kiểm tra thư mục, dung lượng và khoá mã hoá.');
+ }
+}
 function createScheduler(store,{env=process.env,directory,now=()=>Date.now()}={}){let busy=false;return {async tick(){
  if(busy||env.BACKUP_ENABLED!=='true')return;const day=S.localDate(now()),clock=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(now()));
- if(clock<'02:00')return;const claim=await store.mutate(s=>{s.backupRuns||=[];if(s.backupRuns.some(r=>r.day===day&&(r.status==='SUCCESS'||r.status==='RUNNING'&&Date.parse(r.leaseUntil)>now())))return false;s.backupRuns.push({day,status:'RUNNING',at:new Date(now()).toISOString(),leaseUntil:new Date(now()+600000).toISOString()});s.backupRuns=s.backupRuns.slice(-30);return true;});if(!claim)return;
- busy=true;try{const result=await backup(store,{env,directory:directory||env.BACKUP_DIR||undefined,now:now()});await store.mutate(s=>{const row=s.backupRuns.findLast(r=>r.day===day&&r.status==='RUNNING');Object.assign(row,result);delete row.leaseUntil;});}
- catch{await store.mutate(s=>{const row=s.backupRuns.findLast(r=>r.day===day&&r.status==='RUNNING');Object.assign(row,{status:'FAILED',error:'Sao lưu thất bại; kiểm tra thư mục, dung lượng và khoá mã hoá.'});delete row.leaseUntil;});throw Error('Sao lưu thất bại.');}finally{busy=false;}
+ if(clock<'02:00')return;const claim=await store.mutate(s=>{s.backupRuns||=[];if(s.backupRuns.some(r=>r.kind!=='MANUAL'&&r.day===day&&(r.status==='SUCCESS'||r.status==='RUNNING'&&Date.parse(r.leaseUntil)>now())))return false;s.backupRuns.push({day,kind:'AUTO',status:'RUNNING',at:new Date(now()).toISOString(),leaseUntil:new Date(now()+600000).toISOString()});s.backupRuns=s.backupRuns.slice(-30);return true;});if(!claim)return;
+ busy=true;try{const result=await backup(store,{env,directory:directory||env.BACKUP_DIR||undefined,now:now()});await store.mutate(s=>{const row=s.backupRuns.findLast(r=>r.kind!=='MANUAL'&&r.day===day&&r.status==='RUNNING');Object.assign(row,result);delete row.leaseUntil;});}
+ catch{await store.mutate(s=>{const row=s.backupRuns.findLast(r=>r.kind!=='MANUAL'&&r.day===day&&r.status==='RUNNING');Object.assign(row,{status:'FAILED',error:'Sao lưu thất bại; kiểm tra thư mục, dung lượng và khoá mã hoá.'});delete row.leaseUntil;});throw Error('Sao lưu thất bại.');}finally{busy=false;}
  }};}
 async function restoreToQA(file,target,{env=process.env}={}){
  const started=performance.now();if(!/^HOMESTAY_(QA|DEMO)(?:[_-].*)?$/i.test(path.basename(path.dirname(target)))||!target.endsWith('.json'))throw Error('Chỉ phục hồi vào thư mục HOMESTAY_QA hoặc HOMESTAY_DEMO riêng.');
@@ -41,4 +70,4 @@ async function restoreMongoToQA(file,uri,{env=process.env}={}){
   const summary=validate((await collection.findOne({_id:'state'})).data);return {summary,roomNights:await nights.countDocuments(),invoiceDocuments:await invoices.countDocuments(),durationMs:Math.round(performance.now()-started)};
  }finally{await client.close();}
 }
-module.exports={validate,encode,decode,backup,createScheduler,restoreToQA,restoreMongoToQA};
+module.exports={validate,encode,decode,backup,manual,createScheduler,restoreToQA,restoreMongoToQA};

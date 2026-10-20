@@ -1,0 +1,1186 @@
+{
+  "at": "2026-10-19T17:54:53.713Z",
+  "label": "baseline",
+  "realBrowser": true,
+  "database": "actual Atlas via localhost",
+  "role": "admin",
+  "runtime": {
+    "build": "36172b4c8e3ff69b",
+    "startedAt": "2026-10-19T17:40:30.338Z"
+  },
+  "questions": [
+    "Tổng quan homestay",
+    "Khách đến hôm nay",
+    "Gợi ý việc cần xử lý",
+    "Nhìn từ các đặt phòng đang có, bạn giúp mình đánh giá rủi ro vận hành cho ca trực sắp tới nhé."
+  ],
+  "samples": [
+    {
+      "kind": "open-page",
+      "sample": 1,
+      "uiMs": 15487,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=327.27, authentication_1;dur=327.73, atlas_read_2;dur=13519.06, backend_total_3;dur=13849.91",
+          "ms": 13852.082,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=287.54, authentication_1;dur=288.04, atlas_identity_2;dur=413.11, backend_total_3;dur=701.34",
+          "ms": 703.444,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=313.42, authentication_1;dur=313.79, atlas_identity_2;dur=501.58, backend_total_3;dur=816.28",
+          "ms": 817.877,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-page",
+      "sample": 2,
+      "uiMs": 15689,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=384.5, authentication_1;dur=384.94, atlas_read_2;dur=13932.61, backend_total_3;dur=14320.77",
+          "ms": 14323.624,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=291.02, authentication_1;dur=291.3, atlas_identity_2;dur=325.4, backend_total_3;dur=616.82",
+          "ms": 618.956,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=288.68, authentication_1;dur=288.93, atlas_identity_2;dur=391.6, backend_total_3;dur=680.7",
+          "ms": 682.378,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-page",
+      "sample": 3,
+      "uiMs": 15718,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=289.36, authentication_1;dur=290.15, atlas_read_2;dur=13971.76, backend_total_3;dur=14264.45",
+          "ms": 14266.591,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=299.02, authentication_1;dur=299.37, atlas_identity_2;dur=373.33, backend_total_3;dur=672.86",
+          "ms": 674.729,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=326.42, authentication_1;dur=326.71, atlas_identity_2;dur=394.25, backend_total_3;dur=721.2",
+          "ms": 723.409,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-page",
+      "sample": 4,
+      "uiMs": 15604,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=282.99, authentication_1;dur=283.47, atlas_read_2;dur=13956.13, backend_total_3;dur=14241.74",
+          "ms": 14244.128,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.63, authentication_1;dur=284.01, atlas_identity_2;dur=324.38, backend_total_3;dur=608.56",
+          "ms": 612.328,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.38, authentication_1;dur=283.81, atlas_identity_2;dur=408.79, backend_total_3;dur=692.86",
+          "ms": 694.752,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-page",
+      "sample": 5,
+      "uiMs": 15736,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=291.52, authentication_1;dur=292, atlas_read_2;dur=14147.11, backend_total_3;dur=14441.49",
+          "ms": 14442.92,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.12, authentication_1;dur=283.46, atlas_identity_2;dur=325.71, backend_total_3;dur=609.37",
+          "ms": 611.596,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.49, authentication_1;dur=283.97, atlas_identity_2;dur=351.99, backend_total_3;dur=636.22",
+          "ms": 638.036,
+          "success": true,
+          "messages": 2
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=286.02, authentication_1;dur=286.39, atlas_identity_2;dur=404.1, backend_total_3;dur=690.67",
+          "ms": 692.445,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-old",
+      "sample": 1,
+      "uiMs": 716,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=282.11, authentication_1;dur=282.46, atlas_identity_2;dur=393.92, backend_total_3;dur=676.73",
+          "ms": 679.065,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-old",
+      "sample": 2,
+      "uiMs": 747,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=286.15, authentication_1;dur=286.62, atlas_identity_2;dur=424.17, backend_total_3;dur=710.97",
+          "ms": 712.712,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-old",
+      "sample": 3,
+      "uiMs": 734,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=294.88, authentication_1;dur=295.48, atlas_identity_2;dur=393.42, backend_total_3;dur=689.22",
+          "ms": 691.66,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-old",
+      "sample": 4,
+      "uiMs": 709,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.16, authentication_1;dur=283.51, atlas_identity_2;dur=391.67, backend_total_3;dur=675.35",
+          "ms": 676.771,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "open-old",
+      "sample": 5,
+      "uiMs": 699,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=281.05, authentication_1;dur=281.31, atlas_identity_2;dur=393.22, backend_total_3;dur=674.67",
+          "ms": 676.112,
+          "success": true,
+          "messages": 2
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "create-thread",
+      "sample": 1,
+      "uiMs": 870,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "POST",
+          "status": 201,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=285.49, authentication_1;dur=286.07, atlas_conversation_write_2;dur=554.06, backend_total_3;dur=840.34",
+          "ms": 845.008,
+          "success": true
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-1",
+      "sample": 1,
+      "uiMs": 41949,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=289.16, authentication_1;dur=293.24, atlas_read_2;dur=13898.79, atlas_write_3;dur=27682.31, backend_total_4;dur=41886.33",
+          "ms": 41895.257,
+          "success": true,
+          "result": {
+            "intent": "overview",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-2",
+      "sample": 1,
+      "uiMs": 42767,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=405.58, authentication_1;dur=406.32, atlas_read_2;dur=14357.61, atlas_write_3;dur=27964.88, backend_total_4;dur=42731.32",
+          "ms": 42734.357,
+          "success": true,
+          "result": {
+            "intent": "arrivals",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-3",
+      "sample": 1,
+      "uiMs": 43022,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=448.69, authentication_1;dur=449.1, atlas_read_2;dur=14388.92, atlas_write_3;dur=28134.88, backend_total_4;dur=42975.65",
+          "ms": 42977.817,
+          "success": true,
+          "result": {
+            "intent": "alerts",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-4",
+      "sample": 1,
+      "uiMs": 42473,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=364.36, authentication_1;dur=364.75, atlas_read_2;dur=13948.45, atlas_write_3;dur=28108.58, backend_total_4;dur=42429.92",
+          "ms": 42432.253,
+          "success": true,
+          "result": {
+            "intent": "policy",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "reload-history",
+      "sample": 1,
+      "uiMs": 15480,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=326.36, authentication_1;dur=327.27, atlas_read_2;dur=13704.72, backend_total_3;dur=14035.37",
+          "ms": 14038.892,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=282.55, authentication_1;dur=283, atlas_identity_2;dur=327.85, backend_total_3;dur=611.02",
+          "ms": 614.306,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=281.69, authentication_1;dur=282, atlas_identity_2;dur=436.65, backend_total_3;dur=719.16",
+          "ms": 721.289,
+          "success": true,
+          "messages": 8
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "DELETE",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.25, authentication_1;dur=283.74, atlas_conversation_write_2;dur=584.94, backend_total_3;dur=869.4"
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "create-thread",
+      "sample": 2,
+      "uiMs": 872,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "POST",
+          "status": 201,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=289.94, authentication_1;dur=290.47, atlas_conversation_write_2;dur=532.04, backend_total_3;dur=822.78",
+          "ms": 825.639,
+          "success": true
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-1",
+      "sample": 2,
+      "uiMs": 42221,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.18, authentication_1;dur=283.49, atlas_read_2;dur=13878.02, atlas_write_3;dur=28005.24, backend_total_4;dur=42175.68",
+          "ms": 42177.529,
+          "success": true,
+          "result": {
+            "intent": "overview",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-2",
+      "sample": 2,
+      "uiMs": 42330,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=331.83, authentication_1;dur=332.51, atlas_read_2;dur=13953.54, atlas_write_3;dur=27996.06, backend_total_4;dur=42287.57",
+          "ms": 42290.345,
+          "success": true,
+          "result": {
+            "intent": "arrivals",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-3",
+      "sample": 2,
+      "uiMs": 42149,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=453.69, authentication_1;dur=454.23, atlas_read_2;dur=13911.5, atlas_write_3;dur=27726.09, backend_total_4;dur=42095.25",
+          "ms": 42098.234,
+          "success": true,
+          "result": {
+            "intent": "alerts",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-4",
+      "sample": 2,
+      "uiMs": 42500,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=336.76, authentication_1;dur=337.63, atlas_read_2;dur=13635.36, atlas_write_3;dur=28479.18, backend_total_4;dur=42454.26",
+          "ms": 42457.315,
+          "success": true,
+          "result": {
+            "intent": "policy",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "reload-history",
+      "sample": 2,
+      "uiMs": 16472,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=448.51, authentication_1;dur=449.04, atlas_read_2;dur=14563.65, backend_total_3;dur=15015.35",
+          "ms": 15017.486,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=282.79, authentication_1;dur=283.15, atlas_identity_2;dur=334.23, backend_total_3;dur=617.51",
+          "ms": 619.392,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.95, authentication_1;dur=284.85, atlas_identity_2;dur=438.94, backend_total_3;dur=724.37",
+          "ms": 725.999,
+          "success": true,
+          "messages": 8
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "DELETE",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=285.09, authentication_1;dur=285.45, atlas_conversation_write_2;dur=582.8, backend_total_3;dur=868.45"
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "create-thread",
+      "sample": 3,
+      "uiMs": 852,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "POST",
+          "status": 201,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=284.3, authentication_1;dur=284.71, atlas_conversation_write_2;dur=524.71, backend_total_3;dur=809.58",
+          "ms": 811.731,
+          "success": true
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-1",
+      "sample": 3,
+      "uiMs": 42735,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=333.56, authentication_1;dur=334.07, atlas_read_2;dur=13812.89, atlas_write_3;dur=28240.15, backend_total_4;dur=42388.63",
+          "ms": 42390.881,
+          "success": true,
+          "result": {
+            "intent": "overview",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-2",
+      "sample": 3,
+      "uiMs": 43193,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=345, authentication_1;dur=345.39, atlas_read_2;dur=14399.67, atlas_write_3;dur=28409.4, backend_total_4;dur=43155.58",
+          "ms": 43157.697,
+          "success": true,
+          "result": {
+            "intent": "arrivals",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-3",
+      "sample": 3,
+      "uiMs": 42957,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=390.02, authentication_1;dur=390.53, atlas_read_2;dur=14443.67, atlas_write_3;dur=28080.41, backend_total_4;dur=42916.1",
+          "ms": 42918.398,
+          "success": true,
+          "result": {
+            "intent": "alerts",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-4",
+      "sample": 3,
+      "uiMs": 42821,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=419.32, authentication_1;dur=419.68, atlas_read_2;dur=14214.45, atlas_write_3;dur=28116.22, backend_total_4;dur=42751.78",
+          "ms": 42763.898,
+          "success": true,
+          "result": {
+            "intent": "policy",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "reload-history",
+      "sample": 3,
+      "uiMs": 16272,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=324.9, authentication_1;dur=325.93, atlas_read_2;dur=13719.98, backend_total_3;dur=14053.05",
+          "ms": 14056.519,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=327.71, authentication_1;dur=327.98, atlas_identity_2;dur=411.23, backend_total_3;dur=739.34",
+          "ms": 741.547,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=284.43, authentication_1;dur=284.7, atlas_identity_2;dur=444.92, backend_total_3;dur=729.96",
+          "ms": 731.794,
+          "success": true,
+          "messages": 8
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "DELETE",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=325.57, authentication_1;dur=325.84, atlas_conversation_write_2;dur=581.87, backend_total_3;dur=907.93"
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "create-thread",
+      "sample": 4,
+      "uiMs": 5085,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "POST",
+          "status": 201,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=402.16, authentication_1;dur=402.79, atlas_conversation_write_2;dur=741.05, backend_total_3;dur=1143.97",
+          "ms": 1146.416,
+          "success": true
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-1",
+      "sample": 4,
+      "uiMs": 43944,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=325.28, authentication_1;dur=325.61, atlas_read_2;dur=13664.67, atlas_write_3;dur=27595.69, backend_total_4;dur=41587",
+          "ms": 41589.282,
+          "success": true,
+          "result": {
+            "intent": "overview",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-2",
+      "sample": 4,
+      "uiMs": 44161,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=340.13, authentication_1;dur=340.86, atlas_read_2;dur=13640.71, atlas_write_3;dur=28155.42, backend_total_4;dur=42138.3",
+          "ms": 42141.174,
+          "success": true,
+          "result": {
+            "intent": "arrivals",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-3",
+      "sample": 4,
+      "uiMs": 42563,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=329.96, authentication_1;dur=330.31, atlas_read_2;dur=14068.78, atlas_write_3;dur=28122.99, backend_total_4;dur=42523.24",
+          "ms": 42525.844,
+          "success": true,
+          "result": {
+            "intent": "alerts",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-4",
+      "sample": 4,
+      "uiMs": 44290,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=353.2, authentication_1;dur=353.64, atlas_read_2;dur=14265.35, atlas_write_3;dur=27636.49, backend_total_4;dur=42256.86",
+          "ms": 42258.692,
+          "success": true,
+          "result": {
+            "intent": "policy",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "reload-history",
+      "sample": 4,
+      "uiMs": 16574,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=407.58, authentication_1;dur=408.08, atlas_read_2;dur=14033.02, backend_total_3;dur=14443.19",
+          "ms": 14445.19,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=338.06, authentication_1;dur=338.37, atlas_identity_2;dur=411.02, backend_total_3;dur=749.51",
+          "ms": 751.741,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=284.22, authentication_1;dur=284.49, atlas_identity_2;dur=453.02, backend_total_3;dur=737.92",
+          "ms": 739.878,
+          "success": true,
+          "messages": 8
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "DELETE",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=331.21, authentication_1;dur=332.3, atlas_conversation_write_2;dur=574.33, backend_total_3;dur=906.85"
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "create-thread",
+      "sample": 5,
+      "uiMs": 5047,
+      "requests": [
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "POST",
+          "status": 201,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=324.5, authentication_1;dur=324.79, atlas_conversation_write_2;dur=631.49, backend_total_3;dur=956.38",
+          "ms": 958.093,
+          "success": true
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-1",
+      "sample": 5,
+      "uiMs": 44200,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=507.15, authentication_1;dur=507.41, atlas_read_2;dur=13585.18, atlas_write_3;dur=28080.2, backend_total_4;dur=42173.9",
+          "ms": 42176.115,
+          "success": true,
+          "result": {
+            "intent": "overview",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-2",
+      "sample": 5,
+      "uiMs": 45254,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=328.9, authentication_1;dur=329.23, atlas_read_2;dur=13928.23, atlas_write_3;dur=28230.94, backend_total_4;dur=42489.48",
+          "ms": 42491.771,
+          "success": true,
+          "result": {
+            "intent": "arrivals",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-3",
+      "sample": 5,
+      "uiMs": 43722,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=422.96, authentication_1;dur=423.41, atlas_read_2;dur=13874.53, atlas_write_3;dur=27394.15, backend_total_4;dur=41693.18",
+          "ms": 41695.759,
+          "success": true,
+          "result": {
+            "intent": "alerts",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "question-4",
+      "sample": 5,
+      "uiMs": 42859,
+      "requests": [
+        {
+          "endpoint": "/api/ai/chat",
+          "method": "POST",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=325.13, authentication_1;dur=325.5, atlas_read_2;dur=14393.42, atlas_write_3;dur=28099.24, backend_total_4;dur=42819.64",
+          "ms": 42821.546,
+          "success": true,
+          "result": {
+            "intent": "policy",
+            "engine": "rules",
+            "provider": "rules",
+            "model": null,
+            "narrated": false,
+            "fallbackReason": "request_budget",
+            "answerPresent": true
+          }
+        }
+      ],
+      "uiError": ""
+    },
+    {
+      "kind": "reload-history",
+      "sample": 5,
+      "uiMs": 15498,
+      "requests": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=379.17, authentication_1;dur=379.98, atlas_read_2;dur=13619.55, backend_total_3;dur=14001.71",
+          "ms": 14003.993,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=313.3, authentication_1;dur=313.64, atlas_identity_2;dur=342.28, backend_total_3;dur=656.05",
+          "ms": 658.836,
+          "success": true
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=283.28, authentication_1;dur=283.62, atlas_identity_2;dur=438.77, backend_total_3;dur=722.78",
+          "ms": 724.628,
+          "success": true,
+          "messages": 8
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "DELETE",
+          "status": 200,
+          "build": "36172b4c8e3ff69b",
+          "serverTiming": "atlas_auth_0;dur=284.18, authentication_1;dur=284.46, atlas_conversation_write_2;dur=580.46, backend_total_3;dur=865.14"
+        }
+      ],
+      "uiError": ""
+    }
+  ],
+  "summary": [
+    {
+      "kind": "open-page",
+      "n": 5,
+      "medianMs": 15689,
+      "maxMs": 15736,
+      "providerObserved": false,
+      "errors": 0
+    },
+    {
+      "kind": "open-old",
+      "n": 5,
+      "medianMs": 716,
+      "maxMs": 747,
+      "providerObserved": false,
+      "errors": 0
+    },
+    {
+      "kind": "create-thread",
+      "n": 5,
+      "medianMs": 872,
+      "maxMs": 5085,
+      "providerObserved": false,
+      "errors": 0
+    },
+    {
+      "kind": "question-1",
+      "n": 5,
+      "medianMs": 42735,
+      "maxMs": 44200,
+      "providerObserved": false,
+      "errors": 0
+    },
+    {
+      "kind": "question-2",
+      "n": 5,
+      "medianMs": 43193,
+      "maxMs": 45254,
+      "providerObserved": false,
+      "errors": 0
+    },
+    {
+      "kind": "question-3",
+      "n": 5,
+      "medianMs": 42957,
+      "maxMs": 43722,
+      "providerObserved": false,
+      "errors": 0
+    },
+    {
+      "kind": "question-4",
+      "n": 5,
+      "medianMs": 42821,
+      "maxMs": 44290,
+      "providerObserved": false,
+      "errors": 0
+    },
+    {
+      "kind": "reload-history",
+      "n": 5,
+      "medianMs": 16272,
+      "maxMs": 16574,
+      "providerObserved": false,
+      "errors": 0
+    }
+  ],
+  "qaThreadsCleaned": 5
+}

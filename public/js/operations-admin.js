@@ -22,8 +22,8 @@ HS.operations={
   }
   return false;
  },
- async alerts(content){
-  const alerts=await HS.api('/api/admin/shortage-alerts?days=14');
+ async alerts(content,initial){
+  const alerts=initial??await HS.api('/api/admin/shortage-alerts?days=14');
   const panel=document.createElement('section');panel.className='card section-gap';
   panel.innerHTML='<h2>Cảnh báo thiếu phòng · 14 ngày tới</h2>'+(alerts.length?alerts.map(a=>`<article class="notice error"><strong>${HS.esc(a.date)} · ${HS.esc(a.roomTypeName)}</strong><p>${a.bookingCount} booking / ${a.availableCount} phòng khả dụng</p><div class="button-row">${a.bookings.map(b=>`<button class="btn secondary small-btn" data-action="details" data-id="${HS.esc(b.bookingCode)}">${HS.esc(b.bookingCode)} · ${HS.esc(b.guestName)}</button>`).join('')}</div></article>`).join(''):'<p>Không có cảnh báo thiếu phòng.</p>');content.prepend(panel);
  },

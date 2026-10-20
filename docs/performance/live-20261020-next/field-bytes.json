@@ -1,0 +1,538 @@
+{
+  "at": "2026-10-19T18:05:52.045Z",
+  "readOnly": true,
+  "database": "actual Atlas",
+  "sections": {
+    "bookings": [
+      {
+        "field": "operationRequests",
+        "bytes": 188228,
+        "records": 35
+      },
+      {
+        "field": "nightlyPrices",
+        "bytes": 38892,
+        "records": 54
+      },
+      {
+        "field": "changeHistory",
+        "bytes": 20829,
+        "records": 9
+      },
+      {
+        "field": "settingsSnapshot",
+        "bytes": 18720,
+        "records": 54
+      },
+      {
+        "field": "financialRequests",
+        "bytes": 9087,
+        "records": 9
+      },
+      {
+        "field": "settlement",
+        "bytes": 5548,
+        "records": 6
+      },
+      {
+        "field": "changeRequests",
+        "bytes": 4874,
+        "records": 9
+      },
+      {
+        "field": "events",
+        "bytes": 4768,
+        "records": 36
+      },
+      {
+        "field": "fingerprint",
+        "bytes": 4158,
+        "records": 54
+      },
+      {
+        "field": "checkoutPolicySnapshot",
+        "bytes": 2754,
+        "records": 54
+      },
+      {
+        "field": "depositLedger",
+        "bytes": 2557,
+        "records": 11
+      },
+      {
+        "field": "requestKey",
+        "bytes": 2430,
+        "records": 54
+      },
+      {
+        "field": "roomHistory",
+        "bytes": 2235,
+        "records": 11
+      },
+      {
+        "field": "createdAt",
+        "bytes": 1998,
+        "records": 54
+      },
+      {
+        "field": "_id",
+        "bytes": 1998,
+        "records": 54
+      },
+      {
+        "field": "roomTypeId",
+        "bytes": 1998,
+        "records": 54
+      },
+      {
+        "field": "homestayId",
+        "bytes": 1998,
+        "records": 54
+      },
+      {
+        "field": "roomId",
+        "bytes": 1998,
+        "records": 54
+      },
+      {
+        "field": "email",
+        "bytes": 1942,
+        "records": 54
+      },
+      {
+        "field": "transferReports",
+        "bytes": 1936,
+        "records": 5
+      },
+      {
+        "field": "roomTypeName",
+        "bytes": 1599,
+        "records": 54
+      },
+      {
+        "field": "surcharges",
+        "bytes": 1491,
+        "records": 3
+      },
+      {
+        "field": "guestName",
+        "bytes": 1485,
+        "records": 54
+      },
+      {
+        "field": "homestayName",
+        "bytes": 1439,
+        "records": 43
+      },
+      {
+        "field": "guestAddress",
+        "bytes": 1268,
+        "records": 39
+      },
+      {
+        "field": "phone",
+        "bytes": 1242,
+        "records": 54
+      },
+      {
+        "field": "checkOut",
+        "bytes": 1242,
+        "records": 54
+      },
+      {
+        "field": "checkIn",
+        "bytes": 1242,
+        "records": 54
+      },
+      {
+        "field": "status",
+        "bytes": 1168,
+        "records": 54
+      },
+      {
+        "field": "bookingCode",
+        "bytes": 1134,
+        "records": 54
+      },
+      {
+        "field": "source",
+        "bytes": 1039,
+        "records": 54
+      },
+      {
+        "field": "idNumber",
+        "bytes": 999,
+        "records": 54
+      },
+      {
+        "field": "holdExpiresAt",
+        "bytes": 954,
+        "records": 54
+      },
+      {
+        "field": "paymentLedger",
+        "bytes": 936,
+        "records": 6
+      },
+      {
+        "field": "ip",
+        "bytes": 902,
+        "records": 41
+      },
+      {
+        "field": "guestUserId",
+        "bytes": 888,
+        "records": 24
+      },
+      {
+        "field": "assignedAt",
+        "bytes": 814,
+        "records": 22
+      },
+      {
+        "field": "nationality",
+        "bytes": 795,
+        "records": 39
+      },
+      {
+        "field": "notes",
+        "bytes": 782,
+        "records": 54
+      },
+      {
+        "field": "actualCheckIn",
+        "bytes": 777,
+        "records": 21
+      },
+      {
+        "field": "internalNotes",
+        "bytes": 751,
+        "records": 54
+      },
+      {
+        "field": "documentType",
+        "bytes": 696,
+        "records": 29
+      },
+      {
+        "field": "extraGuestTotal",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "version",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "capacitySnapshot",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "numberOfNights",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "totalAmount",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "guestCount",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "depositAmount",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "roomTotal",
+        "bytes": 648,
+        "records": 54
+      },
+      {
+        "field": "companionDetails",
+        "bytes": 530,
+        "records": 18
+      },
+      {
+        "field": "expectedSettingsVersion",
+        "bytes": 492,
+        "records": 41
+      },
+      {
+        "field": "expectedTotalAmount",
+        "bytes": 492,
+        "records": 41
+      },
+      {
+        "field": "birthDate",
+        "bytes": 477,
+        "records": 29
+      },
+      {
+        "field": "gender",
+        "bytes": 421,
+        "records": 29
+      },
+      {
+        "field": "policyAccepted",
+        "bytes": 369,
+        "records": 41
+      },
+      {
+        "field": "assignedBy",
+        "bytes": 342,
+        "records": 19
+      },
+      {
+        "field": "checkedInBy",
+        "bytes": 324,
+        "records": 18
+      },
+      {
+        "field": "actualCheckOut",
+        "bytes": 259,
+        "records": 7
+      },
+      {
+        "field": "companions",
+        "bytes": 258,
+        "records": 18
+      },
+      {
+        "field": "issuedBy",
+        "bytes": 252,
+        "records": 11
+      },
+      {
+        "field": "hometown",
+        "bytes": 247,
+        "records": 11
+      },
+      {
+        "field": "expiryDate",
+        "bytes": 243,
+        "records": 11
+      },
+      {
+        "field": "issueDate",
+        "bytes": 243,
+        "records": 11
+      },
+      {
+        "field": "createdBy",
+        "bytes": 234,
+        "records": 13
+      },
+      {
+        "field": "cancelReason",
+        "bytes": 176,
+        "records": 4
+      },
+      {
+        "field": "earlyAccepted",
+        "bytes": 162,
+        "records": 18
+      },
+      {
+        "field": "earlyCheckoutReason",
+        "bytes": 159,
+        "records": 6
+      },
+      {
+        "field": "cancelledAt",
+        "bytes": 148,
+        "records": 4
+      },
+      {
+        "field": "cancelledBy",
+        "bytes": 72,
+        "records": 4
+      },
+      {
+        "field": "refundAmount",
+        "bytes": 72,
+        "records": 6
+      },
+      {
+        "field": "refundDue",
+        "bytes": 72,
+        "records": 6
+      },
+      {
+        "field": "refundPercent",
+        "bytes": 48,
+        "records": 4
+      },
+      {
+        "field": "guestInfoSource",
+        "bytes": 18,
+        "records": 1
+      }
+    ],
+    "rooms": [
+      {
+        "field": "images",
+        "bytes": 55881,
+        "records": 413
+      },
+      {
+        "field": "photo",
+        "bytes": 18998,
+        "records": 413
+      },
+      {
+        "field": "homestayId",
+        "bytes": 15281,
+        "records": 413
+      },
+      {
+        "field": "roomTypeId",
+        "bytes": 15281,
+        "records": 413
+      },
+      {
+        "field": "_id",
+        "bytes": 15281,
+        "records": 413
+      },
+      {
+        "field": "status",
+        "bytes": 10249,
+        "records": 413
+      },
+      {
+        "field": "roomNumber",
+        "bytes": 7859,
+        "records": 413
+      },
+      {
+        "field": "floor",
+        "bytes": 4956,
+        "records": 413
+      },
+      {
+        "field": "incidents",
+        "bytes": 3163,
+        "records": 12
+      },
+      {
+        "field": "notes",
+        "bytes": 706,
+        "records": 51
+      },
+      {
+        "field": "cleanedAt",
+        "bytes": 333,
+        "records": 9
+      },
+      {
+        "field": "cleanedBy",
+        "bytes": 167,
+        "records": 9
+      }
+    ],
+    "roomTypes": [
+      {
+        "field": "description",
+        "bytes": 52631,
+        "records": 101
+      },
+      {
+        "field": "amenityIds",
+        "bytes": 37640,
+        "records": 101
+      },
+      {
+        "field": "images",
+        "bytes": 13654,
+        "records": 101
+      },
+      {
+        "field": "photo",
+        "bytes": 4646,
+        "records": 101
+      },
+      {
+        "field": "bedDescription",
+        "bytes": 4336,
+        "records": 101
+      },
+      {
+        "field": "homestayId",
+        "bytes": 3737,
+        "records": 101
+      },
+      {
+        "field": "_id",
+        "bytes": 3737,
+        "records": 101
+      },
+      {
+        "field": "name",
+        "bytes": 3606,
+        "records": 101
+      },
+      {
+        "field": "catalogKey",
+        "bytes": 2363,
+        "records": 101
+      },
+      {
+        "field": "standardCapacity",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "sundayPrice",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "weekendPrice",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "maxCapacity",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "weekdayPrice",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "eventPrice",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "area",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "saturdayPrice",
+        "bytes": 1212,
+        "records": 101
+      },
+      {
+        "field": "active",
+        "bytes": 909,
+        "records": 101
+      },
+      {
+        "field": "overflowOf",
+        "bytes": 37,
+        "records": 1
+      }
+    ]
+  }
+}

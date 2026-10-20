@@ -1,12 +1,13 @@
 const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto'),bcrypt=require('bcryptjs'),express=require('express');
 const D=require('./domain'),A=require('./access');
-function register(app,{store,route,ok,auth,options={}}){
+function register(app,{store,route,ok,auth,readRaw,options={}}){
+ const readState=req=>readRaw?readRaw(req):store.read();
  const uploadDir=options.uploadDir||path.join(__dirname,'../public/assets/uploads');
  const publicProperty=(h,s)=>{const {_id,name,address,description,phone,email,photo,images,active,destination,tagline,style,highlights,experiences,houseRules,demoListing}=h;const types=s?.roomTypes?.filter(t=>t.homestayId===_id&&t.active)||[];return {_id,name,address,description,phone,email,photo,images,active,destination,tagline,style,highlights,experiences,houseRules,demoListing,...(s?.roomTypes?{roomTypeCount:types.length,roomCount:s.rooms.filter(r=>r.homestayId===_id&&types.some(t=>t._id===r.roomTypeId)).length,fromPrice:types.length?Math.min(...types.map(t=>t.weekdayPrice)):null}:{})};};
- app.get('/api/public/homestays',route(async(req,res)=>{const s=await store.read();A.upgrade(s);ok(res,s.homestays.filter(h=>h.active).map(h=>publicProperty(h,s)));}));
- app.get('/api/admin/homestays',auth(),route(async(req,res)=>ok(res,A.allowedProperties(await store.read(),req.user).map(publicProperty))));
+ app.get('/api/public/homestays',route(async(req,res)=>{const s=await (store.readPublic?store.readPublic('catalog'):store.read());A.upgrade(s);ok(res,s.homestays.filter(h=>h.active).map(h=>publicProperty(h,s)));}));
+ app.get('/api/admin/homestays',auth(),route(async(req,res)=>ok(res,A.allowedProperties(await readState(req),req.user).map(publicProperty))));
  app.get('/api/admin/customers',auth(),route(async(req,res)=>{
-  const s=await store.read(),v=A.view(s,req.user,req.get('X-Homestay-Id')).result,rows=new Map();
+  const s=await readState(req),v=A.view(s,req.user,req.get('X-Homestay-Id')).result,rows=new Map();
   for(const b of v.bookings.slice().sort((a,b)=>String(a.createdAt||'').localeCompare(String(b.createdAt||'')))){
    const key=b.guestUserId?'user:'+b.guestUserId:b.email?'email:'+b.email.toLowerCase():b.phone?'phone:'+b.phone+':'+b.guestName:'booking:'+b.bookingCode;
    const previous=rows.get(key)||{bookings:[],bookingCount:0,totalAmount:0,depositAmount:0};
@@ -24,7 +25,7 @@ function register(app,{store,route,ok,auth,options={}}){
   const bytes=req.body,type=req.get('Content-Type')?.split(';')[0];if(!Buffer.isBuffer(bytes)||bytes.length<24)D.fail('Chọn ảnh PNG, JPG hoặc WebP hợp lệ, tối đa 5 MB.');
   const ext=type==='image/png'&&bytes.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex'))?'png':type==='image/jpeg'&&bytes[0]===255&&bytes[1]===216&&bytes[2]===255?'jpg':type==='image/webp'&&bytes.toString('ascii',0,4)==='RIFF'&&bytes.toString('ascii',8,12)==='WEBP'?'webp':null;
   if(!ext)D.fail('Nội dung tệp không khớp định dạng ảnh.');
-  const s=await store.read(),h=A.allowedProperties(s,req.user).find(h=>h._id===req.query.homestayId);if(!h)D.fail('Chọn homestay bạn được cấp quyền.','FORBIDDEN',403);
+  const s=await readState(req),h=A.allowedProperties(s,req.user).find(h=>h._id===req.query.homestayId);if(!h)D.fail('Chọn homestay bạn được cấp quyền.','FORBIDDEN',403);
   const file=crypto.randomBytes(24).toString('hex')+'.'+ext,mediaPath='/assets/uploads/'+file;await fs.mkdir(uploadDir,{recursive:true});await fs.writeFile(path.join(uploadDir,file),bytes,{flag:'wx'});
   try{await store.mutate(s=>{s.uploads.push({path:mediaPath,homestayId:h._id,createdAt:new Date().toISOString(),by:req.user._id});D.log(s,req.user.username,'UPLOAD_PHOTO',h.name);});}catch(e){await fs.unlink(path.join(uploadDir,file));throw e;}
   ok(res,{path:mediaPath},201);

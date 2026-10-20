@@ -2,49 +2,82 @@ require('dotenv').config({path:require('node:path').join(__dirname,'.env')});
 const express=require('express'),path=require('node:path'),crypto=require('node:crypto'),bcrypt=require('bcryptjs'),jwt=require('jsonwebtoken');
 const {Store}=require('./src/store');const D=require('./src/domain');const Pricing=require('./src/pricing');const A=require('./src/access');const Platform=require('./src/platform-routes');const Guest=require('./src/guest-routes');const S3=require('./src/sprint3');const Ops=require('./src/operations');const AI=require('./src/ai-routes');
 function createApp(store,secret,options={}){
- const app=express();if(process.env.TRUST_PROXY==='1')app.set('trust proxy',1);app.disable('x-powered-by');app.use(express.json({limit:'64kb'}));
+ // Correlate API failures with internal stacks without exposing diagnostics.
+ const requestErrors=require('./src/request-errors');
+ const app=express();app.use(requestErrors.middleware);app.use((req,res,next)=>{if(typeof options.aiTiming==='function'&&/^\/api\/(?:public\/)?ai\/chat$/.test(req.path)){const start=performance.now();res.once('finish',()=>{try{options.aiTiming({stage:'http_total',ms:performance.now()-start,status:res.statusCode});}catch{}});}next();});if(process.env.TRUST_PROXY==='1')app.set('trust proxy',1);app.disable('x-powered-by');app.use(express.json({limit:'64kb'}));app.use(require('./src/ai-telemetry').middleware);
  app.use((req,res,next)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','same-origin');const assistant=req.path==='/assistant.html';res.setHeader('X-Frame-Options',assistant?'SAMEORIGIN':'DENY');res.setHeader('Content-Security-Policy',"frame-ancestors "+(assistant?"'self'":"'none'"));if(req.path.toLowerCase().startsWith('/api/'))res.setHeader('Cache-Control','no-store');next();});
  const route=fn=>(req,res,next)=>Promise.resolve(fn(req,res)).catch(next);const ok=(res,data,status=200)=>res.status(status).json({success:true,data});
  // Middleware with explicit next: verify current account and role on every request.
  const bookingResponse=(req,result)=>require('./src/privacy').sanitize(result,{personalAllowed:A.can(req.user,'customers.view')});
- const read=async req=>{const s=await store.read();A.upgrade(s);return req.user?A.view(s,req.user,req.get('X-Homestay-Id')||req.query.homestayId).result:s;};
+ // Share only within one request; the next request always rechecks the account.
+ const readRaw=req=>{
+  if(!req.operationalRead){
+   const routePath=A.requestPath(req),screen=routePath==='/api/admin/state'?req.query.screen:undefined;
+   const extra=routePath.includes('/invoices')?['invoices']:routePath.includes('/email-')?['emailJobs','schedulerRuns','mailWorkerRuns']:routePath.endsWith('/operations-status')?['backupRuns','backupLease','emailJobs']:[];
+   const stateRequest=routePath==='/api/admin/state';
+   const list=stateRequest&&req.query.view==='list'&&['reception','rooms'].includes(screen);
+   if(list)require('./src/admin-pagination').options(req.query);
+   const profile=list?(screen==='reception'?'reception_list':'rooms_list'):routePath==='/api/admin/bookings/:code/email-status'?'booking_email':routePath==='/api/reports/revenue'?'revenue':['/api/reports/occupancy','/api/reports/occupancy.csv','/api/admin/shortage-alerts','/api/admin/room-board'].includes(routePath)?'inventory':extra.length&&!routePath.includes('/bookings/')?'metadata':undefined;
+   const shape={screen,profile,extra,...(profile==='booking_email'?{bookingCode:req.params.code}:{}),users:A.can(req.user,'accounts.view')&&(routePath==='/api/admin/users'||stateRequest&&(!screen||screen==='users')),audit:A.can(req.user,'audit.view')&&stateRequest&&(!screen||screen==='audit')};
+   const projected=typeof store.readOperational==='function';req.operationalRead=Promise.resolve(projected?store.readOperational(shape):store.read()).then(s=>{if(!projected)A.upgrade(s);return s;});
+  }return req.operationalRead;
+ };
+ const read=async req=>{const s=await readRaw(req);return req.user?A.view(s,req.user,req.get('X-Homestay-Id')||req.query.homestayId).result:s;};
+ const readPublic=async(profile='catalog')=>{const s=await (store.readPublic?store.readPublic(profile):store.read());A.upgrade(s);return s;};
  const mutate=(req,fn)=>store.mutate(s=>{A.upgrade(s);return req.user?A.mutate(s,req.user,req.get('X-Homestay-Id')||req.query.homestayId,fn,req.body):fn(s);});
- const requireRole=()=> (req,res,next)=>{(async()=>{
+ const requireRole=()=> (req,res,next)=>{const authStarted=performance.now();(async()=>{
   let token;try{token=jwt.verify(String(req.headers.authorization||'').replace(/^Bearer /,''),secret);}catch{throw new D.AppError(401,'UNAUTHORIZED','Vui lòng đăng nhập lại.');}
-  const s=await store.read();A.upgrade(s);const u=s.users.find(u=>u._id===token.sub&&u.active);
+  const s=await (store.readAuth?store.readAuth(token.sub):store.readIdentity?store.readIdentity(token.sub):store.read());A.upgrade(s);const u=s.users.find(u=>u._id===token.sub&&u.active);
   if(!u||(token.version||0)!==(u.sessionVersion||0))throw new D.AppError(401,'UNAUTHORIZED','Phiên đăng nhập đã hết hiệu lực. Vui lòng đăng nhập lại.');
   const policyPath=A.requestPath(req);
   if(u.role==='guest'&&(policyPath.startsWith('/api/admin/')||policyPath.startsWith('/api/reports')))throw new D.AppError(403,'FORBIDDEN','Khách không được truy cập trang quản lý.');
   if(['/api/admin/settings','/api/admin/pricing/calendar'].includes(policyPath)&&!req.get('X-Homestay-Id')&&!req.query.homestayId&&A.allowedProperties(s,u).length>1)D.fail('Chọn một homestay trước khi cấu hình giá hoặc chính sách.');
   const permission=A.routePermission(req);if(permission===undefined||permission&&!A.can(u,permission))throw new D.AppError(403,'FORBIDDEN','Tài khoản không có quyền thực hiện thao tác.');
-  req.user=u;if(policyPath.startsWith('/api/admin/')&&!policyPath.endsWith('/identity')){const json=res.json.bind(res);res.json=value=>json(require('./src/privacy').sanitize(value,{personalAllowed:A.can(u,'customers.view')}));}if(u.role!=='guest'||!policyPath.startsWith('/api/ai/'))A.view(s,u,req.get('X-Homestay-Id')||req.query.homestayId);next();
+  req.user=u;req.authState=s;require('./src/ai-telemetry').record('authentication',performance.now()-authStarted);if(typeof options.aiTiming==='function'&&policyPath==='/api/ai/chat')try{options.aiTiming({stage:'authentication',ms:performance.now()-authStarted});}catch{}if(policyPath.startsWith('/api/admin/')&&!policyPath.endsWith('/identity')){const json=res.json.bind(res);res.json=value=>json(require('./src/privacy').sanitize(value,{personalAllowed:A.can(u,'customers.view')}));}if(u.role!=='guest'||!policyPath.startsWith('/api/ai/'))A.view(s,u,req.get('X-Homestay-Id')||req.query.homestayId);next();
  })().catch(next);};
- Platform.register(app,{store,route,ok,auth:requireRole,options});
- Guest.register(app,{store,route,ok,auth:requireRole,secret});
+ Platform.register(app,{store,route,ok,auth:requireRole,readRaw,options});
+ Guest.register(app,{store,route,ok,auth:requireRole,secret,readRaw});
  AI.register(app,{store,route,ok,auth:requireRole,options});
- require('./src/payment-routes').register(app,{store,route,ok,auth:requireRole,read,mutate,secret,options});
- require('./src/sprint4-routes').register(app,{store,route,ok,auth:requireRole,read,mutate,secret,options});
+ require('./src/payment-routes').register(app,{store,route,ok,auth:requireRole,read,readRaw,mutate,secret,options});
+ require('./src/sprint4-routes').register(app,{store,route,ok,auth:requireRole,read,readRaw,mutate,secret,options});
  const optionalAuth=(req,res,next)=>req.headers.authorization?requireRole()(req,res,next):next();
  const loginAttempts=new Map();
  app.get('/api/ready',route(async(req,res)=>{try{if(store.mongoose)await store.mongoose.connection.db.command({ping:1});else await store.read();ok(res,{ready:true});}catch{res.status(503).json({success:false,code:'NOT_READY',message:'Dịch vụ chưa sẵn sàng.'});}}));
- app.get('/api/health',(req,res)=>ok(res,{name:'HOMESTAY',dataMode:store.mode}));
- app.get('/api/public/rooms',route(async(req,res)=>{const s=await read(req);ok(res,s.rooms.filter(r=>s.homestays.some(h=>h._id===r.homestayId&&h.active)&&s.roomTypes.some(t=>t._id===r.roomTypeId&&t.active)).map(r=>{const t=s.roomTypes.find(t=>t._id===r.roomTypeId);return {_id:r._id,roomNumber:r.roomNumber,floor:r.floor,roomTypeId:t._id,roomTypeName:t.name,homestayId:r.homestayId,homestayName:s.homestays.find(h=>h._id===r.homestayId)?.name,description:t.description,area:t.area,standardCapacity:t.standardCapacity,maxCapacity:t.maxCapacity,weekdayPrice:t.weekdayPrice,weekendPrice:t.weekendPrice,photo:r.photo||t.photo,images:r.images||t.images||[],amenities:s.amenities.filter(a=>a.active&&t.amenityIds.includes(a._id)).map(a=>({name:a.name,icon:a.icon}))};}));}));
- app.get('/api/public/settings',route(async(req,res)=>{const s=await read(req),h=s.homestays.find(h=>h.active&&h._id===req.query.homestayId);if(req.query.homestayId&&!h)D.fail('Không tìm thấy homestay.','NOT_FOUND',404);ok(res,h&&h._id!==s.homestays[0]._id?(h.settings||s.settings):s.settings);}));
- app.get('/api/public/room-types',route(async(req,res)=>{const s=await read(req),counts=new Map();for(const r of s.rooms)counts.set(r.roomTypeId,(counts.get(r.roomTypeId)||0)+1);ok(res,s.roomTypes.filter(t=>t.active&&s.homestays.some(h=>h._id===t.homestayId&&h.active)).map(t=>({...t,roomCount:counts.get(t._id)||0,homestayName:s.homestays.find(h=>h._id===t.homestayId)?.name,homestayAddress:s.homestays.find(h=>h._id===t.homestayId)?.address,destination:s.homestays.find(h=>h._id===t.homestayId)?.destination,demoListing:s.homestays.find(h=>h._id===t.homestayId)?.demoListing,amenities:s.amenities.filter(a=>a.active&&t.amenityIds.includes(a._id))})));}));
- app.get('/api/bookings/availability',route(async(req,res)=>ok(res,D.availability(await read(req),req.query))));
- app.post('/api/bookings/quote',route(async(req,res)=>{const s=await read(req),q=D.quote(s,req.body);if(!D.availability(s,req.body).roomTypes.length)D.fail('Không còn phòng.','NO_AVAILABILITY',409);ok(res,q);}));
- app.post('/api/bookings/create',optionalAuth,route(async(req,res)=>ok(res,await store.mutate(s=>{A.upgrade(s);const isGuest=req.user?.role==='guest';if(isGuest&&String(req.body.email||'').trim().toLowerCase()!==req.user.email)D.fail('Dùng email tài khoản đang đăng nhập để đặt phòng.');const result=D.createBooking(s,req.body,req.ip),b=s.bookings.find(b=>b.bookingCode===result.bookingCode);if(b.guestUserId&&b.guestUserId!==req.user?._id)D.fail('Mã yêu cầu đã được sử dụng.','REQUEST_CONFLICT',409);if(isGuest)b.guestUserId=req.user._id;return result;}),201)));
+ app.get('/api/health',(req,res)=>ok(res,{name:'HOMESTAY',dataMode:store.mode,runtime:require('./src/ai-telemetry').runtime()}));
+ app.get('/api/public/rooms',route(async(req,res)=>{const s=await readPublic();ok(res,s.rooms.filter(r=>s.homestays.some(h=>h._id===r.homestayId&&h.active)&&s.roomTypes.some(t=>t._id===r.roomTypeId&&t.active)).map(r=>{const t=s.roomTypes.find(t=>t._id===r.roomTypeId);return {_id:r._id,roomNumber:r.roomNumber,floor:r.floor,roomTypeId:t._id,roomTypeName:t.name,homestayId:r.homestayId,homestayName:s.homestays.find(h=>h._id===r.homestayId)?.name,description:t.description,area:t.area,standardCapacity:t.standardCapacity,maxCapacity:t.maxCapacity,weekdayPrice:t.weekdayPrice,weekendPrice:t.weekendPrice,photo:r.photo||t.photo,images:r.images||t.images||[],amenities:s.amenities.filter(a=>a.active&&t.amenityIds.includes(a._id)).map(a=>({name:a.name,icon:a.icon}))};}));}));
+ app.get('/api/public/settings',route(async(req,res)=>{const s=await readPublic('policy'),h=s.homestays.find(h=>h.active&&h._id===req.query.homestayId);if(req.query.homestayId&&!h)D.fail('Không tìm thấy homestay.','NOT_FOUND',404);ok(res,h&&h._id!==s.homestays[0]._id?(h.settings||s.settings):s.settings);}));
+ app.get('/api/public/room-types',route(async(req,res)=>{const s=await readPublic(),counts=new Map();for(const r of s.rooms)counts.set(r.roomTypeId,(counts.get(r.roomTypeId)||0)+1);ok(res,s.roomTypes.filter(t=>t.active&&s.homestays.some(h=>h._id===t.homestayId&&h.active)).map(t=>({...t,roomCount:counts.get(t._id)||0,homestayName:s.homestays.find(h=>h._id===t.homestayId)?.name,homestayAddress:s.homestays.find(h=>h._id===t.homestayId)?.address,destination:s.homestays.find(h=>h._id===t.homestayId)?.destination,demoListing:s.homestays.find(h=>h._id===t.homestayId)?.demoListing,amenities:s.amenities.filter(a=>a.active&&t.amenityIds.includes(a._id))})));}));
+ app.get('/api/bookings/availability',route(async(req,res)=>ok(res,D.availability(await readPublic('availability'),req.query))));
+ app.post('/api/bookings/quote',route(async(req,res)=>{const s=await readPublic('availability'),q=D.quote(s,req.body);if(!D.availability(s,req.body).roomTypes.length)D.fail('Không còn phòng.','NO_AVAILABILITY',409);ok(res,q);}));
+ app.post('/api/bookings/create',requireRole(),route(async(req,res)=>ok(res,await store.mutate(s=>{A.upgrade(s);const isGuest=req.user?.role==='guest';if(isGuest&&String(req.body.email||'').trim().toLowerCase()!==req.user.email)D.fail('Dùng email tài khoản đang đăng nhập để đặt phòng.');const result=D.createBooking(s,req.body,req.ip),b=s.bookings.find(b=>b.bookingCode===result.bookingCode);if(b.guestUserId&&b.guestUserId!==req.user?._id)D.fail('Mã yêu cầu đã được sử dụng.','REQUEST_CONFLICT',409);if(isGuest)b.guestUserId=req.user._id;return result;}),201)));
  const lookup=route(async(req,res)=>{const result=await store.mutate(s=>D.lookup(s,req.method==='GET'?req.query:req.body,req.ip));if(result.error)throw result.error;ok(res,result.data);});
  app.get('/api/bookings/lookup',lookup);app.post('/api/lookup',lookup);
- app.post('/api/auth/login',route(async(req,res)=>{const key=req.ip,now=Date.now();let a=loginAttempts.get(key);if(!a||a.until<now)a={count:0,until:now+900000};if(a.count>=10)throw new D.AppError(429,'RATE_LIMITED','Thử lại sau 15 phút.',Math.ceil((a.until-now)/1000));const s=await store.read();A.upgrade(s);const u=s.users.find(u=>u.active&&(u.username.toLowerCase()===String(req.body.username||'').trim().toLowerCase()||u.email?.toLowerCase()===String(req.body.username||'').trim().toLowerCase()));const valid=typeof req.body.password==='string'&&u&&await bcrypt.compare(req.body.password,u.password);if(!valid){a.count++;loginAttempts.set(key,a);throw new D.AppError(401,'INVALID_LOGIN','Tài khoản hoặc mật khẩu không chính xác.');}loginAttempts.delete(key);ok(res,{token:jwt.sign({sub:u._id,version:u.sessionVersion||0},secret,{expiresIn:'30m'}),user:A.safeUser(u)});}));
+ app.post('/api/auth/login',route(async(req,res)=>{const key=req.ip,now=Date.now();let a=loginAttempts.get(key);if(!a||a.until<now)a={count:0,until:now+900000};if(a.count>=10)throw new D.AppError(429,'RATE_LIMITED','Thử lại sau 15 phút.',Math.ceil((a.until-now)/1000));const s=await (store.readLogin?store.readLogin(req.body.username):store.read());A.upgrade(s);const u=s.users.find(u=>u.active&&(u.username.toLowerCase()===String(req.body.username||'').trim().toLowerCase()||u.email?.toLowerCase()===String(req.body.username||'').trim().toLowerCase()));const valid=typeof req.body.password==='string'&&u&&await bcrypt.compare(req.body.password,u.password);if(!valid){a.count++;loginAttempts.set(key,a);throw new D.AppError(401,'INVALID_LOGIN','Tài khoản hoặc mật khẩu không chính xác.');}loginAttempts.delete(key);ok(res,{token:jwt.sign({sub:u._id,version:u.sessionVersion||0},secret,{expiresIn:'30m'}),user:A.safeUser(u)});}));
  app.get('/api/auth/me',requireRole(),(req,res)=>ok(res,A.safeUser(req.user)));
  app.post('/api/auth/change-password',requireRole(),route(async(req,res)=>{const {currentPassword,password}=req.body;if(typeof currentPassword!=='string'||!await bcrypt.compare(currentPassword,req.user.password))D.fail('Mật khẩu hiện tại không đúng.');if(!A.validPassword(password))D.fail('Mật khẩu mới cần 8–72 ký tự, gồm chữ và số.');const hash=await bcrypt.hash(password,10);await store.mutate(s=>{A.upgrade(s);const u=s.users.find(u=>u._id===req.user._id);if(u.password!==req.user.password)D.fail('Mật khẩu đã thay đổi. Vui lòng đăng nhập lại.');u.password=hash;u.sessionVersion=(u.sessionVersion||0)+1;s.passwordResets=s.passwordResets.filter(t=>t.userId!==u._id);D.log(s,req.user.username,'CHANGE_PASSWORD','Đổi mật khẩu');});ok(res,{});}));
- app.get('/api/admin/state',requireRole(),route(async(req,res)=>{const s=await read(req);D.expire(s);const result={homestays:s.homestays.map(({settings,pricingCalendar,...h})=>h),rooms:A.can(req.user,'rooms.view')?s.rooms.map(({notes,...r})=>A.can(req.user,'bookings.view')?{...r,notes}:r):[],roomTypes:A.can(req.user,'types.view')?s.roomTypes:[],amenities:s.amenities,settings:s.settings};
- if(A.can(req.user,'bookings.view'))result.bookings=s.bookings.map(({fingerprint,requestKey,ip,changeRequests,operationRequests,...b})=>{if(!A.can(req.user,'customers.view'))for(const k of ['guestName','phone','email','idNumber','notes','internalNotes','guestAddress','nationality','companions','birthDate','gender','documentType','companionDetails'])delete b[k];return b;});
+ app.get('/api/admin/state',requireRole(),route(async(req,res)=>{
+ const screen=req.query.screen;if(screen&&!Object.hasOwn(require('./src/read-model').screens,screen))D.fail('Chức năng không hợp lệ.');
+ const raw=await readRaw(req),properties=A.allowedProperties(raw,req.user);
+ let selected=req.get('X-Homestay-Id')||req.query.homestayId;
+ if(!selected&&['settings','types'].includes(screen))selected=properties[0]?._id;
+ const s=A.view(raw,req.user,selected).result;D.expire(s);const result={homestays:s.homestays.map(({settings,pricingCalendar,...h})=>h),rooms:A.can(req.user,'rooms.view')?s.rooms.map(({notes,...r})=>A.can(req.user,'bookings.view')?{...r,notes}:r):[],roomTypes:A.can(req.user,'types.view')?s.roomTypes:[],amenities:s.amenities,settings:s.settings};
+ if(A.can(req.user,'bookings.view'))result.bookings=s.bookings.map(({fingerprint,requestKey,ip,changeRequests,operationRequests,...b})=>{if(!A.can(req.user,'customers.view'))for(const k of ['guestName','phone','email','idNumber','notes','internalNotes','guestAddress','nationality','companions','birthDate','gender','documentType','companionDetails','hasIdentity'])delete b[k];return b;});
  if(A.can(req.user,'pricing.view'))result.pricingCalendar=s.pricingCalendar||{};
- if(A.can(req.user,'accounts.view'))result.users=(await store.read()).users.map(A.safeUser);
- if(A.can(req.user,'audit.view'))result.audit=s.audit;
- ok(res,bookingResponse(req,result));
+ if(A.can(req.user,'accounts.view')&&(!screen||screen==='users'))result.users=raw.users.map(A.safeUser);
+ if(A.can(req.user,'audit.view')&&(!screen||screen==='audit'))result.audit=s.audit;
+ if(screen)result._bootstrap={user:A.safeUser(req.user),homestays:properties.map(h=>Object.fromEntries(['_id','name','address','description','phone','email','photo','images','active','destination','tagline','style','highlights','experiences','houseRules','demoListing'].filter(k=>h[k]!==undefined).map(k=>[k,h[k]]))),permissions:screen==='users'&&A.can(req.user,'accounts.view')?A.defaults:{},selectedHomestayId:selected||null};
+ const safe=bookingResponse(req,result);
+ if(req.query.view==='list'&&['reception','rooms'].includes(screen)){
+  if(screen==='reception'&&A.can(req.user,'bookings.view'))safe.shortageAlerts=bookingResponse(req,Ops.alerts(s,{days:14}));
+  const L=require('./src/admin-pagination'),key=screen==='reception'?'bookings':'rooms',p=L.paginate(safe[key]||[],L.options(req.query),{reverse:screen==='reception',searchable:screen==='reception',personal:A.can(req.user,'customers.view')});safe[key]=p.rows;safe.listPagination=p.pagination;
+ }
+ ok(res,safe);
+ }));
+ app.get('/api/admin/bookings/:code',requireRole(),route(async(req,res)=>{
+  const ids=[...A.view(req.authState,req.user,req.get('X-Homestay-Id')||req.query.homestayId).ids],s=await store.readDetail('bookings',req.params.code,ids),b=s.bookings[0];if(!b)D.fail('Không tìm thấy booking.','NOT_FOUND',404);D.expire(s);ok(res,bookingResponse(req,b));
+ }));
+ app.get('/api/admin/rooms/:id',requireRole(),route(async(req,res)=>{
+  const ids=[...A.view(req.authState,req.user,req.get('X-Homestay-Id')||req.query.homestayId).ids],s=await store.readDetail('rooms',req.params.id,ids),room=s.rooms[0];if(!room)D.fail('Không tìm thấy phòng.','NOT_FOUND',404);if(!A.can(req.user,'bookings.view'))delete room.notes;ok(res,bookingResponse(req,{room,roomType:s.roomTypes.find(t=>t._id===room.roomTypeId)||null}));
  }));
  app.get('/api/admin/pricing/calendar',requireRole(['admin']),route(async(req,res)=>ok(res,Pricing.calendarMonth(await read(req),req.query.month,req.query.roomTypeId))));
  app.put('/api/admin/pricing/calendar',requireRole(['admin']),route(async(req,res)=>ok(res,await mutate(req,s=>{const result=Pricing.updateCalendar(s,req.body);D.log(s,req.user.username,'UPDATE_PRICE_CALENDAR',`${result.startDate} → ${result.endDate}: ${req.body.kind}`);return result;}))));
@@ -81,69 +114,6 @@ function createApp(store,secret,options={}){
  })))));
  app.patch('/api/admin/rooms/:id',requireRole(['admin','reception']),route(async(req,res)=>{const status=req.body.status;if(!['CLEAN_VACANT','DIRTY_VACANT','MAINTENANCE'].includes(status))D.fail('Trạng thái phòng không hợp lệ.');ok(res,await mutate(req,s=>{D.expire(s);const r=s.rooms.find(r=>r._id===req.params.id);if(!r)D.fail('Không tìm thấy phòng.','NOT_FOUND',404);if(status==='CLEAN_VACANT'&&r.status==='MAINTENANCE')for(const x of r.incidents||[])if(!x.resolvedDate)x.resolvedDate=D.today();if(r.status==='OCCUPIED')D.fail('Phải trả phòng trước khi đổi trạng thái.','STATE_CONFLICT',409);if(status==='MAINTENANCE'&&s.bookings.some(b=>b.roomId===r._id&&['PENDING','CONFIRMED','CHECKED_IN'].includes(b.status)))D.fail('Phòng đang được giữ hoặc đặt.','STATE_CONFLICT',409);r.status=status;D.log(s,req.user.username,'ROOM_STATUS',r.roomNumber+': '+status);return r;}));}));
 
-<<<<<<< HEAD
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const connectDB = require("./src/config/db");
-
-// Import các routes hiện tại
-const authRoutes = require("./src/modules/auth/auth.routes");
-const lookupRouter = require("./src/modules/lookup/lookup.router");
-const bookingRouter = require("./src/modules/bookings/booking.router");
-const roomRouter = require("./src/modules/rooms/room.router");
-const receptionRouter = require("./src/modules/reception/routes");
-
-// Import Cron Job nhắc lịch tự động
-const { initReminderCron } = require("./src/jobs/reminder.job");
-
-const { notFound, errorHandler } = require("./src/middleware/errorHandler");
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    message: "TTCS Team 04 shared API is running"
-  });
-});
-
-app.use("/api/auth", authRoutes);
-app.use("/api/lookup", lookupRouter);
-app.use("/api/bookings", bookingRouter);
-app.use("/api/rooms", roomRouter);
-app.use("/api/reception", receptionRouter);
-
-app.use(express.static(path.join(__dirname, "public")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-app.use(notFound);
-app.use(errorHandler);
-
-const PORT = process.env.PORT || 3000;
-
-connectDB()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-      
-      // Khởi chạy Cron Job quét nhắc lịch tự động khi server chạy thành công
-      initReminderCron();
-      console.log("Cron Job for booking reminders has been initialized.");
-    });
-  })
-  .catch(error => {
-    console.error("Failed to initialize the database:", error);
-    process.exit(1);
-  });
-=======
  const roomBody=(body,s,previous={})=>{const b={...previous,...body},floor=Number(b.floor),t=s.roomTypes.find(t=>t._id===b.roomTypeId);if(typeof b.roomNumber!=='string'||!b.roomNumber.trim()||b.roomNumber.length>20||!Number.isInteger(floor)||floor<1||floor>200||!t)D.fail('Số phòng, tầng hoặc loại phòng không hợp lệ.');if(s.rooms.some(r=>r._id!==previous._id&&r.roomNumber===b.roomNumber.trim()&&r.homestayId===t.homestayId))D.fail('Số phòng đã tồn tại.','DUPLICATE',409);const status=b.status||'CLEAN_VACANT';if(!['CLEAN_VACANT','DIRTY_VACANT','MAINTENANCE','OCCUPIED'].includes(status)||(!previous._id&&status==='OCCUPIED'))D.fail('Trạng thái phòng không hợp lệ.');const homestayId=t.homestayId,photo=b.photo??t.photo??'',images=b.images??t.images??[];A.validateMedia(s,photo,images,homestayId);if(b.notes!==undefined&&(typeof b.notes!=='string'||b.notes.length>2000))D.fail('Ghi chú phòng tối đa 2000 ký tự.');return {roomNumber:b.roomNumber.trim(),roomTypeId:t._id,homestayId,floor,status,photo,images:[photo,...images].filter((x,i,a)=>x&&a.indexOf(x)===i),notes:b.notes||''};};
  app.post('/api/admin/rooms',requireRole(['admin']),route(async(req,res)=>ok(res,await mutate(req,s=>{const r={_id:D.id(),...roomBody(req.body,s)};s.rooms.push(r);D.log(s,req.user.username,'CREATE_ROOM',r.roomNumber);return r;}),201)));
  app.put('/api/admin/rooms/:id',requireRole(['admin']),route(async(req,res)=>ok(res,await mutate(req,s=>{D.expire(s);const r=s.rooms.find(r=>r._id===req.params.id);if(!r)D.fail('Không tìm thấy phòng.','NOT_FOUND',404);const next=roomBody(req.body,s,r),reserved=s.bookings.some(b=>b.roomId===r._id&&['PENDING','CONFIRMED','CHECKED_IN'].includes(b.status));if((r.status==='OCCUPIED'&&next.status!==r.status)||(r.status!=='OCCUPIED'&&next.status==='OCCUPIED')||(reserved&&(next.roomTypeId!==r.roomTypeId||next.status==='MAINTENANCE')))D.fail('Phòng đang có booking; không thể đổi loại, chuyển bảo trì hoặc tự đổi trạng thái lưu trú.','STATE_CONFLICT',409);Object.assign(r,next);D.log(s,req.user.username,'UPDATE_ROOM',r.roomNumber);return r;}))));
@@ -167,7 +137,7 @@ connectDB()
   if(permissions!==undefined&&(!Array.isArray(permissions)||permissions.some(p=>!A.defaults[role].includes(p))))D.fail('Quyền vượt phạm vi vai trò.');
   return {username,email,role,homestayIds:[...new Set(homestayIds)],permissions,active:b.active??existing.active??true};
  };
- app.get('/api/admin/users',requireRole(),route(async(req,res)=>ok(res,(await store.read()).users.map(A.safeUser))));
+ app.get('/api/admin/users',requireRole(),route(async(req,res)=>ok(res,(await readRaw(req)).users.map(A.safeUser))));
  app.post('/api/admin/users',requireRole(),route(async(req,res)=>{if(!A.validPassword(req.body.password))D.fail('Mật khẩu tối thiểu 8 ký tự, có chữ và số.');const password=await bcrypt.hash(req.body.password,10);ok(res,await store.mutate(s=>{A.upgrade(s);const u={_id:D.id(),...accountFields(s,req.body),password,sessionVersion:0};s.users.push(u);D.log(s,req.user.username,'CREATE_USER',u.username);return A.safeUser(u);}),201);}));
  app.patch('/api/admin/users/:id',requireRole(),route(async(req,res)=>ok(res,await store.mutate(s=>{A.upgrade(s);const u=s.users.find(u=>u._id===req.params.id);if(!u)D.fail('Không tìm thấy tài khoản.','NOT_FOUND',404);const next=accountFields(s,req.body,u);
   if(u._id===req.user._id&&(!next.active||next.role!=='admin'||!A.can(next,'accounts.update')||!A.can(next,'accounts.view')))D.fail('Không thể tự khoá hoặc bỏ quyền quản trị tài khoản đang dùng.');
@@ -178,14 +148,14 @@ connectDB()
  app.get('/api/reports',requireRole(['admin','report']),route(async(req,res)=>{const r=D.report(await read(req),req.query.month||D.today().slice(0,7));const {bookings,...safe}=r;ok(res,safe);}));
  app.get('/api/reports/export.csv',requireRole(['admin','report']),route(async(req,res)=>{const r=D.report(await read(req),req.query.month||D.today().slice(0,7));const cell=x=>'"'+String(x??'').replace(/^[=+@-]/,"'").replaceAll('"','""')+'"';const rows=[['Mã booking','Loại phòng','Nhận phòng','Trả phòng','Số đêm','Tổng tiền','Tiền cọc','Trạng thái'],...r.bookings.map(b=>[b.bookingCode,b.roomTypeName,b.checkIn,b.checkOut,b.numberOfNights,b.totalAmount,b.depositAmount,D.statusLabels[b.status]])];res.type('text/csv; charset=utf-8').attachment(`HOMESTAY_${r.month}.csv`).send('\uFEFF'+rows.map(row=>row.map(cell).join(',')).join('\r\n'));}));
  app.use(express.static(path.join(__dirname,'public')));app.use((req,res)=>res.status(404).json({success:false,code:'NOT_FOUND',message:'Không tìm thấy trang hoặc API.'}));
- app.use((err,req,res,next)=>{const status=err.status||500;if(status>=500)console.error(err.message);if(err.retryAfter)res.set('Retry-After',String(err.retryAfter));res.status(status).json({success:false,code:err.code||'SERVER_ERROR',message:status>=500&&!['MAIL_UNAVAILABLE','PAYOS_NOT_CONFIGURED','PAYOS_UNAVAILABLE','PAYMENT_BUSY','PAYMENT_MISMATCH'].includes(err.code)?'Lỗi máy chủ. Vui lòng thử lại.':err.message});});return app;
+ app.use((err,req,res,next)=>{const status=err.status||500;if(status>=500)requestErrors.log(err,req,res);if(err.retryAfter)res.set('Retry-After',String(err.retryAfter));res.status(status).json({success:false,code:err.code||'SERVER_ERROR',message:status>=500&&!['MAIL_UNAVAILABLE','PAYOS_NOT_CONFIGURED','PAYOS_UNAVAILABLE','PAYMENT_BUSY','PAYMENT_MISMATCH'].includes(err.code)?'Lỗi máy chủ. Vui lòng thử lại.':err.message});});return app;
 }
 async function main(){
  const mode=process.env.DATA_MODE||'mongo';
  if(!['mongo','file'].includes(mode))throw new Error('DATA_MODE phải là mongo hoặc file.');
  const store=new Store({mode,uri:process.env.MONGODB_URI||'mongodb://127.0.0.1:27017/HOMESTAY_QUY_TEST',file:process.env.HOMESTAY_DATA_FILE||path.join(__dirname,'data/homestay.json')}),secret=process.env.JWT_SECRET;
  try{
-  await store.init();await store.mutate(s=>{D.upgradeData(s);A.upgrade(s);});
+  const existingOnly=process.argv.includes('--existing-data');await store.init({existingOnly});if(!existingOnly)await store.mutate(s=>{D.upgradeData(s);A.upgrade(s);});
   if(!secret||secret==='replace-with-a-long-random-secret')throw new Error('Hãy chạy bash scripts/setup.sh để tạo JWT_SECRET riêng.');
   if(process.env.NODE_ENV==='production'){
    if(mode!=='mongo'||secret.length<32)throw Error('Production cần MongoDB transaction và JWT_SECRET riêng tối thiểu 32 ký tự.');
@@ -204,4 +174,3 @@ async function main(){
  process.on('SIGINT',stop);process.on('SIGTERM',stop);
 }
 if(require.main===module)main().catch(e=>{console.error('Không khởi động được:',e.message);console.error('Kiểm tra MongoDB hoặc dùng npm run setup:demo.');process.exitCode=1;});module.exports={createApp};
->>>>>>> c31a10da1ac88f3723d04fad460b8c53d5c0c7b0

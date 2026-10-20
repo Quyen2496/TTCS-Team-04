@@ -10,6 +10,7 @@ function budgetValue(raw,unit){
 }
 function parse(question,previous={},slots={}){
  const q=P.normalize(question),out={...previous};
+ Object.assign(out,require('./ai-search-profile').parse(question,previous,slots));
  for(const key of ['budget','budgetPeriod','budgetScope','adults','children','childAges','amenities'])if(slots[key]!==undefined)out[key]=slots[key];
  const adults=familyCount(q,'nguoi lon'),children=familyCount(q,'tre em|tre|be');
  if(adults!==undefined||children!==undefined){if(adults!==undefined)out.adults=adults;if(children!==undefined)out.children=children;if(children!==undefined&&children!==previous.children)out.childAges=[];}
@@ -30,7 +31,7 @@ function parse(question,previous={},slots={}){
  if(out.children!==undefined&&(out.childAges||[]).length>out.children)D.fail('Số tuổi đã nhập nhiều hơn số trẻ. Bạn kiểm tra lại số trẻ và tuổi từng bé nhé.');
  return out;
 }
-function hasRoomFollowup(question){return /ngan sach|toi da|khong qua|tre em|nguoi lon|\btuoi\b|ngay mai|hom nay|\d+\s*dem|\b(wifi|dieu hoa|bep|ban cong|ho boi|may giat)\b/.test(P.normalize(question));}
+function hasRoomFollowup(question){return require('./ai-search-profile').isRefinement(question)||/ngan sach|toi da|khong qua|tre em|nguoi lon|\btuoi\b|ngay mai|hom nay|\d+\s*dem|\b(wifi|dieu hoa|bep|ban cong|ho boi|may giat)\b/.test(P.normalize(question));}
 function matches(card,c){
  if(c.budget){const nights=c.checkIn&&c.checkOut?(Date.parse(c.checkOut)-Date.parse(c.checkIn))/86400000:1;let charge=card.price/(c.budgetPeriod==='stay'?1:nights);if(c.budgetScope==='room')charge=card.roomPrices?Math.max(...card.roomPrices)/(c.budgetPeriod==='stay'?1:nights):charge/card.roomCount;if(charge>c.budget)return false;}
  const names=card.amenities.map(P.normalize).join(' ');
@@ -38,6 +39,7 @@ function matches(card,c){
 }
 function note(c){
  const parts=[];
+ parts.push(...require('./ai-search-profile').notes(c));
  if(c.budget)parts.push('ngân sách tối đa '+c.budget.toLocaleString('vi-VN')+' ₫ / '+(c.budgetPeriod==='stay'?'cả kỳ':'đêm')+(c.budgetScope==='room'?' / phòng':' cho cả nhóm'));
  if(c.amenities?.length)parts.push('tiện nghi: '+c.amenities.map(key=>aliases[key]?.[0]||key).join(', '));
  return parts.length?' Mình đã lọc theo '+parts.join('; ')+'.':'';
