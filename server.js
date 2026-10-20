@@ -114,6 +114,69 @@ function createApp(store,secret,options={}){
  })))));
  app.patch('/api/admin/rooms/:id',requireRole(['admin','reception']),route(async(req,res)=>{const status=req.body.status;if(!['CLEAN_VACANT','DIRTY_VACANT','MAINTENANCE'].includes(status))D.fail('Trạng thái phòng không hợp lệ.');ok(res,await mutate(req,s=>{D.expire(s);const r=s.rooms.find(r=>r._id===req.params.id);if(!r)D.fail('Không tìm thấy phòng.','NOT_FOUND',404);if(status==='CLEAN_VACANT'&&r.status==='MAINTENANCE')for(const x of r.incidents||[])if(!x.resolvedDate)x.resolvedDate=D.today();if(r.status==='OCCUPIED')D.fail('Phải trả phòng trước khi đổi trạng thái.','STATE_CONFLICT',409);if(status==='MAINTENANCE'&&s.bookings.some(b=>b.roomId===r._id&&['PENDING','CONFIRMED','CHECKED_IN'].includes(b.status)))D.fail('Phòng đang được giữ hoặc đặt.','STATE_CONFLICT',409);r.status=status;D.log(s,req.user.username,'ROOM_STATUS',r.roomNumber+': '+status);return r;}));}));
 
+<<<<<<< HEAD
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const connectDB = require("./src/config/db");
+
+// Import các routes hiện tại
+const authRoutes = require("./src/modules/auth/auth.routes");
+const lookupRouter = require("./src/modules/lookup/lookup.router");
+const bookingRouter = require("./src/modules/bookings/booking.router");
+const roomRouter = require("./src/modules/rooms/room.router");
+const receptionRouter = require("./src/modules/reception/routes");
+
+// Import Cron Job nhắc lịch tự động
+const { initReminderCron } = require("./src/jobs/reminder.job");
+
+const { notFound, errorHandler } = require("./src/middleware/errorHandler");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "TTCS Team 04 shared API is running"
+  });
+});
+
+app.use("/api/auth", authRoutes);
+app.use("/api/lookup", lookupRouter);
+app.use("/api/bookings", bookingRouter);
+app.use("/api/rooms", roomRouter);
+app.use("/api/reception", receptionRouter);
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.use(notFound);
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 3000;
+
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      
+      // Khởi chạy Cron Job quét nhắc lịch tự động khi server chạy thành công
+      initReminderCron();
+      console.log("Cron Job for booking reminders has been initialized.");
+    });
+  })
+  .catch(error => {
+    console.error("Failed to initialize the database:", error);
+    process.exit(1);
+  });
+=======
  const roomBody=(body,s,previous={})=>{const b={...previous,...body},floor=Number(b.floor),t=s.roomTypes.find(t=>t._id===b.roomTypeId);if(typeof b.roomNumber!=='string'||!b.roomNumber.trim()||b.roomNumber.length>20||!Number.isInteger(floor)||floor<1||floor>200||!t)D.fail('Số phòng, tầng hoặc loại phòng không hợp lệ.');if(s.rooms.some(r=>r._id!==previous._id&&r.roomNumber===b.roomNumber.trim()&&r.homestayId===t.homestayId))D.fail('Số phòng đã tồn tại.','DUPLICATE',409);const status=b.status||'CLEAN_VACANT';if(!['CLEAN_VACANT','DIRTY_VACANT','MAINTENANCE','OCCUPIED'].includes(status)||(!previous._id&&status==='OCCUPIED'))D.fail('Trạng thái phòng không hợp lệ.');const homestayId=t.homestayId,photo=b.photo??t.photo??'',images=b.images??t.images??[];A.validateMedia(s,photo,images,homestayId);if(b.notes!==undefined&&(typeof b.notes!=='string'||b.notes.length>2000))D.fail('Ghi chú phòng tối đa 2000 ký tự.');return {roomNumber:b.roomNumber.trim(),roomTypeId:t._id,homestayId,floor,status,photo,images:[photo,...images].filter((x,i,a)=>x&&a.indexOf(x)===i),notes:b.notes||''};};
  app.post('/api/admin/rooms',requireRole(['admin']),route(async(req,res)=>ok(res,await mutate(req,s=>{const r={_id:D.id(),...roomBody(req.body,s)};s.rooms.push(r);D.log(s,req.user.username,'CREATE_ROOM',r.roomNumber);return r;}),201)));
  app.put('/api/admin/rooms/:id',requireRole(['admin']),route(async(req,res)=>ok(res,await mutate(req,s=>{D.expire(s);const r=s.rooms.find(r=>r._id===req.params.id);if(!r)D.fail('Không tìm thấy phòng.','NOT_FOUND',404);const next=roomBody(req.body,s,r),reserved=s.bookings.some(b=>b.roomId===r._id&&['PENDING','CONFIRMED','CHECKED_IN'].includes(b.status));if((r.status==='OCCUPIED'&&next.status!==r.status)||(r.status!=='OCCUPIED'&&next.status==='OCCUPIED')||(reserved&&(next.roomTypeId!==r.roomTypeId||next.status==='MAINTENANCE')))D.fail('Phòng đang có booking; không thể đổi loại, chuyển bảo trì hoặc tự đổi trạng thái lưu trú.','STATE_CONFLICT',409);Object.assign(r,next);D.log(s,req.user.username,'UPDATE_ROOM',r.roomNumber);return r;}))));
@@ -174,3 +237,4 @@ async function main(){
  process.on('SIGINT',stop);process.on('SIGTERM',stop);
 }
 if(require.main===module)main().catch(e=>{console.error('Không khởi động được:',e.message);console.error('Kiểm tra MongoDB hoặc dùng npm run setup:demo.');process.exitCode=1;});module.exports={createApp};
+>>>>>>> c31a10da1ac88f3723d04fad460b8c53d5c0c7b0
