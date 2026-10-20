@@ -1,0 +1,95 @@
+{
+  "at": "2026-10-19T17:45:44.349Z",
+  "realBrowser": true,
+  "database": "live Atlas",
+  "accountMutations": 0,
+  "fixtureOnly": [
+    "disabled account",
+    "revoked permissions",
+    "stale sessionVersion",
+    "owner foreign property",
+    "guest admin/foreign history"
+  ],
+  "role": "admin",
+  "rows": [
+    {
+      "endpoint": "/api/auth/me",
+      "status": 200,
+      "success": true,
+      "hasData": true,
+      "ms": 450,
+      "build": "36172b4c8e3ff69b",
+      "serverTiming": "atlas_auth_0;dur=440.71, authentication_1;dur=441.05, backend_total_2;dur=441.18",
+      "requestId": "a7c62ab6-1fc6-485a-be4d-c2f051687a11"
+    },
+    {
+      "endpoint": "/api/ai/sessions",
+      "status": 200,
+      "success": true,
+      "hasData": true,
+      "ms": 775,
+      "build": "36172b4c8e3ff69b",
+      "serverTiming": "atlas_auth_0;dur=396.83, authentication_1;dur=397.35, atlas_identity_2;dur=371.34, backend_total_3;dur=768.89",
+      "requestId": "dafeae5c-950b-49ed-a148-0eac499b04c4"
+    },
+    {
+      "endpoint": "/api/ai/sessions/:id",
+      "status": 200,
+      "success": true,
+      "hasData": true,
+      "ms": 885,
+      "build": "36172b4c8e3ff69b",
+      "serverTiming": "atlas_auth_0;dur=332.05, authentication_1;dur=332.38, atlas_identity_2;dur=548.6, backend_total_3;dur=882.15",
+      "requestId": "669c8bf6-109e-4d3a-b9ba-db4e088c6e62"
+    },
+    {
+      "endpoint": "/api/ai/sessions/:id",
+      "status": 404,
+      "success": false,
+      "code": "NOT_FOUND",
+      "hasData": false,
+      "ms": 700,
+      "build": "36172b4c8e3ff69b",
+      "serverTiming": "atlas_auth_0;dur=329.05, authentication_1;dur=329.46, atlas_identity_2;dur=364.73, backend_total_3;dur=694.49",
+      "requestId": "440a30fe-3ad5-4c9f-a19d-3e39df7b5957"
+    },
+    {
+      "endpoint": "/api/admin/state?screen=overview",
+      "status": 401,
+      "success": false,
+      "code": "UNAUTHORIZED",
+      "hasData": false,
+      "ms": 3,
+      "build": "36172b4c8e3ff69b",
+      "serverTiming": "backend_total_0;dur=0.42",
+      "requestId": "dec9cb08-f364-4dee-bbda-6ca8e301f053"
+    },
+    {
+      "endpoint": "/api/ai/sessions",
+      "status": 401,
+      "success": false,
+      "code": "UNAUTHORIZED",
+      "hasData": false,
+      "ms": 2,
+      "build": "36172b4c8e3ff69b",
+      "serverTiming": "backend_total_0;dur=0.38",
+      "requestId": "77546790-babf-44fb-b03c-34691db1ab27"
+    },
+    {
+      "endpoint": "/api/admin/state?screen=overview",
+      "status": 403,
+      "success": false,
+      "code": "FORBIDDEN",
+      "hasData": false,
+      "ms": 289,
+      "build": "36172b4c8e3ff69b",
+      "serverTiming": "atlas_auth_0;dur=285.97, authentication_1;dur=286.34, backend_total_2;dur=286.61",
+      "requestId": "738e376e-05c1-4128-9181-e98d8d9068f8"
+    }
+  ],
+  "ownHistory": {
+    "success": true,
+    "messages": 26
+  },
+  "foreignHistoryTested": true
+}

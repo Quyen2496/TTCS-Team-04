@@ -68,6 +68,7 @@ function routePermission(req){
  if(/^\/api\/guest\/bookings\/[^/]+\/(payment|guest-info)$/.test(p))return 'own-bookings.view';
  if(/^\/api\/guest\/bookings\/[^/]+\/cancel$/.test(p)&&m==='POST')return 'own-bookings.cancel';
  if(p==='/api/admin/state')return null;
+ if(p==='/api/admin/backups'&&m==='POST')return 'system.view';
  if(p==='/api/admin/email-logs')return 'email.view';
  if(p==='/api/admin/operations-status'||p==='/api/admin/security-matrix')return 'system.view';
  if(p.startsWith('/api/admin/invoices'))return 'invoices.view';

@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-19T16:15:47.587Z",
+  "operation": "Store.readIdentity: actual Atlas, no writes",
+  "error": {
+    "name": "MongoServerError",
+    "code": 31275,
+    "message": "Cannot use $elemMatch projection on a nested field.",
+    "stack": "MongoServerError: Cannot use $elemMatch projection on a nested field.\n    at Connection.sendCommand (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:290:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async Connection.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:317:26)\n    at async Server.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\sdam\\server.js:167:29)\n    at async FindOperation.execute (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\find.js:34:16)\n    at async tryOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:199:20)\n    at async executeOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:69:16)\n    at async FindCursor._initialize (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\find_cursor.js:51:26)\n    at async FindCursor.cursorInit (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:495:27)\n    at async FindCursor.fetchBatch (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:527:13)"
+  }
+}

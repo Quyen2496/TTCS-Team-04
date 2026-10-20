@@ -1,0 +1,44 @@
+[
+  {
+    "sample": 1,
+    "projected": false,
+    "ms": 13200.5004,
+    "bytes": 1210056,
+    "rooms": 413
+  },
+  {
+    "sample": 1,
+    "projected": true,
+    "ms": 3603.5921000000017,
+    "bytes": 314778,
+    "rooms": 413
+  },
+  {
+    "sample": 2,
+    "projected": false,
+    "ms": 13175.306499999999,
+    "bytes": 1210056,
+    "rooms": 413
+  },
+  {
+    "sample": 2,
+    "projected": true,
+    "ms": 3609.6229999999996,
+    "bytes": 314778,
+    "rooms": 413
+  },
+  {
+    "sample": 3,
+    "projected": false,
+    "ms": 13167.980600000003,
+    "bytes": 1210056,
+    "rooms": 413
+  },
+  {
+    "sample": 3,
+    "projected": true,
+    "ms": 3641.9956999999995,
+    "bytes": 314778,
+    "rooms": 413
+  }
+]

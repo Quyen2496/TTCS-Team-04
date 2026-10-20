@@ -1,0 +1,114 @@
+{
+  "at": "2026-10-19T16:49:03.470Z",
+  "realBrowser": true,
+  "login": "user-entered admin session",
+  "checks": {
+    "overview": {
+      "rendered": true,
+      "error": "",
+      "network": [
+        {
+          "endpoint": "/api/auth/me",
+          "method": "GET",
+          "status": 200,
+          "ms": 324.7
+        },
+        {
+          "endpoint": "/api/admin/homestays",
+          "method": "GET",
+          "status": 200,
+          "ms": 13526
+        },
+        {
+          "endpoint": "/api/admin/permissions",
+          "method": "GET",
+          "status": 200,
+          "ms": 327.1
+        },
+        {
+          "endpoint": "/api/admin/state",
+          "method": "GET",
+          "status": 200,
+          "ms": 26996.1
+        }
+      ]
+    },
+    "roomsScreen": {
+      "verified": true,
+      "evidence": "UI runner passed table-render assertion before sending the QA conversation"
+    },
+    "chat": {
+      "status": 200,
+      "requestId": "6639175a55f84b9eafe045c0",
+      "backendMs": 1318.93
+    },
+    "historyAfterReload": {
+      "status": 200,
+      "messages": 2,
+      "matchingReply": true,
+      "rendered": true,
+      "network": [
+        {
+          "endpoint": "/api/ai/status",
+          "method": "GET",
+          "status": 200,
+          "ms": 13561.8
+        },
+        {
+          "endpoint": "/api/ai/sessions",
+          "method": "GET",
+          "status": 200,
+          "ms": 651.5
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "ms": 704.8
+        },
+        {
+          "endpoint": "/api/ai/sessions/:id",
+          "method": "GET",
+          "status": 200,
+          "ms": 763.5
+        }
+      ]
+    },
+    "foreignConversation": {
+      "verified": true,
+      "status": 404,
+      "code": "NOT_FOUND",
+      "hasMessages": false
+    },
+    "unauthenticated": 401
+  },
+  "chatTrace": {
+    "at": "2026-10-19T16:34:12.179Z",
+    "requestId": "6639175a55f84b9eafe045c0",
+    "requestKey": "0f68e3a130844675864e91967515228a",
+    "build": "82246f2ee0ba42a9",
+    "status": 200,
+    "spans": [
+      {
+        "stage": "atlas_identity",
+        "ms": 376.91
+      },
+      {
+        "stage": "atlas_public_policy",
+        "ms": 347.42
+      },
+      {
+        "stage": "atlas_identity",
+        "ms": 362.77
+      },
+      {
+        "stage": "atlas_conversation_write",
+        "ms": 558.24
+      },
+      {
+        "stage": "backend_total",
+        "ms": 1318.93
+      }
+    ]
+  }
+}

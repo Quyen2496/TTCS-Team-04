@@ -1,0 +1,1442 @@
+{
+  "at": "2026-10-19T17:27:33.980Z",
+  "label": "baseline",
+  "realBrowser": true,
+  "database": "live Atlas through localhost",
+  "role": "admin",
+  "selectedProperty": false,
+  "runtime": {
+    "build": "90b7e360bcd6ca89",
+    "startedAt": "2026-10-19T17:18:02.783Z"
+  },
+  "samples": [
+    {
+      "screen": "overview",
+      "sample": 1,
+      "uiMs": 7840,
+      "outsideApiMs": 110,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=overview",
+          "method": "GET",
+          "status": 200,
+          "ms": 7730.2,
+          "startMs": 85.80000000447035,
+          "endMs": 7816,
+          "bytes": 468560,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 330.5
+            },
+            {
+              "name": "authentication_1",
+              "ms": 331.25
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7380.31
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7720.5
+            }
+          ],
+          "atlasMs": 7710.81,
+          "authenticationMs": 331.25,
+          "backendMs": 7720.5,
+          "backendOtherMs": 9.6899999999996,
+          "clientAndTransferMs": 9.699999999999818
+        }
+      ]
+    },
+    {
+      "screen": "overview",
+      "sample": 2,
+      "uiMs": 8154,
+      "outsideApiMs": 616,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=overview",
+          "method": "GET",
+          "status": 200,
+          "ms": 7537.7,
+          "startMs": 66.29999999701977,
+          "endMs": 7604,
+          "bytes": 468560,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 316.24
+            },
+            {
+              "name": "authentication_1",
+              "ms": 316.81
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7201.02
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7530.1
+            }
+          ],
+          "atlasMs": 7517.26,
+          "authenticationMs": 316.81,
+          "backendMs": 7530.1,
+          "backendOtherMs": 12.840000000000146,
+          "clientAndTransferMs": 7.599999999999454
+        }
+      ]
+    },
+    {
+      "screen": "overview",
+      "sample": 3,
+      "uiMs": 7819,
+      "outsideApiMs": 70,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=overview",
+          "method": "GET",
+          "status": 200,
+          "ms": 7749.4,
+          "startMs": 40.399999998509884,
+          "endMs": 7789.79999999702,
+          "bytes": 468560,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 291.11
+            },
+            {
+              "name": "authentication_1",
+              "ms": 291.87
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7406.49
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7719.91
+            }
+          ],
+          "atlasMs": 7697.599999999999,
+          "authenticationMs": 291.87,
+          "backendMs": 7719.91,
+          "backendOtherMs": 22.3100000000004,
+          "clientAndTransferMs": 29.48999999999978
+        }
+      ]
+    },
+    {
+      "screen": "owner",
+      "sample": 1,
+      "uiMs": 11191,
+      "outsideApiMs": 538,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=owner",
+          "method": "GET",
+          "status": 200,
+          "ms": 2752.9,
+          "startMs": 73.89999999850988,
+          "endMs": 2826.8000000044703,
+          "bytes": 170702,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 899.65
+            },
+            {
+              "name": "authentication_1",
+              "ms": 900.83
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 1847.77
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 2749.59
+            }
+          ],
+          "atlasMs": 2747.42,
+          "authenticationMs": 900.83,
+          "backendMs": 2749.59,
+          "backendOtherMs": 2.1700000000000728,
+          "clientAndTransferMs": 3.3099999999999454
+        },
+        {
+          "endpoint": "/api/reports/revenue?from=2026-10-01&to=2026-10-20",
+          "method": "GET",
+          "status": 200,
+          "ms": 7900.1,
+          "startMs": 2839.5,
+          "endMs": 10739.60000000149,
+          "bytes": 18910,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 309.28
+            },
+            {
+              "name": "authentication_1",
+              "ms": 310.12
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7569.35
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7896.81
+            }
+          ],
+          "atlasMs": 7878.63,
+          "authenticationMs": 310.12,
+          "backendMs": 7896.81,
+          "backendOtherMs": 18.18000000000029,
+          "clientAndTransferMs": 3.2899999999999636
+        }
+      ]
+    },
+    {
+      "screen": "owner",
+      "sample": 2,
+      "uiMs": 10335,
+      "outsideApiMs": 79,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=owner",
+          "method": "GET",
+          "status": 200,
+          "ms": 2210.1,
+          "startMs": 57.5,
+          "endMs": 2267.60000000149,
+          "bytes": 170702,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 332.12
+            },
+            {
+              "name": "authentication_1",
+              "ms": 333.38
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 1868.38
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 2205.72
+            }
+          ],
+          "atlasMs": 2200.5,
+          "authenticationMs": 333.38,
+          "backendMs": 2205.72,
+          "backendOtherMs": 5.2199999999998,
+          "clientAndTransferMs": 4.380000000000109
+        },
+        {
+          "endpoint": "/api/reports/revenue?from=2026-10-01&to=2026-10-20",
+          "method": "GET",
+          "status": 200,
+          "ms": 8045.5,
+          "startMs": 2274,
+          "endMs": 10319.5,
+          "bytes": 18910,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 407.06
+            },
+            {
+              "name": "authentication_1",
+              "ms": 407.59
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7586.89
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 8043.28
+            }
+          ],
+          "atlasMs": 7993.950000000001,
+          "authenticationMs": 407.59,
+          "backendMs": 8043.28,
+          "backendOtherMs": 49.32999999999902,
+          "clientAndTransferMs": 2.2200000000002547
+        }
+      ]
+    },
+    {
+      "screen": "owner",
+      "sample": 3,
+      "uiMs": 10067,
+      "outsideApiMs": 104,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=owner",
+          "method": "GET",
+          "status": 200,
+          "ms": 2167.1,
+          "startMs": 38,
+          "endMs": 2205.10000000149,
+          "bytes": 170702,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 284.94
+            },
+            {
+              "name": "authentication_1",
+              "ms": 285.29
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 1871.75
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 2163.14
+            }
+          ],
+          "atlasMs": 2156.69,
+          "authenticationMs": 285.29,
+          "backendMs": 2163.14,
+          "backendOtherMs": 6.449999999999818,
+          "clientAndTransferMs": 3.9600000000000364
+        },
+        {
+          "endpoint": "/api/reports/revenue?from=2026-10-01&to=2026-10-20",
+          "method": "GET",
+          "status": 200,
+          "ms": 7795.9,
+          "startMs": 2208.4000000059605,
+          "endMs": 10004.30000000447,
+          "bytes": 18910,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 283.15
+            },
+            {
+              "name": "authentication_1",
+              "ms": 283.56
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7494.72
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7793.7
+            }
+          ],
+          "atlasMs": 7777.87,
+          "authenticationMs": 283.56,
+          "backendMs": 7793.7,
+          "backendOtherMs": 15.829999999999927,
+          "clientAndTransferMs": 2.199999999999818
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "sample": 1,
+      "uiMs": 16180,
+      "outsideApiMs": 894,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception",
+          "method": "GET",
+          "status": 200,
+          "ms": 7671.7,
+          "startMs": 53.19999999552965,
+          "endMs": 7724.89999999851,
+          "bytes": 468638,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 344.43
+            },
+            {
+              "name": "authentication_1",
+              "ms": 344.91
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7305.42
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7663.24
+            }
+          ],
+          "atlasMs": 7649.85,
+          "authenticationMs": 344.91,
+          "backendMs": 7663.24,
+          "backendOtherMs": 13.389999999999418,
+          "clientAndTransferMs": 8.460000000000036
+        },
+        {
+          "endpoint": "/api/admin/shortage-alerts?days=14",
+          "method": "GET",
+          "status": 200,
+          "ms": 7613.8,
+          "startMs": 7749.0999999940395,
+          "endMs": 15362.89999999851,
+          "bytes": 26,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 284.75
+            },
+            {
+              "name": "authentication_1",
+              "ms": 285.18
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7295.35
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7610.58
+            }
+          ],
+          "atlasMs": 7580.1,
+          "authenticationMs": 285.18,
+          "backendMs": 7610.58,
+          "backendOtherMs": 30.479999999999563,
+          "clientAndTransferMs": 3.2200000000002547
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "sample": 2,
+      "uiMs": 16074,
+      "outsideApiMs": 508,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception",
+          "method": "GET",
+          "status": 200,
+          "ms": 7935.6,
+          "startMs": 41.70000000298023,
+          "endMs": 7977.30000000447,
+          "bytes": 468638,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 329.98
+            },
+            {
+              "name": "authentication_1",
+              "ms": 330.54
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7583.28
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7927.79
+            }
+          ],
+          "atlasMs": 7913.26,
+          "authenticationMs": 330.54,
+          "backendMs": 7927.79,
+          "backendOtherMs": 14.529999999999745,
+          "clientAndTransferMs": 7.8100000000004
+        },
+        {
+          "endpoint": "/api/admin/shortage-alerts?days=14",
+          "method": "GET",
+          "status": 200,
+          "ms": 7630.3,
+          "startMs": 8001.20000000298,
+          "endMs": 15631.5,
+          "bytes": 26,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 305.08
+            },
+            {
+              "name": "authentication_1",
+              "ms": 305.44
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7287.9
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7627.42
+            }
+          ],
+          "atlasMs": 7592.98,
+          "authenticationMs": 305.44,
+          "backendMs": 7627.42,
+          "backendOtherMs": 34.44000000000051,
+          "clientAndTransferMs": 2.880000000000109
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "sample": 3,
+      "uiMs": 16153,
+      "outsideApiMs": 669,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception",
+          "method": "GET",
+          "status": 200,
+          "ms": 7612.1,
+          "startMs": 37.70000000298023,
+          "endMs": 7649.79999999702,
+          "bytes": 468638,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 330.22
+            },
+            {
+              "name": "authentication_1",
+              "ms": 330.5
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7270.66
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7606.74
+            }
+          ],
+          "atlasMs": 7600.88,
+          "authenticationMs": 330.5,
+          "backendMs": 7606.74,
+          "backendOtherMs": 5.859999999999673,
+          "clientAndTransferMs": 5.360000000000582
+        },
+        {
+          "endpoint": "/api/admin/shortage-alerts?days=14",
+          "method": "GET",
+          "status": 200,
+          "ms": 7872.4,
+          "startMs": 7669.89999999851,
+          "endMs": 15542.29999999702,
+          "bytes": 26,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 281.3
+            },
+            {
+              "name": "authentication_1",
+              "ms": 281.64
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7572.7
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7868.17
+            }
+          ],
+          "atlasMs": 7854,
+          "authenticationMs": 281.64,
+          "backendMs": 7868.17,
+          "backendOtherMs": 14.170000000000073,
+          "clientAndTransferMs": 4.229999999999563
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 1,
+      "uiMs": 8133,
+      "outsideApiMs": 96,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms",
+          "method": "GET",
+          "status": 200,
+          "ms": 8037.2,
+          "startMs": 39.5,
+          "endMs": 8076.69999999553,
+          "bytes": 468638,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 405.32
+            },
+            {
+              "name": "authentication_1",
+              "ms": 405.66
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7617.38
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 8030.97
+            }
+          ],
+          "atlasMs": 8022.7,
+          "authenticationMs": 405.66,
+          "backendMs": 8030.97,
+          "backendOtherMs": 8.270000000000437,
+          "clientAndTransferMs": 6.229999999999563
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 2,
+      "uiMs": 7827,
+      "outsideApiMs": 63,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms",
+          "method": "GET",
+          "status": 200,
+          "ms": 7763.8,
+          "startMs": 39.100000001490116,
+          "endMs": 7802.89999999851,
+          "bytes": 468638,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 282.84
+            },
+            {
+              "name": "authentication_1",
+              "ms": 283.13
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7466.03
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7756.36
+            }
+          ],
+          "atlasMs": 7748.87,
+          "authenticationMs": 283.13,
+          "backendMs": 7756.36,
+          "backendOtherMs": 7.489999999999782,
+          "clientAndTransferMs": 7.440000000000509
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 3,
+      "uiMs": 8141,
+      "outsideApiMs": 322,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms",
+          "method": "GET",
+          "status": 200,
+          "ms": 7819,
+          "startMs": 42.80000000447035,
+          "endMs": 7861.80000000447,
+          "bytes": 468638,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 281.93
+            },
+            {
+              "name": "authentication_1",
+              "ms": 282.29
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7520.37
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7809.98
+            }
+          ],
+          "atlasMs": 7802.3,
+          "authenticationMs": 282.29,
+          "backendMs": 7809.98,
+          "backendOtherMs": 7.6799999999993815,
+          "clientAndTransferMs": 9.020000000000437
+        }
+      ]
+    },
+    {
+      "screen": "reports",
+      "sample": 1,
+      "uiMs": 10319,
+      "outsideApiMs": 374,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reports",
+          "method": "GET",
+          "status": 200,
+          "ms": 2214.2,
+          "startMs": 47.100000001490116,
+          "endMs": 2261.3000000044703,
+          "bytes": 170702,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 325.77
+            },
+            {
+              "name": "authentication_1",
+              "ms": 326.15
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 1855.03
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 2183.33
+            }
+          ],
+          "atlasMs": 2180.8,
+          "authenticationMs": 326.15,
+          "backendMs": 2183.33,
+          "backendOtherMs": 2.5299999999997453,
+          "clientAndTransferMs": 30.86999999999989
+        },
+        {
+          "endpoint": "/api/reports/revenue?from=2026-10-01&to=2026-10-20",
+          "method": "GET",
+          "status": 200,
+          "ms": 7730.9,
+          "startMs": 2266.8000000044703,
+          "endMs": 9997.70000000298,
+          "bytes": 18910,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 282.59
+            },
+            {
+              "name": "authentication_1",
+              "ms": 282.92
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7438.25
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7729.04
+            }
+          ],
+          "atlasMs": 7720.84,
+          "authenticationMs": 282.92,
+          "backendMs": 7729.04,
+          "backendOtherMs": 8.199999999999818,
+          "clientAndTransferMs": 1.8599999999996726
+        }
+      ]
+    },
+    {
+      "screen": "reports",
+      "sample": 2,
+      "uiMs": 10150,
+      "outsideApiMs": 206,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reports",
+          "method": "GET",
+          "status": 200,
+          "ms": 2233.8,
+          "startMs": 45,
+          "endMs": 2278.7999999970198,
+          "bytes": 170702,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 377.92
+            },
+            {
+              "name": "authentication_1",
+              "ms": 378.21
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 1851.47
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 2231.34
+            }
+          ],
+          "atlasMs": 2229.39,
+          "authenticationMs": 378.21,
+          "backendMs": 2231.34,
+          "backendOtherMs": 1.9500000000002728,
+          "clientAndTransferMs": 2.4600000000000364
+        },
+        {
+          "endpoint": "/api/reports/revenue?from=2026-10-01&to=2026-10-20",
+          "method": "GET",
+          "status": 200,
+          "ms": 7710.5,
+          "startMs": 2285.10000000149,
+          "endMs": 9995.60000000149,
+          "bytes": 18910,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 290.56
+            },
+            {
+              "name": "authentication_1",
+              "ms": 290.86
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7410
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7708.41
+            }
+          ],
+          "atlasMs": 7700.56,
+          "authenticationMs": 290.86,
+          "backendMs": 7708.41,
+          "backendOtherMs": 7.849999999999454,
+          "clientAndTransferMs": 2.0900000000001455
+        }
+      ]
+    },
+    {
+      "screen": "reports",
+      "sample": 3,
+      "uiMs": 10137,
+      "outsideApiMs": 383,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reports",
+          "method": "GET",
+          "status": 200,
+          "ms": 2221.3,
+          "startMs": 48,
+          "endMs": 2269.3000000044703,
+          "bytes": 170702,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 366.01
+            },
+            {
+              "name": "authentication_1",
+              "ms": 366.81
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 1850.11
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 2218.51
+            }
+          ],
+          "atlasMs": 2216.12,
+          "authenticationMs": 366.81,
+          "backendMs": 2218.51,
+          "backendOtherMs": 2.3900000000003274,
+          "clientAndTransferMs": 2.7899999999999636
+        },
+        {
+          "endpoint": "/api/reports/revenue?from=2026-10-01&to=2026-10-20",
+          "method": "GET",
+          "status": 200,
+          "ms": 7532.6,
+          "startMs": 2275.5,
+          "endMs": 9808.10000000149,
+          "bytes": 18910,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 287.22
+            },
+            {
+              "name": "authentication_1",
+              "ms": 287.55
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7234.78
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7530.27
+            }
+          ],
+          "atlasMs": 7522,
+          "authenticationMs": 287.55,
+          "backendMs": 7530.27,
+          "backendOtherMs": 8.270000000000437,
+          "clientAndTransferMs": 2.3299999999999272
+        }
+      ]
+    },
+    {
+      "screen": "invoices",
+      "sample": 1,
+      "uiMs": 9128,
+      "outsideApiMs": 995,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=invoices",
+          "method": "GET",
+          "status": 200,
+          "ms": 564.4,
+          "startMs": 44.30000000447035,
+          "endMs": 608.7000000029802,
+          "bytes": 33328,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 283.82
+            },
+            {
+              "name": "authentication_1",
+              "ms": 284.16
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 277.64
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 562.23
+            }
+          ],
+          "atlasMs": 561.46,
+          "authenticationMs": 284.16,
+          "backendMs": 562.23,
+          "backendOtherMs": 0.7699999999999818,
+          "clientAndTransferMs": 2.169999999999959
+        },
+        {
+          "endpoint": "/api/admin/invoices",
+          "method": "GET",
+          "status": 200,
+          "ms": 7568.2,
+          "startMs": 612.3000000044703,
+          "endMs": 8180.5,
+          "bytes": 640,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 282.63
+            },
+            {
+              "name": "authentication_1",
+              "ms": 282.98
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7280.27
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7563.88
+            }
+          ],
+          "atlasMs": 7562.900000000001,
+          "authenticationMs": 282.98,
+          "backendMs": 7563.88,
+          "backendOtherMs": 0.9799999999995634,
+          "clientAndTransferMs": 4.319999999999709
+        }
+      ]
+    },
+    {
+      "screen": "invoices",
+      "sample": 2,
+      "uiMs": 9161,
+      "outsideApiMs": 886,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=invoices",
+          "method": "GET",
+          "status": 200,
+          "ms": 658.3,
+          "startMs": 74.30000000447035,
+          "endMs": 732.6000000014901,
+          "bytes": 33328,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 331.69
+            },
+            {
+              "name": "authentication_1",
+              "ms": 331.98
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 324.35
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 656.64
+            }
+          ],
+          "atlasMs": 656.04,
+          "authenticationMs": 331.98,
+          "backendMs": 656.64,
+          "backendOtherMs": 0.6000000000000227,
+          "clientAndTransferMs": 1.6599999999999682
+        },
+        {
+          "endpoint": "/api/admin/invoices",
+          "method": "GET",
+          "status": 200,
+          "ms": 7616.5,
+          "startMs": 735.9000000059605,
+          "endMs": 8352.40000000596,
+          "bytes": 640,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 327.79
+            },
+            {
+              "name": "authentication_1",
+              "ms": 328.25
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7285.7
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7614.39
+            }
+          ],
+          "atlasMs": 7613.49,
+          "authenticationMs": 328.25,
+          "backendMs": 7614.39,
+          "backendOtherMs": 0.9000000000005457,
+          "clientAndTransferMs": 2.1099999999996726
+        }
+      ]
+    },
+    {
+      "screen": "invoices",
+      "sample": 3,
+      "uiMs": 9132,
+      "outsideApiMs": 559,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=invoices",
+          "method": "GET",
+          "status": 200,
+          "ms": 665,
+          "startMs": 41.399999998509884,
+          "endMs": 706.3999999985099,
+          "bytes": 33328,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 332.43
+            },
+            {
+              "name": "authentication_1",
+              "ms": 332.8
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 322.64
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 661.45
+            }
+          ],
+          "atlasMs": 655.0699999999999,
+          "authenticationMs": 332.8,
+          "backendMs": 661.45,
+          "backendOtherMs": 6.380000000000109,
+          "clientAndTransferMs": 3.5499999999999545
+        },
+        {
+          "endpoint": "/api/admin/invoices",
+          "method": "GET",
+          "status": 200,
+          "ms": 7907.6,
+          "startMs": 714.7999999970198,
+          "endMs": 8622.39999999851,
+          "bytes": 640,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 324.11
+            },
+            {
+              "name": "authentication_1",
+              "ms": 324.39
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7581.28
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7905.96
+            }
+          ],
+          "atlasMs": 7905.389999999999,
+          "authenticationMs": 324.39,
+          "backendMs": 7905.96,
+          "backendOtherMs": 0.5700000000006185,
+          "clientAndTransferMs": 1.6400000000003274
+        }
+      ]
+    },
+    {
+      "screen": "emails",
+      "sample": 1,
+      "uiMs": 9743,
+      "outsideApiMs": 1039,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=emails",
+          "method": "GET",
+          "status": 200,
+          "ms": 644.1,
+          "startMs": 34.79999999701977,
+          "endMs": 678.8999999985099,
+          "bytes": 33328,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 323.24
+            },
+            {
+              "name": "authentication_1",
+              "ms": 323.58
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 318.52
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 642.55
+            }
+          ],
+          "atlasMs": 641.76,
+          "authenticationMs": 323.58,
+          "backendMs": 642.55,
+          "backendOtherMs": 0.7899999999999636,
+          "clientAndTransferMs": 1.5500000000000682
+        },
+        {
+          "endpoint": "/api/admin/email-logs?page=1&type=&status=&bookingCode=",
+          "method": "GET",
+          "status": 200,
+          "ms": 8059.7,
+          "startMs": 685.2999999970198,
+          "endMs": 8745,
+          "bytes": 11174,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 323.8
+            },
+            {
+              "name": "authentication_1",
+              "ms": 324.09
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7733.03
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 8057.69
+            }
+          ],
+          "atlasMs": 8056.83,
+          "authenticationMs": 324.09,
+          "backendMs": 8057.69,
+          "backendOtherMs": 0.8599999999996726,
+          "clientAndTransferMs": 2.0100000000002183
+        }
+      ]
+    },
+    {
+      "screen": "emails",
+      "sample": 2,
+      "uiMs": 9140,
+      "outsideApiMs": 576,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=emails",
+          "method": "GET",
+          "status": 200,
+          "ms": 650.4,
+          "startMs": 44.80000000447035,
+          "endMs": 695.2000000029802,
+          "bytes": 33328,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 329.02
+            },
+            {
+              "name": "authentication_1",
+              "ms": 329.36
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 318.85
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 648.65
+            }
+          ],
+          "atlasMs": 647.87,
+          "authenticationMs": 329.36,
+          "backendMs": 648.65,
+          "backendOtherMs": 0.7799999999999727,
+          "clientAndTransferMs": 1.75
+        },
+        {
+          "endpoint": "/api/admin/email-logs?page=1&type=&status=&bookingCode=",
+          "method": "GET",
+          "status": 200,
+          "ms": 7913.9,
+          "startMs": 699.3000000044703,
+          "endMs": 8613.20000000298,
+          "bytes": 11174,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 323.71
+            },
+            {
+              "name": "authentication_1",
+              "ms": 324.01
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7587.3
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7911.9
+            }
+          ],
+          "atlasMs": 7911.01,
+          "authenticationMs": 324.01,
+          "backendMs": 7911.9,
+          "backendOtherMs": 0.8899999999994179,
+          "clientAndTransferMs": 2
+        }
+      ]
+    },
+    {
+      "screen": "emails",
+      "sample": 3,
+      "uiMs": 8757,
+      "outsideApiMs": 192,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=emails",
+          "method": "GET",
+          "status": 200,
+          "ms": 650,
+          "startMs": 35.399999998509884,
+          "endMs": 685.3999999985099,
+          "bytes": 33328,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 326.56
+            },
+            {
+              "name": "authentication_1",
+              "ms": 326.87
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 320.67
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 647.94
+            }
+          ],
+          "atlasMs": 647.23,
+          "authenticationMs": 326.87,
+          "backendMs": 647.94,
+          "backendOtherMs": 0.7100000000000364,
+          "clientAndTransferMs": 2.0599999999999454
+        },
+        {
+          "endpoint": "/api/admin/email-logs?page=1&type=&status=&bookingCode=",
+          "method": "GET",
+          "status": 200,
+          "ms": 7914.8,
+          "startMs": 688.6999999955297,
+          "endMs": 8603.5,
+          "bytes": 11174,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 323.68
+            },
+            {
+              "name": "authentication_1",
+              "ms": 323.99
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 7588.42
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 7912.9
+            }
+          ],
+          "atlasMs": 7912.1,
+          "authenticationMs": 323.99,
+          "backendMs": 7912.9,
+          "backendOtherMs": 0.7999999999992724,
+          "clientAndTransferMs": 1.9000000000005457
+        }
+      ]
+    }
+  ],
+  "skipped": [],
+  "summary": [
+    {
+      "screen": "overview",
+      "n": 3,
+      "firstMs": 7840,
+      "medianMs": 7840,
+      "warmMedianMs": 7986.5,
+      "maxMs": 8154,
+      "errors": 0
+    },
+    {
+      "screen": "owner",
+      "n": 3,
+      "firstMs": 11191,
+      "medianMs": 10335,
+      "warmMedianMs": 10201,
+      "maxMs": 11191,
+      "errors": 0
+    },
+    {
+      "screen": "reception",
+      "n": 3,
+      "firstMs": 16180,
+      "medianMs": 16153,
+      "warmMedianMs": 16113.5,
+      "maxMs": 16180,
+      "errors": 0
+    },
+    {
+      "screen": "rooms",
+      "n": 3,
+      "firstMs": 8133,
+      "medianMs": 8133,
+      "warmMedianMs": 7984,
+      "maxMs": 8141,
+      "errors": 0
+    },
+    {
+      "screen": "reports",
+      "n": 3,
+      "firstMs": 10319,
+      "medianMs": 10150,
+      "warmMedianMs": 10143.5,
+      "maxMs": 10319,
+      "errors": 0
+    },
+    {
+      "screen": "invoices",
+      "n": 3,
+      "firstMs": 9128,
+      "medianMs": 9132,
+      "warmMedianMs": 9146.5,
+      "maxMs": 9161,
+      "errors": 0
+    },
+    {
+      "screen": "emails",
+      "n": 3,
+      "firstMs": 9743,
+      "medianMs": 9140,
+      "warmMedianMs": 8948.5,
+      "maxMs": 9743,
+      "errors": 0
+    }
+  ]
+}

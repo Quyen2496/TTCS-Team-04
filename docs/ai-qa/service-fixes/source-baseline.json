@@ -1,0 +1,153 @@
+{
+  "capturedAt": "2026-10-19T15:20:54.325Z",
+  "pid": 22356,
+  "startedAt": "2026-10-19T22:03:41+07:00",
+  "cwd": "D:\\CodeGym_project\\HOMESTAY\\HOMESTAY",
+  "files": [
+    {
+      "path": "server.js",
+      "sha256": "2ff98eeb79052a8a8aaa7ba7a591ee726e391f006acde8b12504a97f58be64dd",
+      "mtime": "2026-10-19T14:45:15.299Z"
+    },
+    {
+      "path": "public/js/assistant.js",
+      "sha256": "3ad665e0db82bcd832c87509423f2e083d3942ec933f5b9f77eb51d0f5447814",
+      "mtime": "2026-10-19T14:54:51.986Z"
+    },
+    {
+      "path": "src/ai-answer-contract.js",
+      "sha256": "7f4e04447b24b554a0a6ff9758c58e2688ca729a670d6def02c110913c56fba9",
+      "mtime": "2026-10-19T14:50:25.145Z"
+    },
+    {
+      "path": "src/ai-capability.js",
+      "sha256": "1121961972abf532ae5222e4ca993e3e0d7fbacdfec6053c13e61bbea0d3d99b",
+      "mtime": "2026-10-19T14:53:11.877Z"
+    },
+    {
+      "path": "src/ai-conversation.js",
+      "sha256": "98c26a110870947e453d4471c3bcb2ef3fabd537219ad97341079c0fcb97e25e",
+      "mtime": "2026-10-19T14:59:50.196Z"
+    },
+    {
+      "path": "src/ai-data.js",
+      "sha256": "de8a8e462a3d4fe2c675e5df874e2ac101e59d59b98bfef886fac71eab772672",
+      "mtime": "2026-10-19T14:47:37.938Z"
+    },
+    {
+      "path": "src/ai-dialogue.js",
+      "sha256": "f9280e859d6fce35e9d22fdd671b1794760da4d624ea611f09fec1a7ec97e90a",
+      "mtime": "2026-10-19T14:59:50.548Z"
+    },
+    {
+      "path": "src/ai-explanation.js",
+      "sha256": "3cca6d5c4b9b323f6f721c7f602c9b66bc2398ba060a30cfa1708d0ed8bf9a8e",
+      "mtime": "2026-10-18T18:40:09.694Z"
+    },
+    {
+      "path": "src/ai-export.js",
+      "sha256": "50f8465d8a4ea8c6daec33c1e0136803eefdb21702299e918c06c1e14104f2b3",
+      "mtime": "2026-10-16T14:00:19.152Z"
+    },
+    {
+      "path": "src/ai-guest-catalog.js",
+      "sha256": "7ecb246cb4ba806119ad199360397fde57563de24524b5b67400a05a245a8eed",
+      "mtime": "2026-10-19T10:00:57.080Z"
+    },
+    {
+      "path": "src/ai-inventory.js",
+      "sha256": "6a3b0529de6feb6b9cbc695dc73f59ee298010a9aea16e5c3cdfbb30ca0d79e4",
+      "mtime": "2026-10-19T14:50:00.014Z"
+    },
+    {
+      "path": "src/ai-knowledge.js",
+      "sha256": "93c6592d4f56cf9f1c2d6ef2fd01e2e1f09e86a833a915ecdc017808fbd6bcfc",
+      "mtime": "2026-10-18T17:56:31.222Z"
+    },
+    {
+      "path": "src/ai-narration.js",
+      "sha256": "5855249a271aaa7da4e4e4e666aeda7e8ce91c36bb20a0eef9edbf80d8ec0ddb",
+      "mtime": "2026-10-18T17:01:14.668Z"
+    },
+    {
+      "path": "src/ai-output-schema.js",
+      "sha256": "cc2af4ca0772f8547429133f0721da7d2fd227563b7eb698218311d01708c01b",
+      "mtime": "2026-10-18T18:55:08.355Z"
+    },
+    {
+      "path": "src/ai-policy.js",
+      "sha256": "30d0f79d63717b1891d83cfd3c24753f45586573b8a12c9c85d94481f3b0cc2f",
+      "mtime": "2026-10-19T14:44:29.655Z"
+    },
+    {
+      "path": "src/ai-preferences.js",
+      "sha256": "62640397f0fc742090d1e92ce64c46329ff3e2335db21c87c90dcba624efbbc6",
+      "mtime": "2026-10-18T19:28:28.787Z"
+    },
+    {
+      "path": "src/ai-provider.js",
+      "sha256": "efaa2b017551b556e0dbf484b558a579bfb5a95df697ce183c4a5107839c0c97",
+      "mtime": "2026-10-19T14:48:30.761Z"
+    },
+    {
+      "path": "src/ai-public-info.js",
+      "sha256": "40c432aac0b8fc00ea4da1d21a988754d0f8bb49485d51b5ff17dad0b42970e8",
+      "mtime": "2026-10-19T14:44:29.693Z"
+    },
+    {
+      "path": "src/ai-public.js",
+      "sha256": "4f4eff5bef63298247f52e1cdd28e7fbd220d666b8bdbee9f36ec6eb7570b7ed",
+      "mtime": "2026-10-19T14:48:31.810Z"
+    },
+    {
+      "path": "src/ai-query-scope.js",
+      "sha256": "40e92d43ce7c871b8479f4fc5a1f422915a2efa9e58e6cc50710dab5470ae15c",
+      "mtime": "2026-10-19T14:51:55.459Z"
+    },
+    {
+      "path": "src/ai-routes.js",
+      "sha256": "8916c15394e7b495e65d9ac20523ab9b3abf1b509ba91ee9f5df1aca6c3f7c72",
+      "mtime": "2026-10-19T14:52:05.995Z"
+    },
+    {
+      "path": "src/ai-scope.js",
+      "sha256": "ac07f28ee610989ae65478607df37e850de55e419dc3298b012181bf40effec4",
+      "mtime": "2026-10-19T14:44:29.694Z"
+    },
+    {
+      "path": "src/ai-search-profile.js",
+      "sha256": "cc406c9d6166b0a8583edf04c1039e0f73baaeafc2b10f2b3eb1c67bbdaf6343",
+      "mtime": "2026-10-19T10:00:57.081Z"
+    },
+    {
+      "path": "src/ai-service-info.js",
+      "sha256": "69e21727e64a160cc0bb5602214b433149a0c3994896c3995e0f020394115ddc",
+      "mtime": "2026-10-19T14:53:12.214Z"
+    },
+    {
+      "path": "src/ai-service-voice.js",
+      "sha256": "4108c4073d38250cde39e1c7039c3a0ef63b74497e8e60d2ec2a8a593389468f",
+      "mtime": "2026-10-19T10:00:57.081Z"
+    },
+    {
+      "path": "src/ai-setup.js",
+      "sha256": "df979cb12f65c45b89f3c37be702ac1921d9a081eecf0e2938ab1c4c6daeb20c",
+      "mtime": "2026-10-16T14:00:19.154Z"
+    },
+    {
+      "path": "src/ai-transport.js",
+      "sha256": "ebdd328d37fcb9031792283eb600260d1d19f649a0a12feeffe2537ccb5d73be",
+      "mtime": "2026-10-19T14:55:46.260Z"
+    },
+    {
+      "path": "src/ai-understanding.js",
+      "sha256": "9ca0ace4b894b27a053dc6dbe9902873185de6034be5eded22a86f1fbcc09a4e",
+      "mtime": "2026-10-19T14:53:12.936Z"
+    },
+    {
+      "path": "src/ai-visibility.js",
+      "sha256": "516756d70c8395f9e8d7a502aa38b8c8ed942e0bbafa5c30caecd2140fbc39cc",
+      "mtime": "2026-10-19T10:00:57.081Z"
+    }
+  ]
+}

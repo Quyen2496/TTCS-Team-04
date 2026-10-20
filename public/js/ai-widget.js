@@ -2,7 +2,7 @@
 (()=>{
  if(document.getElementById('hs-ai-widget')||window.parent!==window)return;
  let user;try{user=JSON.parse(sessionStorage.getItem('hs_user'));}catch{}
- if(!user||!sessionStorage.getItem('hs_token'))return;
+ if(!user||!sessionStorage.getItem('hs_token'))user={_id:'visitor',role:'guest'};
  const key='hs_ai_widget_'+(user._id||user.username),threadKey='hs_ai_session_'+(user._id||user.username),margin=10,size=56;
  const read=()=>{try{return JSON.parse(sessionStorage.getItem(key)||'{}')||{};}catch{return {};}};
  const saved=read();let expanded=saved.open===true,frame=null,drag=null,suppressClick=false,sessionId=sessionStorage.getItem(threadKey)||'',returnFocus=null;

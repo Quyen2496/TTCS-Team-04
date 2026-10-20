@@ -1,0 +1,62 @@
+[
+  {
+    "path": "public/admin.html",
+    "matchesPackage": true
+  },
+  {
+    "path": "public/js/admin.js",
+    "matchesPackage": true
+  },
+  {
+    "path": "scripts/check-performance.cjs",
+    "matchesPackage": true
+  },
+  {
+    "path": "server.js",
+    "matchesPackage": false
+  },
+  {
+    "path": "src/ai-telemetry.js",
+    "matchesPackage": true
+  },
+  {
+    "path": "src/guest-routes.js",
+    "matchesPackage": true
+  },
+  {
+    "path": "src/platform-routes.js",
+    "matchesPackage": true
+  },
+  {
+    "path": "src/read-model.js",
+    "matchesPackage": false
+  },
+  {
+    "path": "src/sprint4-routes.js",
+    "matchesPackage": true
+  },
+  {
+    "path": "src/store.js",
+    "matchesPackage": false
+  },
+  {
+    "path": "test/ai-store-atlas-readonly.test.js",
+    "matchesPackage": false
+  },
+  {
+    "path": "test/ai-store-projection.test.js",
+    "matchesPackage": true
+  },
+  {
+    "path": "test/helpers/performance-fixture.cjs",
+    "matchesPackage": true
+  },
+  {
+    "path": "test/helpers/projection-fixture.cjs",
+    "matchesPackage": false
+  },
+  {
+    "path": "test/performance-read.test.js",
+    "matchesPackage": false
+  }
+]

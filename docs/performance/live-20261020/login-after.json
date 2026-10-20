@@ -1,0 +1,34 @@
+{
+  "realBrowser": true,
+  "additionalApiSamples": 2,
+  "uiWaitIncludesBenchmarkReplays": true,
+  "samples": [
+    {
+      "at": "2026-10-19T17:43:24.863Z",
+      "endpoint": "/api/auth/login",
+      "method": "POST",
+      "status": 200,
+      "headersMs": 479.689,
+      "serverTiming": "atlas_login_0;dur=402.4, backend_total_1;dur=471.23",
+      "build": "36172b4c8e3ff69b"
+    },
+    {
+      "at": "2026-10-19T17:43:25.291Z",
+      "endpoint": "/api/auth/login",
+      "method": "POST",
+      "status": 200,
+      "headersMs": 427.485,
+      "serverTiming": "atlas_login_0;dur=352.76, backend_total_1;dur=426.13",
+      "build": "36172b4c8e3ff69b"
+    },
+    {
+      "at": "2026-10-19T17:43:25.742Z",
+      "endpoint": "/api/auth/login",
+      "method": "POST",
+      "status": 200,
+      "headersMs": 448.242,
+      "serverTiming": "atlas_login_0;dur=371.22, backend_total_1;dur=446.96",
+      "build": "36172b4c8e3ff69b"
+    }
+  ]
+}

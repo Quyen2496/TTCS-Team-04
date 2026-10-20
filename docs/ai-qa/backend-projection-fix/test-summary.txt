@@ -1,0 +1,9 @@
+﻿✔ UI 04 Báo cáo tổng hợp theo loại phòng, không lộ dữ liệu khách (149.8848ms)
+ℹ tests 444
+ℹ suites 0
+ℹ pass 441
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 3
+ℹ todo 0
+ℹ duration_ms 26860.7795

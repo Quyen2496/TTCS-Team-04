@@ -1,0 +1,282 @@
+{
+  "baseline": [
+    {
+      "screen": "overview",
+      "n": 3,
+      "firstMs": 7840,
+      "medianMs": 7840,
+      "warmMedianMs": 7986.5,
+      "maxMs": 8154,
+      "errors": 0,
+      "requestCount": 1,
+      "authenticationMs": 316.81,
+      "businessAtlasMs": 7380.31,
+      "backendOtherMs": 12.84,
+      "clientTransferMs": 9.7,
+      "outsideApiMs": 110,
+      "responseBytes": 468560,
+      "endpoints": [
+        "/api/admin/state?screen=overview"
+      ]
+    },
+    {
+      "screen": "owner",
+      "n": 3,
+      "firstMs": 11191,
+      "medianMs": 10335,
+      "warmMedianMs": 10201,
+      "maxMs": 11191,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 740.97,
+      "businessAtlasMs": 9417.12,
+      "backendOtherMs": 22.28,
+      "clientTransferMs": 6.6,
+      "outsideApiMs": 104,
+      "responseBytes": 189612,
+      "endpoints": [
+        "/api/admin/state?screen=owner",
+        "/api/reports/revenue?from=2026-10-01&to=2026-10-20"
+      ]
+    },
+    {
+      "screen": "reception",
+      "n": 3,
+      "firstMs": 16180,
+      "medianMs": 16153,
+      "warmMedianMs": 16113.5,
+      "maxMs": 16180,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 630.09,
+      "businessAtlasMs": 14843.36,
+      "backendOtherMs": 43.87,
+      "clientTransferMs": 10.69,
+      "outsideApiMs": 669,
+      "responseBytes": 468664,
+      "endpoints": [
+        "/api/admin/state?screen=reception",
+        "/api/admin/shortage-alerts?days=14"
+      ]
+    },
+    {
+      "screen": "rooms",
+      "n": 3,
+      "firstMs": 8133,
+      "medianMs": 8133,
+      "warmMedianMs": 7984,
+      "maxMs": 8141,
+      "errors": 0,
+      "requestCount": 1,
+      "authenticationMs": 283.13,
+      "businessAtlasMs": 7520.37,
+      "backendOtherMs": 7.68,
+      "clientTransferMs": 7.44,
+      "outsideApiMs": 96,
+      "responseBytes": 468638,
+      "endpoints": [
+        "/api/admin/state?screen=rooms"
+      ]
+    },
+    {
+      "screen": "reports",
+      "n": 3,
+      "firstMs": 10319,
+      "medianMs": 10150,
+      "warmMedianMs": 10143.5,
+      "maxMs": 10319,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 654.36,
+      "businessAtlasMs": 9261.47,
+      "backendOtherMs": 10.66,
+      "clientTransferMs": 5.12,
+      "outsideApiMs": 374,
+      "responseBytes": 189612,
+      "endpoints": [
+        "/api/admin/state?screen=reports",
+        "/api/reports/revenue?from=2026-10-01&to=2026-10-20"
+      ]
+    },
+    {
+      "screen": "invoices",
+      "n": 3,
+      "firstMs": 9128,
+      "medianMs": 9132,
+      "warmMedianMs": 9146.5,
+      "maxMs": 9161,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 657.19,
+      "businessAtlasMs": 7610.05,
+      "backendOtherMs": 1.75,
+      "clientTransferMs": 5.19,
+      "outsideApiMs": 886,
+      "responseBytes": 33968,
+      "endpoints": [
+        "/api/admin/state?screen=invoices",
+        "/api/admin/invoices"
+      ]
+    },
+    {
+      "screen": "emails",
+      "n": 3,
+      "firstMs": 9743,
+      "medianMs": 9140,
+      "warmMedianMs": 8948.5,
+      "maxMs": 9743,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 650.86,
+      "businessAtlasMs": 7909.09,
+      "backendOtherMs": 1.65,
+      "clientTransferMs": 3.75,
+      "outsideApiMs": 576,
+      "responseBytes": 44502,
+      "endpoints": [
+        "/api/admin/state?screen=emails",
+        "/api/admin/email-logs?page=1&type=&status=&bookingCode="
+      ]
+    }
+  ],
+  "after": [
+    {
+      "screen": "overview",
+      "n": 3,
+      "firstMs": 1690,
+      "medianMs": 1614,
+      "warmMedianMs": 1614,
+      "maxMs": 1690,
+      "errors": 0,
+      "requestCount": 1,
+      "authenticationMs": 291.34,
+      "businessAtlasMs": 1269.53,
+      "backendOtherMs": 5.01,
+      "clientTransferMs": 2.77,
+      "outsideApiMs": 53,
+      "responseBytes": 113853,
+      "endpoints": [
+        "/api/admin/state?screen=overview"
+      ]
+    },
+    {
+      "screen": "owner",
+      "n": 3,
+      "firstMs": 1772,
+      "medianMs": 1772,
+      "warmMedianMs": 1761.5,
+      "maxMs": 1775,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 572.42,
+      "businessAtlasMs": 1105.45,
+      "backendOtherMs": 12.85,
+      "clientTransferMs": 4.6,
+      "outsideApiMs": 57,
+      "responseBytes": 64529,
+      "endpoints": [
+        "/api/admin/state?screen=owner",
+        "/api/reports/revenue?from=2026-10-01&to=2026-10-20"
+      ]
+    },
+    {
+      "screen": "reception",
+      "n": 3,
+      "firstMs": 5552,
+      "medianMs": 5786,
+      "warmMedianMs": 5856,
+      "maxMs": 5926,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 607.53,
+      "businessAtlasMs": 5024.98,
+      "backendOtherMs": 24.27,
+      "clientTransferMs": 7.68,
+      "outsideApiMs": 53,
+      "responseBytes": 290220,
+      "endpoints": [
+        "/api/admin/state?screen=reception",
+        "/api/admin/shortage-alerts?days=14"
+      ]
+    },
+    {
+      "screen": "rooms",
+      "n": 3,
+      "firstMs": 2839,
+      "medianMs": 2714,
+      "warmMedianMs": 2712,
+      "maxMs": 2839,
+      "errors": 0,
+      "requestCount": 1,
+      "authenticationMs": 287.2,
+      "businessAtlasMs": 2353.22,
+      "backendOtherMs": 3.68,
+      "clientTransferMs": 3.82,
+      "outsideApiMs": 65,
+      "responseBytes": 205765,
+      "endpoints": [
+        "/api/admin/state?screen=rooms"
+      ]
+    },
+    {
+      "screen": "reports",
+      "n": 3,
+      "firstMs": 1814,
+      "medianMs": 1939,
+      "warmMedianMs": 1981,
+      "maxMs": 2023,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 668.16,
+      "businessAtlasMs": 1146.23,
+      "backendOtherMs": 11.9,
+      "clientTransferMs": 5.07,
+      "outsideApiMs": 63,
+      "responseBytes": 64529,
+      "endpoints": [
+        "/api/admin/state?screen=reports",
+        "/api/reports/revenue?from=2026-10-01&to=2026-10-20"
+      ]
+    },
+    {
+      "screen": "invoices",
+      "n": 3,
+      "firstMs": 1288,
+      "medianMs": 1288,
+      "warmMedianMs": 1281.5,
+      "maxMs": 1295,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 573.58,
+      "businessAtlasMs": 646.22,
+      "backendOtherMs": 1.75,
+      "clientTransferMs": 4.15,
+      "outsideApiMs": 49,
+      "responseBytes": 33968,
+      "endpoints": [
+        "/api/admin/state?screen=invoices",
+        "/api/admin/invoices"
+      ]
+    },
+    {
+      "screen": "emails",
+      "n": 3,
+      "firstMs": 1628,
+      "medianMs": 1628,
+      "warmMedianMs": 1625.5,
+      "maxMs": 1628,
+      "errors": 0,
+      "requestCount": 2,
+      "authenticationMs": 569.02,
+      "businessAtlasMs": 995.89,
+      "backendOtherMs": 2.12,
+      "clientTransferMs": 3.81,
+      "outsideApiMs": 53,
+      "responseBytes": 44502,
+      "endpoints": [
+        "/api/admin/state?screen=emails",
+        "/api/admin/email-logs?page=1&type=&status=&bookingCode="
+      ]
+    }
+  ]
+}

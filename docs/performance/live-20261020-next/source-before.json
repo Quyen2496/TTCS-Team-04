@@ -1,0 +1,16 @@
+{
+  "build": "36172b4c8e3ff69b",
+  "stage": "C:\\Users\\quy42\\AppData\\Local\\Temp\\homestay-next-before-62dUc3",
+  "files": [
+    "server.js",
+    "src/store.js",
+    "src/read-model.js",
+    "src/access.js",
+    "src/ai-routes.js",
+    "src/ai-telemetry.js",
+    "public/js/assistant.js",
+    "public/js/admin.js",
+    "public/js/sprint4-admin.js",
+    "public/js/operations-admin.js"
+  ]
+}

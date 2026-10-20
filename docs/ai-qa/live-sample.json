@@ -1,0 +1,2424 @@
+{
+  "summary": {
+    "mode": "live",
+    "modelEvidence": "Thử API thật bằng dữ liệu tổng hợp; chỉ các mục có modelPlans mới chứng minh model trả kế hoạch hợp lệ. Fallback và định tuyến trực tiếp không đánh giá độ hiểu model.",
+    "count": 9,
+    "counts": {
+      "Đạt": 9,
+      "Lỗi": 0,
+      "Chưa hỗ trợ": 0,
+      "Chưa chạy": 0
+    },
+    "medianMs": 11.25,
+    "p95Ms": 4363.61,
+    "timings": [
+      {
+        "stage": "authentication",
+        "ms": 3.1486999999999625
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 27.127500000000055
+      },
+      {
+        "stage": "classification",
+        "ms": 3500.8161
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 48.67630000000008
+      },
+      {
+        "stage": "narration",
+        "ms": 753.5281999999997
+      },
+      {
+        "stage": "http_total",
+        "ms": 4354.2879,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.7984999999998763
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 4.799200000000383
+      },
+      {
+        "stage": "classification",
+        "ms": 2983.3644999999997
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 22.404100000001563
+      },
+      {
+        "stage": "narration",
+        "ms": 597.6903000000002
+      },
+      {
+        "stage": "http_total",
+        "ms": 3614.1652999999997,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.9673999999995431
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 1.499099999999089
+      },
+      {
+        "stage": "classification",
+        "ms": 2353.5195999999996
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 7.2004999999990105
+      },
+      {
+        "stage": "http_total",
+        "ms": 2364.5357000000004,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.7602000000006228
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 2.7151000000012573
+      },
+      {
+        "stage": "classification",
+        "ms": 0.10080000000016298
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 3.106499999999869
+      },
+      {
+        "stage": "http_total",
+        "ms": 8.70010000000002,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 1.021099999999933
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 3.2739000000001397
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 21.895399999999427
+      },
+      {
+        "stage": "http_total",
+        "ms": 33.384799999999814,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.49060000000099535
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 0.9104000000006636
+      },
+      {
+        "stage": "http_total",
+        "ms": 3.3998000000028696,
+        "status": 403
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.4724000000023807
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 1.3040000000000873
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 4.54399999999805
+      },
+      {
+        "stage": "http_total",
+        "ms": 7.192299999998795,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.5577000000012049
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 1.0514000000002852
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 5.534299999999348
+      },
+      {
+        "stage": "http_total",
+        "ms": 8.408900000002177,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.6212000000014086
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 0.9416999999994005
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 3.801400000000285
+      },
+      {
+        "stage": "http_total",
+        "ms": 5.943100000000413,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 1.5659000000014203
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 1.7347999999983585
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 4.338300000003073
+      },
+      {
+        "stage": "http_total",
+        "ms": 8.69340000000011,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.5711999999984982
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 1.2498999999988882
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 6.4122000000024855
+      },
+      {
+        "stage": "http_total",
+        "ms": 8.991600000001199,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.5872000000017579
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 0.7070000000021537
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 3.9114000000008673
+      },
+      {
+        "stage": "http_total",
+        "ms": 5.803299999999581,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.4955000000009022
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 0.6664999999993597
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 6.368700000002718
+      },
+      {
+        "stage": "http_total",
+        "ms": 8.310400000002119,
+        "status": 200
+      },
+      {
+        "stage": "authentication",
+        "ms": 0.47520000000076834
+      },
+      {
+        "stage": "context_preparation",
+        "ms": 0.5663000000022294
+      },
+      {
+        "stage": "data_and_persistence",
+        "ms": 4.921500000000378
+      },
+      {
+        "stage": "http_total",
+        "ms": 6.596899999996822,
+        "status": 200
+      }
+    ],
+    "providerCalls": [
+      {
+        "provider": "groq",
+        "stage": "classification",
+        "http": 200,
+        "ms": 3484.9201999999996
+      },
+      {
+        "provider": "groq",
+        "stage": "narration",
+        "http": 200,
+        "ms": 751.1371999999992
+      },
+      {
+        "provider": "groq",
+        "stage": "classification",
+        "http": 200,
+        "ms": 2981.6062
+      },
+      {
+        "provider": "groq",
+        "stage": "narration",
+        "http": 200,
+        "ms": 596.5835999999999
+      },
+      {
+        "provider": "groq",
+        "stage": "classification",
+        "http": 429,
+        "ms": 560.2526999999991
+      },
+      {
+        "provider": "gemini",
+        "stage": "classification",
+        "http": 200,
+        "ms": 1790.4430000000011
+      }
+    ],
+    "validModelPlans": 2
+  },
+  "fixtures": {
+    "properties": [
+      "Nhà Núi QA",
+      "Nhà Biển QA"
+    ],
+    "start": "2026-10-20",
+    "end": "2026-10-22",
+    "bookingCodes": [
+      "ABCD0001",
+      "ABCD0002",
+      "BCDE0003"
+    ],
+    "assignment": "Mỗi vai trò nội bộ chỉ được giao A; Admin toàn hệ thống"
+  },
+  "results": [
+    {
+      "id": "K-D05",
+      "role": "guest",
+      "question": "Mình muốn homestay trên núi, đi 2 người, dưới 2 triệu một đêm.",
+      "preparation": [],
+      "expected": "Lọc đúng cảnh quan, nhóm và ngân sách; hỏi ngày ở nếu chưa có.",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 4363.61,
+      "answer": "nhóm 2 người 6 phương án phù hợp Giá đang là tham khảo ngày thường, chưa xác nhận phòng trống theo ngày lưu trú Mình đã lọc theo vùng núi/đồi theo mô tả cơ sở; ngân sách tối đa 2.000.000 ₫ / đêm cho cả nhóm. Bạn dự định nhận và trả phòng ngày nào?",
+      "result": {
+        "intent": "recommendation",
+        "publicCatalog": true,
+        "answer": "nhóm 2 người 6 phương án phù hợp Giá đang là tham khảo ngày thường, chưa xác nhận phòng trống theo ngày lưu trú Mình đã lọc theo vùng núi/đồi theo mô tả cơ sở; ngân sách tối đa 2.000.000 ₫ / đêm cho cả nhóm. Bạn dự định nhận và trả phòng ngày nào?",
+        "presentation": "rooms",
+        "cards": [
+          {
+            "roomTypeId": "000000000000000000000001",
+            "name": "Phòng đơn",
+            "homestayId": "c23e8f062f4688589b52a667",
+            "homestayName": "Nhà Núi QA",
+            "destination": "Vùng cao QA",
+            "locationEvidence": "",
+            "roomKind": "single",
+            "photo": "",
+            "area": 18,
+            "standardCapacity": 1,
+            "maxCapacity": 2,
+            "description": "Căn phòng gọn gàng với giường đơn, bàn làm việc và cửa sổ đón ánh sáng.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "TV thông minh",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Bàn làm việc",
+              "Tủ quần áo",
+              "Cửa sổ lớn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 450000,
+            "roomPrices": [
+              450000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "000000000000000000000002",
+            "name": "Phòng đôi",
+            "homestayId": "c23e8f062f4688589b52a667",
+            "homestayName": "Nhà Núi QA",
+            "destination": "Vùng cao QA",
+            "locationEvidence": "",
+            "roomKind": "double",
+            "photo": "",
+            "area": 26,
+            "standardCapacity": 2,
+            "maxCapacity": 3,
+            "description": "Không gian thư giãn với giường đôi, tủ lạnh mini và góc nghỉ ngơi.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "Bữa sáng",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Tủ quần áo",
+              "Cửa sổ lớn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 550000,
+            "roomPrices": [
+              550000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "000000000000000000000009",
+            "name": "Phòng twin",
+            "homestayId": "c23e8f062f4688589b52a667",
+            "homestayName": "Nhà Núi QA",
+            "destination": "Vùng cao QA",
+            "locationEvidence": "",
+            "roomKind": "twin",
+            "photo": "",
+            "area": 28,
+            "standardCapacity": 2,
+            "maxCapacity": 3,
+            "description": "Hai giường riêng phù hợp bạn bè hoặc đồng nghiệp cùng chuyến đi.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "Bữa sáng",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Bàn làm việc",
+              "Tủ quần áo"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 600000,
+            "roomPrices": [
+              600000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "000000000000000000000006",
+            "name": "Studio có bếp",
+            "homestayId": "c23e8f062f4688589b52a667",
+            "homestayName": "Nhà Núi QA",
+            "destination": "Vùng cao QA",
+            "locationEvidence": "",
+            "roomKind": "studio",
+            "photo": "",
+            "area": 35,
+            "standardCapacity": 2,
+            "maxCapacity": 3,
+            "description": "Studio phù hợp lưu trú dài ngày, có bếp và bàn ăn trong phòng.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Nước nóng",
+              "Khăn tắm",
+              "Bàn làm việc",
+              "Bếp riêng",
+              "Dụng cụ nấu ăn",
+              "Máy giặt",
+              "Bàn ăn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 680000,
+            "roomPrices": [
+              680000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "000000000000000000000004",
+            "name": "Deluxe ban công",
+            "homestayId": "c23e8f062f4688589b52a667",
+            "homestayName": "Nhà Núi QA",
+            "destination": "Vùng cao QA",
+            "locationEvidence": "",
+            "roomKind": null,
+            "photo": "",
+            "area": 32,
+            "standardCapacity": 2,
+            "maxCapacity": 3,
+            "description": "Phòng Deluxe có ban công riêng, giường đôi và góc uống trà.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "Bữa sáng",
+              "Ban công",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Két an toàn",
+              "Cửa sổ lớn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 750000,
+            "roomPrices": [
+              750000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "000000000000000000000008",
+            "name": "Loft gác lửng",
+            "homestayId": "c23e8f062f4688589b52a667",
+            "homestayName": "Nhà Núi QA",
+            "destination": "Vùng cao QA",
+            "locationEvidence": "",
+            "roomKind": null,
+            "photo": "",
+            "area": 40,
+            "standardCapacity": 2,
+            "maxCapacity": 4,
+            "description": "Phòng phong cách loft với gác lửng, góc làm việc và cửa sổ lớn.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Nước nóng",
+              "Khăn tắm",
+              "Bàn làm việc",
+              "Sofa",
+              "Cửa sổ lớn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 780000,
+            "roomPrices": [
+              780000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          }
+        ],
+        "columns": [
+          "Homestay",
+          "Loại phòng",
+          "Số phòng cần",
+          "Chia số khách",
+          "Tối đa mỗi phòng",
+          "Giá ngày thường tham khảo cả nhóm/đêm (VND)"
+        ],
+        "rows": [
+          [
+            "Nhà Núi QA",
+            "Phòng đơn",
+            1,
+            "2",
+            2,
+            450000
+          ],
+          [
+            "Nhà Núi QA",
+            "Phòng đôi",
+            1,
+            "2",
+            3,
+            550000
+          ],
+          [
+            "Nhà Núi QA",
+            "Phòng twin",
+            1,
+            "2",
+            3,
+            600000
+          ],
+          [
+            "Nhà Núi QA",
+            "Studio có bếp",
+            1,
+            "2",
+            3,
+            680000
+          ],
+          [
+            "Nhà Núi QA",
+            "Deluxe ban công",
+            1,
+            "2",
+            3,
+            750000
+          ],
+          [
+            "Nhà Núi QA",
+            "Loft gác lửng",
+            1,
+            "2",
+            4,
+            780000
+          ]
+        ],
+        "totalRows": 6,
+        "sources": [
+          "Danh mục và tiện nghi loại phòng",
+          "Sức chứa",
+          "Giá ngày thường và phụ thu tham khảo"
+        ],
+        "followUps": [
+          "Nhóm mình ở 2 đêm từ ngày mai"
+        ],
+        "exportable": true,
+        "exportsReady": false,
+        "exportPrompt": "Bạn có muốn xuất kết quả này thành file Excel hoặc PDF không?",
+        "at": "2026-10-19T14:56:37.927Z",
+        "engine": "ai",
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "fallbackReason": null,
+        "failoverFrom": null,
+        "narrated": true,
+        "narrationProvider": "groq"
+      },
+      "modelPlans": [
+        {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "plan": {
+            "intent": "recommendation",
+            "topic": "general",
+            "slots": {
+              "guestCount": 2,
+              "adults": 2,
+              "budget": 2000000,
+              "budgetPeriod": "night",
+              "budgetScope": "room",
+              "landscapes": [
+                "mountain"
+              ]
+            },
+            "understanding": {
+              "confidence": "high",
+              "relation": "new_topic",
+              "clarify": "goal"
+            }
+          }
+        }
+      ],
+      "providerCalls": [
+        {
+          "provider": "groq",
+          "stage": "classification",
+          "http": 200,
+          "ms": 3484.9201999999996
+        },
+        {
+          "provider": "groq",
+          "stage": "narration",
+          "http": 200,
+          "ms": 751.1371999999992
+        }
+      ],
+      "serverPlan": {
+        "intent": "recommendation",
+        "landscapes": [
+          "mountain"
+        ],
+        "excludedLandscapes": [],
+        "preferredPropertyIds": null,
+        "destinationQuery": null,
+        "budget": 2000000,
+        "budgetPeriod": "night",
+        "budgetScope": "group",
+        "guestCount": 2,
+        "choices": [
+          "000000000000000000000001",
+          "000000000000000000000002",
+          "000000000000000000000009",
+          "000000000000000000000006",
+          "000000000000000000000004",
+          "000000000000000000000008"
+        ],
+        "answerContract": {
+          "type": "consultation",
+          "corrected": true
+        },
+        "exportSourceId": "047ae8a3beac8dd5431744fb",
+        "exportState": "offer"
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 3.1486999999999625
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 27.127500000000055
+        },
+        {
+          "stage": "classification",
+          "ms": 3500.8161
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 48.67630000000008
+        },
+        {
+          "stage": "narration",
+          "ms": 753.5281999999997
+        },
+        {
+          "stage": "http_total",
+          "ms": 4354.2879,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Câu hợp lệ được trả lời"
+        },
+        {
+          "ok": true,
+          "why": "Không chặn nhầm"
+        },
+        {
+          "ok": true,
+          "why": "Đúng công cụ tư vấn"
+        },
+        {
+          "ok": true,
+          "why": "Kết quả không chứa loại phòng đã loại"
+        }
+      ]
+    },
+    {
+      "id": "K-D06",
+      "role": "guest",
+      "question": "Tư vấn phòng đôi, không lấy twin, nhận ngày 20/10/2026 và trả ngày 22/10/2026.",
+      "preparation": [
+        "Gửi sau K-D05 trong cùng cuộc trò chuyện.",
+        "Chạy trước K-D05"
+      ],
+      "expected": "Giữ yêu cầu trên núi và ngân sách; chỉ phòng đôi; đúng hai đêm.",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 2367.66,
+      "answer": "Với 2 người, từ 20/10/2026 đến 22/10/2026, mình gợi ý các phương án dưới đây. Bạn bấm vào loại phòng muốn xem để mình giới thiệu tiện nghi và thông tin cụ thể nhé. Mình đã lọc theo vùng núi/đồi theo mô tả cơ sở; chỉ phòng đôi; không chọn phòng hai giường đơn (twin); ngân sách tối đa 2.000.000 ₫ / đêm cho cả nhóm. Giá đã tính theo từng đêm và phụ thu; mình chưa giữ phòng.",
+      "result": {
+        "intent": "recommendation",
+        "publicCatalog": true,
+        "answer": "Với 2 người, từ 20/10/2026 đến 22/10/2026, mình gợi ý các phương án dưới đây. Bạn bấm vào loại phòng muốn xem để mình giới thiệu tiện nghi và thông tin cụ thể nhé. Mình đã lọc theo vùng núi/đồi theo mô tả cơ sở; chỉ phòng đôi; không chọn phòng hai giường đơn (twin); ngân sách tối đa 2.000.000 ₫ / đêm cho cả nhóm. Giá đã tính theo từng đêm và phụ thu; mình chưa giữ phòng.",
+        "presentation": "rooms",
+        "cards": [
+          {
+            "roomTypeId": "000000000000000000000002",
+            "name": "Phòng đôi",
+            "homestayId": "c23e8f062f4688589b52a667",
+            "homestayName": "Nhà Núi QA",
+            "destination": "Vùng cao QA",
+            "locationEvidence": "",
+            "roomKind": "double",
+            "photo": "",
+            "area": 26,
+            "standardCapacity": 2,
+            "maxCapacity": 3,
+            "description": "Không gian thư giãn với giường đôi, tủ lạnh mini và góc nghỉ ngơi.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "Bữa sáng",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Tủ quần áo",
+              "Cửa sổ lớn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 1363000,
+            "roomPrices": [
+              1363000
+            ],
+            "priceLabel": "Tổng giá cả nhóm / 2 đêm",
+            "availableCount": 3,
+            "inventoryCount": 5,
+            "checkIn": "2026-10-20",
+            "checkOut": "2026-10-22",
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          }
+        ],
+        "columns": [
+          "Homestay",
+          "Loại phòng",
+          "Số phòng cần",
+          "Chia số khách",
+          "Tối đa mỗi phòng",
+          "Tổng giá cả nhóm (VND)"
+        ],
+        "rows": [
+          [
+            "Nhà Núi QA",
+            "Phòng đôi",
+            1,
+            "2",
+            3,
+            1363000
+          ]
+        ],
+        "totalRows": 1,
+        "sources": [
+          "Danh mục và tiện nghi loại phòng",
+          "Lịch giữ phòng",
+          "Bảng giá từng đêm và phụ thu"
+        ],
+        "followUps": [],
+        "exportable": true,
+        "exportsReady": false,
+        "exportPrompt": "Bạn có muốn xuất kết quả này thành file Excel hoặc PDF không?",
+        "at": "2026-10-19T14:56:46.242Z",
+        "engine": "rules",
+        "provider": "gemini",
+        "model": null,
+        "fallbackReason": "invalid_response",
+        "failoverFrom": null
+      },
+      "modelPlans": [],
+      "providerCalls": [
+        {
+          "provider": "groq",
+          "stage": "classification",
+          "http": 429,
+          "ms": 560.2526999999991
+        },
+        {
+          "provider": "gemini",
+          "stage": "classification",
+          "http": 200,
+          "ms": 1790.4430000000011
+        }
+      ],
+      "serverPlan": {
+        "intent": "recommendation",
+        "landscapes": [
+          "mountain"
+        ],
+        "excludedLandscapes": [],
+        "preferredPropertyIds": null,
+        "destinationQuery": null,
+        "budget": 2000000,
+        "budgetPeriod": "night",
+        "budgetScope": "group",
+        "checkIn": "2026-10-20",
+        "checkOut": "2026-10-22",
+        "guestCount": 2,
+        "nights": 2,
+        "choices": [
+          "000000000000000000000002"
+        ],
+        "answerContract": {
+          "type": "consultation",
+          "corrected": false
+        },
+        "exportSourceId": "65d521f9d88c9ae1dc607541",
+        "exportState": "offer",
+        "roomSearch": {
+          "intent": "recommendation",
+          "landscapes": [
+            "mountain"
+          ],
+          "excludedLandscapes": [],
+          "preferredPropertyIds": null,
+          "destinationQuery": null,
+          "budget": 2000000,
+          "budgetPeriod": "night",
+          "budgetScope": "group",
+          "guestCount": 2,
+          "choices": [
+            "000000000000000000000001",
+            "000000000000000000000002",
+            "000000000000000000000009",
+            "000000000000000000000006",
+            "000000000000000000000004",
+            "000000000000000000000008"
+          ],
+          "answerContract": {
+            "type": "consultation",
+            "corrected": true
+          },
+          "exportSourceId": "e983e4a1880db484c7dba5b4",
+          "exportState": "offer"
+        },
+        "roomKinds": [
+          "double"
+        ],
+        "excludedRoomKinds": [
+          "twin"
+        ]
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 0.9673999999995431
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 1.499099999999089
+        },
+        {
+          "stage": "classification",
+          "ms": 2353.5195999999996
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 7.2004999999990105
+        },
+        {
+          "stage": "http_total",
+          "ms": 2364.5357000000004,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Câu hợp lệ được trả lời"
+        },
+        {
+          "ok": true,
+          "why": "Không chặn nhầm"
+        },
+        {
+          "ok": true,
+          "why": "Đúng công cụ tư vấn"
+        },
+        {
+          "ok": true,
+          "why": "Giữ núi, đôi, phủ định twin"
+        },
+        {
+          "ok": true,
+          "why": "Giữ đúng ngày"
+        },
+        {
+          "ok": true,
+          "why": "Giữ/cập nhật số người"
+        },
+        {
+          "ok": true,
+          "why": "Giữ/cập nhật ngân sách"
+        },
+        {
+          "ok": true,
+          "why": "Kết quả không chứa loại phòng đã loại"
+        }
+      ]
+    },
+    {
+      "id": "K-L11",
+      "role": "guest",
+      "question": "Chọn giúp mình cái tốt nhất.",
+      "preparation": [
+        "Mở cuộc trò chuyện mới, chưa có yêu cầu tìm phòng."
+      ],
+      "expected": "Hỏi rõ số người, khu vực hoặc ưu tiên; không đoán phòng ngẫu nhiên.",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 11.37,
+      "answer": "Mình chưa xác định chắc ý bạn nên cần hỏi rõ một chút. Bạn muốn mình tra số liệu, giải thích cách làm hay kiểm tra khả năng của trợ lý?",
+      "result": {
+        "intent": "policy",
+        "answer": "Mình chưa xác định chắc ý bạn nên cần hỏi rõ một chút. Bạn muốn mình tra số liệu, giải thích cách làm hay kiểm tra khả năng của trợ lý?",
+        "columns": [],
+        "rows": [],
+        "totalRows": 0,
+        "sources": [
+          "Làm rõ yêu cầu trước khi tra cứu"
+        ],
+        "audienceRole": "guest",
+        "suppressExport": true,
+        "exportable": false,
+        "exportsReady": false,
+        "at": "2026-10-19T14:56:47.773Z",
+        "engine": "rules",
+        "provider": "gemini",
+        "model": null,
+        "fallbackReason": "invalid_response",
+        "failoverFrom": null,
+        "exportPrompt": null
+      },
+      "modelPlans": [],
+      "providerCalls": [],
+      "serverPlan": {
+        "intent": "policy",
+        "topic": "general",
+        "understanding": {
+          "confidence": "low",
+          "relation": "followup",
+          "clarify": "goal"
+        }
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 0.7602000000006228
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 2.7151000000012573
+        },
+        {
+          "stage": "classification",
+          "ms": 0.10080000000016298
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 3.106499999999869
+        },
+        {
+          "stage": "http_total",
+          "ms": 8.70010000000002,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Mơ hồ: hỏi rõ, không báo thiếu quyền"
+        }
+      ]
+    },
+    {
+      "id": "A-D05",
+      "role": "admin",
+      "question": "Doanh thu toàn hệ thống từ 01/10/2026 đến hết 18/10/2026 là bao nhiêu?",
+      "preparation": [],
+      "expected": "Đọc đúng kỳ và dữ liệu quyết toán; không hỏi lại ngày đã rõ.",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 35.13,
+      "answer": "Doanh thu từ 01/10/2026 đến 18/10/2026 là 3.900.000 ₫. Số liệu lấy từ booking đã đóng có quyết toán, theo ngày trả thực tế; tiền cọc không được cộng thêm lần nữa.",
+      "result": {
+        "answer": "Doanh thu từ 01/10/2026 đến 18/10/2026 là 3.900.000 ₫. Số liệu lấy từ booking đã đóng có quyết toán, theo ngày trả thực tế; tiền cọc không được cộng thêm lần nữa.",
+        "columns": [
+          "Ngày",
+          "Booking đóng",
+          "Tiền phòng (VND)",
+          "Phụ thu (VND)",
+          "Doanh thu (VND)"
+        ],
+        "rows": [
+          [
+            "2026-10-01",
+            2,
+            3700000,
+            200000,
+            3900000
+          ],
+          [
+            "2026-10-02",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-03",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-04",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-05",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-06",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-07",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-08",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-09",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-10",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-11",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-12",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-13",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-14",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-15",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-16",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-17",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-10-18",
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "totalRows": 18,
+        "sources": [
+          "Quyết toán booking"
+        ],
+        "intent": "report",
+        "metric": "revenue",
+        "metrics": [
+          [
+            "Doanh thu",
+            "3.900.000 ₫"
+          ],
+          [
+            "Tiền phòng",
+            "3.700.000 ₫"
+          ],
+          [
+            "Phụ thu",
+            "200.000 ₫"
+          ],
+          [
+            "Booking đóng",
+            2
+          ]
+        ],
+        "exportable": true,
+        "exportsReady": false,
+        "exportPrompt": "Bạn có muốn xuất kết quả này thành file Excel hoặc PDF không?",
+        "at": "2026-10-19T14:56:49.319Z",
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "verified_request",
+        "failoverFrom": null
+      },
+      "modelPlans": [],
+      "providerCalls": [],
+      "serverPlan": {
+        "intent": "report",
+        "metric": "revenue",
+        "reportPeriod": {
+          "from": "2026-10-01",
+          "to": "2026-10-18"
+        },
+        "explicitLookup": true,
+        "publicCatalog": false,
+        "answerContract": {
+          "type": "report",
+          "metric": "revenue",
+          "from": "2026-10-01",
+          "to": "2026-10-18",
+          "corrected": false
+        },
+        "from": "2026-10-01",
+        "to": "2026-10-18",
+        "exportSourceId": "5c4f31fcaabd1d632a0a7705",
+        "exportState": "offer"
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 1.021099999999933
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 3.2739000000001397
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 21.895399999999427
+        },
+        {
+          "stage": "http_total",
+          "ms": 33.384799999999814,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Câu hợp lệ được trả lời"
+        },
+        {
+          "ok": true,
+          "why": "Không chặn nhầm"
+        },
+        {
+          "ok": true,
+          "why": "Đúng chỉ tiêu doanh thu"
+        },
+        {
+          "ok": true,
+          "why": "Số liệu khớp quyết toán nguồn"
+        },
+        {
+          "ok": true,
+          "why": "Doanh thu toàn hệ thống khớp tổng quyết toán A+B",
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "C-L01",
+      "role": "owner",
+      "question": "Cho tôi doanh thu nội bộ của homestay Nhà Biển QA.",
+      "preparation": [],
+      "expected": "Từ chối dữ liệu ngoài cơ sở được giao.",
+      "status": "Đạt",
+      "http": 403,
+      "ms": 5.33,
+      "answer": "Cơ sở được hỏi nằm ngoài phạm vi tài khoản.",
+      "result": {},
+      "modelPlans": [],
+      "providerCalls": [],
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 0.49060000000099535
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 0.9104000000006636
+        },
+        {
+          "stage": "http_total",
+          "ms": 3.3998000000028696,
+          "status": 403
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Không nhận đã thực hiện"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ booking B"
+        },
+        {
+          "ok": true,
+          "why": "Từ chối cơ sở ngoài quyền"
+        }
+      ]
+    },
+    {
+      "id": "L-D19",
+      "role": "reception",
+      "question": "Còn ngày mai thì sao?",
+      "preparation": [
+        "Gửi sau L-D01 trong cùng cuộc trò chuyện.",
+        "Chạy trước L-D01"
+      ],
+      "expected": "Giữ lịch khách đến tại [A], đổi ngày tương đối đúng múi giờ Việt Nam.",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 11.25,
+      "answer": "Mình tìm thấy 2 mục phù hợp. Bạn xem danh sách bên dưới nhé. ",
+      "result": {
+        "answer": "Mình tìm thấy 2 mục phù hợp. Bạn xem danh sách bên dưới nhé. ",
+        "columns": [
+          "Mã booking",
+          "Homestay",
+          "Phòng",
+          "Ngày",
+          "Số khách",
+          "Trạng thái"
+        ],
+        "rows": [
+          [
+            "ABCD0001",
+            "Nhà Núi QA",
+            "201",
+            "2026-10-20",
+            2,
+            "Đã xác nhận"
+          ],
+          [
+            "ABCD0002",
+            "Nhà Núi QA",
+            "202",
+            "2026-10-20",
+            2,
+            "Đã xác nhận"
+          ]
+        ],
+        "totalRows": 2,
+        "sources": [
+          "Lịch booking"
+        ],
+        "intent": "arrivals",
+        "exportable": true,
+        "exportsReady": false,
+        "exportPrompt": "Bạn có muốn xuất kết quả này thành file Excel hoặc PDF không?",
+        "at": "2026-10-19T14:56:52.420Z",
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "verified_request",
+        "failoverFrom": null
+      },
+      "modelPlans": [],
+      "providerCalls": [],
+      "serverPlan": {
+        "intent": "arrivals",
+        "explicitLookup": true,
+        "publicCatalog": false,
+        "answerContract": {
+          "type": "lookup",
+          "intent": "arrivals",
+          "corrected": false
+        },
+        "from": "2026-10-20",
+        "to": "2026-10-20",
+        "exportSourceId": "3d2789517bd473ea1dfb61f7",
+        "exportState": "offer",
+        "queryPropertyId": "c23e8f062f4688589b52a667",
+        "querySelectionHeader": null
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 0.5577000000012049
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 1.0514000000002852
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 5.534299999999348
+        },
+        {
+          "stage": "http_total",
+          "ms": 8.408900000002177,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Câu hợp lệ được trả lời"
+        },
+        {
+          "ok": true,
+          "why": "Không chặn nhầm"
+        },
+        {
+          "ok": true,
+          "why": "Giữ lịch và ngày mai"
+        }
+      ]
+    },
+    {
+      "id": "B-D13",
+      "role": "report",
+      "question": "Còn tháng 8 năm 2026 thì sao?",
+      "preparation": [
+        "Gửi sau B-D02 trong cùng cuộc trò chuyện.",
+        "Chạy trước B-D02"
+      ],
+      "expected": "Giữ [A] và doanh thu, đổi tháng.",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 10.61,
+      "answer": "Doanh thu từ 01/08/2026 đến 31/08/2026 là 0 ₫. Số liệu lấy từ booking đã đóng có quyết toán, theo ngày trả thực tế; tiền cọc không được cộng thêm lần nữa.",
+      "result": {
+        "answer": "Doanh thu từ 01/08/2026 đến 31/08/2026 là 0 ₫. Số liệu lấy từ booking đã đóng có quyết toán, theo ngày trả thực tế; tiền cọc không được cộng thêm lần nữa.",
+        "columns": [
+          "Ngày",
+          "Booking đóng",
+          "Tiền phòng (VND)",
+          "Phụ thu (VND)",
+          "Doanh thu (VND)"
+        ],
+        "rows": [
+          [
+            "2026-08-01",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-02",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-03",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-04",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-05",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-06",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-07",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-08",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-09",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-10",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-11",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-12",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-13",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-14",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-15",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-16",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-17",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-18",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-19",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-20",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-21",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-22",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-23",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-24",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-25",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-26",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-27",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-28",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-29",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-30",
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-08-31",
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "totalRows": 31,
+        "sources": [
+          "Quyết toán booking"
+        ],
+        "intent": "report",
+        "metric": "revenue",
+        "metrics": [
+          [
+            "Doanh thu",
+            "0 ₫"
+          ],
+          [
+            "Tiền phòng",
+            "0 ₫"
+          ],
+          [
+            "Phụ thu",
+            "0 ₫"
+          ],
+          [
+            "Booking đóng",
+            0
+          ]
+        ],
+        "exportable": true,
+        "exportsReady": false,
+        "exportPrompt": "Bạn có muốn xuất kết quả này thành file Excel hoặc PDF không?",
+        "at": "2026-10-19T14:56:53.965Z",
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "verified_request",
+        "failoverFrom": null
+      },
+      "modelPlans": [],
+      "providerCalls": [],
+      "serverPlan": {
+        "intent": "report",
+        "metric": "revenue",
+        "reportPeriod": {
+          "from": "2026-08-01",
+          "to": "2026-08-31"
+        },
+        "explicitLookup": true,
+        "publicCatalog": false,
+        "answerContract": {
+          "type": "report",
+          "metric": "revenue",
+          "from": "2026-08-01",
+          "to": "2026-08-31",
+          "corrected": false
+        },
+        "from": "2026-08-01",
+        "to": "2026-08-31",
+        "exportSourceId": "96213f3aed4f20765969e903",
+        "exportState": "offer",
+        "queryPropertyId": "c23e8f062f4688589b52a667",
+        "querySelectionHeader": null
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 1.5659000000014203
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 1.7347999999983585
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 4.338300000003073
+        },
+        {
+          "stage": "http_total",
+          "ms": 8.69340000000011,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Câu hợp lệ được trả lời"
+        },
+        {
+          "ok": true,
+          "why": "Không chặn nhầm"
+        },
+        {
+          "ok": true,
+          "why": "Giữ metric, đổi tháng 8"
+        }
+      ]
+    },
+    {
+      "id": "B-D14",
+      "role": "report",
+      "question": "Tôi muốn công suất chứ không phải doanh thu trong kỳ vừa hỏi.",
+      "preparation": [
+        "Gửi sau B-D13 trong cùng cuộc trò chuyện.",
+        "Chạy trước B-D02",
+        "Chạy trước B-D13"
+      ],
+      "expected": "Đổi chỉ tiêu, giữ đúng kỳ và cơ sở.",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 9.62,
+      "answer": "Đây là công suất từ 01/08/2026 đến 31/08/2026, tính theo đêm phòng được đặt trên đêm khả dụng và loại các đêm bảo trì.",
+      "result": {
+        "answer": "Đây là công suất từ 01/08/2026 đến 31/08/2026, tính theo đêm phòng được đặt trên đêm khả dụng và loại các đêm bảo trì.",
+        "columns": [
+          "Ngày",
+          "Đêm bán",
+          "Đêm khả dụng",
+          "Công suất (%)"
+        ],
+        "rows": [
+          [
+            "2026-08-01",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-02",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-03",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-04",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-05",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-06",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-07",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-08",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-09",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-10",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-11",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-12",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-13",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-14",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-15",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-16",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-17",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-18",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-19",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-20",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-21",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-22",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-23",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-24",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-25",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-26",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-27",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-28",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-29",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-30",
+            0,
+            50,
+            0
+          ],
+          [
+            "2026-08-31",
+            0,
+            50,
+            0
+          ]
+        ],
+        "totalRows": 31,
+        "sources": [
+          "Booking và lịch bảo trì"
+        ],
+        "intent": "report",
+        "metric": "occupancy",
+        "metrics": [
+          [
+            "Đêm phòng được đặt / khả dụng",
+            "0 / 1550"
+          ],
+          [
+            "Tỷ lệ đêm phòng được đặt",
+            "0.0%"
+          ]
+        ],
+        "exportable": true,
+        "exportsReady": false,
+        "exportPrompt": "Bạn có muốn xuất kết quả này thành file Excel hoặc PDF không?",
+        "at": "2026-10-19T14:56:55.508Z",
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "verified_request",
+        "failoverFrom": null
+      },
+      "modelPlans": [],
+      "providerCalls": [],
+      "serverPlan": {
+        "intent": "report",
+        "metric": "occupancy",
+        "reportPeriod": {
+          "from": "2026-08-01",
+          "to": "2026-08-31"
+        },
+        "explicitLookup": true,
+        "publicCatalog": false,
+        "answerContract": {
+          "type": "report",
+          "metric": "occupancy",
+          "from": "2026-08-01",
+          "to": "2026-08-31",
+          "corrected": false
+        },
+        "from": "2026-08-01",
+        "to": "2026-08-31",
+        "exportSourceId": "8d8aa94f8445cb9f5e46e04b",
+        "exportState": "offer",
+        "queryPropertyId": "c23e8f062f4688589b52a667",
+        "querySelectionHeader": null
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 0.4955000000009022
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 0.6664999999993597
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 6.368700000002718
+        },
+        {
+          "stage": "http_total",
+          "ms": 8.310400000002119,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Câu hợp lệ được trả lời"
+        },
+        {
+          "ok": true,
+          "why": "Không chặn nhầm"
+        },
+        {
+          "ok": true,
+          "why": "Đổi metric, giữ tháng 8"
+        }
+      ]
+    },
+    {
+      "id": "P-D15",
+      "role": "housekeeping",
+      "question": "Phòng đôi Phòng đôi tại Nhà Biển QA có tiện nghi gì?",
+      "preparation": [],
+      "expected": "Được xem công khai [B] dù không được giao dọn [B].",
+      "status": "Đạt",
+      "http": 200,
+      "ms": 8.57,
+      "answer": "Đây là Phòng đôi tại Nhà Biển QA. Không gian thư giãn với giường đôi, tủ lạnh mini và góc nghỉ ngơi.\nPhòng dành cho 2 người tiêu chuẩn, tối đa 3 người, diện tích 26 m². Giá dưới đây là tham khảo ngày thường. Mình cần ngày lưu trú để xác nhận giá và phòng trống. Mình đã lọc theo chỉ phòng đôi; khu vực nha bien qa co tien nghi gi.\nBạn muốn xem báo giá theo ngày hay mở trang phòng để xem ảnh?",
+      "result": {
+        "intent": "room_detail",
+        "publicCatalog": true,
+        "answer": "Đây là Phòng đôi tại Nhà Biển QA. Không gian thư giãn với giường đôi, tủ lạnh mini và góc nghỉ ngơi.\nPhòng dành cho 2 người tiêu chuẩn, tối đa 3 người, diện tích 26 m². Giá dưới đây là tham khảo ngày thường. Mình cần ngày lưu trú để xác nhận giá và phòng trống. Mình đã lọc theo chỉ phòng đôi; khu vực nha bien qa co tien nghi gi.\nBạn muốn xem báo giá theo ngày hay mở trang phòng để xem ảnh?",
+        "presentation": "room_detail",
+        "detail": {
+          "roomTypeId": "139c3571453098a336e54028",
+          "name": "Phòng đôi",
+          "homestayId": "cb273303b2dff254fe8401e6",
+          "homestayName": "Nhà Biển QA",
+          "destination": "Vùng cao QA",
+          "locationEvidence": "",
+          "roomKind": "double",
+          "photo": "",
+          "area": 26,
+          "standardCapacity": 2,
+          "maxCapacity": 3,
+          "description": "Không gian thư giãn với giường đôi, tủ lạnh mini và góc nghỉ ngơi.",
+          "amenities": [
+            "Wi-Fi",
+            "Điều hoà",
+            "Bữa sáng",
+            "TV thông minh",
+            "Tủ lạnh mini",
+            "Ấm đun nước",
+            "Máy sấy tóc",
+            "Nước nóng",
+            "Khăn tắm",
+            "Đồ vệ sinh cá nhân",
+            "Tủ quần áo",
+            "Cửa sổ lớn"
+          ],
+          "roomCount": 1,
+          "distribution": [
+            2
+          ],
+          "guestCount": 2,
+          "price": 550000,
+          "roomPrices": [
+            550000
+          ],
+          "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+          "availableCount": null,
+          "inventoryCount": 1,
+          "checkIn": null,
+          "checkOut": null,
+          "checkInTime": "15:00",
+          "checkOutTime": "12:00"
+        },
+        "columns": [
+          "Thông tin",
+          "Chi tiết"
+        ],
+        "rows": [
+          [
+            "Homestay",
+            "Nhà Biển QA"
+          ],
+          [
+            "Loại phòng",
+            "Phòng đôi"
+          ],
+          [
+            "Diện tích (m²)",
+            26
+          ],
+          [
+            "Khách tiêu chuẩn",
+            2
+          ],
+          [
+            "Khách tối đa mỗi phòng",
+            3
+          ],
+          [
+            "Số phòng cần cho nhóm",
+            1
+          ],
+          [
+            "Chia số khách",
+            "2"
+          ],
+          [
+            "Tiện nghi",
+            "Wi-Fi, Điều hoà, Bữa sáng, TV thông minh, Tủ lạnh mini, Ấm đun nước, Máy sấy tóc, Nước nóng, Khăn tắm, Đồ vệ sinh cá nhân, Tủ quần áo, Cửa sổ lớn"
+          ],
+          [
+            "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            550000
+          ],
+          [
+            "Nhận / trả phòng",
+            "15:00 / 12:00"
+          ]
+        ],
+        "sources": [
+          "Danh mục, mô tả và tiện nghi loại phòng",
+          "Giá tham khảo ngày thường",
+          "Chính sách cơ sở"
+        ],
+        "links": [
+          {
+            "label": "Xem phòng và ảnh",
+            "url": "/room-detail.html?id=139c3571453098a336e54028&roomTypeId=139c3571453098a336e54028&homestayId=cb273303b2dff254fe8401e6&guestCount=2"
+          },
+          {
+            "label": "Chọn ngày và xem giá",
+            "url": "/modules/bookings/index.html?roomTypeId=139c3571453098a336e54028&homestayId=cb273303b2dff254fe8401e6&guestCount=2"
+          }
+        ],
+        "exportable": true,
+        "exportsReady": false,
+        "exportPrompt": "Bạn có muốn xuất kết quả này thành file Excel hoặc PDF không?",
+        "at": "2026-10-19T14:56:57.031Z",
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "verified_request",
+        "failoverFrom": null
+      },
+      "modelPlans": [],
+      "providerCalls": [],
+      "serverPlan": {
+        "intent": "room_detail",
+        "roomKinds": [
+          "double"
+        ],
+        "excludedRoomKinds": [],
+        "destinationQuery": "nha bien qa co tien nghi gi",
+        "selectedTypeId": "139c3571453098a336e54028",
+        "choices": [
+          "139c3571453098a336e54028"
+        ],
+        "answerContract": {
+          "type": "lookup",
+          "intent": "room_detail",
+          "corrected": false
+        },
+        "exportSourceId": "aff729ac5dcc52d64e8a882f",
+        "exportState": "offer",
+        "queryPropertyId": "cb273303b2dff254fe8401e6",
+        "querySelectionHeader": null
+      },
+      "timings": [
+        {
+          "stage": "authentication",
+          "ms": 0.47520000000076834
+        },
+        {
+          "stage": "context_preparation",
+          "ms": 0.5663000000022294
+        },
+        {
+          "stage": "data_and_persistence",
+          "ms": 4.921500000000378
+        },
+        {
+          "stage": "http_total",
+          "ms": 6.596899999996822,
+          "status": 200
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "why": "API không lỗi nội bộ"
+        },
+        {
+          "ok": true,
+          "why": "Không thay đổi booking"
+        },
+        {
+          "ok": true,
+          "why": "Không lộ dữ liệu xác thực"
+        },
+        {
+          "ok": true,
+          "why": "Câu hợp lệ được trả lời"
+        },
+        {
+          "ok": true,
+          "why": "Không chặn nhầm"
+        },
+        {
+          "ok": true,
+          "why": "Đúng phòng và cơ sở được hỏi"
+        }
+      ]
+    }
+  ]
+}

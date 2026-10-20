@@ -60,7 +60,7 @@ test('AI: giới hạn 20 câu/5 phút; retry đã lưu không dùng thêm lư�
 test('AI: xuất Excel/PDF thật, kiểm tra quyền tải và CSV chống công thức',()=>fixture(async({chat,call,dir})=>{
  const r=await chat('Báo cáo tháng 1/2026'),c=r.json.data.session._id,m=r.json.data._id;const url='/api/ai/sessions/'+c+'/messages/'+m+'/export?format=';
  const x=await call(url+'xlsx');assert.equal(x.status,200);assert.equal(x.buffer.subarray(0,2).toString(),'PK');const p=await call(url+'pdf');assert.equal(p.status,200);assert.equal(p.buffer.subarray(0,4).toString(),'%PDF');assert.equal((await call(url+'pdf','owner')).status,404);assert.match(Export.csv({columns:['Mã'],rows:[['=HYPERLINK("secret")']]}),/'=HYPERLINK/);
- await fs.writeFile('/tmp/hs-ai-report.xlsx',x.buffer);await fs.writeFile('/tmp/hs-ai-report.pdf',p.buffer);
+ await fs.writeFile(path.join(dir,'hs-ai-report.xlsx'),x.buffer);await fs.writeFile(path.join(dir,'hs-ai-report.pdf'),p.buffer);
 }));
 test('AI setup: xác minh trước khi lưu, bảo toàn SMTP/Mongo/JWT và backup kín',async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'hs-ai-setup-')),envPath=path.join(dir,'.env'),original='MONGODB_URI=keep\r\nJWT_SECRET=keep-jwt\r\nSMTP_PASS=keep-mail\r\nAI_PROVIDER=disabled\r\n# giữ chú thích\r\n';await fs.writeFile(envPath,original);
@@ -89,7 +89,7 @@ test('AI 1.4.1: Groq GPT-OSS đủ token, không gửi tham số riêng của Gr
  const env={AI_PROVIDER:'groq',GROQ_API_KEY:'fake-test-key'},seen=[];
  const fetcher=async(url,options)=>{seen.push({url,body:JSON.parse(options.body)});return new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:'{"intent":"help","topic":"general"}'}}]}));};
  assert.equal((await P.classify('Xin chào',{}, {env,fetch:fetcher})).fallback,false);
- assert.equal(seen[0].body.model,'openai/gpt-oss-20b');assert.equal(seen[0].body.max_completion_tokens,2048);assert.equal(seen[0].body.reasoning_effort,'low');assert.equal(seen[0].body.include_reasoning,false);assert.ok(!Object.hasOwn(seen[0].body,'max_tokens'));assert.deepEqual(seen[0].body.response_format,{type:'json_object'});
+ assert.equal(seen[0].body.model,'openai/gpt-oss-20b');assert.equal(seen[0].body.max_completion_tokens,2048);assert.equal(seen[0].body.reasoning_effort,'low');assert.equal(seen[0].body.include_reasoning,false);assert.ok(!Object.hasOwn(seen[0].body,'max_tokens'));assert.equal(seen[0].body.response_format.type,'json_schema');assert.equal(seen[0].body.response_format.json_schema.strict,true);
  await P.classify('Xin chào',{}, {env:{AI_PROVIDER:'ollama'},fetch:fetcher});assert.equal(seen[1].body.max_tokens,512);for(const name of ['max_completion_tokens','reasoning_effort','include_reasoning'])assert.ok(!Object.hasOwn(seen[1].body,name));
 });
 test('AI 1.4.1: phân biệt HTTP, phản hồi sai và thiếu token, không trả lỗi gốc chứa bí mật',async()=>{
@@ -158,8 +158,8 @@ test('AI 1.5: nút lựa chọn không vượt cơ sở, không nhận nguồn h
  const offer=await chat('Gợi ý phòng cho 2 người','guest'),sid=offer.json.data.session._id,mid=offer.json.data._id,card=offer.json.data.result.cards.find(c=>c.homestayId===first),body={question:'Mình chọn phòng này',sessionId:sid,requestKey:key(),action:{type:'select_room',messageId:mid,roomTypeId:card.roomTypeId}};
  assert.equal((await call('/api/ai/chat','guest','POST',{...body,sessionId:await session('guest')})).status,404);
  assert.equal((await call('/api/ai/chat','guest','POST',{...body,action:{...body.action,roomTypeId:D.id()}})).status,404);
- await store.mutate(s=>{s.roomTypes.find(t=>t._id===card.roomTypeId).active=false;});const disabled=await call('/api/ai/chat','guest','POST',body);assert.equal(disabled.status,200);assert.equal(disabled.json.data.result.detail,undefined);
- const own=await chat('Gợi ý phòng cho 2 người','owner');await store.mutate(s=>{s.users.find(u=>u.username==='owner').homestayIds=[];});const out=await call('/api/ai/chat','owner','POST',{question:'Xem phòng',sessionId:own.json.data.session._id,requestKey:key(),action:{type:'select_room',messageId:own.json.data._id,roomTypeId:own.json.data.result.cards[0].roomTypeId}});assert.equal(out.status,403);
+ await store.mutate(s=>{s.roomTypes.find(t=>t._id===card.roomTypeId).active=false;});const disabled=await call('/api/ai/chat','guest','POST',body);assert.equal(disabled.status,404);
+ const own=await chat('Gợi ý phòng cho 2 người','owner');await store.mutate(s=>{s.users.find(u=>u.username==='owner').homestayIds=[];});const out=await call('/api/ai/chat','owner','POST',{question:'Xem phòng',sessionId:own.json.data.session._id,requestKey:key(),action:{type:'select_room',messageId:own.json.data._id,roomTypeId:own.json.data.result.cards[0].roomTypeId}});assert.equal(out.status,200);assert.equal(out.json.data.result.publicCatalog,true);
 }));
 test('AI 1.5: thu hồi quyền xuất che lựa chọn đã đồng ý và chặn consent sau đó',()=>fixture(async({chat,call,store})=>{
  const offer=await chat('Báo cáo tháng 1/2026','owner'),sid=offer.json.data.session._id;await chat('Có','owner',sid);
@@ -184,4 +184,4 @@ test('AI 1.5: giá nhóm lấy đúng lịch giá và phụ thu cơ sở thứ h
  const state=await store.read(),t=state.roomTypes.find(t=>t.homestayId===other),expected=D.quote(state,{checkIn,checkOut,roomTypeId:t._id,guestCount:3}).totalAmount;
  for(const role of ['guest','owner']){const r=await chat('Gợi ý phòng cho 3 người từ '+checkIn+' đến '+checkOut,role,null,key(),{'X-Homestay-Id':other});assert.equal(r.status,200);assert.equal(r.json.data.result.cards.length,1);assert.equal(r.json.data.result.cards[0].price,expected);assert.equal(expected,2700000);}
 }));
-test('AI 1.6: chính sách huỷ đúng chủ đề, danh sách booking đúng quyền',()=>fixture(async({chat})=>{const c=await chat('Chính sách huỷ booking được áp dụng như thế nào?');assert.equal(c.status,200);assert.ok(c.json.data.result.columns.includes('Tỷ lệ hoàn (%)'));const list=await chat('Hiển thị các khách hàng đã đặt phòng');assert.equal(list.status,200);assert.equal(list.json.data.result.rows.length,2);assert.equal((await chat('Hiển thị các khách hàng đã đặt phòng','housekeeping')).status,403);}));
+test('AI 1.6: chính sách huỷ hỏi đúng cơ sở còn thiếu, danh sách booking đúng quyền',()=>fixture(async({chat})=>{const missing=await chat('Chính sách huỷ booking được áp dụng như thế nào?');assert.equal(missing.status,200);assert.equal(missing.json.data.result.rows.length,0);assert.match(missing.json.data.result.answer,/homestay nào/);const c=await chat('Chính sách huỷ booking của Homestay Việt được áp dụng như thế nào?');assert.equal(c.status,200);assert.ok(c.json.data.result.columns.includes('Tỷ lệ hoàn (%)'));assert(c.json.data.result.rows.every(r=>r[0]==='Homestay Việt'));const list=await chat('Hiển thị các khách hàng đã đặt phòng');assert.equal(list.status,200);assert.equal(list.json.data.result.rows.length,2);assert.equal((await chat('Hiển thị các khách hàng đã đặt phòng','housekeeping')).status,403);}));

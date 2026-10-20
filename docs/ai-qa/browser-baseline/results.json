@@ -1,0 +1,1078 @@
+{
+  "base": "http://127.0.0.1:3001",
+  "label": "browser-baseline",
+  "mode": "Real Chromium, real application and configured providers; anonymous public data only",
+  "startedAt": "2026-10-19T15:28:06.136Z",
+  "results": [
+    {
+      "id": "A1",
+      "question": "chính sách hoàn tiền",
+      "http": 200,
+      "requestKey": "647c19e362044fa2b220db3760c2580b",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 29971,
+      "usefulContentMs": 29981,
+      "completeMs": 29981,
+      "renderAfterResponseMs": 10,
+      "result": {
+        "answer": "Mình hướng dẫn bạn nhé: số tiền được hoàn phụ thuộc chính sách đã chốt trên booking và thời điểm bạn huỷ. Các mức đang cấu hình được hiển thị bên dưới; với booking đã đặt, cơ sở cần kiểm tra chính sách lưu trên booking để tính đúng. Bạn liên hệ lễ tân hoặc chủ homestay trước khi xác nhận huỷ; số tiền phải hoàn hiển thị chưa đồng nghĩa tiền đã được chuyển lại.",
+        "columns": [
+          "Homestay",
+          "Trước giờ nhận ít nhất (giờ)",
+          "Tỷ lệ hoàn (%)"
+        ],
+        "rows": [
+          [
+            "An Nhiên Trà Viên Homestay",
+            48,
+            100
+          ],
+          [
+            "An Nhiên Trà Viên Homestay",
+            24,
+            50
+          ],
+          [
+            "An Nhiên Trà Viên Homestay",
+            0,
+            0
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            48,
+            100
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            24,
+            50
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            0,
+            0
+          ],
+          [
+            "Lưng Chừng Mây Sa Pa",
+            48,
+            100
+          ],
+          [
+            "Lưng Chừng Mây Sa Pa",
+            24,
+            50
+          ],
+          [
+            "Lưng Chừng Mây Sa Pa",
+            0,
+            0
+          ],
+          [
+            "Nếp Sen Ninh Bình Retreat",
+            48,
+            100
+          ],
+          [
+            "Nếp Sen Ninh Bình Retreat",
+            24,
+            50
+          ],
+          [
+            "Nếp Sen Ninh Bình Retreat",
+            0,
+            0
+          ],
+          [
+            "Hiên Vàng Hội An Homestay",
+            48,
+            100
+          ],
+          [
+            "Hiên Vàng Hội An Homestay",
+            24,
+            50
+          ],
+          [
+            "Hiên Vàng Hội An Homestay",
+            0,
+            0
+          ],
+          [
+            "Gió Nồm Đà Nẵng Stay",
+            48,
+            100
+          ],
+          [
+            "Gió Nồm Đà Nẵng Stay",
+            24,
+            50
+          ],
+          [
+            "Gió Nồm Đà Nẵng Stay",
+            0,
+            0
+          ],
+          [
+            "Cát Mềm Quy Nhơn Homestay",
+            48,
+            100
+          ],
+          [
+            "Cát Mềm Quy Nhơn Homestay",
+            24,
+            50
+          ],
+          [
+            "Cát Mềm Quy Nhơn Homestay",
+            0,
+            0
+          ],
+          [
+            "Dừa Xanh Phú Quốc Garden Stay",
+            48,
+            100
+          ],
+          [
+            "Dừa Xanh Phú Quốc Garden Stay",
+            24,
+            50
+          ],
+          [
+            "Dừa Xanh Phú Quốc Garden Stay",
+            0,
+            0
+          ],
+          [
+            "Hiên Biển Vũng Tàu Residence",
+            48,
+            100
+          ],
+          [
+            "Hiên Biển Vũng Tàu Residence",
+            24,
+            50
+          ],
+          [
+            "Hiên Biển Vũng Tàu Residence",
+            0,
+            0
+          ],
+          [
+            "Bến Vườn Cần Thơ Eco Stay",
+            48,
+            100
+          ],
+          [
+            "Bến Vườn Cần Thơ Eco Stay",
+            24,
+            50
+          ],
+          [
+            "Bến Vườn Cần Thơ Eco Stay",
+            0,
+            0
+          ]
+        ],
+        "totalRows": 30,
+        "sources": [
+          "Hướng dẫn sử dụng HOMESTAY",
+          "Cấu hình chính sách hiện tại"
+        ],
+        "intent": "policy",
+        "depositProvider": null,
+        "paymentEnabled": true,
+        "at": "2026-10-19T15:21:47.107Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nMình hướng dẫn bạn nhé: số tiền được hoàn phụ thuộc chính sách đã chốt trên booking và thời điểm bạn huỷ. Các mức đang cấu hình được hiển thị bên dưới; với booking đã đặt, cơ sở cần kiểm tra chính sách lưu trên booking để tính đúng. Bạn liên hệ lễ tân hoặc chủ homestay trước khi xác nhận huỷ; số tiền phải hoàn hiển thị chưa đồng nghĩa tiền đã được chuyển lại.\n\nHomestay\tTrước giờ nhận ít nhất (giờ)\tTỷ lệ hoàn (%)\nAn Nhiên Trà Viên Homestay\t48\t100\nAn Nhiên Trà Viên Homestay\t24\t50\nAn Nhiên Trà Viên Homestay\t0\t0\nMộc Miên Đà Lạt Homestay\t48\t100\nMộc Miên Đà Lạt Homestay\t24\t50\nMộc Miên Đà Lạt Homestay\t0\t0\nLưng Chừng Mây Sa Pa\t48\t100\nLưng Chừng Mây Sa Pa\t24\t50\nLưng Chừng Mây Sa Pa\t0\t0\nNếp Sen Ninh Bình Retreat\t48\t100\nNếp Sen Ninh Bình Retreat\t24\t50\nNếp Sen Ninh Bình Retreat\t0\t0\nHiên Vàng Hội An Homestay\t48\t100\nHiên Vàng Hội An Homestay\t24\t50\nHiên Vàng Hội An Homestay\t0\t0\nGió Nồm Đà Nẵng Stay\t48\t100\nGió Nồm Đà Nẵng Stay\t24\t50\nGió Nồm Đà Nẵng Stay\t0\t0\nCát Mềm Quy Nhơn Homestay\t48\t100\nCát Mềm Quy Nhơn Homestay\t24\t50\nCát Mềm Quy Nhơn Homestay\t0\t0\nDừa Xanh Phú Quốc Garden Stay\t48\t100\nDừa Xanh Phú Quốc Garden Stay\t24\t50\nDừa Xanh Phú Quốc Garden Stay\t0\t0\nHiên Biển Vũng Tàu Residence\t48\t100\nHiên Biển Vũng Tàu Residence\t24\t50\nHiên Biển Vũng Tàu Residence\t0\t0\nBến Vườn Cần Thơ Eco Stay\t48\t100\nBến Vườn Cần Thơ Eco Stay\t24\t50\nBến Vườn Cần Thơ Eco Stay\t0\t0\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423277210,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423307115,
+          "durationMs": 29905
+        },
+        {
+          "url": "/api/public/ai/sessions/1b8f3da5ab77599dd12d5032",
+          "start": 1792423307116,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423307117,
+          "durationMs": 1
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": false,
+          "message": "Chỉ hỏi cơ sở còn thiếu"
+        },
+        {
+          "ok": true,
+          "message": "Phân biệt chính sách hiện tại và booking hoặc hỏi đúng cơ sở"
+        }
+      ],
+      "verdict": "Lỗi"
+    },
+    {
+      "id": "A2",
+      "question": "cho tôi chính sách hoàn tiền của mộc miên đà lạt homestay",
+      "http": 200,
+      "requestKey": "31b2818c7e744c0dbbaea3f13cff0bfc",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 34440,
+      "usefulContentMs": 34482,
+      "completeMs": 34482,
+      "renderAfterResponseMs": 42,
+      "result": {
+        "answer": "Mình hướng dẫn bạn nhé: số tiền được hoàn phụ thuộc chính sách đã chốt trên booking và thời điểm bạn huỷ. Các mức đang cấu hình được hiển thị bên dưới; với booking đã đặt, cơ sở cần kiểm tra chính sách lưu trên booking để tính đúng. Bạn liên hệ lễ tân hoặc chủ homestay trước khi xác nhận huỷ; số tiền phải hoàn hiển thị chưa đồng nghĩa tiền đã được chuyển lại.",
+        "columns": [
+          "Homestay",
+          "Trước giờ nhận ít nhất (giờ)",
+          "Tỷ lệ hoàn (%)"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            48,
+            100
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            24,
+            50
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            0,
+            0
+          ]
+        ],
+        "totalRows": 3,
+        "sources": [
+          "Hướng dẫn sử dụng HOMESTAY",
+          "Cấu hình chính sách hiện tại"
+        ],
+        "intent": "policy",
+        "depositProvider": "manual",
+        "paymentEnabled": true,
+        "at": "2026-10-19T15:22:36.572Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nMình hướng dẫn bạn nhé: số tiền được hoàn phụ thuộc chính sách đã chốt trên booking và thời điểm bạn huỷ. Các mức đang cấu hình được hiển thị bên dưới; với booking đã đặt, cơ sở cần kiểm tra chính sách lưu trên booking để tính đúng. Bạn liên hệ lễ tân hoặc chủ homestay trước khi xác nhận huỷ; số tiền phải hoàn hiển thị chưa đồng nghĩa tiền đã được chuyển lại.\n\nHomestay\tTrước giờ nhận ít nhất (giờ)\tTỷ lệ hoàn (%)\nMộc Miên Đà Lạt Homestay\t48\t100\nMộc Miên Đà Lạt Homestay\t24\t50\nMộc Miên Đà Lạt Homestay\t0\t0\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423322160,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423356580,
+          "durationMs": 34420
+        },
+        {
+          "url": "/api/public/ai/sessions/6f7a3517fec30c19bbe11569",
+          "start": 1792423356580,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423356586,
+          "durationMs": 6
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Đúng chính sách hoàn cọc của cơ sở theo Atlas, không phải tỷ lệ đặt cọc"
+        },
+        {
+          "ok": true,
+          "message": "Phân biệt chính sách hiện tại và booking hoặc hỏi đúng cơ sở"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "A3",
+      "question": "chính sách huỷ và hoàn tiền cọc tại mộc miên homestay đà lạt như thế nào",
+      "http": 200,
+      "requestKey": "376d34f8dad141098857ca1031e7d0dd",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 27167,
+      "usefulContentMs": 27205,
+      "completeMs": 27205,
+      "renderAfterResponseMs": 38,
+      "result": {
+        "intent": "policy",
+        "publicCatalog": true,
+        "suppressExport": true,
+        "answer": "Mình liệt kê tỷ lệ cọc trên tổng giá booking theo từng homestay bên dưới. Bạn đang quan tâm cơ sở nào? Đây là chính sách hiện tại; số tiền cọc cụ thể cần tổng giá và chính sách đã chốt trên booking, không phải số tiền đã nhận.",
+        "columns": [
+          "Homestay",
+          "Tỷ lệ cọc trên tổng giá booking"
+        ],
+        "rows": [
+          [
+            "An Nhiên Trà Viên Homestay",
+            "5%"
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "5%"
+          ],
+          [
+            "Lưng Chừng Mây Sa Pa",
+            "5%"
+          ],
+          [
+            "Nếp Sen Ninh Bình Retreat",
+            "5%"
+          ],
+          [
+            "Hiên Vàng Hội An Homestay",
+            "5%"
+          ],
+          [
+            "Gió Nồm Đà Nẵng Stay",
+            "5%"
+          ],
+          [
+            "Cát Mềm Quy Nhơn Homestay",
+            "5%"
+          ],
+          [
+            "Dừa Xanh Phú Quốc Garden Stay",
+            "5%"
+          ],
+          [
+            "Hiên Biển Vũng Tàu Residence",
+            "5%"
+          ],
+          [
+            "Bến Vườn Cần Thơ Eco Stay",
+            "5%"
+          ]
+        ],
+        "totalRows": 10,
+        "sources": [
+          "Giờ nhận/trả và chính sách cọc hiện tại của từng homestay"
+        ],
+        "at": "2026-10-19T15:23:18.861Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nMình liệt kê tỷ lệ cọc trên tổng giá booking theo từng homestay bên dưới. Bạn đang quan tâm cơ sở nào? Đây là chính sách hiện tại; số tiền cọc cụ thể cần tổng giá và chính sách đã chốt trên booking, không phải số tiền đã nhận.\n\nHomestay\tTỷ lệ cọc trên tổng giá booking\nAn Nhiên Trà Viên Homestay\t5%\nMộc Miên Đà Lạt Homestay\t5%\nLưng Chừng Mây Sa Pa\t5%\nNếp Sen Ninh Bình Retreat\t5%\nHiên Vàng Hội An Homestay\t5%\nGió Nồm Đà Nẵng Stay\t5%\nCát Mềm Quy Nhơn Homestay\t5%\nDừa Xanh Phú Quốc Garden Stay\t5%\nHiên Biển Vũng Tàu Residence\t5%\nBến Vườn Cần Thơ Eco Stay\t5%\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423371722,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423398866,
+          "durationMs": 27144
+        },
+        {
+          "url": "/api/public/ai/sessions/470ae30be81df06dc8ee4056",
+          "start": 1792423398866,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423398869,
+          "durationMs": 3
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": false,
+          "message": "Đúng chính sách hoàn cọc của cơ sở theo Atlas, không phải tỷ lệ đặt cọc"
+        },
+        {
+          "ok": true,
+          "message": "Phân biệt chính sách hiện tại và booking hoặc hỏi đúng cơ sở"
+        }
+      ],
+      "verdict": "Lỗi"
+    },
+    {
+      "id": "A4",
+      "question": "cho tôi xem chính sách hoàn tiền của tất cả các homestay",
+      "http": 200,
+      "requestKey": "67c821f1ca144e5ba0842dae8cdf7ef1",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 28488,
+      "usefulContentMs": 28523,
+      "completeMs": 28523,
+      "renderAfterResponseMs": 35,
+      "result": {
+        "answer": "Bạn đang muốn hỏi chính sách hoặc chức năng nào? Mình cần xác định đúng nội dung trước khi giải thích.",
+        "columns": [],
+        "rows": [],
+        "totalRows": 0,
+        "sources": [
+          "Hướng dẫn sử dụng HOMESTAY",
+          "Cấu hình chính sách hiện tại"
+        ],
+        "intent": "policy",
+        "depositProvider": null,
+        "paymentEnabled": true,
+        "at": "2026-10-19T15:24:02.397Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nBạn đang muốn hỏi chính sách hoặc chức năng nào? Mình cần xác định đúng nội dung trước khi giải thích.\n\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423413981,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423442400,
+          "durationMs": 28419
+        },
+        {
+          "url": "/api/public/ai/sessions/b9004e011ec4d72f00736753",
+          "start": 1792423442400,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423442404,
+          "durationMs": 4
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": false,
+          "message": "Tất cả cơ sở công khai có chính sách riêng đúng Atlas"
+        },
+        {
+          "ok": false,
+          "message": "Phân biệt chính sách hiện tại và booking hoặc hỏi đúng cơ sở"
+        }
+      ],
+      "verdict": "Lỗi"
+    },
+    {
+      "id": "B",
+      "question": "Xin chào, tôi lỡ làm hỏng điều hoà ở phòng của mình, giờ tôi phải làm sao?",
+      "http": 403,
+      "requestKey": "1192d733c2da4a7c9240cbac30b358c2",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 16366,
+      "usefulContentMs": 16403,
+      "completeMs": 16403,
+      "renderAfterResponseMs": 37,
+      "result": {
+        "intent": "unsupported",
+        "answer": "Vai trò Khách chưa đăng nhập không được cấp phép cho yêu cầu này. Mình có thể hỗ trợ tìm phòng, xem giá, tiện nghi và chính sách lưu trú. Bạn đăng nhập để xem booking của mình.",
+        "denied": true,
+        "restricted": true,
+        "columns": [],
+        "rows": [],
+        "sources": [
+          "Phạm vi khách chưa đăng nhập"
+        ],
+        "at": "2026-10-19T15:24:33.647Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nVai trò Khách chưa đăng nhập không được cấp phép cho yêu cầu này. Mình có thể hỗ trợ tìm phòng, xem giá, tiện nghi và chính sách lưu trú. Bạn đăng nhập để xem booking của mình.\n\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423457304,
+          "http": 403,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423473651,
+          "durationMs": 16347
+        },
+        {
+          "url": "/api/public/ai/sessions/2945b6c754d672c896cf72bb",
+          "start": 1792423473651,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423473655,
+          "durationMs": 4
+        }
+      ],
+      "checks": [
+        {
+          "ok": false,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": false,
+          "message": "Hướng dẫn liên hệ đúng bộ phận"
+        },
+        {
+          "ok": false,
+          "message": "Không tự sửa hoặc báo đã tạo sự cố"
+        },
+        {
+          "ok": false,
+          "message": "Không kết luận trách nhiệm hay bồi thường"
+        }
+      ],
+      "verdict": "Lỗi"
+    },
+    {
+      "id": "C",
+      "question": "Homestay có phục vụ bữa sáng không?",
+      "http": 200,
+      "requestKey": "f2c3a8869f89487a816c3c8bb888eac7",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 27331,
+      "usefulContentMs": 27381,
+      "completeMs": 27381,
+      "renderAfterResponseMs": 50,
+      "result": {
+        "intent": "policy",
+        "answer": "Mình chưa xác định chắc ý bạn nên cần hỏi rõ một chút. Bạn đang muốn hỏi chức năng hoặc đối tượng nào trong homestay?",
+        "columns": [],
+        "rows": [],
+        "totalRows": 0,
+        "sources": [
+          "Làm rõ yêu cầu trước khi tra cứu"
+        ],
+        "audienceRole": "guest",
+        "suppressExport": true,
+        "at": "2026-10-19T15:25:15.875Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nMình chưa xác định chắc ý bạn nên cần hỏi rõ một chút. Bạn đang muốn hỏi chức năng hoặc đối tượng nào trong homestay?\n\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423488569,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423515878,
+          "durationMs": 27309
+        },
+        {
+          "url": "/api/public/ai/sessions/a5db1774755f2fb0d9e89e5c",
+          "start": 1792423515879,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423515882,
+          "durationMs": 3
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": false,
+          "message": "Hỏi đúng cơ sở khi hỏi bữa sáng"
+        }
+      ],
+      "verdict": "Lỗi"
+    },
+    {
+      "id": "D",
+      "question": "Loại phòng đôi Mộc Miên tại Mộc Miên Đà Lạt Homestay có những tiện nghi gì?",
+      "http": 200,
+      "requestKey": "781737d3d49c4b4da5230f35211d2cd1",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 26450,
+      "usefulContentMs": 26505,
+      "completeMs": 26505,
+      "renderAfterResponseMs": 55,
+      "result": {
+        "intent": "room_detail",
+        "publicCatalog": true,
+        "answer": "Đây là Phòng đôi Mộc Miên tại Mộc Miên Đà Lạt Homestay. Không gian 25 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bố cục một phòng ngủ, phù hợp cặp đôi muốn nghỉ riêng tư. Thuộc Mộc Miên Đà Lạt Homestay; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Không có điều hoà; sử dụng chăn ấm và thông gió tự nhiên.\nPhòng dành cho 2 người tiêu chuẩn, tối đa 2 người, diện tích 25 m². Giá dưới đây là tham khảo ngày thường. Mình cần ngày lưu trú để xác nhận giá và phòng trống. Mình đã lọc theo chỉ phòng đôi; khu vực moc mien da lat homestay co nhung tien nghi gi.\nBạn muốn xem báo giá theo ngày hay mở trang phòng để xem ảnh?",
+        "presentation": "room_detail",
+        "detail": {
+          "roomTypeId": "b6146c8adc56e065bbc1b31f",
+          "name": "Phòng đôi Mộc Miên",
+          "homestayId": "0b25529dced1319846cf1a42",
+          "homestayName": "Mộc Miên Đà Lạt Homestay",
+          "destination": "Đà Lạt",
+          "locationEvidence": "Nhà đồi & không gian gỗ",
+          "roomKind": "double",
+          "photo": "/assets/catalog190/photo-005.webp",
+          "area": 25,
+          "standardCapacity": 2,
+          "maxCapacity": 2,
+          "description": "Không gian 25 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bố cục một phòng ngủ, phù hợp cặp đôi muốn nghỉ riêng tư. Thuộc Mộc Miên Đà Lạt Homestay; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Không có điều hoà; sử dụng chăn ấm và thông gió tự nhiên.",
+          "amenities": [
+            "Wi-Fi",
+            "TV thông minh",
+            "Tủ lạnh mini",
+            "Ấm đun nước",
+            "Máy sấy tóc",
+            "Nước nóng",
+            "Khăn tắm",
+            "Đồ vệ sinh cá nhân",
+            "Tủ quần áo"
+          ],
+          "roomCount": 1,
+          "distribution": [
+            2
+          ],
+          "guestCount": 2,
+          "price": 570000,
+          "roomPrices": [
+            570000
+          ],
+          "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+          "availableCount": null,
+          "inventoryCount": 5,
+          "checkIn": null,
+          "checkOut": null,
+          "checkInTime": "14:00",
+          "checkOutTime": "12:00"
+        },
+        "columns": [
+          "Thông tin",
+          "Chi tiết"
+        ],
+        "rows": [
+          [
+            "Homestay",
+            "Mộc Miên Đà Lạt Homestay"
+          ],
+          [
+            "Loại phòng",
+            "Phòng đôi Mộc Miên"
+          ],
+          [
+            "Diện tích (m²)",
+            25
+          ],
+          [
+            "Khách tiêu chuẩn",
+            2
+          ],
+          [
+            "Khách tối đa mỗi phòng",
+            2
+          ],
+          [
+            "Số phòng cần cho nhóm",
+            1
+          ],
+          [
+            "Chia số khách",
+            "2"
+          ],
+          [
+            "Tiện nghi",
+            "Wi-Fi, TV thông minh, Tủ lạnh mini, Ấm đun nước, Máy sấy tóc, Nước nóng, Khăn tắm, Đồ vệ sinh cá nhân, Tủ quần áo"
+          ],
+          [
+            "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            570000
+          ],
+          [
+            "Nhận / trả phòng",
+            "14:00 / 12:00"
+          ]
+        ],
+        "sources": [
+          "Danh mục, mô tả và tiện nghi loại phòng",
+          "Giá tham khảo ngày thường",
+          "Chính sách cơ sở"
+        ],
+        "links": [
+          {
+            "label": "Xem phòng và ảnh",
+            "url": "/room-detail.html?id=b6146c8adc56e065bbc1b31f&roomTypeId=b6146c8adc56e065bbc1b31f&homestayId=0b25529dced1319846cf1a42&guestCount=2"
+          },
+          {
+            "label": "Chọn ngày và xem giá",
+            "url": "/modules/bookings/index.html?roomTypeId=b6146c8adc56e065bbc1b31f&homestayId=0b25529dced1319846cf1a42&guestCount=2"
+          }
+        ],
+        "at": "2026-10-19T15:25:57.224Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nĐây là Phòng đôi Mộc Miên tại Mộc Miên Đà Lạt Homestay. Không gian 25 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bố cục một phòng ngủ, phù hợp cặp đôi muốn nghỉ riêng tư. Thuộc Mộc Miên Đà Lạt Homestay; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Không có điều hoà; sử dụng chăn ấm và thông gió tự nhiên.\nPhòng dành cho 2 người tiêu chuẩn, tối đa 2 người, diện tích 25 m². Giá dưới đây là tham khảo ngày thường. Mình cần ngày lưu trú để xác nhận giá và phòng trống. Mình đã lọc theo chỉ phòng đôi; khu vực moc mien da lat homestay co nhung tien nghi gi.\nBạn muốn xem báo giá theo ngày hay mở trang phòng để xem ảnh?\n\nPhòng đôi Mộc Miên\n\nMộc Miên Đà Lạt Homestay\n\nDiện tích\n25 m²\nSức chứa mỗi phòng\n2 tiêu chuẩn · 2 tối đa\nGiờ nhận / trả\n14:00 / 12:00\nTiện nghi được cơ sở cập nhật\nWi-Fi\nTV thông minh\nTủ lạnh mini\nẤm đun nước\nMáy sấy tóc\nNước nóng\nKhăn tắm\nĐồ vệ sinh cá nhân\nTủ quần áo\n\n570.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nXem phòng và ảnh ↗\nChọn ngày và xem giá ↗\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423530830,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423557228,
+          "durationMs": 26398
+        },
+        {
+          "url": "/api/public/ai/sessions/5782841add3e33a79a87d9d6",
+          "start": 1792423557228,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423557234,
+          "durationMs": 6
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Đúng đối tượng phòng/cơ sở"
+        },
+        {
+          "ok": true,
+          "message": "Danh sách tiện nghi khớp nguồn Atlas"
+        },
+        {
+          "ok": false,
+          "message": "Trả thẳng tiện nghi"
+        }
+      ],
+      "verdict": "Lỗi"
+    },
+    {
+      "id": "E",
+      "question": "Ngày 20/10/2026 đến 22/10/2026, Mộc Miên Đà Lạt Homestay còn phòng cho 2 người không?",
+      "http": 200,
+      "requestKey": "a92466c7d4b14c218f5b447217cf0745",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 27191,
+      "usefulContentMs": 27234,
+      "completeMs": 27234,
+      "renderAfterResponseMs": 43,
+      "result": {
+        "answer": "Phòng còn trống từ 2026-10-20 đến 2026-10-22 cho 2 khách. Báo giá lấy theo từng đêm, gồm phụ thu thêm khách; chưa giữ phòng.",
+        "columns": [
+          "Homestay",
+          "Loại phòng",
+          "Phòng trống",
+          "Tối đa khách",
+          "Số đêm",
+          "Tổng giá (VND)"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Phòng đôi Mộc Miên",
+            5,
+            2,
+            2,
+            1430000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Phòng gia đình Nhà Đồi",
+            5,
+            5,
+            2,
+            2350000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Deluxe ban công Sương Sớm",
+            3,
+            3,
+            2,
+            1970000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Suite Góc Thông",
+            3,
+            4,
+            2,
+            3030000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Studio Gác Bếp",
+            4,
+            3,
+            2,
+            1870000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Cabin Hiên Gỗ",
+            3,
+            3,
+            2,
+            2350000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Loft Áp Mái",
+            4,
+            4,
+            2,
+            2150000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Twin Mây Trắng",
+            5,
+            2,
+            2,
+            1550000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Căn nhóm Đồi Nhỏ",
+            4,
+            8,
+            2,
+            4000000
+          ]
+        ],
+        "totalRows": 9,
+        "sources": [
+          "Lịch phòng đang có hiệu lực",
+          "Bảng giá từng đêm và phụ thu"
+        ],
+        "intent": "availability",
+        "links": [
+          {
+            "label": "Mở đặt phòng",
+            "url": "/modules/bookings/index.html?checkIn=2026-10-20&checkOut=2026-10-22&guestCount=2"
+          }
+        ],
+        "at": "2026-10-19T15:26:39.301Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nPhòng còn trống từ 2026-10-20 đến 2026-10-22 cho 2 khách. Báo giá lấy theo từng đêm, gồm phụ thu thêm khách; chưa giữ phòng.\n\nHomestay\tLoại phòng\tPhòng trống\tTối đa khách\tSố đêm\tTổng giá (VND)\nMộc Miên Đà Lạt Homestay\tPhòng đôi Mộc Miên\t5\t2\t2\t1.430.000\nMộc Miên Đà Lạt Homestay\tPhòng gia đình Nhà Đồi\t5\t5\t2\t2.350.000\nMộc Miên Đà Lạt Homestay\tDeluxe ban công Sương Sớm\t3\t3\t2\t1.970.000\nMộc Miên Đà Lạt Homestay\tSuite Góc Thông\t3\t4\t2\t3.030.000\nMộc Miên Đà Lạt Homestay\tStudio Gác Bếp\t4\t3\t2\t1.870.000\nMộc Miên Đà Lạt Homestay\tCabin Hiên Gỗ\t3\t3\t2\t2.350.000\nMộc Miên Đà Lạt Homestay\tLoft Áp Mái\t4\t4\t2\t2.150.000\nMộc Miên Đà Lạt Homestay\tTwin Mây Trắng\t5\t2\t2\t1.550.000\nMộc Miên Đà Lạt Homestay\tCăn nhóm Đồi Nhỏ\t4\t8\t2\t4.000.000\nMở đặt phòng ↗\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423572136,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423599305,
+          "durationMs": 27169
+        },
+        {
+          "url": "/api/public/ai/sessions/068dcbcbfb1b4545d4dff9a3",
+          "start": 1792423599305,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423599311,
+          "durationMs": 6
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Phòng trống khớp đếm độc lập từ phòng, bảo trì và booking Atlas"
+        },
+        {
+          "ok": true,
+          "message": "Không hỏi lại ngày/số khách"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "F",
+      "question": "Smart TV trong phòng có kết nối sẵn Netflix, YouTube Premium không?",
+      "http": 200,
+      "requestKey": "6fb4f62fad7b4a45b7cc3ff96f147174",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 28017,
+      "usefulContentMs": 28075,
+      "completeMs": 28075,
+      "renderAfterResponseMs": 58,
+      "result": {
+        "intent": "policy",
+        "answer": "Mình chưa xác định chắc ý bạn nên cần hỏi rõ một chút. Bạn muốn mình tra số liệu, giải thích cách làm hay kiểm tra khả năng của trợ lý?",
+        "columns": [],
+        "rows": [],
+        "totalRows": 0,
+        "sources": [
+          "Làm rõ yêu cầu trước khi tra cứu"
+        ],
+        "audienceRole": "guest",
+        "suppressExport": true,
+        "at": "2026-10-19T15:27:22.536Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nMình chưa xác định chắc ý bạn nên cần hỏi rõ một chút. Bạn muốn mình tra số liệu, giải thích cách làm hay kiểm tra khả năng của trợ lý?\n\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423614601,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423642539,
+          "durationMs": 27938
+        },
+        {
+          "url": "/api/public/ai/sessions/8cda08a179019eb850063b7e",
+          "start": 1792423642539,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423642545,
+          "durationMs": 6
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": false,
+          "message": "Không suy thuê bao trả phí từ Smart TV"
+        }
+      ],
+      "verdict": "Lỗi"
+    },
+    {
+      "id": "G",
+      "question": "Tôi có thể thanh toán bằng Apple Pay, Google Pay hoặc chuyển khoản QR code không?",
+      "http": 200,
+      "requestKey": "16554ab84ad84004b42fb9ccc6735276",
+      "requestId": null,
+      "serverTiming": null,
+      "networkMs": 28204,
+      "usefulContentMs": 28235,
+      "completeMs": 28235,
+      "renderAfterResponseMs": 31,
+      "result": {
+        "answer": "Bạn đang muốn hỏi chính sách hoặc chức năng nào? Mình cần xác định đúng nội dung trước khi giải thích.",
+        "columns": [],
+        "rows": [],
+        "totalRows": 0,
+        "sources": [
+          "Hướng dẫn sử dụng HOMESTAY",
+          "Cấu hình chính sách hiện tại"
+        ],
+        "intent": "policy",
+        "depositProvider": null,
+        "paymentEnabled": true,
+        "at": "2026-10-19T15:28:05.953Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nBạn đang muốn hỏi chính sách hoặc chức năng nào? Mình cần xác định đúng nội dung trước khi giải thích.\n\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792423657775,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423685958,
+          "durationMs": 28183
+        },
+        {
+          "url": "/api/public/ai/sessions/e8e1108ff1b6c7778a110aa2",
+          "start": 1792423685958,
+          "http": 200,
+          "serverTiming": null,
+          "trace": null,
+          "finished": 1792423685962,
+          "durationMs": 4
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": false,
+          "message": "Trả đủ phương thức; không suy ví điện tử từ QR"
+        }
+      ],
+      "verdict": "Lỗi"
+    }
+  ],
+  "review": {
+    "at": "2026-10-19T15:37:49.912Z",
+    "source": "Atlas projection read only; independent public facts and availability arithmetic",
+    "passed": 2,
+    "total": 10,
+    "expectedCancellation": [
+      {
+        "hoursBefore": 48,
+        "refundPercent": 100
+      },
+      {
+        "hoursBefore": 24,
+        "refundPercent": 50
+      },
+      {
+        "hoursBefore": 0,
+        "refundPercent": 0
+      }
+    ],
+    "expectedAmenities": [
+      "Khăn tắm",
+      "Máy sấy tóc",
+      "Nước nóng",
+      "TV thông minh",
+      "Tủ lạnh mini",
+      "Tủ quần áo",
+      "Wi-Fi",
+      "Đồ vệ sinh cá nhân",
+      "Ấm đun nước"
+    ]
+  }
+}

@@ -26,7 +26,7 @@
    if(HS.heroCarousel)HS.heroCarousel(properties);
    const destinations=document.getElementById('home-destinations');if(destinations)destinations.innerHTML=properties.slice(0,6).map(h=>`<a class="destination-tile" href="/homestay-detail.html?id=${e(h._id)}"><img src="${HS.thumbnail(h.photo)}" alt="Ảnh minh hoạ ${e(h.destination||h.name)}" loading="lazy" width="480" height="320"><span>${e(h.destination||h.name)}<small>${e(h.roomTypeCount||0)} loại phòng</small></span></a>`).join('');
    const count=document.getElementById('collection-count');if(count)count.textContent=`${properties.length} homestay · ${all.length} loại phòng · Chọn nơi ở theo cách của bạn`;
-   if(properties.some(h=>h.demoListing))document.getElementById('collection-notice').hidden=false;
+   
    const s=await HS.api('/api/public/settings');document.getElementById('home-policy').textContent=`Nhận phòng từ ${s.checkInTime} · Trả phòng trước ${s.checkOutTime}. Chính sách cụ thể được hiển thị tại từng cơ sở và trong báo giá.`;
   }else{
    group=params.get('group')||'';if(!groups.some(g=>g[0]===group))group='';
@@ -36,7 +36,7 @@
    typeOptions();document.getElementById('room-type-filter').onchange=ev=>{type=ev.target.value;page=1;render();};
    document.getElementById('room-group-filter').value=group;document.getElementById('room-group-filter').onchange=ev=>{group=ev.target.value;page=1;render();};
    document.getElementById('room-search').oninput=ev=>{query=ev.target.value.trim();page=1;render();};document.getElementById('room-sort').onchange=ev=>{sort=ev.target.value;page=1;render();};
-   document.getElementById('collection-notice').hidden=!properties.some(h=>h.demoListing);
+   
   }
   render();
  }catch(error){container.innerHTML='<div class="notice error" role="alert">'+e(error.message)+'</div>';}

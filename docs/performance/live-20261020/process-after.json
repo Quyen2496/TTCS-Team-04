@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-19T17:46:10.5275824Z",
+  "pid": 7488,
+  "executable": "D:\\node_js\\node.exe",
+  "command": "\"D:\\node_js\\node.exe\" server.js --existing-data ",
+  "directory": "D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\",
+  "build": "36172b4c8e3ff69b",
+  "status": 200,
+  "cloudflarePids": [
+    5544
+  ],
+  "stderrBytes": 0,
+  "stdout": "HOMESTAY: http://localhost:3001 — mongo"
+}
