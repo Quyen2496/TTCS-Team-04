@@ -1,0 +1,897 @@
+{
+  "at": "2026-10-20T00:04:31.756Z",
+  "label": "after-integrity-fix",
+  "realBrowser": true,
+  "database": "live Atlas through localhost",
+  "role": "admin",
+  "selectedProperty": false,
+  "runtime": {
+    "build": "5317b1a541b87ba2",
+    "startedAt": "2026-10-20T00:02:58.305Z"
+  },
+  "samples": [
+    {
+      "screen": "reception",
+      "sample": 1,
+      "uiMs": 315,
+      "outsideApiMs": 61,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 254.1,
+          "startMs": 45.5,
+          "endMs": 299.60000000009313,
+          "bytes": 124596,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 48.17
+            },
+            {
+              "name": "authentication_1",
+              "ms": 48.67
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 177.45
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 248.69
+            }
+          ],
+          "atlasMs": 225.62,
+          "authenticationMs": 48.67,
+          "backendMs": 248.69,
+          "backendOtherMs": 23.069999999999993,
+          "clientAndTransferMs": 5.409999999999997
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "sample": 2,
+      "uiMs": 175,
+      "outsideApiMs": 44,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 131,
+          "startMs": 33.5,
+          "endMs": 164.5,
+          "bytes": 124596,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 44.28
+            },
+            {
+              "name": "authentication_1",
+              "ms": 44.94
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 53.84
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 113.73
+            }
+          ],
+          "atlasMs": 98.12,
+          "authenticationMs": 44.94,
+          "backendMs": 113.73,
+          "backendOtherMs": 15.61,
+          "clientAndTransferMs": 17.269999999999996
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "sample": 3,
+      "uiMs": 161,
+      "outsideApiMs": 43,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 118.5,
+          "startMs": 28.90000000037253,
+          "endMs": 147.40000000037253,
+          "bytes": 124596,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 42.18
+            },
+            {
+              "name": "authentication_1",
+              "ms": 42.75
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 55.35
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 113.86
+            }
+          ],
+          "atlasMs": 97.53,
+          "authenticationMs": 42.75,
+          "backendMs": 113.86,
+          "backendOtherMs": 16.33,
+          "clientAndTransferMs": 4.640000000000001
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "sample": 4,
+      "uiMs": 171,
+      "outsideApiMs": 48,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 122.7,
+          "startMs": 35.299999999813735,
+          "endMs": 158,
+          "bytes": 124596,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 43.5
+            },
+            {
+              "name": "authentication_1",
+              "ms": 44.02
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 57.28
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 118.34
+            }
+          ],
+          "atlasMs": 100.78,
+          "authenticationMs": 44.02,
+          "backendMs": 118.34,
+          "backendOtherMs": 17.560000000000002,
+          "clientAndTransferMs": 4.359999999999999
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "sample": 5,
+      "uiMs": 237,
+      "outsideApiMs": 49,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=reception&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 188.2,
+          "startMs": 33,
+          "endMs": 221.20000000018626,
+          "bytes": 124596,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 95.46
+            },
+            {
+              "name": "authentication_1",
+              "ms": 95.9
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 67.06
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 181.91
+            }
+          ],
+          "atlasMs": 162.51999999999998,
+          "authenticationMs": 95.9,
+          "backendMs": 181.91,
+          "backendOtherMs": 19.390000000000015,
+          "clientAndTransferMs": 6.289999999999992
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 1,
+      "uiMs": 245,
+      "outsideApiMs": 35,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 210.3,
+          "startMs": 23.200000000186265,
+          "endMs": 233.5,
+          "bytes": 52312,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 83.43
+            },
+            {
+              "name": "authentication_1",
+              "ms": 83.97
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 121.25
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 206.34
+            }
+          ],
+          "atlasMs": 204.68,
+          "authenticationMs": 83.97,
+          "backendMs": 206.34,
+          "backendOtherMs": 1.6599999999999966,
+          "clientAndTransferMs": 3.960000000000008
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 2,
+      "uiMs": 215,
+      "outsideApiMs": 51,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 163.7,
+          "startMs": 32.5,
+          "endMs": 196.1999999997206,
+          "bytes": 52312,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 43.55
+            },
+            {
+              "name": "authentication_1",
+              "ms": 44.06
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 115.04
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 160.28
+            }
+          ],
+          "atlasMs": 158.59,
+          "authenticationMs": 44.06,
+          "backendMs": 160.28,
+          "backendOtherMs": 1.6899999999999977,
+          "clientAndTransferMs": 3.4199999999999875
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 3,
+      "uiMs": 291,
+      "outsideApiMs": 51,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 240.1,
+          "startMs": 39.299999999813735,
+          "endMs": 279.39999999990687,
+          "bytes": 52312,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 128.42
+            },
+            {
+              "name": "authentication_1",
+              "ms": 129.15
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 106.32
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 236.6
+            }
+          ],
+          "atlasMs": 234.73999999999998,
+          "authenticationMs": 129.15,
+          "backendMs": 236.6,
+          "backendOtherMs": 1.8600000000000136,
+          "clientAndTransferMs": 3.5
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 4,
+      "uiMs": 143,
+      "outsideApiMs": 45,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 97.9,
+          "startMs": 34.60000000009313,
+          "endMs": 132.5,
+          "bytes": 52312,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 43.58
+            },
+            {
+              "name": "authentication_1",
+              "ms": 44.02
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 49.66
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 94.96
+            }
+          ],
+          "atlasMs": 93.24,
+          "authenticationMs": 44.02,
+          "backendMs": 94.96,
+          "backendOtherMs": 1.7199999999999989,
+          "clientAndTransferMs": 2.940000000000012
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "sample": 5,
+      "uiMs": 201,
+      "outsideApiMs": 40,
+      "pageError": null,
+      "rendered": true,
+      "requests": [
+        {
+          "endpoint": "/api/admin/state?screen=rooms&view=list&page=1&pageSize=10&search=",
+          "method": "GET",
+          "status": 200,
+          "ms": 160.6,
+          "startMs": 31.59999999962747,
+          "endMs": 192.1999999997206,
+          "bytes": 52312,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 48.22
+            },
+            {
+              "name": "authentication_1",
+              "ms": 48.54
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 108.51
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 158.26
+            }
+          ],
+          "atlasMs": 156.73000000000002,
+          "authenticationMs": 48.54,
+          "backendMs": 158.26,
+          "backendOtherMs": 1.5299999999999727,
+          "clientAndTransferMs": 2.3400000000000034
+        }
+      ]
+    }
+  ],
+  "details": [
+    {
+      "screen": "reception",
+      "action": "details",
+      "sample": 1,
+      "uiMs": 866,
+      "requests": [
+        {
+          "endpoint": "/api/admin/bookings/:code",
+          "status": 200,
+          "ms": 156.39999999990687,
+          "bytes": 1790,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 71.8
+            },
+            {
+              "name": "authentication_1",
+              "ms": 72.33
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 81.25
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 153.92
+            }
+          ]
+        },
+        {
+          "endpoint": "/api/admin/bookings/:code/email-status",
+          "status": 200,
+          "ms": 223.8000000002794,
+          "bytes": 195,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 93.03
+            },
+            {
+              "name": "authentication_1",
+              "ms": 93.45
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 127.97
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 221.87
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "action": "details",
+      "sample": 2,
+      "uiMs": 211,
+      "requests": [
+        {
+          "endpoint": "/api/admin/bookings/:code",
+          "status": 200,
+          "ms": 88.5,
+          "bytes": 1790,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 42.9
+            },
+            {
+              "name": "authentication_1",
+              "ms": 43.19
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 43.43
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 86.84
+            }
+          ]
+        },
+        {
+          "endpoint": "/api/admin/bookings/:code/email-status",
+          "status": 200,
+          "ms": 94.60000000009313,
+          "bytes": 195,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 48.94
+            },
+            {
+              "name": "authentication_1",
+              "ms": 49.19
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 43.67
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 93.05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "action": "details",
+      "sample": 3,
+      "uiMs": 236,
+      "requests": [
+        {
+          "endpoint": "/api/admin/bookings/:code",
+          "status": 200,
+          "ms": 93.90000000037253,
+          "bytes": 1790,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 45.25
+            },
+            {
+              "name": "authentication_1",
+              "ms": 45.8
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 46.13
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 92.21
+            }
+          ]
+        },
+        {
+          "endpoint": "/api/admin/bookings/:code/email-status",
+          "status": 200,
+          "ms": 88.8000000002794,
+          "bytes": 195,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 43.47
+            },
+            {
+              "name": "authentication_1",
+              "ms": 43.73
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 43.64
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 87.52
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "action": "details",
+      "sample": 4,
+      "uiMs": 208,
+      "requests": [
+        {
+          "endpoint": "/api/admin/bookings/:code",
+          "status": 200,
+          "ms": 92.70000000018626,
+          "bytes": 1790,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 44.55
+            },
+            {
+              "name": "authentication_1",
+              "ms": 44.83
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 46.29
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 91.3
+            }
+          ]
+        },
+        {
+          "endpoint": "/api/admin/bookings/:code/email-status",
+          "status": 200,
+          "ms": 89.20000000018626,
+          "bytes": 195,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 43.96
+            },
+            {
+              "name": "authentication_1",
+              "ms": 44.22
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 43.37
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 87.76
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "reception",
+      "action": "details",
+      "sample": 5,
+      "uiMs": 219,
+      "requests": [
+        {
+          "endpoint": "/api/admin/bookings/:code",
+          "status": 200,
+          "ms": 90.89999999990687,
+          "bytes": 1790,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 44.08
+            },
+            {
+              "name": "authentication_1",
+              "ms": 44.36
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 43.82
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 88.48
+            }
+          ]
+        },
+        {
+          "endpoint": "/api/admin/bookings/:code/email-status",
+          "status": 200,
+          "ms": 97.1999999997206,
+          "bytes": 195,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 42.56
+            },
+            {
+              "name": "authentication_1",
+              "ms": 42.96
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 51.51
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 94.71
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "action": "room-gallery",
+      "sample": 1,
+      "uiMs": 243,
+      "requests": [
+        {
+          "endpoint": "/api/admin/rooms/:id",
+          "status": 200,
+          "ms": 106.5,
+          "bytes": 831,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 42.95
+            },
+            {
+              "name": "authentication_1",
+              "ms": 43.46
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 60.98
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 104.72
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "action": "room-gallery",
+      "sample": 2,
+      "uiMs": 212,
+      "requests": [
+        {
+          "endpoint": "/api/admin/rooms/:id",
+          "status": 200,
+          "ms": 103.20000000018626,
+          "bytes": 831,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 42.55
+            },
+            {
+              "name": "authentication_1",
+              "ms": 42.82
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 58.46
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 101.52
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "action": "room-gallery",
+      "sample": 3,
+      "uiMs": 224,
+      "requests": [
+        {
+          "endpoint": "/api/admin/rooms/:id",
+          "status": 200,
+          "ms": 97.3000000002794,
+          "bytes": 831,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 43.25
+            },
+            {
+              "name": "authentication_1",
+              "ms": 43.52
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 52.24
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 95.99
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "action": "room-gallery",
+      "sample": 4,
+      "uiMs": 227,
+      "requests": [
+        {
+          "endpoint": "/api/admin/rooms/:id",
+          "status": 200,
+          "ms": 107.79999999981374,
+          "bytes": 831,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 43.62
+            },
+            {
+              "name": "authentication_1",
+              "ms": 43.91
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 62.14
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 106.25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "rooms",
+      "action": "room-gallery",
+      "sample": 5,
+      "uiMs": 234,
+      "requests": [
+        {
+          "endpoint": "/api/admin/rooms/:id",
+          "status": 200,
+          "ms": 126,
+          "bytes": 831,
+          "serverTiming": [
+            {
+              "name": "atlas_auth_0",
+              "ms": 46.96
+            },
+            {
+              "name": "authentication_1",
+              "ms": 47.21
+            },
+            {
+              "name": "atlas_operational_2",
+              "ms": 77.22
+            },
+            {
+              "name": "backend_total_3",
+              "ms": 124.62
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "skipped": [],
+  "summary": [
+    {
+      "screen": "reception",
+      "n": 5,
+      "firstMs": 315,
+      "medianMs": 175,
+      "warmMedianMs": 173,
+      "maxMs": 315,
+      "errors": 0
+    },
+    {
+      "screen": "rooms",
+      "n": 5,
+      "firstMs": 245,
+      "medianMs": 215,
+      "warmMedianMs": 208,
+      "maxMs": 291,
+      "errors": 0
+    }
+  ]
+}

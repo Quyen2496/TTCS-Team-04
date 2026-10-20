@@ -1,0 +1,26 @@
+{
+  "build": "90b7e360bcd6ca89",
+  "stage": "C:\\Users\\quy42\\AppData\\Local\\Temp\\homestay-perf-before-_x4wk38u",
+  "files": [
+    {
+      "path": "src/store.js",
+      "sha256": "f94448d65f9fc8926f0945d225a87eb8ac33c9fc632c828c97a082011f359286"
+    },
+    {
+      "path": "server.js",
+      "sha256": "4f5468652bc15f1ac004170a63e3981db2e93c55eaaa1e138250ecaf52d91257"
+    },
+    {
+      "path": "src/read-model.js",
+      "sha256": "b67140f1aef54dae5a84ef8187eda8f4bee763ee77d120e8856e4ef0b564121e"
+    },
+    {
+      "path": "src/ai-telemetry.js",
+      "sha256": "4ef3829935bb2f14f3ffa6f7989fade03fa3c30ca6c26bfdbdbbbbeca63287ab"
+    },
+    {
+      "path": "public/js/admin.js",
+      "sha256": "ba81eb9f6b50e3bb235e241b5a6123429b8c1f8c0fa2600321809c01beab1619"
+    }
+  ]
+}

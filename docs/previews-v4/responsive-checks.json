@@ -1,0 +1,132 @@
+[
+  {
+    "width": 360,
+    "url": "/",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "url": "/rooms.html",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "url": "/room-detail.html?id=000000000000000000000001",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "url": "/modules/bookings/index.html?checkIn=2026-11-10&checkOut=2026-11-12&guestCount=2",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "url": "/modules/lookup/index.html",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "owner",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "rooms",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "types",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "amenities",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "reception",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "users",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "reports",
+    "overflow": false
+  },
+  {
+    "width": 360,
+    "page": "settings",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "url": "/",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "url": "/rooms.html",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "url": "/room-detail.html?id=000000000000000000000001",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "url": "/modules/bookings/index.html?checkIn=2026-11-10&checkOut=2026-11-12&guestCount=2",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "url": "/modules/lookup/index.html",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "owner",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "rooms",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "types",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "amenities",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "reception",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "users",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "reports",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "settings",
+    "overflow": false
+  }
+]

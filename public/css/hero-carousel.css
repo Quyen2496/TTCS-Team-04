@@ -1,0 +1,26 @@
+.homestay-ui .hero-slides{position:absolute;inset:0;overflow:hidden;z-index:0;touch-action:pan-y}
+.homestay-ui .hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 53%;will-change:transform}
+.homestay-ui .hero-slides img[hidden]{display:none}
+.homestay-ui .travel-hero:after{z-index:1;pointer-events:none}
+.homestay-ui .travel-hero .hero-copy{z-index:2;padding-bottom:26px;pointer-events:none}
+.homestay-ui .hero-footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:end;gap:24px;padding:0 50px 100px;color:#fff}
+.homestay-ui .hero-footer[hidden],.homestay-ui .hero-controls[hidden]{display:none}
+.homestay-ui .hero-caption{min-width:0;max-width:65%;line-height:1.5}
+.homestay-ui .hero-location{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;color:#e9f4ec}
+.homestay-ui .hero-caption a{display:inline-flex;flex-direction:column;gap:5px;color:#fff;text-decoration:none;text-shadow:0 1px 3px #0006}
+.homestay-ui .hero-caption strong{font-size:21px;line-height:1.35;overflow-wrap:anywhere}
+.homestay-ui .hero-caption a>span{font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.homestay-ui .hero-controls{display:flex;flex-direction:column;gap:10px;align-items:flex-end;flex:none}
+.homestay-ui .hero-nav{display:flex;align-items:center;gap:8px}
+.homestay-ui .hero-nav button{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;border:1px solid #ffffffb3;border-radius:50%;background:#153929aa;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.homestay-ui .hero-nav button:hover{background:#153929}
+.homestay-ui .hero-nav #hero-toggle{font-size:17px}
+.homestay-ui .hero-counter{font-size:12px;min-width:46px;text-align:center;font-variant-numeric:tabular-nums}
+.homestay-ui .hero-dots{display:flex;gap:0;flex-wrap:wrap;max-width:264px}
+.homestay-ui .hero-dots button{width:24px;height:24px;padding:0;display:grid;place-items:center;border:0;background:transparent;cursor:pointer;border-radius:50%}
+.homestay-ui .hero-dots span{width:6px;height:6px;border:1px solid white;background:#ffffff70;border-radius:50%;transition:width .2s}
+.homestay-ui .hero-dots [aria-current=true] span{width:17px;border-radius:6px;background:#fff}
+.homestay-ui .hero-footer a:focus-visible,.homestay-ui .hero-footer button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:800px){.homestay-ui .hero-footer{padding-inline:35px;gap:16px}.homestay-ui .hero-caption{max-width:55%}.homestay-ui .hero-caption strong{font-size:18px}}
+@media(max-width:600px){.homestay-ui .travel-hero .hero-copy{padding-bottom:24px}.homestay-ui .hero-footer{display:grid;grid-template-columns:1fr;padding:0 24px 118px;gap:18px}.homestay-ui .hero-caption{max-width:100%}.homestay-ui .hero-caption strong{font-size:19px}.homestay-ui .hero-controls{align-items:flex-start;gap:6px}.homestay-ui .hero-nav{gap:10px}.homestay-ui .hero-dots{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.homestay-ui .hero-dots span{transition:none}.homestay-ui .hero-slides img{will-change:auto}}

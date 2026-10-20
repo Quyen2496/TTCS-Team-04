@@ -1,0 +1,1054 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+(node:35) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:42) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AI: báo cáo tháng/năm tính từ dữ liệu, giữ nguyên số và không trả PII
+ok 1 - AI: báo cáo tháng/năm tính từ dữ liệu, giữ nguyên số và không trả PII
+  ---
+  duration_ms: 239.280628
+  type: 'test'
+  ...
+# Subtest: AI: chủ homestay chỉ cơ sở được cấp, từ chối header cơ sở khác
+ok 2 - AI: chủ homestay chỉ cơ sở được cấp, từ chối header cơ sở khác
+  ---
+  duration_ms: 68.615455
+  type: 'test'
+  ...
+# Subtest: AI: lễ tân/buồng phòng/khách không xem báo cáo hoặc dữ liệu ngoài quyền
+ok 3 - AI: lễ tân/buồng phòng/khách không xem báo cáo hoặc dữ liệu ngoài quyền
+  ---
+  duration_ms: 90.230725
+  type: 'test'
+  ...
+# Subtest: AI: cuộc chat riêng, request lặp chỉ lưu một cặp, lỗi không xoá nội dung
+ok 4 - AI: cuộc chat riêng, request lặp chỉ lưu một cặp, lỗi không xoá nội dung
+  ---
+  duration_ms: 48.096176
+  type: 'test'
+  ...
+# Subtest: AI: thu hồi quyền/cơ sở che kết quả cũ và ngăn xuất lại
+ok 5 - AI: thu hồi quyền/cơ sở che kết quả cũ và ngăn xuất lại
+  ---
+  duration_ms: 35.996269
+  type: 'test'
+  ...
+# Subtest: AI: tra phòng/báo giá sử dụng giá từng đêm và không tạo booking
+ok 6 - AI: tra phòng/báo giá sử dụng giá từng đêm và không tạo booking
+  ---
+  duration_ms: 25.490314
+  type: 'test'
+  ...
+# Subtest: AI: hỏi tiếp kỳ trước, xác thực ngày/tháng, lấy chính sách đúng cơ sở
+ok 7 - AI: hỏi tiếp kỳ trước, xác thực ngày/tháng, lấy chính sách đúng cơ sở
+  ---
+  duration_ms: 56.829024
+  type: 'test'
+  ...
+# Subtest: AI: không tiết lộ state qua API quản trị và không tự làm thao tác ghi
+ok 8 - AI: không tiết lộ state qua API quản trị và không tự làm thao tác ghi
+  ---
+  duration_ms: 41.976169
+  type: 'test'
+  ...
+# Subtest: AI: model hiểu câu diễn đạt khác, chỉ nhận intent; không gửi PII/state cho nhà cung cấp
+ok 9 - AI: model hiểu câu diễn đạt khác, chỉ nhận intent; không gửi PII/state cho nhà cung cấp
+  ---
+  duration_ms: 24.40225
+  type: 'test'
+  ...
+# Subtest: AI: đầu ra model thêm số liệu/SQL hoặc lỗi key được bỏ, fallback có nhãn rõ
+ok 10 - AI: đầu ra model thêm số liệu/SQL hoặc lỗi key được bỏ, fallback có nhãn rõ
+  ---
+  duration_ms: 55.944162
+  type: 'test'
+  ...
+# Subtest: AI: hai câu đồng thời chỉ xử lý một và tài khoản khoá trong lúc gọi model bị từ chối
+ok 11 - AI: hai câu đồng thời chỉ xử lý một và tài khoản khoá trong lúc gọi model bị từ chối
+  ---
+  duration_ms: 33.607835
+  type: 'test'
+  ...
+# Subtest: AI: giới hạn 20 câu/5 phút; retry đã lưu không dùng thêm lượt
+ok 12 - AI: giới hạn 20 câu/5 phút; retry đã lưu không dùng thêm lượt
+  ---
+  duration_ms: 132.07788
+  type: 'test'
+  ...
+# Subtest: AI: xuất Excel/PDF thật, kiểm tra quyền tải và CSV chống công thức
+ok 13 - AI: xuất Excel/PDF thật, kiểm tra quyền tải và CSV chống công thức
+  ---
+  duration_ms: 135.421298
+  type: 'test'
+  ...
+# Subtest: AI setup: xác minh trước khi lưu, bảo toàn SMTP/Mongo/JWT và backup kín
+ok 14 - AI setup: xác minh trước khi lưu, bảo toàn SMTP/Mongo/JWT và backup kín
+  ---
+  duration_ms: 8.924989
+  type: 'test'
+  ...
+# Subtest: AI: chữ Đ hoa, ngày ngắn dd/MM và hỏi tiếp tháng trước tính từ kỳ đã hỏi
+ok 15 - AI: chữ Đ hoa, ngày ngắn dd/MM và hỏi tiếp tháng trước tính từ kỳ đã hỏi
+  ---
+  duration_ms: 1.135711
+  type: 'test'
+  ...
+# Subtest: AI: bỏ đêm bảo trì trong mẫu số công suất và không đếm ngày trả
+ok 16 - AI: bỏ đêm bảo trì trong mẫu số công suất và không đếm ngày trả
+  ---
+  duration_ms: 1.773769
+  type: 'test'
+  ...
+# Subtest: AI: giới hạn dung lượng lịch sử không lưu nửa tin nhắn hoặc đổi booking
+ok 17 - AI: giới hạn dung lượng lịch sử không lưu nửa tin nhắn hoặc đổi booking
+  ---
+  duration_ms: 148.763227
+  type: 'test'
+  ...
+# Subtest: AI 1.4.1: Groq GPT-OSS đủ token, không gửi tham số riêng của Groq sang Ollama
+ok 18 - AI 1.4.1: Groq GPT-OSS đủ token, không gửi tham số riêng của Groq sang Ollama
+  ---
+  duration_ms: 1.095871
+  type: 'test'
+  ...
+# Subtest: AI 1.4.1: phân biệt HTTP, phản hồi sai và thiếu token, không trả lỗi gốc chứa bí mật
+ok 19 - AI 1.4.1: phân biệt HTTP, phản hồi sai và thiếu token, không trả lỗi gốc chứa bí mật
+  ---
+  duration_ms: 3.004064
+  type: 'test'
+  ...
+# Subtest: AI 1.4.1: chẩn đoán DNS, TLS, timeout và mạng không lộ exception
+ok 20 - AI 1.4.1: chẩn đoán DNS, TLS, timeout và mạng không lộ exception
+  ---
+  duration_ms: 0.424213
+  type: 'test'
+  ...
+# Subtest: AI 1.4.1: setup lỗi báo đúng HTTP, giữ nguyên .env và chỉ lưu khi JSON hợp lệ
+ok 21 - AI 1.4.1: setup lỗi báo đúng HTTP, giữ nguyên .env và chỉ lưu khi JSON hợp lệ
+  ---
+  duration_ms: 16.434722
+  type: 'test'
+  ...
+# Subtest: AI 1.4.2: chỉ trang trợ lý được nhúng từ cùng origin cho cửa sổ chat
+ok 22 - AI 1.4.2: chỉ trang trợ lý được nhúng từ cùng origin cho cửa sổ chat
+  ---
+  duration_ms: 23.244666
+  type: 'test'
+  ...
+# Subtest: AI 1.5: gợi ý theo số người không cần ngày, chọn phòng thật và nhớ nhóm khi hỏi tiếp
+ok 23 - AI 1.5: gợi ý theo số người không cần ngày, chọn phòng thật và nhớ nhóm khi hỏi tiếp
+  ---
+  duration_ms: 54.203548
+  type: 'test'
+  ...
+# Subtest: AI 1.5: nhóm đông chia phòng đúng sức chứa và giá từng phòng, không tạo booking
+ok 24 - AI 1.5: nhóm đông chia phòng đúng sức chứa và giá từng phòng, không tạo booking
+  ---
+  duration_ms: 41.662083
+  type: 'test'
+  ...
+# Subtest: AI 1.5: hỏi số người trước, hiểu số viết bằng chữ và chọn tên/thứ tự bằng tin nhắn
+ok 25 - AI 1.5: hỏi số người trước, hiểu số viết bằng chữ và chọn tên/thứ tự bằng tin nhắn
+  ---
+  duration_ms: 66.035364
+  type: 'test'
+  ...
+# Subtest: AI 1.5: greeting không tải file; bảng hỏi trước, đồng ý mới hiện định dạng và tải đúng nguồn
+ok 26 - AI 1.5: greeting không tải file; bảng hỏi trước, đồng ý mới hiện định dạng và tải đúng nguồn
+  ---
+  duration_ms: 72.10547
+  type: 'test'
+  ...
+# Subtest: AI 1.5: từ chối xuất, yêu cầu sau và nút consent gắn đúng kết quả trong hội thoại
+ok 27 - AI 1.5: từ chối xuất, yêu cầu sau và nút consent gắn đúng kết quả trong hội thoại
+  ---
+  duration_ms: 62.468708
+  type: 'test'
+  ...
+# Subtest: AI 1.5: nút lựa chọn không vượt cơ sở, không nhận nguồn hội thoại khác và từ chối phòng ngừng hoạt động
+ok 28 - AI 1.5: nút lựa chọn không vượt cơ sở, không nhận nguồn hội thoại khác và từ chối phòng ngừng hoạt động
+  ---
+  duration_ms: 56.884363
+  type: 'test'
+  ...
+# Subtest: AI 1.5: thu hồi quyền xuất che lựa chọn đã đồng ý và chặn consent sau đó
+ok 29 - AI 1.5: thu hồi quyền xuất che lựa chọn đã đồng ý và chặn consent sau đó
+  ---
+  duration_ms: 34.685208
+  type: 'test'
+  ...
+# Subtest: AI 1.5: số phòng có khách tách hiện tại với lịch sử, đếm riêng từng phòng và kiểm tra quyền
+ok 30 - AI 1.5: số phòng có khách tách hiện tại với lịch sử, đếm riêng từng phòng và kiểm tra quyền
+  ---
+  duration_ms: 48.393622
+  type: 'test'
+  ...
+# Subtest: AI 1.5: SQL không biến thành hướng dẫn booking; tổng tiền booking không nhầm báo cáo
+ok 31 - AI 1.5: SQL không biến thành hướng dẫn booking; tổng tiền booking không nhầm báo cáo
+  ---
+  duration_ms: 28.585907
+  type: 'test'
+  ...
+# Subtest: AI 1.5: giá nhóm lấy đúng lịch giá và phụ thu cơ sở thứ hai trong phạm vi được chọn
+ok 32 - AI 1.5: giá nhóm lấy đúng lịch giá và phụ thu cơ sở thứ hai trong phạm vi được chọn
+  ---
+  duration_ms: 24.552212
+  type: 'test'
+  ...
+# Subtest: AI 1.6: chính sách huỷ đúng chủ đề, danh sách booking đúng quyền
+ok 33 - AI 1.6: chính sách huỷ đúng chủ đề, danh sách booking đúng quyền
+  ---
+  duration_ms: 26.799915
+  type: 'test'
+  ...
+# (node:43) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Thiết lập email kiểm tra đăng nhập + gửi trước khi lưu, giữ Mongo/JWT và sao lưu file cũ
+ok 34 - Thiết lập email kiểm tra đăng nhập + gửi trước khi lưu, giữ Mongo/JWT và sao lưu file cũ
+  ---
+  duration_ms: 23.380231
+  type: 'test'
+  ...
+# Subtest: SMTP lỗi hoặc từ chối thư không ghi cấu hình hay tạo sao lưu
+ok 35 - SMTP lỗi hoặc từ chối thư không ghi cấu hình hay tạo sao lưu
+  ---
+  duration_ms: 22.053935
+  type: 'test'
+  ...
+# Subtest: Không ghi đè .env được sửa trong khi đang kiểm tra SMTP
+ok 36 - Không ghi đè .env được sửa trong khi đang kiểm tra SMTP
+  ---
+  duration_ms: 22.974971
+  type: 'test'
+  ...
+# Subtest: Không tạo .env thiếu cấu hình dự án; không nhận email/giá trị chèn dòng
+ok 37 - Không tạo .env thiếu cấu hình dự án; không nhận email/giá trị chèn dòng
+  ---
+  duration_ms: 4.849972
+  type: 'test'
+  ...
+# Subtest: Nodemailer thật qua SMTP TLS: thiết lập gửi thư thử rồi API gửi mã và đặt lại
+ok 38 - Nodemailer thật qua SMTP TLS: thiết lập gửi thư thử rồi API gửi mã và đặt lại
+  ---
+  duration_ms: 627.977791
+  type: 'test'
+  ...
+# (node:44) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Payment: cấu hình ngân hàng hợp lệ, chưa thiết lập thì tắt
+ok 39 - Payment: cấu hình ngân hàng hợp lệ, chưa thiết lập thì tắt
+  ---
+  duration_ms: 2.11744
+  type: 'test'
+  ...
+# Subtest: Payment: QR đúng số tiền/nội dung, không tự ghi cọc hoặc lộ email
+ok 40 - Payment: QR đúng số tiền/nội dung, không tự ghi cọc hoặc lộ email
+  ---
+  duration_ms: 106.335087
+  type: 'test'
+  ...
+# Subtest: Payment: khách khác/token sửa bị chặn, tra cứu sai giới hạn
+ok 41 - Payment: khách khác/token sửa bị chặn, tra cứu sai giới hạn
+  ---
+  duration_ms: 126.462097
+  type: 'test'
+  ...
+# Subtest: Payment: báo chuyển không ghi tiền, lặp không trùng, lễ tân đối soát một lần
+ok 42 - Payment: báo chuyển không ghi tiền, lặp không trùng, lễ tân đối soát một lần
+  ---
+  duration_ms: 61.662687
+  type: 'test'
+  ...
+# Subtest: Payment: quá hạn/tắt cấu hình chặn tạo QR hoặc báo chuyển
+ok 43 - Payment: quá hạn/tắt cấu hình chặn tạo QR hoặc báo chuyển
+  ---
+  duration_ms: 47.620014
+  type: 'test'
+  ...
+# Subtest: Payment: từ chối giữ nguyên sổ tiền và cho báo lại
+ok 44 - Payment: từ chối giữ nguyên sổ tiền và cho báo lại
+  ---
+  duration_ms: 56.33144
+  type: 'test'
+  ...
+# Subtest: Payment: cơ sở chưa cấu hình không dùng nhầm tài khoản cơ sở đầu
+ok 45 - Payment: cơ sở chưa cấu hình không dùng nhầm tài khoản cơ sở đầu
+  ---
+  duration_ms: 20.943743
+  type: 'test'
+  ...
+# Subtest: Payment: tỷ lệ cọc lưu tại lúc báo giá, cọc đủ không chuyển thêm
+ok 46 - Payment: tỷ lệ cọc lưu tại lúc báo giá, cọc đủ không chuyển thêm
+  ---
+  duration_ms: 15.03779
+  type: 'test'
+  ...
+# (node:50) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: payOS: QR lấy từ provider, giữ đúng số cọc, không gửi giấy tờ/key ra client
+ok 47 - payOS: QR lấy từ provider, giữ đúng số cọc, không gửi giấy tờ/key ra client
+  ---
+  duration_ms: 164.451273
+  type: 'test'
+  ...
+# Subtest: payOS: giả webhook/chữ ký sai/return giả không ghi cọc
+ok 48 - payOS: giả webhook/chữ ký sai/return giả không ghi cọc
+  ---
+  duration_ms: 85.142012
+  type: 'test'
+  ...
+# Subtest: payOS: webhook hợp lệ và gửi lặp đồng thời chỉ ghi một bút toán
+ok 49 - payOS: webhook hợp lệ và gửi lặp đồng thời chỉ ghi một bút toán
+  ---
+  duration_ms: 81.942131
+  type: 'test'
+  ...
+# Subtest: payOS: currency/tài khoản/link sai không ghi tiền, tham chiếu sửa bị chặn
+ok 50 - payOS: currency/tài khoản/link sai không ghi tiền, tham chiếu sửa bị chặn
+  ---
+  duration_ms: 90.360993
+  type: 'test'
+  ...
+# Subtest: payOS: số tiền thiếu được ghi đúng; QR cũ huỷ trước tạo QR phần còn thiếu
+ok 51 - payOS: số tiền thiếu được ghi đúng; QR cũ huỷ trước tạo QR phần còn thiếu
+  ---
+  duration_ms: 95.092495
+  type: 'test'
+  ...
+# Subtest: payOS: đổi booking/tiền chuyển vượt cần đối soát, không tự xác nhận
+ok 52 - payOS: đổi booking/tiền chuyển vượt cần đối soát, không tự xác nhận
+  ---
+  duration_ms: 42.742361
+  type: 'test'
+  ...
+# Subtest: payOS: hết hạn rồi nhận webhook giữ bằng chứng, không hồi sinh booking
+ok 53 - payOS: hết hạn rồi nhận webhook giữ bằng chứng, không hồi sinh booking
+  ---
+  duration_ms: 58.247023
+  type: 'test'
+  ...
+# Chưa kết nối được payOS. Lệnh được giữ để kiểm tra lại, tránh tạo trùng.
+# Subtest: payOS: timeout tạo lệnh không tạo lại orderCode khác, có thể huỷ lệnh tìm được
+ok 54 - payOS: timeout tạo lệnh không tạo lại orderCode khác, có thể huỷ lệnh tìm được
+  ---
+  duration_ms: 53.025829
+  type: 'test'
+  ...
+# Subtest: payOS: tạo QR đồng thời chỉ một lệnh, gọi lại dùng lệnh đang chờ
+ok 55 - payOS: tạo QR đồng thời chỉ một lệnh, gọi lại dùng lệnh đang chờ
+  ---
+  duration_ms: 91.060563
+  type: 'test'
+  ...
+# Subtest: payOS: reconcile server cập nhật giao dịch mất webhook một lần
+ok 56 - payOS: reconcile server cập nhật giao dịch mất webhook một lần
+  ---
+  duration_ms: 58.818631
+  type: 'test'
+  ...
+# payOS chưa được cấu hình cho homestay này. Liên hệ cơ sở để được hướng dẫn.
+# Subtest: payOS: kênh sai homestay và khách khác bị chặn
+ok 57 - payOS: kênh sai homestay và khách khác bị chặn
+  ---
+  duration_ms: 22.046349
+  type: 'test'
+  ...
+# Subtest: payOS: staff đối soát ngoại lệ một lần, báo cáo không được ghi cọc
+ok 58 - payOS: staff đối soát ngoại lệ một lần, báo cáo không được ghi cọc
+  ---
+  duration_ms: 46.652077
+  type: 'test'
+  ...
+# Subtest: payOS: trả vượt lệnh lưu đối soát, không cộng cọc hoặc cho tạo QR mới
+ok 59 - payOS: trả vượt lệnh lưu đối soát, không cộng cọc hoặc cho tạo QR mới
+  ---
+  duration_ms: 75.004185
+  type: 'test'
+  ...
+# Chưa kết nối được payOS. Lệnh được giữ để kiểm tra lại, tránh tạo trùng.
+# Subtest: payOS: lệnh tạo timeout nhưng đã thanh toán được khôi phục qua API có chữ ký
+ok 60 - payOS: lệnh tạo timeout nhưng đã thanh toán được khôi phục qua API có chữ ký
+  ---
+  duration_ms: 33.173555
+  type: 'test'
+  ...
+# Subtest: payOS: quét lệnh hết hạn đối chiếu và huỷ, webhook đến sau huỷ vẫn giữ bằng chứng
+ok 61 - payOS: quét lệnh hết hạn đối chiếu và huỷ, webhook đến sau huỷ vẫn giữ bằng chứng
+  ---
+  duration_ms: 40.995824
+  type: 'test'
+  ...
+# Subtest: payOS local: QR hết hạn nhưng booking còn hạn đưa tiền vào đối soát
+ok 62 - payOS local: QR hết hạn nhưng booking còn hạn đưa tiền vào đối soát
+  ---
+  duration_ms: 38.131742
+  type: 'test'
+  ...
+# Subtest: payOS local: huỷ QR rồi nhận tiền giữ bằng chứng và không tự cộng cọc
+ok 63 - payOS local: huỷ QR rồi nhận tiền giữ bằng chứng và không tự cộng cọc
+  ---
+  duration_ms: 54.783032
+  type: 'test'
+  ...
+# Subtest: payOS local: huỷ thất bại và API còn PENDING không báo huỷ thành công
+ok 64 - payOS local: huỷ thất bại và API còn PENDING không báo huỷ thành công
+  ---
+  duration_ms: 35.850995
+  type: 'test'
+  ...
+# Subtest: payOS local: API đang PROCESSING chưa cho huỷ hoặc tạo thêm lệnh
+ok 65 - payOS local: API đang PROCESSING chưa cho huỷ hoặc tạo thêm lệnh
+  ---
+  duration_ms: 48.432467
+  type: 'test'
+  ...
+# Subtest: payOS local: API đã ghi cọc trong lúc trả QR không bị ghi đè thành PENDING
+ok 66 - payOS local: API đã ghi cọc trong lúc trả QR không bị ghi đè thành PENDING
+  ---
+  duration_ms: 21.886897
+  type: 'test'
+  ...
+# (node:56) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: V5 01 Đăng ký chỉ tạo Khách; chống nâng quyền, trùng email/tên và mật khẩu yếu
+ok 67 - V5 01 Đăng ký chỉ tạo Khách; chống nâng quyền, trùng email/tên và mật khẩu yếu
+  ---
+  duration_ms: 547.545915
+  type: 'test'
+  ...
+# Subtest: V5 02 Booking cá nhân liên kết tài khoản, không lộ CCCD/ghi chú, không nhận booking khác bằng email
+ok 68 - V5 02 Booking cá nhân liên kết tài khoản, không lộ CCCD/ghi chú, không nhận booking khác bằng email
+  ---
+  duration_ms: 248.89052
+  type: 'test'
+  ...
+# Subtest: V5 03 Hồ sơ chỉ sửa dữ liệu cho phép và đổi mật khẩu hủy phiên cũ
+ok 69 - V5 03 Hồ sơ chỉ sửa dữ liệu cho phép và đổi mật khẩu hủy phiên cũ
+  ---
+  duration_ms: 400.84918
+  type: 'test'
+  ...
+# Subtest: Email OTP 10 phút, chỉ giữ hash, mã mới thay mã cũ, dùng một lần và hủy phiên
+ok 70 - Email OTP 10 phút, chỉ giữ hash, mã mới thay mã cũ, dùng một lần và hủy phiên
+  ---
+  duration_ms: 491.364793
+  type: 'test'
+  ...
+# Subtest: Email OTP quá hạn, khóa sau 5 lần sai và hai yêu cầu đồng thời chỉ thành công một lần
+ok 71 - Email OTP quá hạn, khóa sau 5 lần sai và hai yêu cầu đồng thời chỉ thành công một lần
+  ---
+  duration_ms: 851.745135
+  type: 'test'
+  ...
+# Subtest: V5 06 Chủ nhà chỉ xem/sửa cơ sở được cấp; phân quyền chức năng có hiệu lực phía server
+ok 72 - V5 06 Chủ nhà chỉ xem/sửa cơ sở được cấp; phân quyền chức năng có hiệu lực phía server
+  ---
+  duration_ms: 42.549598
+  type: 'test'
+  ...
+# Subtest: V5 07 Upload ảnh thật, kiểm tra định dạng và quyền cơ sở; không chấp nhận đường dẫn ảnh mẫu
+ok 73 - V5 07 Upload ảnh thật, kiểm tra định dạng và quyền cơ sở; không chấp nhận đường dẫn ảnh mẫu
+  ---
+  duration_ms: 35.72257
+  type: 'test'
+  ...
+# Subtest: V5 08 Tài khoản xóa/khóa mất quyền ngay và giữ admin cuối cùng
+ok 74 - V5 08 Tài khoản xóa/khóa mất quyền ngay và giữ admin cuối cùng
+  ---
+  duration_ms: 108.741255
+  type: 'test'
+  ...
+# Subtest: V5 09 Giá/chính sách cơ sở riêng và public ẩn cơ sở ngừng hoạt động
+ok 75 - V5 09 Giá/chính sách cơ sở riêng và public ẩn cơ sở ngừng hoạt động
+  ---
+  duration_ms: 24.060447
+  type: 'test'
+  ...
+# Subtest: V5 10 Chủ nhà nhiều cơ sở phải chọn cơ sở khi sửa chính sách; không đổi cấu hình cơ sở ngoài quyền
+ok 76 - V5 10 Chủ nhà nhiều cơ sở phải chọn cơ sở khi sửa chính sách; không đổi cấu hình cơ sở ngoài quyền
+  ---
+  duration_ms: 33.292206
+  type: 'test'
+  ...
+# Máy chủ email từ chối đăng nhập. Quản trị viên cần kiểm tra SMTP_USER và SMTP_PASS (mật khẩu ứng dụng nếu dùng Gmail).
+# Máy chủ email từ chối đăng nhập. Quản trị viên cần kiểm tra SMTP_USER và SMTP_PASS (mật khẩu ứng dụng nếu dùng Gmail).
+# Máy chủ email từ chối đăng nhập. Quản trị viên cần kiểm tra SMTP_USER và SMTP_PASS (mật khẩu ứng dụng nếu dùng Gmail).
+# Máy chủ email từ chối đăng nhập. Quản trị viên cần kiểm tra SMTP_USER và SMTP_PASS (mật khẩu ứng dụng nếu dùng Gmail).
+# Subtest: SMTP từ chối đăng nhập báo rõ và xóa mã không gửi được, cho phép thử lại
+ok 77 - SMTP từ chối đăng nhập báo rõ và xóa mã không gửi được, cho phép thử lại
+  ---
+  duration_ms: 108.399562
+  type: 'test'
+  ...
+# Chưa cấu hình email gửi mã. Quản trị viên cần thiết lập SMTP_HOST, SMTP_USER, SMTP_PASS và MAIL_FROM trong .env.
+# Subtest: SMTP chưa cấu hình báo hướng dẫn thay vì lỗi máy chủ chung
+ok 78 - SMTP chưa cấu hình báo hướng dẫn thay vì lỗi máy chủ chung
+  ---
+  duration_ms: 8.06186
+  type: 'test'
+  ...
+# (node:62) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Giá 01: Thứ Sáu thường; thứ Bảy và Chủ nhật có giá riêng
+ok 79 - Giá 01: Thứ Sáu thường; thứ Bảy và Chủ nhật có giá riêng
+  ---
+  duration_ms: 22.76653
+  type: 'test'
+  ...
+# Subtest: Giá 02: Sự kiện ưu tiên cuối tuần và hiển thị tên
+ok 80 - Giá 02: Sự kiện ưu tiên cuối tuần và hiển thị tên
+  ---
+  duration_ms: 1.628769
+  type: 'test'
+  ...
+# Subtest: Giá 03: Đổi sự kiện thành thường, gỡ cấu hình phục hồi cuối tuần
+ok 81 - Giá 03: Đổi sự kiện thành thường, gỡ cấu hình phục hồi cuối tuần
+  ---
+  duration_ms: 1.271407
+  type: 'test'
+  ...
+# Subtest: Giá 04: Giá riêng một loại phòng không ảnh hưởng loại khác
+ok 82 - Giá 04: Giá riêng một loại phòng không ảnh hưởng loại khác
+  ---
+  duration_ms: 1.12827
+  type: 'test'
+  ...
+# Subtest: Giá 05: Khoảng ngày gồm hai đầu, giao năm và ngày nhuận
+ok 83 - Giá 05: Khoảng ngày gồm hai đầu, giao năm và ngày nhuận
+  ---
+  duration_ms: 1.323657
+  type: 'test'
+  ...
+# Subtest: Giá 06: Ngày trả phòng không bị tính thêm đêm sự kiện
+ok 84 - Giá 06: Ngày trả phòng không bị tính thêm đêm sự kiện
+  ---
+  duration_ms: 1.341424
+  type: 'test'
+  ...
+# Subtest: Giá 07: Booking đã tạo giữ tổng tiền và nguồn giá khi đổi lịch
+ok 85 - Giá 07: Booking đã tạo giữ tổng tiền và nguồn giá khi đổi lịch
+  ---
+  duration_ms: 3.704746
+  type: 'test'
+  ...
+# Subtest: Giá 08: Đổi nguồn giá dù tổng tiền bằng nhau vẫn chặn báo giá cũ
+ok 86 - Giá 08: Đổi nguồn giá dù tổng tiền bằng nhau vẫn chặn báo giá cũ
+  ---
+  duration_ms: 2.43407
+  type: 'test'
+  ...
+# Subtest: Giá 09: Chặn giá âm, 0, lẻ, tràn số và giá cao điểm không cao hơn thường
+ok 87 - Giá 09: Chặn giá âm, 0, lẻ, tràn số và giá cao điểm không cao hơn thường
+  ---
+  duration_ms: 2.290752
+  type: 'test'
+  ...
+# Subtest: Giá 10: Chặn ngày sai, khoảng quá dài, mã loại ngày / loại phòng sai
+ok 88 - Giá 10: Chặn ngày sai, khoảng quá dài, mã loại ngày / loại phòng sai
+  ---
+  duration_ms: 8.122282
+  type: 'test'
+  ...
+# Subtest: Giá 11: Nâng v2 giữ booking, tài khoản, chính sách, giá cũ và không ghi đè khi chạy lại
+ok 89 - Giá 11: Nâng v2 giữ booking, tài khoản, chính sách, giá cũ và không ghi đè khi chạy lại
+  ---
+  duration_ms: 3.985281
+  type: 'test'
+  ...
+# Subtest: Giá 12: Giá từ trên thẻ tìm phòng dựa vào kỳ lưu trú được chọn
+ok 90 - Giá 12: Giá từ trên thẻ tìm phòng dựa vào kỳ lưu trú được chọn
+  ---
+  duration_ms: 1.331418
+  type: 'test'
+  ...
+# Subtest: Giá 13: Chỉ admin được xem lịch và chỉnh giá
+ok 91 - Giá 13: Chỉ admin được xem lịch và chỉnh giá
+  ---
+  duration_ms: 395.745288
+  type: 'test'
+  ...
+# Subtest: Giá 14: API chỉnh bảng giá và giá sự kiện; báo giá, nhật ký và lưu lại đúng
+ok 92 - Giá 14: API chỉnh bảng giá và giá sự kiện; báo giá, nhật ký và lưu lại đúng
+  ---
+  duration_ms: 234.651946
+  type: 'test'
+  ...
+# Subtest: Giá 15: API từ chối giá sai không đổi version, lịch hay bảng giá
+ok 93 - Giá 15: API từ chối giá sai không đổi version, lịch hay bảng giá
+  ---
+  duration_ms: 226.564157
+  type: 'test'
+  ...
+# Subtest: Giá 16: Tăng giá thường không làm giá sự kiện riêng thấp hơn giá thường
+ok 94 - Giá 16: Tăng giá thường không làm giá sự kiện riêng thấp hơn giá thường
+  ---
+  duration_ms: 1.548728
+  type: 'test'
+  ...
+# (node:63) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Production: chặn tài khoản demo còn bật và thiếu admin, không xuất mật khẩu
+ok 95 - Production: chặn tài khoản demo còn bật và thiếu admin, không xuất mật khẩu
+  ---
+  duration_ms: 59.059014
+  type: 'test'
+  ...
+# (node:102) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Review: hồ sơ giấy tờ của khách lưu riêng, không có trong login/me/lookup/AI
+ok 96 - Review: hồ sơ giấy tờ của khách lưu riêng, không có trong login/me/lookup/AI
+  ---
+  duration_ms: 172.040838
+  type: 'test'
+  ...
+# Subtest: Review: khách bổ sung giấy tờ đúng booking, lễ tân nhận được; chặn sửa hồ sơ người khác
+ok 97 - Review: khách bổ sung giấy tờ đúng booking, lễ tân nhận được; chặn sửa hồ sơ người khác
+  ---
+  duration_ms: 55.662971
+  type: 'test'
+  ...
+# Subtest: Review: booking mới nhận giấy tờ từ form; thiếu đồng ý bị chặn server
+ok 98 - Review: booking mới nhận giấy tờ từ form; thiếu đồng ý bị chặn server
+  ---
+  duration_ms: 48.001188
+  type: 'test'
+  ...
+# Subtest: Review: sơ đồ 1/31 ngày, đảo ngày hoặc hơn 31 bị chặn; ngày trả không chiếm đêm
+ok 99 - Review: sơ đồ 1/31 ngày, đảo ngày hoặc hơn 31 bị chặn; ngày trả không chiếm đêm
+  ---
+  duration_ms: 81.128564
+  type: 'test'
+  ...
+# Subtest: Review: nhận phòng báo riêng thiếu gán/sai ngày/chưa sạch
+ok 100 - Review: nhận phòng báo riêng thiếu gán/sai ngày/chưa sạch
+  ---
+  duration_ms: 20.159479
+  type: 'test'
+  ...
+# Subtest: Review: backend ready phản hồi không chứa secret
+ok 101 - Review: backend ready phản hồi không chứa secret
+  ---
+  duration_ms: 19.799303
+  type: 'test'
+  ...
+# (node:134) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: S3-01 Sổ cọc lưu đủ fields, gửi lặp một lần, chặn âm/vượt, điều chỉnh bất biến
+ok 102 - S3-01 Sổ cọc lưu đủ fields, gửi lặp một lần, chặn âm/vượt, điều chỉnh bất biến
+  ---
+  duration_ms: 224.308989
+  type: 'test'
+  ...
+# Subtest: S3-01 Xác nhận đồng thời chỉ một lần, bỏ hạn, từ chối trạng thái khác và hết hạn
+ok 103 - S3-01 Xác nhận đồng thời chỉ một lần, bỏ hạn, từ chối trạng thái khác và hết hạn
+  ---
+  duration_ms: 67.336673
+  type: 'test'
+  ...
+# Subtest: S3-02 200 yêu cầu tại quầy đồng thời: 1 thành công, 199 lỗi 409, không trùng đêm
+ok 104 - S3-02 200 yêu cầu tại quầy đồng thời: 1 thành công, 199 lỗi 409, không trùng đêm
+  ---
+  duration_ms: 689.690383
+  type: 'test'
+  ...
+# Subtest: S3-02 200 yêu cầu cùng mã chỉ tạo một booking; web/quầy chung tồn
+ok 105 - S3-02 200 yêu cầu cùng mã chỉ tạo một booking; web/quầy chung tồn
+  ---
+  duration_ms: 561.336729
+  type: 'test'
+  ...
+# Subtest: S3-02 Khoảng nửa mở, huỷ nhả tồn và hết hạn nhả trước đặt lại
+ok 106 - S3-02 Khoảng nửa mở, huỷ nhả tồn và hết hạn nhả trước đặt lại
+  ---
+  duration_ms: 39.149665
+  type: 'test'
+  ...
+# Subtest: S3-03 Gán cùng loại, chặn phòng bị chiếm kèm mã, lưu lịch sử và lý do
+ok 107 - S3-03 Gán cùng loại, chặn phòng bị chiếm kèm mã, lưu lịch sử và lý do
+  ---
+  duration_ms: 51.058036
+  type: 'test'
+  ...
+# Subtest: S3-03 Đổi phòng đang ở chỉ sang sạch; cập nhật hai trạng thái và phân đoạn lịch
+ok 108 - S3-03 Đổi phòng đang ở chỉ sang sạch; cập nhật hai trạng thái và phân đoạn lịch
+  ---
+  duration_ms: 49.493299
+  type: 'test'
+  ...
+# Subtest: S3-04 Đổi ngày/loại preview + commit giữ cọc, giá snapshot, lịch sử, chống stale và replay
+ok 109 - S3-04 Đổi ngày/loại preview + commit giữ cọc, giá snapshot, lịch sử, chống stale và replay
+  ---
+  duration_ms: 37.287202
+  type: 'test'
+  ...
+# Subtest: S3-04 Giá thay đổi sau preview rollback toàn bộ; cọc dư giữ nguyên
+ok 110 - S3-04 Giá thay đổi sau preview rollback toàn bộ; cọc dư giữ nguyên
+  ---
+  duration_ms: 43.300211
+  type: 'test'
+  ...
+# Subtest: S3-04 Hết phòng hoặc vượt sức chứa không đổi một phần
+ok 111 - S3-04 Hết phòng hoặc vượt sức chứa không đổi một phần
+  ---
+  duration_ms: 34.161334
+  type: 'test'
+  ...
+# Subtest: S3-05 Huỷ preview theo snapshot, không tin tiền client; audit + idempotency
+ok 112 - S3-05 Huỷ preview theo snapshot, không tin tiền client; audit + idempotency
+  ---
+  duration_ms: 45.101988
+  type: 'test'
+  ...
+# Subtest: S3-06 Không email, source COUNTER, CONFIRMED, bỏ hold; có email lưu event; sai email bị chặn
+ok 113 - S3-06 Không email, source COUNTER, CONFIRMED, bỏ hold; có email lưu event; sai email bị chặn
+  ---
+  duration_ms: 36.895617
+  type: 'test'
+  ...
+# (node:134) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# Subtest: S3-07 Chặn chưa gán/bẩn/thiếu giấy tờ/khách đi cùng, nhận thành công rồi không huỷ
+ok 114 - S3-07 Chặn chưa gán/bẩn/thiếu giấy tờ/khách đi cùng, nhận thành công rồi không huỷ
+  ---
+  duration_ms: 55.700314
+  type: 'test'
+  ...
+# Subtest: S3-07 Ranh giới 13:59 và 14:00 giờ VN
+ok 115 - S3-07 Ranh giới 13:59 và 14:00 giờ VN
+  ---
+  duration_ms: 3.467366
+  type: 'test'
+  ...
+# Subtest: S3-08 Bảo trì làm thiếu tồn, không xoá booking; cảnh báo đúng ngày/loại/codes
+ok 116 - S3-08 Bảo trì làm thiếu tồn, không xoá booking; cảnh báo đúng ngày/loại/codes
+  ---
+  duration_ms: 41.140408
+  type: 'test'
+  ...
+# Subtest: S3-09 Ưu tiên khách đến hôm nay; chỉ phòng bẩn; đánh sạch một audit; incident bắt note
+ok 117 - S3-09 Ưu tiên khách đến hôm nay; chỉ phòng bẩn; đánh sạch một audit; incident bắt note
+  ---
+  duration_ms: 82.236578
+  type: 'test'
+  ...
+# Subtest: S3-10 Lưới 14 ngày, không chiếm ngày trả, che giấy tờ, từ chối 15 ngày và khách
+ok 118 - S3-10 Lưới 14 ngày, không chiếm ngày trả, che giấy tờ, từ chối 15 ngày và khách
+  ---
+  duration_ms: 35.57773
+  type: 'test'
+  ...
+# Subtest: S3 Quyền homestay: không đổi/gán/quầy ngoài cơ sở, không lộ dữ liệu booking cho buồng phòng
+ok 119 - S3 Quyền homestay: không đổi/gán/quầy ngoài cơ sở, không lộ dữ liệu booking cho buồng phòng
+  ---
+  duration_ms: 30.714288
+  type: 'test'
+  ...
+# Subtest: S3 Mongo unique index thật chặn ghi trùng trực tiếp
+ok 120 - S3 Mongo unique index thật chặn ghi trùng trực tiếp # SKIP
+  ---
+  duration_ms: 0.084088
+  type: 'test'
+  ...
+# Subtest: S3-02 200 booking trực tuyến đồng thời cho phòng cuối: 1/199, cùng mã replay 200/200
+ok 121 - S3-02 200 booking trực tuyến đồng thời cho phòng cuối: 1/199, cùng mã replay 200/200
+  ---
+  duration_ms: 664.051685
+  type: 'test'
+  ...
+# Subtest: S3-05 Mốc hoàn 48h/24h và sát ranh giới dùng giờ VN
+ok 122 - S3-05 Mốc hoàn 48h/24h và sát ranh giới dùng giờ VN
+  ---
+  duration_ms: 1.7677
+  type: 'test'
+  ...
+# Subtest: S3 Migration giữ số dư cọc v5, có ledger và không ghi trùng khi mở lại
+ok 123 - S3 Migration giữ số dư cọc v5, có ledger và không ghi trùng khi mở lại
+  ---
+  duration_ms: 1.016671
+  type: 'test'
+  ...
+# Subtest: S3 Quyền thu hẹp che PII cả phản hồi ghi cọc
+ok 124 - S3 Quyền thu hẹp che PII cả phản hồi ghi cọc
+  ---
+  duration_ms: 30.795872
+  type: 'test'
+  ...
+# Subtest: Hồ sơ nhận phòng phong phú lưu đúng, kiểm tra dữ liệu và bảo vệ quyền xem
+ok 125 - Hồ sơ nhận phòng phong phú lưu đúng, kiểm tra dữ liệu và bảo vệ quyền xem
+  ---
+  duration_ms: 46.520959
+  type: 'test'
+  ...
+# Subtest: Khách tại quầy không có email được nhóm theo điện thoại và tên, giữ hồ sơ đã có
+ok 126 - Khách tại quầy không có email được nhóm theo điện thoại và tên, giữ hồ sơ đã có
+  ---
+  duration_ms: 37.919731
+  type: 'test'
+  ...
+# (node:135) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: S4-01 12:00/12:01/13:00/18:00/18:01 và qua ngày: chỉ một loại phí muộn
+ok 127 - S4-01 12:00/12:01/13:00/18:00/18:01 và qua ngày: chỉ một loại phí muộn
+  ---
+  duration_ms: 17.150788
+  type: 'test'
+  ...
+# Subtest: S4-01 early checkout keeps booked nights; requires reason, method, exact paid amount, and version
+ok 128 - S4-01 early checkout keeps booked nights; requires reason, method, exact paid amount, and version
+  ---
+  duration_ms: 2.934088
+  type: 'test'
+  ...
+# Subtest: S4-02 extra bed and person periods, override reasons, capacity by night and void ledger
+ok 129 - S4-02 extra bed and person periods, override reasons, capacity by night and void ledger
+  ---
+  duration_ms: 2.873936
+  type: 'test'
+  ...
+# Subtest: S4-01 API preview token, tamper, repeated checkout and closed surcharge rejection
+ok 130 - S4-01 API preview token, tamper, repeated checkout and closed surcharge rejection
+  ---
+  duration_ms: 117.924796
+  type: 'test'
+  ...
+# Subtest: S4-03 concurrent invoice requests stable and contiguous; PDF A4 and Vietnamese money words
+ok 131 - S4-03 concurrent invoice requests stable and contiguous; PDF A4 and Vietnamese money words
+  ---
+  duration_ms: 203.961364
+  type: 'test'
+  ...
+# Subtest: S4 invoice counters rollback when mutation fails and year sequences restart
+ok 132 - S4 invoice counters rollback when mutation fails and year sequences restart
+  ---
+  duration_ms: 20.707549
+  type: 'test'
+  ...
+# Subtest: S4-04 outbox committed once, rollback no job, SMTP does not run inside booking mutation
+ok 133 - S4-04 outbox committed once, rollback no job, SMTP does not run inside booking mutation
+  ---
+  duration_ms: 37.862058
+  type: 'test'
+  ...
+# Subtest: S4-04 retry exactly 5 minutes and 3 retries, no send before due, timeout uncertain
+ok 134 - S4-04 retry exactly 5 minutes and 3 retries, no send before due, timeout uncertain
+  ---
+  duration_ms: 86.999187
+  type: 'test'
+  ...
+# Subtest: S4-05 08:59/09:00 VN reminder once, no cancelled mail, cancellation snapshot
+ok 135 - S4-05 08:59/09:00 VN reminder once, no cancelled mail, cancellation snapshot
+  ---
+  duration_ms: 2.365686
+  type: 'test'
+  ...
+# Subtest: S4-06 occupancy historical maintenance, weighted totals, half-open dates, N/A and CSV formula
+ok 136 - S4-06 occupancy historical maintenance, weighted totals, half-open dates, N/A and CSV formula
+  ---
+  duration_ms: 2.529524
+  type: 'test'
+  ...
+# Subtest: S4-07 revenue settled only, no deposit double count, VN date, equal previous period
+ok 137 - S4-07 revenue settled only, no deposit double count, VN date, equal previous period
+  ---
+  duration_ms: 2.592329
+  type: 'test'
+  ...
+# Subtest: S4-08 >=20 forbidden cases on API, downloads, PII and property scope
+ok 138 - S4-08 >=20 forbidden cases on API, downloads, PII and property scope
+  ---
+  duration_ms: 82.511435
+  type: 'test'
+  ...
+# Subtest: S4-09 dataset exact 4/20/30 three months and deterministic reset counts
+ok 139 - S4-09 dataset exact 4/20/30 three months and deterministic reset counts
+  ---
+  duration_ms: 219.854316
+  type: 'test'
+  ...
+# Subtest: S4-10 backup encrypted, retains 7 good copies; restore QA counts/financial totals; corrupt fails
+ok 140 - S4-10 backup encrypted, retains 7 good copies; restore QA counts/financial totals; corrupt fails
+  ---
+  duration_ms: 54.65287
+  type: 'test'
+  ...
+# Subtest: S4-10 scheduler 01:59/02:00 local, daily idempotency and failed backup keeps good files
+ok 141 - S4-10 scheduler 01:59/02:00 local, daily idempotency and failed backup keeps good files
+  ---
+  duration_ms: 18.162596
+  type: 'test'
+  ...
+# Subtest: S4-08 expired and invalid tokens never return report, email, invoice or guest data
+ok 142 - S4-08 expired and invalid tokens never return report, email, invoice or guest data
+  ---
+  duration_ms: 21.370926
+  type: 'test'
+  ...
+# Subtest: S4-03 Mongo unique invoice number and real restore to separate Mongo QA
+ok 143 - S4-03 Mongo unique invoice number and real restore to separate Mongo QA # SKIP
+  ---
+  duration_ms: 0.104238
+  type: 'test'
+  ...
+# Subtest: S4-04 booking outbox sends through real Nodemailer TLS to isolated SMTP fixture
+ok 144 - S4-04 booking outbox sends through real Nodemailer TLS to isolated SMTP fixture
+  ---
+  duration_ms: 163.678556
+  type: 'test'
+  ...
+# (node:150) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 01 Tìm phòng và báo giá đủ từng đêm, phụ thu, tổng tiền
+ok 145 - 01 Tìm phòng và báo giá đủ từng đêm, phụ thu, tổng tiền
+  ---
+  duration_ms: 225.954351
+  type: 'test'
+  ...
+# Subtest: 02 Tạo booking, phát lại cùng key và chống đổi nội dung
+ok 146 - 02 Tạo booking, phát lại cùng key và chống đổi nội dung
+  ---
+  duration_ms: 154.907585
+  type: 'test'
+  ...
+# Subtest: 03 Hai mươi yêu cầu tranh phòng cuối chỉ một yêu cầu thành công
+ok 147 - 03 Hai mươi yêu cầu tranh phòng cuối chỉ một yêu cầu thành công
+  ---
+  duration_ms: 153.503087
+  type: 'test'
+  ...
+# Subtest: 04 Sai mã/email cùng thông báo; khoá sau 10 lần sai
+ok 148 - 04 Sai mã/email cùng thông báo; khoá sau 10 lần sai
+  ---
+  duration_ms: 141.761504
+  type: 'test'
+  ...
+# Subtest: 05 Khách không đọc quản trị; báo cáo không xem PII và không ghi phòng
+ok 149 - 05 Khách không đọc quản trị; báo cáo không xem PII và không ghi phòng
+  ---
+  duration_ms: 201.250399
+  type: 'test'
+  ...
+# Subtest: 06 Luồng cọc → xác nhận → nhận → trả → dọn phòng; tra cứu không lộ CCCD
+ok 150 - 06 Luồng cọc → xác nhận → nhận → trả → dọn phòng; tra cứu không lộ CCCD
+  ---
+  duration_ms: 218.87772
+  type: 'test'
+  ...
+# Subtest: 07 Giá/chính sách thay đổi trả 409; không tin tổng client
+ok 151 - 07 Giá/chính sách thay đổi trả 409; không tin tổng client
+  ---
+  duration_ms: 94.594466
+  type: 'test'
+  ...
+# Subtest: 08 Ngày sai, quá 30 đêm, số khách sai và thiếu chấp nhận bị chặn
+ok 152 - 08 Ngày sai, quá 30 đêm, số khách sai và thiếu chấp nhận bị chặn
+  ---
+  duration_ms: 96.679932
+  type: 'test'
+  ...
+# Subtest: 09 Booking giữ chỗ hết hạn tự nhả phòng
+ok 153 - 09 Booking giữ chỗ hết hạn tự nhả phòng
+  ---
+  duration_ms: 111.283688
+  type: 'test'
+  ...
+# Subtest: 10 Tiện nghi đang được gán không được xoá
+ok 154 - 10 Tiện nghi đang được gán không được xoá
+  ---
+  duration_ms: 196.294363
+  type: 'test'
+  ...
+# Subtest: 11 Báo cáo tháng và CSV đúng tiền, có UTF-8 BOM
+ok 155 - 11 Báo cáo tháng và CSV đúng tiền, có UTF-8 BOM
+  ---
+  duration_ms: 178.375405
+  type: 'test'
+  ...
+# Subtest: 12 Hạn mức 5 booking/giờ; replay không tăng quota
+ok 156 - 12 Hạn mức 5 booking/giờ; replay không tăng quota
+  ---
+  duration_ms: 158.128929
+  type: 'test'
+  ...
+# Subtest: 13 Huỷ booking dùng chính sách snapshot và nhả phòng
+ok 157 - 13 Huỷ booking dùng chính sách snapshot và nhả phòng
+  ---
+  duration_ms: 187.36779
+  type: 'test'
+  ...
+# Subtest: 14 Đổi mật khẩu và bảo vệ quản trị viên đang đăng nhập
+ok 158 - 14 Đổi mật khẩu và bảo vệ quản trị viên đang đăng nhập
+  ---
+  duration_ms: 604.97624
+  type: 'test'
+  ...
+# Subtest: 15 Dữ liệu file lưu và mở lại giữ nguyên booking
+ok 159 - 15 Dữ liệu file lưu và mở lại giữ nguyên booking
+  ---
+  duration_ms: 101.650611
+  type: 'test'
+  ...
+# Subtest: 16 Bộ dữ liệu mới có 50 phòng, 10 loại, 30 tiện nghi và chờ chủ nhà tải ảnh thật
+ok 160 - 16 Bộ dữ liệu mới có 50 phòng, 10 loại, 30 tiện nghi và chờ chủ nhà tải ảnh thật
+  ---
+  duration_ms: 1.051905
+  type: 'test'
+  ...
+# Subtest: 17 Cập nhật v1 không xoá booking, tài khoản, cấu hình, trạng thái; chạy lại không nhân đôi
+ok 161 - 17 Cập nhật v1 không xoá booking, tài khoản, cấu hình, trạng thái; chạy lại không nhân đôi
+  ---
+  duration_ms: 1.659375
+  type: 'test'
+  ...
+# Subtest: 18 Danh mục phòng khách có ảnh/tiện nghi và không có thông tin riêng tư
+ok 162 - 18 Danh mục phòng khách có ảnh/tiện nghi và không có thông tin riêng tư
+  ---
+  duration_ms: 93.921801
+  type: 'test'
+  ...
+# Subtest: 19 Chưa tải ảnh thì availability dùng hình giữ chỗ trung tính
+ok 163 - 19 Chưa tải ảnh thì availability dùng hình giữ chỗ trung tính
+  ---
+  duration_ms: 91.436403
+  type: 'test'
+  ...
+# Subtest: 20 Sửa ảnh loại phòng cập nhật các phòng dùng ảnh chung
+ok 164 - 20 Sửa ảnh loại phòng cập nhật các phòng dùng ảnh chung
+  ---
+  duration_ms: 174.087109
+  type: 'test'
+  ...
+# (node:170) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: UI 01 Tạo/sửa phòng đủ ảnh, trạng thái, ghi chú; chặn ảnh sai, số trùng và role báo cáo
+ok 165 - UI 01 Tạo/sửa phòng đủ ảnh, trạng thái, ghi chú; chặn ảnh sai, số trùng và role báo cáo
+  ---
+  duration_ms: 179.832709
+  type: 'test'
+  ...
+# Subtest: UI 02 Không sửa loại/bảo trì phòng đang có booking hoặc tự chuyển OCCUPIED
+ok 166 - UI 02 Không sửa loại/bảo trì phòng đang có booking hoặc tự chuyển OCCUPIED
+  ---
+  duration_ms: 59.601447
+  type: 'test'
+  ...
+# Subtest: UI 03 Thời hạn giữ chỗ cấu hình 72h, snapshot bất biến và liên hệ hợp lệ
+ok 167 - UI 03 Thời hạn giữ chỗ cấu hình 72h, snapshot bất biến và liên hệ hợp lệ
+  ---
+  duration_ms: 45.088297
+  type: 'test'
+  ...
+# Subtest: UI 04 Báo cáo tổng hợp theo loại phòng, không lộ dữ liệu khách
+ok 168 - UI 04 Báo cáo tổng hợp theo loại phòng, không lộ dữ liệu khách
+  ---
+  duration_ms: 31.690438
+  type: 'test'
+  ...
+1..168
+# tests 168
+# suites 0
+# pass 166
+# fail 0
+# cancelled 0
+# skipped 2
+# todo 0
+# duration_ms 4366.679112

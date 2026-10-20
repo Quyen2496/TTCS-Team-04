@@ -1,0 +1,3 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),bcrypt=require('bcryptjs'),P=require('../src/production');
+test('Production: chặn tài khoản demo còn bật và thiếu admin, không xuất mật khẩu',async()=>{const demo=bcrypt.hashSync('Quy@123456',4),privateHash=bcrypt.hashSync('Private12345678',4);await assert.rejects(P.accounts({users:[]}),/admin riêng/);await assert.rejects(P.accounts({users:[{role:'admin',active:true,password:privateHash},{role:'reception',active:true,password:demo}]}),/mật khẩu demo/);await P.accounts({users:[{role:'admin',active:true,password:privateHash},{role:'reception',active:false,password:demo}]});});

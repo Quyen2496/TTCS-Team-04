@@ -1,0 +1,167 @@
+{
+  "at": "2026-10-19T16:22:05.362Z",
+  "database": "real configured Atlas, read only",
+  "http": "isolated listener, synthetic JWT secret/subject (not a real login)",
+  "requests": [
+    {
+      "method": "GET",
+      "endpoint": "/api/auth/me",
+      "status": 500,
+      "ms": 105.85,
+      "requestId": "3a50464b-8e20-4eb7-9271-832865faf192",
+      "response": {
+        "success": false,
+        "code": 31275,
+        "message": "Lỗi máy chủ. Vui lòng thử lại."
+      }
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/admin/state",
+      "status": 500,
+      "ms": 59.57,
+      "requestId": "4300c494-9bfc-4a49-bec4-05c764fbd487",
+      "response": {
+        "success": false,
+        "code": 31275,
+        "message": "Lỗi máy chủ. Vui lòng thử lại."
+      }
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ai/sessions",
+      "status": 500,
+      "ms": 55.8,
+      "requestId": "33d3de5f-d6c6-4d73-b5bd-63635d3945e7",
+      "response": {
+        "success": false,
+        "code": 31275,
+        "message": "Lỗi máy chủ. Vui lòng thử lại."
+      }
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/ai/chat",
+      "status": 500,
+      "ms": 86.03,
+      "requestId": "a30e3ad75cc90d0db05ff3ca",
+      "response": {
+        "success": false,
+        "code": 31275,
+        "message": "Lỗi máy chủ. Vui lòng thử lại."
+      }
+    }
+  ],
+  "logs": [
+    {
+      "at": "2026-10-19T16:22:05.090Z",
+      "requestId": "3a50464b-8e20-4eb7-9271-832865faf192",
+      "method": "GET",
+      "route": "/api/auth/me",
+      "status": 500,
+      "name": "MongoServerError",
+      "code": 31275,
+      "stack": [
+        "    at Connection.sendCommand (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:290:27)",
+        "    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+        "    at async Connection.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:317:26)",
+        "    at async Server.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\sdam\\server.js:167:29)",
+        "    at async FindOperation.execute (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\find.js:34:16)",
+        "    at async tryOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:199:20)",
+        "    at async executeOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:69:16)",
+        "    at async FindCursor._initialize (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\find_cursor.js:51:26)",
+        "    at async FindCursor.cursorInit (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:495:27)",
+        "    at async FindCursor.fetchBatch (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:527:13)",
+        "    at async FindCursor.next (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:239:13)",
+        "    at async Collection.findOne (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\collection.js:274:21)",
+        "    at async LegacyProjectionStore.readIdentity (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\scripts\\qa-backend-projection-before.cjs:9:36)",
+        "    at async D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\server.js:16:11"
+      ],
+      "message": "Cannot use $elemMatch projection on a nested field."
+    },
+    {
+      "at": "2026-10-19T16:22:05.161Z",
+      "requestId": "4300c494-9bfc-4a49-bec4-05c764fbd487",
+      "method": "GET",
+      "route": "/api/admin/state",
+      "status": 500,
+      "name": "MongoServerError",
+      "code": 31275,
+      "stack": [
+        "    at Connection.sendCommand (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:290:27)",
+        "    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+        "    at async Connection.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:317:26)",
+        "    at async Server.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\sdam\\server.js:167:29)",
+        "    at async FindOperation.execute (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\find.js:34:16)",
+        "    at async tryOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:199:20)",
+        "    at async executeOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:69:16)",
+        "    at async FindCursor._initialize (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\find_cursor.js:51:26)",
+        "    at async FindCursor.cursorInit (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:495:27)",
+        "    at async FindCursor.fetchBatch (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:527:13)",
+        "    at async FindCursor.next (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:239:13)",
+        "    at async Collection.findOne (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\collection.js:274:21)",
+        "    at async LegacyProjectionStore.readIdentity (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\scripts\\qa-backend-projection-before.cjs:9:36)",
+        "    at async D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\server.js:16:11"
+      ],
+      "message": "Cannot use $elemMatch projection on a nested field."
+    },
+    {
+      "at": "2026-10-19T16:22:05.217Z",
+      "requestId": "33d3de5f-d6c6-4d73-b5bd-63635d3945e7",
+      "method": "GET",
+      "route": "/api/ai/sessions",
+      "status": 500,
+      "name": "MongoServerError",
+      "code": 31275,
+      "stack": [
+        "    at Connection.sendCommand (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:290:27)",
+        "    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+        "    at async Connection.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:317:26)",
+        "    at async Server.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\sdam\\server.js:167:29)",
+        "    at async FindOperation.execute (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\find.js:34:16)",
+        "    at async tryOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:199:20)",
+        "    at async executeOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:69:16)",
+        "    at async FindCursor._initialize (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\find_cursor.js:51:26)",
+        "    at async FindCursor.cursorInit (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:495:27)",
+        "    at async FindCursor.fetchBatch (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:527:13)",
+        "    at async FindCursor.next (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:239:13)",
+        "    at async Collection.findOne (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\collection.js:274:21)",
+        "    at async LegacyProjectionStore.readIdentity (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\scripts\\qa-backend-projection-before.cjs:9:36)",
+        "    at async D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\server.js:16:11"
+      ],
+      "message": "Cannot use $elemMatch projection on a nested field."
+    },
+    {
+      "at": "2026-10-19T16:22:05.303Z",
+      "requestId": "a30e3ad75cc90d0db05ff3ca",
+      "method": "POST",
+      "route": "/api/ai/chat",
+      "status": 500,
+      "name": "MongoServerError",
+      "code": 31275,
+      "stack": [
+        "    at Connection.sendCommand (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:290:27)",
+        "    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+        "    at async Connection.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cmap\\connection.js:317:26)",
+        "    at async Server.command (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\sdam\\server.js:167:29)",
+        "    at async FindOperation.execute (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\find.js:34:16)",
+        "    at async tryOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:199:20)",
+        "    at async executeOperation (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:69:16)",
+        "    at async FindCursor._initialize (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\find_cursor.js:51:26)",
+        "    at async FindCursor.cursorInit (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:495:27)",
+        "    at async FindCursor.fetchBatch (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:527:13)",
+        "    at async FindCursor.next (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:239:13)",
+        "    at async Collection.findOne (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\node_modules\\mongodb\\lib\\collection.js:274:21)",
+        "    at async LegacyProjectionStore.readIdentity (D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\scripts\\qa-backend-projection-before.cjs:9:36)",
+        "    at async D:\\CodeGym_project\\HOMESTAY\\HOMESTAY\\server.js:16:11"
+      ],
+      "message": "Cannot use $elemMatch projection on a nested field."
+    },
+    {
+      "operation": "Original nested conversation projection",
+      "name": "MongoServerError",
+      "code": 31275,
+      "message": "Cannot use $elemMatch projection on a nested field."
+    }
+  ]
+}

@@ -1,0 +1,1020 @@
+{
+  "base": "http://127.0.0.1:3001",
+  "label": "browser-variants",
+  "mode": "Real Chromium, real application and configured providers; anonymous public data only",
+  "startedAt": "2026-10-19T15:41:20.713Z",
+  "results": [
+    {
+      "id": "V1",
+      "question": "moc mien homestay da lat huy phong thi duoc hoan coc the nao",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "e46e4e6d0c77476b9728e9de3191ef1f",
+      "requestId": "2088f85b8dd148d6976728e5",
+      "serverTiming": "atlas_public_policy_0;dur=332.64, backend_total_1;dur=333.9",
+      "networkMs": 395,
+      "usefulContentMs": 410,
+      "completeMs": 410,
+      "renderAfterResponseMs": 15,
+      "result": {
+        "intent": "policy",
+        "publicCatalog": true,
+        "answer": "Tại Mộc Miên Đà Lạt Homestay: Huỷ trước giờ nhận ít nhất 48 giờ: hoàn 100% tiền cọc; Huỷ trước giờ nhận ít nhất 24 giờ: hoàn 50% tiền cọc; Huỷ trước giờ nhận ít nhất 0 giờ: hoàn 0% tiền cọc. Đây là chính sách hiện tại; booking đã đặt phải xét chính sách đã chốt trên booking và thời điểm huỷ. Khoản phải hoàn chưa xác nhận tiền đã được chuyển hoàn.",
+        "columns": [
+          "Homestay",
+          "Trước giờ nhận ít nhất (giờ)",
+          "Tỷ lệ hoàn (%)"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            48,
+            100
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            24,
+            50
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            0,
+            0
+          ]
+        ],
+        "totalRows": 3,
+        "suppressExport": true,
+        "sources": [
+          "Thông tin công khai và chính sách hiện tại của cơ sở; chưa xác nhận giao dịch"
+        ],
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "local_plan",
+        "failoverFrom": null,
+        "at": "2026-10-19T15:40:43.622Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nTại Mộc Miên Đà Lạt Homestay: Huỷ trước giờ nhận ít nhất 48 giờ: hoàn 100% tiền cọc; Huỷ trước giờ nhận ít nhất 24 giờ: hoàn 50% tiền cọc; Huỷ trước giờ nhận ít nhất 0 giờ: hoàn 0% tiền cọc. Đây là chính sách hiện tại; booking đã đặt phải xét chính sách đã chốt trên booking và thời điểm huỷ. Khoản phải hoàn chưa xác nhận tiền đã được chuyển hoàn.\n\nHomestay\tTrước giờ nhận ít nhất (giờ)\tTỷ lệ hoàn (%)\nMộc Miên Đà Lạt Homestay\t48\t100\nMộc Miên Đà Lạt Homestay\t24\t50\nMộc Miên Đà Lạt Homestay\t0\t0\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424443291,
+          "http": 200,
+          "serverTiming": "atlas_public_policy_0;dur=332.64, backend_total_1;dur=333.9",
+          "trace": "2088f85b8dd148d6976728e5",
+          "finished": 1792424443626,
+          "durationMs": 335
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Không dấu và đảo thứ tự tên vẫn trả đúng chính sách nguồn"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "V2",
+      "question": "Ở Mộc Miên Đà Lạt Homestay, bữa sáng đã gồm trong giá hay phải trả thêm?",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "e2d8e79d2ff248f78c8d1911701cb9d6",
+      "requestId": "5234c602c3b0f23af09dcab4",
+      "serverTiming": "atlas_public_policy_0;dur=333.05, atlas_public_details_1;dur=1882.03, backend_total_2;dur=2218.17",
+      "networkMs": 2307,
+      "usefulContentMs": 2323,
+      "completeMs": 2323,
+      "renderAfterResponseMs": 16,
+      "result": {
+        "intent": "policy",
+        "publicCatalog": true,
+        "answer": "Tại Mộc Miên Đà Lạt Homestay: Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng.",
+        "columns": [
+          "Homestay",
+          "Nội dung",
+          "Thông tin đã xác nhận"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Bữa sáng",
+            "Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng."
+          ]
+        ],
+        "totalRows": 1,
+        "suppressExport": true,
+        "sources": [
+          "Thông tin công khai và chính sách hiện tại của cơ sở; chưa xác nhận giao dịch"
+        ],
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "local_plan",
+        "failoverFrom": null,
+        "at": "2026-10-19T15:40:47.893Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nTại Mộc Miên Đà Lạt Homestay: Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng.\n\nHomestay\tNội dung\tThông tin đã xác nhận\nMộc Miên Đà Lạt Homestay\tBữa sáng\tCó thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng.\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424445676,
+          "http": 200,
+          "serverTiming": "atlas_public_policy_0;dur=333.05, atlas_public_details_1;dur=1882.03, backend_total_2;dur=2218.17",
+          "trace": "5234c602c3b0f23af09dcab4",
+          "finished": 1792424447896,
+          "durationMs": 2220
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Đúng cơ sở và đúng dịch vụ"
+        },
+        {
+          "ok": true,
+          "message": "Phục vụ bữa sáng có bằng chứng riêng"
+        },
+        {
+          "ok": true,
+          "message": "Không suy bao gồm trong giá hoặc tự đặt mức phí"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "V3",
+      "question": "Netflix và YouTube Premium ở Mộc Miên Đà Lạt Homestay có được dùng miễn phí không?",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "549cd0508aa143fa8446008a63fd1993",
+      "requestId": "7e531469ab0c9ee899a39944",
+      "serverTiming": "atlas_public_policy_0;dur=331.55, backend_total_1;dur=332.43",
+      "networkMs": 381,
+      "usefulContentMs": 389,
+      "completeMs": 389,
+      "renderAfterResponseMs": 8,
+      "result": {
+        "intent": "policy",
+        "publicCatalog": true,
+        "answer": "Tại Mộc Miên Đà Lạt Homestay: Netflix: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. YouTube Premium: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. Có Smart TV không đồng nghĩa đã gồm tài khoản hoặc thuê bao miễn phí; bạn nhờ cơ sở kiểm tra dịch vụ của phòng.",
+        "columns": [
+          "Homestay",
+          "Nội dung",
+          "Thông tin đã xác nhận"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Dịch vụ Smart TV",
+            "Netflix: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. YouTube Premium: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. Có Smart TV không đồng nghĩa đã gồm tài khoản hoặc thuê bao miễn phí; bạn nhờ cơ sở kiểm tra dịch vụ của phòng."
+          ]
+        ],
+        "totalRows": 1,
+        "suppressExport": true,
+        "sources": [
+          "Thông tin công khai và chính sách hiện tại của cơ sở; chưa xác nhận giao dịch"
+        ],
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "local_plan",
+        "failoverFrom": null,
+        "at": "2026-10-19T15:40:50.372Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nTại Mộc Miên Đà Lạt Homestay: Netflix: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. YouTube Premium: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. Có Smart TV không đồng nghĩa đã gồm tài khoản hoặc thuê bao miễn phí; bạn nhờ cơ sở kiểm tra dịch vụ của phòng.\n\nHomestay\tNội dung\tThông tin đã xác nhận\nMộc Miên Đà Lạt Homestay\tDịch vụ Smart TV\tNetflix: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. YouTube Premium: chưa có thông tin xác nhận tài khoản trả phí được cung cấp. Có Smart TV không đồng nghĩa đã gồm tài khoản hoặc thuê bao miễn phí; bạn nhờ cơ sở kiểm tra dịch vụ của phòng.\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424450041,
+          "http": 200,
+          "serverTiming": "atlas_public_policy_0;dur=331.55, backend_total_1;dur=332.43",
+          "trace": "7e531469ab0c9ee899a39944",
+          "finished": 1792424450374,
+          "durationMs": 333
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Tài khoản trả phí chưa được xác nhận"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "V4",
+      "question": "Cho biết điều kiện huỷ hoàn tiền và có bữa sáng ở Mộc Miên Đà Lạt Homestay không?",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "74160b2e4d04495ab6af7fbf04c0e182",
+      "requestId": "8e6772c967261c4cb6c7361c",
+      "serverTiming": "atlas_public_policy_0;dur=276.79, atlas_public_details_1;dur=1874.75, backend_total_2;dur=2153.91",
+      "networkMs": 2204,
+      "usefulContentMs": 2212,
+      "completeMs": 2212,
+      "renderAfterResponseMs": 8,
+      "result": {
+        "intent": "policy",
+        "publicCatalog": true,
+        "answer": "Tại Mộc Miên Đà Lạt Homestay: Huỷ trước giờ nhận ít nhất 48 giờ: hoàn 100% tiền cọc; Huỷ trước giờ nhận ít nhất 24 giờ: hoàn 50% tiền cọc; Huỷ trước giờ nhận ít nhất 0 giờ: hoàn 0% tiền cọc. Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng. Đây là chính sách hiện tại; booking đã đặt phải xét chính sách đã chốt trên booking và thời điểm huỷ. Khoản phải hoàn chưa xác nhận tiền đã được chuyển hoàn.",
+        "columns": [
+          "Homestay",
+          "Nội dung",
+          "Thông tin đã xác nhận"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Huỷ trước ít nhất 48 giờ",
+            "Hoàn 100% tiền cọc"
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Huỷ trước ít nhất 24 giờ",
+            "Hoàn 50% tiền cọc"
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Huỷ trước ít nhất 0 giờ",
+            "Hoàn 0% tiền cọc"
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Bữa sáng",
+            "Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng."
+          ]
+        ],
+        "totalRows": 4,
+        "suppressExport": true,
+        "sources": [
+          "Thông tin công khai và chính sách hiện tại của cơ sở; chưa xác nhận giao dịch"
+        ],
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "local_plan",
+        "failoverFrom": null,
+        "at": "2026-10-19T15:40:54.514Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nTại Mộc Miên Đà Lạt Homestay: Huỷ trước giờ nhận ít nhất 48 giờ: hoàn 100% tiền cọc; Huỷ trước giờ nhận ít nhất 24 giờ: hoàn 50% tiền cọc; Huỷ trước giờ nhận ít nhất 0 giờ: hoàn 0% tiền cọc. Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng. Đây là chính sách hiện tại; booking đã đặt phải xét chính sách đã chốt trên booking và thời điểm huỷ. Khoản phải hoàn chưa xác nhận tiền đã được chuyển hoàn.\n\nHomestay\tNội dung\tThông tin đã xác nhận\nMộc Miên Đà Lạt Homestay\tHuỷ trước ít nhất 48 giờ\tHoàn 100% tiền cọc\nMộc Miên Đà Lạt Homestay\tHuỷ trước ít nhất 24 giờ\tHoàn 50% tiền cọc\nMộc Miên Đà Lạt Homestay\tHuỷ trước ít nhất 0 giờ\tHoàn 0% tiền cọc\nMộc Miên Đà Lạt Homestay\tBữa sáng\tCó thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng.\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424452362,
+          "http": 200,
+          "serverTiming": "atlas_public_policy_0;dur=276.79, atlas_public_details_1;dur=1874.75, backend_total_2;dur=2153.91",
+          "trace": "8e6772c967261c4cb6c7361c",
+          "finished": 1792424454517,
+          "durationMs": 2155
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Trả đủ huỷ/hoàn tiền và bữa sáng"
+        },
+        {
+          "ok": true,
+          "message": "Câu nhiều ý không đổi cơ sở"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "V5",
+      "question": "Mộc Miên Đà Lạt Homestay nhận Apple Pay, Google Pay và QR ngân hàng chứ?",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "fd094780dcae49639051521db3eb92bc",
+      "requestId": "4becaa30021f628d62f840fb",
+      "serverTiming": "atlas_public_policy_0;dur=336.71, backend_total_1;dur=337.67",
+      "networkMs": 391,
+      "usefulContentMs": 402,
+      "completeMs": 402,
+      "renderAfterResponseMs": 11,
+      "result": {
+        "intent": "policy",
+        "publicCatalog": true,
+        "answer": "Tại Mộc Miên Đà Lạt Homestay: Apple Pay và Google Pay chưa được triển khai trong luồng thanh toán hiện tại của website. Có chuyển khoản QR theo hướng dẫn của cơ sở cho booking hợp lệ; mở mục thanh toán của booking để đối chiếu người nhận và số tiền. Mình chưa nhận tiền hoặc xác nhận giao dịch.",
+        "columns": [
+          "Homestay",
+          "Nội dung",
+          "Thông tin đã xác nhận"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Phương thức thanh toán",
+            "Apple Pay và Google Pay chưa được triển khai trong luồng thanh toán hiện tại của website. Có chuyển khoản QR theo hướng dẫn của cơ sở cho booking hợp lệ; mở mục thanh toán của booking để đối chiếu người nhận và số tiền. Mình chưa nhận tiền hoặc xác nhận giao dịch."
+          ]
+        ],
+        "totalRows": 1,
+        "suppressExport": true,
+        "sources": [
+          "Thông tin công khai và chính sách hiện tại của cơ sở; chưa xác nhận giao dịch"
+        ],
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "local_plan",
+        "failoverFrom": null,
+        "at": "2026-10-19T15:40:56.897Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nTại Mộc Miên Đà Lạt Homestay: Apple Pay và Google Pay chưa được triển khai trong luồng thanh toán hiện tại của website. Có chuyển khoản QR theo hướng dẫn của cơ sở cho booking hợp lệ; mở mục thanh toán của booking để đối chiếu người nhận và số tiền. Mình chưa nhận tiền hoặc xác nhận giao dịch.\n\nHomestay\tNội dung\tThông tin đã xác nhận\nMộc Miên Đà Lạt Homestay\tPhương thức thanh toán\tApple Pay và Google Pay chưa được triển khai trong luồng thanh toán hiện tại của website. Có chuyển khoản QR theo hướng dẫn của cơ sở cho booking hợp lệ; mở mục thanh toán của booking để đối chiếu người nhận và số tiền. Mình chưa nhận tiền hoặc xác nhận giao dịch.\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424456563,
+          "http": 200,
+          "serverTiming": "atlas_public_policy_0;dur=336.71, backend_total_1;dur=337.67",
+          "trace": "4becaa30021f628d62f840fb",
+          "finished": 1792424456900,
+          "durationMs": 337
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Tách ví chưa triển khai và QR được bật thực tế"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "V6",
+      "question": "Còn bữa sáng?",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "26cbf1abdcce4bebb9bce4a8ace92455",
+      "requestId": "105ba7b05abfa0cd5f00a555",
+      "serverTiming": "atlas_public_policy_0;dur=341.03, atlas_public_details_1;dur=1892.26, backend_total_2;dur=2235.81",
+      "networkMs": 2267,
+      "usefulContentMs": 2274,
+      "completeMs": 2274,
+      "renderAfterResponseMs": 7,
+      "result": {
+        "intent": "policy",
+        "publicCatalog": true,
+        "answer": "Tại Mộc Miên Đà Lạt Homestay: Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng.",
+        "columns": [
+          "Homestay",
+          "Nội dung",
+          "Thông tin đã xác nhận"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Bữa sáng",
+            "Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng."
+          ]
+        ],
+        "totalRows": 1,
+        "suppressExport": true,
+        "sources": [
+          "Thông tin công khai và chính sách hiện tại của cơ sở; chưa xác nhận giao dịch"
+        ],
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "local_plan",
+        "failoverFrom": null,
+        "at": "2026-10-19T15:41:02.757Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nTại Mộc Miên Đà Lạt Homestay: Có thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng.\n\nHomestay\tNội dung\tThông tin đã xác nhận\nMộc Miên Đà Lạt Homestay\tBữa sáng\tCó thông tin công khai về phục vụ bữa sáng. Chưa có thông tin xác nhận bữa sáng gồm trong giá. Mức phụ phí chưa được cập nhật; bạn hỏi lễ tân trước khi sử dụng.\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424460522,
+          "http": 200,
+          "serverTiming": "atlas_public_policy_0;dur=341.03, atlas_public_details_1;dur=1892.26, backend_total_2;dur=2235.81",
+          "trace": "105ba7b05abfa0cd5f00a555",
+          "finished": 1792424462760,
+          "durationMs": 2238
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Đúng cơ sở và đúng dịch vụ"
+        },
+        {
+          "ok": true,
+          "message": "Phục vụ bữa sáng có bằng chứng riêng"
+        },
+        {
+          "ok": true,
+          "message": "Không suy bao gồm trong giá hoặc tự đặt mức phí"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "V7",
+      "question": "Loại phòng đôi Mộc Miên tại Mộc Miên Đà Lạt Homestay có tiện nghi gì?",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "d7c634a1ecbd4e8a8a29a708e44ec7fc",
+      "requestId": "0c577ea20f3315da15a09a82",
+      "serverTiming": "atlas_public_catalog_0;dur=3487.55, backend_total_1;dur=3492.9",
+      "networkMs": 3534,
+      "usefulContentMs": 3549,
+      "completeMs": 3549,
+      "renderAfterResponseMs": 15,
+      "result": {
+        "intent": "room_detail",
+        "publicCatalog": true,
+        "answer": "Tiện nghi của Phòng đôi Mộc Miên tại Mộc Miên Đà Lạt Homestay: Wi-Fi, TV thông minh, Tủ lạnh mini, Ấm đun nước, Máy sấy tóc, Nước nóng, Khăn tắm, Đồ vệ sinh cá nhân, Tủ quần áo.",
+        "presentation": "room_detail",
+        "detail": {
+          "roomTypeId": "b6146c8adc56e065bbc1b31f",
+          "name": "Phòng đôi Mộc Miên",
+          "homestayId": "0b25529dced1319846cf1a42",
+          "homestayName": "Mộc Miên Đà Lạt Homestay",
+          "destination": "Đà Lạt",
+          "locationEvidence": "Nhà đồi & không gian gỗ",
+          "roomKind": "double",
+          "photo": "/assets/catalog190/photo-005.webp",
+          "area": 25,
+          "standardCapacity": 2,
+          "maxCapacity": 2,
+          "description": "Không gian 25 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bố cục một phòng ngủ, phù hợp cặp đôi muốn nghỉ riêng tư. Thuộc Mộc Miên Đà Lạt Homestay; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Không có điều hoà; sử dụng chăn ấm và thông gió tự nhiên.",
+          "amenities": [
+            "Wi-Fi",
+            "TV thông minh",
+            "Tủ lạnh mini",
+            "Ấm đun nước",
+            "Máy sấy tóc",
+            "Nước nóng",
+            "Khăn tắm",
+            "Đồ vệ sinh cá nhân",
+            "Tủ quần áo"
+          ],
+          "roomCount": 1,
+          "distribution": [
+            2
+          ],
+          "guestCount": 2,
+          "price": 570000,
+          "roomPrices": [
+            570000
+          ],
+          "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+          "availableCount": null,
+          "inventoryCount": 5,
+          "checkIn": null,
+          "checkOut": null,
+          "checkInTime": "14:00",
+          "checkOutTime": "12:00"
+        },
+        "columns": [
+          "Thông tin",
+          "Chi tiết"
+        ],
+        "rows": [
+          [
+            "Homestay",
+            "Mộc Miên Đà Lạt Homestay"
+          ],
+          [
+            "Loại phòng",
+            "Phòng đôi Mộc Miên"
+          ],
+          [
+            "Diện tích (m²)",
+            25
+          ],
+          [
+            "Khách tiêu chuẩn",
+            2
+          ],
+          [
+            "Khách tối đa mỗi phòng",
+            2
+          ],
+          [
+            "Số phòng cần cho nhóm",
+            1
+          ],
+          [
+            "Chia số khách",
+            "2"
+          ],
+          [
+            "Tiện nghi",
+            "Wi-Fi, TV thông minh, Tủ lạnh mini, Ấm đun nước, Máy sấy tóc, Nước nóng, Khăn tắm, Đồ vệ sinh cá nhân, Tủ quần áo"
+          ],
+          [
+            "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            570000
+          ],
+          [
+            "Nhận / trả phòng",
+            "14:00 / 12:00"
+          ]
+        ],
+        "sources": [
+          "Danh mục, mô tả và tiện nghi loại phòng",
+          "Giá tham khảo ngày thường",
+          "Chính sách cơ sở"
+        ],
+        "links": [
+          {
+            "label": "Xem phòng và ảnh",
+            "url": "/room-detail.html?id=b6146c8adc56e065bbc1b31f&roomTypeId=b6146c8adc56e065bbc1b31f&homestayId=0b25529dced1319846cf1a42&guestCount=2"
+          },
+          {
+            "label": "Chọn ngày và xem giá",
+            "url": "/modules/bookings/index.html?roomTypeId=b6146c8adc56e065bbc1b31f&homestayId=0b25529dced1319846cf1a42&guestCount=2"
+          }
+        ],
+        "engine": "rules",
+        "provider": "rules",
+        "model": null,
+        "fallbackReason": "local_plan",
+        "failoverFrom": null,
+        "at": "2026-10-19T15:41:09.783Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nTiện nghi của Phòng đôi Mộc Miên tại Mộc Miên Đà Lạt Homestay: Wi-Fi, TV thông minh, Tủ lạnh mini, Ấm đun nước, Máy sấy tóc, Nước nóng, Khăn tắm, Đồ vệ sinh cá nhân, Tủ quần áo.\n\nPhòng đôi Mộc Miên\n\nMộc Miên Đà Lạt Homestay\n\nDiện tích\n25 m²\nSức chứa mỗi phòng\n2 tiêu chuẩn · 2 tối đa\nGiờ nhận / trả\n14:00 / 12:00\nTiện nghi được cơ sở cập nhật\nWi-Fi\nTV thông minh\nTủ lạnh mini\nẤm đun nước\nMáy sấy tóc\nNước nóng\nKhăn tắm\nĐồ vệ sinh cá nhân\nTủ quần áo\n\n570.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nXem phòng và ảnh ↗\nChọn ngày và xem giá ↗\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424466291,
+          "http": 200,
+          "serverTiming": "atlas_public_catalog_0;dur=3487.55, backend_total_1;dur=3492.9",
+          "trace": "0c577ea20f3315da15a09a82",
+          "finished": 1792424469788,
+          "durationMs": 3497
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Sau chủ đề sự cố vẫn đọc đúng tiện nghi phòng hiện tại"
+        }
+      ],
+      "verdict": "Đạt"
+    },
+    {
+      "id": "V8",
+      "question": "Gợi ý nơi nghỉ yên tĩnh cho hai người, muốn ở trên núi",
+      "http": 200,
+      "build": "cd538c8652afd69c",
+      "requestKey": "5687697336f24060a7a879c95c576ae2",
+      "requestId": "2ae30d5e3c67ba0d58836e0e",
+      "serverTiming": "atlas_public_availability_0;dur=3613.48, provider_groq_1;dur=1214.57, classification_2;dur=1218.17, atlas_public_availability_3;dur=3602.54, backend_total_4;dur=8451.97",
+      "networkMs": 8512,
+      "usefulContentMs": 8517,
+      "completeMs": 8517,
+      "renderAfterResponseMs": 5,
+      "result": {
+        "intent": "recommendation",
+        "publicCatalog": true,
+        "answer": "Với 2 người, mình gợi ý các phương án dưới đây. Bạn bấm vào loại phòng muốn xem để mình giới thiệu tiện nghi và thông tin cụ thể nhé. Mình đã lọc theo vùng núi/đồi theo mô tả cơ sở. Mình chưa xác nhận phòng trống theo ngày lưu trú. Bạn dự định nhận và trả phòng ngày nào?",
+        "presentation": "rooms",
+        "cards": [
+          {
+            "roomTypeId": "b6146c8adc56e065bbc1b31f",
+            "name": "Phòng đôi Mộc Miên",
+            "homestayId": "0b25529dced1319846cf1a42",
+            "homestayName": "Mộc Miên Đà Lạt Homestay",
+            "destination": "Đà Lạt",
+            "locationEvidence": "Nhà đồi & không gian gỗ",
+            "roomKind": "double",
+            "photo": "/assets/catalog190/photo-005.webp",
+            "area": 25,
+            "standardCapacity": 2,
+            "maxCapacity": 2,
+            "description": "Không gian 25 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bố cục một phòng ngủ, phù hợp cặp đôi muốn nghỉ riêng tư. Thuộc Mộc Miên Đà Lạt Homestay; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Không có điều hoà; sử dụng chăn ấm và thông gió tự nhiên.",
+            "amenities": [
+              "Wi-Fi",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Tủ quần áo"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 570000,
+            "roomPrices": [
+              570000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "b5654212ce87421f2ba27f98",
+            "name": "Phòng đôi Mây Nhẹ",
+            "homestayId": "10baec5c17b5ffcda5a3a89a",
+            "homestayName": "Lưng Chừng Mây Sa Pa",
+            "destination": "Sa Pa",
+            "locationEvidence": "Nhà núi & thung lũng",
+            "roomKind": "double",
+            "photo": "/assets/catalog190/photo-006.webp",
+            "area": 25,
+            "standardCapacity": 2,
+            "maxCapacity": 2,
+            "description": "Không gian 25 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bố cục một phòng ngủ, phù hợp cặp đôi muốn nghỉ riêng tư. Thuộc Lưng Chừng Mây Sa Pa; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Điều hoà riêng, khăn tắm và đồ vệ sinh cơ bản được chuẩn bị khi nhận phòng.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Tủ quần áo"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 600000,
+            "roomPrices": [
+              600000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "9db86739bdebbcab5f5bff0c",
+            "name": "Twin Mây Trắng",
+            "homestayId": "0b25529dced1319846cf1a42",
+            "homestayName": "Mộc Miên Đà Lạt Homestay",
+            "destination": "Đà Lạt",
+            "locationEvidence": "Nhà đồi & không gian gỗ",
+            "roomKind": "twin",
+            "photo": "/assets/catalog190/photo-013.webp",
+            "area": 27,
+            "standardCapacity": 2,
+            "maxCapacity": 2,
+            "description": "Không gian 27 m² với 2 giường đơn 1,2 m, phòng tắm riêng có nước nóng và Wi-Fi. Hai giường đơn tách riêng, phù hợp bạn bè hoặc đồng nghiệp. Thuộc Mộc Miên Đà Lạt Homestay; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Không có điều hoà; sử dụng chăn ấm và thông gió tự nhiên.",
+            "amenities": [
+              "Wi-Fi",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Bàn làm việc",
+              "Tủ quần áo"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 620000,
+            "roomPrices": [
+              620000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "4f47943a06f6f40da352c4e4",
+            "name": "Twin Đường Xa",
+            "homestayId": "10baec5c17b5ffcda5a3a89a",
+            "homestayName": "Lưng Chừng Mây Sa Pa",
+            "destination": "Sa Pa",
+            "locationEvidence": "Nhà núi & thung lũng",
+            "roomKind": "twin",
+            "photo": "/assets/catalog190/photo-004.webp",
+            "area": 27,
+            "standardCapacity": 2,
+            "maxCapacity": 2,
+            "description": "Không gian 27 m² với 2 giường đơn 1,2 m, phòng tắm riêng có nước nóng và Wi-Fi. Hai giường đơn tách riêng, phù hợp bạn bè hoặc đồng nghiệp. Thuộc Lưng Chừng Mây Sa Pa; sức chứa tiêu chuẩn 2 khách, tối đa 2 khách. Điều hoà riêng, khăn tắm và đồ vệ sinh cơ bản được chuẩn bị khi nhận phòng.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Bàn làm việc",
+              "Tủ quần áo"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 640000,
+            "roomPrices": [
+              640000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 5,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "da0fdfd84c3fa08f5beddf82",
+            "name": "Studio Gác Bếp",
+            "homestayId": "0b25529dced1319846cf1a42",
+            "homestayName": "Mộc Miên Đà Lạt Homestay",
+            "destination": "Đà Lạt",
+            "locationEvidence": "Nhà đồi & không gian gỗ",
+            "roomKind": "studio",
+            "photo": "/assets/catalog190/photo-040.webp",
+            "area": 34,
+            "standardCapacity": 2,
+            "maxCapacity": 3,
+            "description": "Không gian 34 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bếp riêng có bếp điện, dụng cụ cơ bản và bàn ăn nhỏ; khách tự dọn khu bếp sau sử dụng. Thuộc Mộc Miên Đà Lạt Homestay; sức chứa tiêu chuẩn 2 khách, tối đa 3 khách. Không có điều hoà; sử dụng chăn ấm và thông gió tự nhiên. Khách vượt số tiêu chuẩn sử dụng giường/nệm phụ theo xác nhận trước của cơ sở và chịu phụ thu theo báo giá.",
+            "amenities": [
+              "Wi-Fi",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Bàn làm việc",
+              "Bếp riêng",
+              "Dụng cụ nấu ăn",
+              "Bàn ăn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 750000,
+            "roomPrices": [
+              750000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 4,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          },
+          {
+            "roomTypeId": "a7a590f4d74d86c6a3e94d98",
+            "name": "Studio Bếp Ấm",
+            "homestayId": "10baec5c17b5ffcda5a3a89a",
+            "homestayName": "Lưng Chừng Mây Sa Pa",
+            "destination": "Sa Pa",
+            "locationEvidence": "Nhà núi & thung lũng",
+            "roomKind": "studio",
+            "photo": "/assets/catalog190/photo-041.webp",
+            "area": 34,
+            "standardCapacity": 2,
+            "maxCapacity": 3,
+            "description": "Không gian 34 m² với 1 giường đôi 1,6 m, phòng tắm riêng có nước nóng và Wi-Fi. Bếp riêng có bếp điện, dụng cụ cơ bản và bàn ăn nhỏ; khách tự dọn khu bếp sau sử dụng. Thuộc Lưng Chừng Mây Sa Pa; sức chứa tiêu chuẩn 2 khách, tối đa 3 khách. Điều hoà riêng, khăn tắm và đồ vệ sinh cơ bản được chuẩn bị khi nhận phòng. Khách vượt số tiêu chuẩn sử dụng giường/nệm phụ theo xác nhận trước của cơ sở và chịu phụ thu theo báo giá.",
+            "amenities": [
+              "Wi-Fi",
+              "Điều hoà",
+              "TV thông minh",
+              "Tủ lạnh mini",
+              "Ấm đun nước",
+              "Máy sấy tóc",
+              "Nước nóng",
+              "Khăn tắm",
+              "Đồ vệ sinh cá nhân",
+              "Bàn làm việc",
+              "Bếp riêng",
+              "Dụng cụ nấu ăn",
+              "Bàn ăn"
+            ],
+            "roomCount": 1,
+            "distribution": [
+              2
+            ],
+            "guestCount": 2,
+            "price": 780000,
+            "roomPrices": [
+              780000
+            ],
+            "priceLabel": "Giá ngày thường tham khảo / đêm cho cả nhóm",
+            "availableCount": null,
+            "inventoryCount": 4,
+            "checkIn": null,
+            "checkOut": null,
+            "checkInTime": "14:00",
+            "checkOutTime": "12:00"
+          }
+        ],
+        "columns": [
+          "Homestay",
+          "Loại phòng",
+          "Số phòng cần",
+          "Chia số khách",
+          "Tối đa mỗi phòng",
+          "Giá ngày thường tham khảo cả nhóm/đêm (VND)"
+        ],
+        "rows": [
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Phòng đôi Mộc Miên",
+            1,
+            "2",
+            2,
+            570000
+          ],
+          [
+            "Lưng Chừng Mây Sa Pa",
+            "Phòng đôi Mây Nhẹ",
+            1,
+            "2",
+            2,
+            600000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Twin Mây Trắng",
+            1,
+            "2",
+            2,
+            620000
+          ],
+          [
+            "Lưng Chừng Mây Sa Pa",
+            "Twin Đường Xa",
+            1,
+            "2",
+            2,
+            640000
+          ],
+          [
+            "Mộc Miên Đà Lạt Homestay",
+            "Studio Gác Bếp",
+            1,
+            "2",
+            3,
+            750000
+          ],
+          [
+            "Lưng Chừng Mây Sa Pa",
+            "Studio Bếp Ấm",
+            1,
+            "2",
+            3,
+            780000
+          ]
+        ],
+        "totalRows": 6,
+        "sources": [
+          "Danh mục và tiện nghi loại phòng",
+          "Sức chứa",
+          "Giá ngày thường và phụ thu tham khảo"
+        ],
+        "followUps": [
+          "Nhóm mình ở 2 đêm từ ngày mai"
+        ],
+        "engine": "ai",
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "fallbackReason": null,
+        "failoverFrom": null,
+        "at": "2026-10-19T15:41:20.471Z",
+        "exportable": false,
+        "exportPrompt": null,
+        "exportsReady": false
+      },
+      "renderedText": "✧ TRỢ LÝ HOMESTAY\n\nVới 2 người, mình gợi ý các phương án dưới đây. Bạn bấm vào loại phòng muốn xem để mình giới thiệu tiện nghi và thông tin cụ thể nhé. Mình đã lọc theo vùng núi/đồi theo mô tả cơ sở. Mình chưa xác nhận phòng trống theo ngày lưu trú. Bạn dự định nhận và trả phòng ngày nào?\n\n1\nPhòng đôi Mộc Miên\nMộc Miên Đà Lạt Homestay\n↗\n\n25 m² · 2 người tiêu chuẩn · Tối đa 2 người/phòng\n\nWi-Fi\nTV thông minh\nTủ lạnh mini\nẤm đun nước\n\n570.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nChưa kiểm tra ngày lưu trú\n\nXem tiện nghi và chi tiết\n2\nPhòng đôi Mây Nhẹ\nLưng Chừng Mây Sa Pa\n↗\n\n25 m² · 2 người tiêu chuẩn · Tối đa 2 người/phòng\n\nWi-Fi\nĐiều hoà\nTV thông minh\nTủ lạnh mini\n\n600.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nChưa kiểm tra ngày lưu trú\n\nXem tiện nghi và chi tiết\n3\nTwin Mây Trắng\nMộc Miên Đà Lạt Homestay\n↗\n\n27 m² · 2 người tiêu chuẩn · Tối đa 2 người/phòng\n\nWi-Fi\nTV thông minh\nTủ lạnh mini\nẤm đun nước\n\n620.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nChưa kiểm tra ngày lưu trú\n\nXem tiện nghi và chi tiết\n4\nTwin Đường Xa\nLưng Chừng Mây Sa Pa\n↗\n\n27 m² · 2 người tiêu chuẩn · Tối đa 2 người/phòng\n\nWi-Fi\nĐiều hoà\nTV thông minh\nTủ lạnh mini\n\n640.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nChưa kiểm tra ngày lưu trú\n\nXem tiện nghi và chi tiết\n5\nStudio Gác Bếp\nMộc Miên Đà Lạt Homestay\n↗\n\n34 m² · 2 người tiêu chuẩn · Tối đa 3 người/phòng\n\nWi-Fi\nTV thông minh\nTủ lạnh mini\nẤm đun nước\n\n750.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nChưa kiểm tra ngày lưu trú\n\nXem tiện nghi và chi tiết\n6\nStudio Bếp Ấm\nLưng Chừng Mây Sa Pa\n↗\n\n34 m² · 2 người tiêu chuẩn · Tối đa 3 người/phòng\n\nWi-Fi\nĐiều hoà\nTV thông minh\nTủ lạnh mini\n\n780.000 ₫\nGiá ngày thường tham khảo / đêm cho cả nhóm\n\nChưa kiểm tra ngày lưu trú\n\nXem tiện nghi và chi tiết\nNhóm mình ở 2 đêm từ ngày mai\nNguồn và thời điểm",
+      "requests": [
+        {
+          "url": "/api/public/ai/chat",
+          "start": 1792424472020,
+          "http": 200,
+          "serverTiming": "atlas_public_availability_0;dur=3613.48, provider_groq_1;dur=1214.57, classification_2;dur=1218.17, atlas_public_availability_3;dur=3602.54, backend_total_4;dur=8451.97",
+          "trace": "2ae30d5e3c67ba0d58836e0e",
+          "finished": 1792424480474,
+          "durationMs": 8454
+        }
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "message": "Câu hỗ trợ công khai không bị chặn"
+        },
+        {
+          "ok": true,
+          "message": "Đề xuất đúng hai người"
+        },
+        {
+          "ok": true,
+          "message": "Phòng trên núi có bằng chứng từ thông tin cơ sở thật"
+        }
+      ],
+      "verdict": "Đạt"
+    }
+  ],
+  "review": {
+    "at": "2026-10-19T15:42:20.486Z",
+    "source": "Atlas projection read only; independent public facts and availability arithmetic",
+    "passed": 8,
+    "total": 8,
+    "expectedCancellation": [
+      {
+        "hoursBefore": 48,
+        "refundPercent": 100
+      },
+      {
+        "hoursBefore": 24,
+        "refundPercent": 50
+      },
+      {
+        "hoursBefore": 0,
+        "refundPercent": 0
+      }
+    ],
+    "expectedAmenities": [
+      "Khăn tắm",
+      "Máy sấy tóc",
+      "Nước nóng",
+      "TV thông minh",
+      "Tủ lạnh mini",
+      "Tủ quần áo",
+      "Wi-Fi",
+      "Đồ vệ sinh cá nhân",
+      "Ấm đun nước"
+    ]
+  }
+}

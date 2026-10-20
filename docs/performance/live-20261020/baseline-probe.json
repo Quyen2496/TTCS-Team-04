@@ -1,0 +1,42 @@
+[
+  {
+    "endpoint": "/api/ready",
+    "status": 200,
+    "ms": 71,
+    "bytes": 38,
+    "build": "90b7e360bcd6ca89",
+    "serverTiming": "backend_total_0;dur=46.86",
+    "bootstrap": false,
+    "slow": false
+  },
+  {
+    "endpoint": "/api/public/settings",
+    "status": 200,
+    "ms": 344,
+    "bytes": 516,
+    "build": "90b7e360bcd6ca89",
+    "serverTiming": "atlas_public_policy_0;dur=338.74, backend_total_1;dur=339.1",
+    "bootstrap": false,
+    "slow": false
+  },
+  {
+    "endpoint": "/api/auth/me",
+    "status": 401,
+    "ms": 6,
+    "bytes": 82,
+    "build": "90b7e360bcd6ca89",
+    "serverTiming": "backend_total_0;dur=1.27",
+    "bootstrap": false,
+    "slow": false
+  },
+  {
+    "endpoint": "/api/admin/state?screen=overview",
+    "status": 401,
+    "ms": 5,
+    "bytes": 82,
+    "build": "90b7e360bcd6ca89",
+    "serverTiming": "backend_total_0;dur=0.6",
+    "bootstrap": false,
+    "slow": false
+  }
+]

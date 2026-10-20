@@ -1,0 +1,160 @@
+TAP version 13
+# Subtest: S3-01 Sổ cọc lưu đủ fields, gửi lặp một lần, chặn âm/vượt, điều chỉnh bất biến
+ok 1 - S3-01 Sổ cọc lưu đủ fields, gửi lặp một lần, chặn âm/vượt, điều chỉnh bất biến
+  ---
+  duration_ms: 415.452482
+  type: 'test'
+  ...
+# Subtest: S3-01 Xác nhận đồng thời chỉ một lần, bỏ hạn, từ chối trạng thái khác và hết hạn
+ok 2 - S3-01 Xác nhận đồng thời chỉ một lần, bỏ hạn, từ chối trạng thái khác và hết hạn
+  ---
+  duration_ms: 107.642406
+  type: 'test'
+  ...
+# Subtest: S3-02 200 yêu cầu tại quầy đồng thời: 1 thành công, 199 lỗi 409, không trùng đêm
+ok 3 - S3-02 200 yêu cầu tại quầy đồng thời: 1 thành công, 199 lỗi 409, không trùng đêm
+  ---
+  duration_ms: 883.91099
+  type: 'test'
+  ...
+# Subtest: S3-02 200 yêu cầu cùng mã chỉ tạo một booking; web/quầy chung tồn
+ok 4 - S3-02 200 yêu cầu cùng mã chỉ tạo một booking; web/quầy chung tồn
+  ---
+  duration_ms: 740.880167
+  type: 'test'
+  ...
+# Subtest: S3-02 Khoảng nửa mở, huỷ nhả tồn và hết hạn nhả trước đặt lại
+ok 5 - S3-02 Khoảng nửa mở, huỷ nhả tồn và hết hạn nhả trước đặt lại
+  ---
+  duration_ms: 62.149645
+  type: 'test'
+  ...
+# Subtest: S3-03 Gán cùng loại, chặn phòng bị chiếm kèm mã, lưu lịch sử và lý do
+ok 6 - S3-03 Gán cùng loại, chặn phòng bị chiếm kèm mã, lưu lịch sử và lý do
+  ---
+  duration_ms: 95.687361
+  type: 'test'
+  ...
+# Subtest: S3-03 Đổi phòng đang ở chỉ sang sạch; cập nhật hai trạng thái và phân đoạn lịch
+ok 7 - S3-03 Đổi phòng đang ở chỉ sang sạch; cập nhật hai trạng thái và phân đoạn lịch
+  ---
+  duration_ms: 119.851077
+  type: 'test'
+  ...
+# Subtest: S3-04 Đổi ngày/loại preview + commit giữ cọc, giá snapshot, lịch sử, chống stale và replay
+ok 8 - S3-04 Đổi ngày/loại preview + commit giữ cọc, giá snapshot, lịch sử, chống stale và replay
+  ---
+  duration_ms: 82.634165
+  type: 'test'
+  ...
+# Subtest: S3-04 Giá thay đổi sau preview rollback toàn bộ; cọc dư giữ nguyên
+ok 9 - S3-04 Giá thay đổi sau preview rollback toàn bộ; cọc dư giữ nguyên
+  ---
+  duration_ms: 77.516633
+  type: 'test'
+  ...
+# Subtest: S3-04 Hết phòng hoặc vượt sức chứa không đổi một phần
+ok 10 - S3-04 Hết phòng hoặc vượt sức chứa không đổi một phần
+  ---
+  duration_ms: 57.32368
+  type: 'test'
+  ...
+# Subtest: S3-05 Huỷ preview theo snapshot, không tin tiền client; audit + idempotency
+ok 11 - S3-05 Huỷ preview theo snapshot, không tin tiền client; audit + idempotency
+  ---
+  duration_ms: 82.973019
+  type: 'test'
+  ...
+# Subtest: S3-06 Không email, source COUNTER, CONFIRMED, bỏ hold; có email lưu event; sai email bị chặn
+ok 12 - S3-06 Không email, source COUNTER, CONFIRMED, bỏ hold; có email lưu event; sai email bị chặn
+  ---
+  duration_ms: 58.562002
+  type: 'test'
+  ...
+# Subtest: S3-07 Chặn chưa gán/bẩn/thiếu giấy tờ/khách đi cùng, nhận thành công rồi không huỷ
+ok 13 - S3-07 Chặn chưa gán/bẩn/thiếu giấy tờ/khách đi cùng, nhận thành công rồi không huỷ
+  ---
+  duration_ms: 108.99335
+  type: 'test'
+  ...
+# Subtest: S3-07 Ranh giới 13:59 và 14:00 giờ VN
+ok 14 - S3-07 Ranh giới 13:59 và 14:00 giờ VN
+  ---
+  duration_ms: 3.23877
+  type: 'test'
+  ...
+# Subtest: S3-08 Bảo trì làm thiếu tồn, không xoá booking; cảnh báo đúng ngày/loại/codes
+ok 15 - S3-08 Bảo trì làm thiếu tồn, không xoá booking; cảnh báo đúng ngày/loại/codes
+  ---
+  duration_ms: 80.86956
+  type: 'test'
+  ...
+# Subtest: S3-09 Ưu tiên khách đến hôm nay; chỉ phòng bẩn; đánh sạch một audit; incident bắt note
+ok 16 - S3-09 Ưu tiên khách đến hôm nay; chỉ phòng bẩn; đánh sạch một audit; incident bắt note
+  ---
+  duration_ms: 77.268682
+  type: 'test'
+  ...
+# Subtest: S3-10 Lưới 14 ngày, không chiếm ngày trả, che giấy tờ, từ chối 15 ngày và khách
+ok 17 - S3-10 Lưới 14 ngày, không chiếm ngày trả, che giấy tờ, từ chối 15 ngày và khách
+  ---
+  duration_ms: 66.482637
+  type: 'test'
+  ...
+# Subtest: S3 Quyền homestay: không đổi/gán/quầy ngoài cơ sở, không lộ dữ liệu booking cho buồng phòng
+ok 18 - S3 Quyền homestay: không đổi/gán/quầy ngoài cơ sở, không lộ dữ liệu booking cho buồng phòng
+  ---
+  duration_ms: 64.505867
+  type: 'test'
+  ...
+# Subtest: S3 Mongo unique index thật chặn ghi trùng trực tiếp
+ok 19 - S3 Mongo unique index thật chặn ghi trùng trực tiếp
+  ---
+  duration_ms: 52.958243
+  type: 'test'
+  ...
+# Subtest: S3-02 200 booking trực tuyến đồng thời cho phòng cuối: 1/199, cùng mã replay 200/200
+ok 20 - S3-02 200 booking trực tuyến đồng thời cho phòng cuối: 1/199, cùng mã replay 200/200
+  ---
+  duration_ms: 1497.97034
+  type: 'test'
+  ...
+# Subtest: S3-05 Mốc hoàn 48h/24h và sát ranh giới dùng giờ VN
+ok 21 - S3-05 Mốc hoàn 48h/24h và sát ranh giới dùng giờ VN
+  ---
+  duration_ms: 1.584542
+  type: 'test'
+  ...
+# Subtest: S3 Migration giữ số dư cọc v5, có ledger và không ghi trùng khi mở lại
+ok 22 - S3 Migration giữ số dư cọc v5, có ledger và không ghi trùng khi mở lại
+  ---
+  duration_ms: 0.907606
+  type: 'test'
+  ...
+# Subtest: S3 Quyền thu hẹp che PII cả phản hồi ghi cọc
+ok 23 - S3 Quyền thu hẹp che PII cả phản hồi ghi cọc
+  ---
+  duration_ms: 50.797959
+  type: 'test'
+  ...
+# Subtest: Hồ sơ nhận phòng phong phú lưu đúng, kiểm tra dữ liệu và bảo vệ quyền xem
+ok 24 - Hồ sơ nhận phòng phong phú lưu đúng, kiểm tra dữ liệu và bảo vệ quyền xem
+  ---
+  duration_ms: 107.606797
+  type: 'test'
+  ...
+# Subtest: Khách tại quầy không có email được nhóm theo điện thoại và tên, giữ hồ sơ đã có
+ok 25 - Khách tại quầy không có email được nhóm theo điện thoại và tên, giữ hồ sơ đã có
+  ---
+  duration_ms: 66.062916
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5205.336341

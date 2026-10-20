@@ -1,0 +1,3 @@
+'use strict';
+require('dotenv').config({path:require('node:path').join(__dirname,'../.env')});
+(async()=>{if(!process.argv[2]||!process.env.HOMESTAY_QA_MONGODB_URI)throw Error('Cần đường dẫn .hsbackup và HOMESTAY_QA_MONGODB_URI trỏ tới database QA mới.');const result=await require('../src/backup').restoreMongoToQA(require('node:path').resolve(process.argv[2]),process.env.HOMESTAY_QA_MONGODB_URI);console.log('Đã phục hồi và đối chiếu dữ liệu trong MongoDB QA riêng.');console.log(JSON.stringify(result,null,2));})().catch(()=>{console.error('Chưa phục hồi được. Kiểm tra khoá backup, kết nối replica set và database QA mới chưa có dữ liệu. Không thay MONGODB_URI đang vận hành.');process.exitCode=1;});

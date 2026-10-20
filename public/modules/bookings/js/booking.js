@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const searchForm = $("search-form"), bookingForm = $("booking-form");
   const API = Object.freeze({ availability: "/api/bookings/availability", quote: "/api/bookings/quote", create: "/api/bookings/create" });
-  const state = { filterTypeId: "", criteria: null, rooms: [], selected: null, quote: null, searchSeq: 0, quoteSeq: 0,
+  const state = { filterTypeId: "", roomPage:1, criteria: null, rooms: [], selected: null, quote: null, searchSeq: 0, quoteSeq: 0,
     searchAbort: null, quoteAbort: null, busy: false, uncertain: false, pending: null, booking: null };
   const currency = new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 });
   const money = value => currency.format(value);
@@ -28,7 +28,7 @@
     let timedOut = false;
     const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 15000);
     try {
-      const response = await fetch(url, { method, credentials: "same-origin", headers: { Accept: "application/json", ...(body ? { "Content-Type": "application/json" } : {}) }, ...(body ? { body: JSON.stringify(body) } : {}), signal: controller.signal });
+      const response = await fetch(url, { method, credentials: "same-origin", headers: { Accept: "application/json", ...(url===API.create&&sessionStorage.getItem("hs_token")?{Authorization:"Bearer "+sessionStorage.getItem("hs_token")} : {}), ...(body ? { "Content-Type": "application/json" } : {}) }, ...(body ? { body: JSON.stringify(body) } : {}), signal: controller.signal });
       const json = await response.json().catch(() => null);
       if (!response.ok) {
         const message = response.status === 404 ? "Chức năng này hiện chưa sẵn sàng. Vui lòng thử lại sau." :
@@ -53,13 +53,13 @@
     if (!isDay(checkOut) || !isDay(checkIn) || !Number.isInteger(nights(checkIn, checkOut)) || nights(checkIn, checkOut) < 1 || nights(checkIn, checkOut) > 30) $("checkOut").setCustomValidity("Ngày trả phải sau ngày nhận, với kỳ lưu trú từ 1 đến 30 đêm.");
     if (!Number.isSafeInteger(guestCount) || guestCount < 1) $("guestCount").setCustomValidity("Nhập số khách là số nguyên dương.");
     if (!searchForm.reportValidity()) return null;
-    return { checkIn, checkOut, guestCount, ...(state.filterTypeId ? { roomTypeId: state.filterTypeId } : {}) };
+    return { ...(new URLSearchParams(location.search).get("homestayId")?{homestayId:new URLSearchParams(location.search).get("homestayId")} : {}), checkIn, checkOut, guestCount, ...(state.filterTypeId ? { roomTypeId: state.filterTypeId } : {}) };
   }
   function cancelQuote() { state.quoteSeq++; state.quoteAbort?.abort(); state.quote = null; state.selected = null; $("quote-section").hidden = true; $("booking-section").hidden = true; $("policyAccepted").checked = false; }
   function invalidateSearch() {
     if (state.busy || state.uncertain) return;
     clearValidation(searchForm); state.searchSeq++; state.searchAbort?.abort(); cancelQuote(); state.criteria = null; state.rooms = [];
-    $("results-section").hidden = true; $("search-button").disabled = false; $("search-button").lastChild.textContent = "Tìm phòng trống";
+    $("results-section").hidden = true; $("search-button").disabled = false; $("search-button").lastChild.textContent = "Xem phòng";
     notice("search-message", ""); notice("booking-message", ""); progress(1);
   }
   function safePhoto(path) {
@@ -82,7 +82,9 @@
     const criteria = state.criteria;
     $("results-description").textContent = `${dateLabel(criteria.checkIn)} – ${dateLabel(criteria.checkOut)} · ${nights(criteria.checkIn, criteria.checkOut)} đêm · ${criteria.guestCount} khách`;
     $("results-count").textContent = `${state.rooms.length} loại phòng`;
-    $("room-results").innerHTML = state.rooms.map(room => `<article class="room-card${state.selected?.roomTypeId === room.roomTypeId ? " selected" : ""}"><img class="room-image" src="${esc(safePhoto(room.photo?.thumbnailPath || room.photo?.path))}" alt="${esc(room.photo?.alt || `Hình ảnh ${room.name}`)}" loading="lazy"><div class="room-content"><div class="room-top"><span>LOẠI PHÒNG</span><span class="status">Còn ${room.availableCount} phòng</span></div><h3>${esc(room.name)}</h3><p class="capacity">${room.standardCapacity} khách tiêu chuẩn · Tối đa ${room.maxCapacity} khách</p><div class="room-price"><span>Từ</span><strong>${esc(money(room.fromPrice))}</strong><span>/ đêm</span></div><p class="room-caption">Xem báo giá để biết giá từng đêm và phụ thu.</p><button type="button" class="btn ${state.selected?.roomTypeId === room.roomTypeId ? "primary" : "secondary"}" data-room-type="${room.roomTypeId}">${state.selected?.roomTypeId === room.roomTypeId ? "Đã chọn · Xem lại báo giá" : "Chọn phòng · Xem báo giá"}</button></div></article>`).join("");
+    const pages=Math.max(1,Math.ceil(state.rooms.length/12));state.roomPage=Math.max(1,Math.min(state.roomPage,pages));
+    $("room-results").innerHTML = state.rooms.slice((state.roomPage-1)*12,state.roomPage*12).map(room => `<article class="room-card${state.selected?.roomTypeId === room.roomTypeId ? " selected" : ""}"><img class="room-image" src="${esc(safePhoto(HS.thumbnail(room.photo?.thumbnailPath || room.photo?.path)))}" alt="${esc(room.photo?.alt || `Hình ảnh ${room.name}`)}" loading="lazy"><div class="room-content"><div class="room-top"><span><a href="/room-detail.html?id=${room.roomTypeId}">Xem chi tiết</a></span><span class="status">Còn ${room.availableCount} phòng</span></div><h3>${esc(room.name)}</h3><p class="room-property">${esc(room.homestayName||"")}</p><div class="amenity-tags">${(room.amenities||[]).slice(0,3).map(a=>`<span class="tag">${HS.iconHTML(a.icon)} ${esc(a.name)}</span>`).join("")}</div><p class="capacity">${room.standardCapacity} khách tiêu chuẩn · Tối đa ${room.maxCapacity} khách</p><div class="room-price"><span>Từ</span><strong>${esc(money(room.fromPrice))}</strong><span>/ đêm</span></div><p class="room-caption">Xem báo giá để biết giá từng đêm và phụ thu.</p><button type="button" class="btn ${state.selected?.roomTypeId === room.roomTypeId ? "primary" : "secondary"}" data-room-type="${room.roomTypeId}">${state.selected?.roomTypeId === room.roomTypeId ? "Đã chọn · Xem lại báo giá" : "Chọn phòng · Xem báo giá"}</button></div></article>`).join("");
+    $("booking-pagination").innerHTML=pages>1?`<button type="button" class="btn secondary" data-page="${state.roomPage-1}" ${state.roomPage===1?"disabled":""}>← Trước</button><span>Trang ${state.roomPage}/${pages}</span><button type="button" class="btn secondary" data-page="${state.roomPage+1}" ${state.roomPage===pages?"disabled":""}>Tiếp →</button>`:"";
     $("room-results").querySelectorAll("img").forEach(img => img.addEventListener("error", () => { if (!img.dataset.fallback) { img.dataset.fallback = "1"; img.src = "assets/room-placeholder.svg"; img.alt = "Hình ảnh phòng đang cập nhật"; } }, { once: true }));
     $("room-results").querySelectorAll("[data-room-type]").forEach(button => button.addEventListener("click", () => selectRoom(button.dataset.roomType)));
   }
@@ -90,24 +92,24 @@
     event?.preventDefault(); if (state.busy || state.uncertain) return;
     const criteria = readCriteria(); if (!criteria) return;
     const seq = ++state.searchSeq; state.searchAbort?.abort(); state.searchAbort = new AbortController(); cancelQuote();
-    state.criteria = criteria; state.rooms = []; $("results-section").hidden = true;
+    state.criteria = criteria; state.rooms = []; state.roomPage=1; $("results-section").hidden = true;
     $("search-button").disabled = true; $("search-button").lastChild.textContent = "Đang tìm phòng…";
     notice("search-message", "Đang tìm phòng cho kỳ lưu trú của bạn…", "loading"); progress(1);
     try {
       const data = await request(`${API.availability}?${new URLSearchParams(criteria)}`, { signal: state.searchAbort.signal });
       if (seq !== state.searchSeq) return;
-      state.rooms = validateRooms(data, criteria);
+      state.roomPage=1; state.rooms = validateRooms(data, criteria);
       if (!state.rooms.length) { notice("search-message", "Không còn phòng phù hợp trong khoảng ngày này. Bạn có thể đổi ngày hoặc số khách.", "warning"); return; }
       notice("search-message", ""); renderRooms(); $("results-section").hidden = false;
     } catch (error) { if (seq === state.searchSeq) notice("search-message", error.message, "error"); }
-    finally { if (seq === state.searchSeq) { $("search-button").disabled = false; $("search-button").lastChild.textContent = "Tìm phòng trống"; } }
+    finally { if (seq === state.searchSeq) { $("search-button").disabled = false; $("search-button").lastChild.textContent = "Xem phòng"; } }
   }
   function validateQuote(q, criteria, room) {
     const count = nights(criteria.checkIn, criteria.checkOut);
     if (q?.roomTypeId !== room.roomTypeId || q.checkIn !== criteria.checkIn || q.checkOut !== criteria.checkOut || q.guestCount !== criteria.guestCount || q.numberOfNights !== count || !Array.isArray(q.nightlyPrices) || q.nightlyPrices.length !== count ||
         ![q.roomTotal, q.extraGuestTotal, q.totalAmount].every(isMoney) || q.totalAmount !== q.roomTotal + q.extraGuestTotal || typeof q.roomTypeName !== "string" || !q.roomTypeName.trim()) throw dataError();
     let roomSum = 0, extraSum = 0;
-    for (let i = 0; i < count; i++) { const row = q.nightlyPrices[i]; if (row.night !== addDays(criteria.checkIn, i) || ![row.basePrice, row.surchargeAmount, row.lineTotal, row.extraGuestUnitPrice].every(isMoney) || row.lineTotal !== row.basePrice + row.surchargeAmount || !Number.isSafeInteger(row.extraGuestCount) || row.extraGuestCount !== Math.max(0, criteria.guestCount - room.standardCapacity) || row.surchargeAmount !== row.extraGuestCount * row.extraGuestUnitPrice || !["WEEKDAY", "WEEKEND", "OVERRIDE"].includes(row.priceKind) || typeof row.label !== "string" || !row.label.trim()) throw dataError(); roomSum += row.basePrice; extraSum += row.surchargeAmount; }
+    for (let i = 0; i < count; i++) { const row = q.nightlyPrices[i]; if (row.night !== addDays(criteria.checkIn, i) || ![row.basePrice, row.surchargeAmount, row.lineTotal, row.extraGuestUnitPrice].every(isMoney) || row.lineTotal !== row.basePrice + row.surchargeAmount || !Number.isSafeInteger(row.extraGuestCount) || row.extraGuestCount !== Math.max(0, criteria.guestCount - room.standardCapacity) || row.surchargeAmount !== row.extraGuestCount * row.extraGuestUnitPrice || !["WEEKDAY", "WEEKEND", "EVENT", "OVERRIDE"].includes(row.priceKind) || typeof row.label !== "string" || !row.label.trim()) throw dataError(); roomSum += row.basePrice; extraSum += row.surchargeAmount; }
     const s = q.settingsSnapshot;
     if (roomSum !== q.roomTotal || extraSum !== q.extraGuestTotal || !Number.isSafeInteger(s?.version) || s.version < 1 || !/^([01]\d|2[0-3]):[0-5]\d$/.test(s.checkInTime || "") || !/^([01]\d|2[0-3]):[0-5]\d$/.test(s.checkOutTime || "") || !isMoney(s.extraGuestPerNight) || !Array.isArray(s.cancellationRules) || s.cancellationRules.length < 1 || s.cancellationRules.length > 3) throw dataError();
     s.cancellationRules.forEach((r, i) => { if (!Number.isSafeInteger(r.hoursBefore) || r.hoursBefore < 0 || !Number.isFinite(r.refundPercent) || r.refundPercent < 0 || r.refundPercent > 100 || (i && s.cancellationRules[i - 1].hoursBefore <= r.hoursBefore)) throw dataError(); });
@@ -122,28 +124,40 @@
     try {
       const q = await request(API.quote, { method: "POST", body: { ...state.criteria, roomTypeId: id }, signal: state.quoteAbort.signal });
       if (seq !== state.quoteSeq) return;
-      state.quote = validateQuote(q, state.criteria, room); $("continue-button").disabled = false; $("booking-button").disabled = false; renderQuote(); notice("quote-message", ""); $("quote-content").hidden = false; focusSection("quote-title");
+      state.quote = validateQuote(q, state.criteria, room); $("continue-button").disabled = false; syncBookingButton(); renderQuote(); notice("quote-message", ""); $("quote-content").hidden = false; focusSection("quote-title");
     } catch (error) { if (seq === state.quoteSeq) { state.quote = null; notice("quote-message", error.message, "error"); } }
   }
   function renderQuote() {
-    const q = state.quote, s = q.settingsSnapshot;
-    $("quote-description").textContent = `${q.roomTypeName} · ${dateLabel(q.checkIn)} – ${dateLabel(q.checkOut)} · ${q.numberOfNights} đêm · ${q.guestCount} khách`;
+    const q = state.quote, s = q.settingsSnapshot; $("quote-hold").textContent = `Yêu cầu được giữ chỗ tối đa ${s.holdHours||24} giờ, chờ homestay xác nhận.`;
+    $("quote-description").textContent = `${q.homestayName?q.homestayName+" · ":""}${q.roomTypeName} · ${dateLabel(q.checkIn)} – ${dateLabel(q.checkOut)} · ${q.numberOfNights} đêm · ${q.guestCount} khách`;
     $("nightly-prices").innerHTML = q.nightlyPrices.map(row => `<tr><th scope="row">${dateLabel(row.night)}</th><td><span class="price-label">${esc(row.label)}</span></td><td class="money">${esc(money(row.basePrice))}</td><td class="money">${esc(money(row.surchargeAmount))}</td><td class="money">${esc(money(row.lineTotal))}</td></tr>`).join("");
     $("room-total").textContent = money(q.roomTotal); $("extra-total").textContent = money(q.extraGuestTotal); $("quote-total").textContent = money(q.totalAmount);
     const extraCount = q.nightlyPrices[0].extraGuestCount;
     $("policy-content").innerHTML = `<p>Nhận phòng từ <strong>${esc(s.checkInTime)}</strong> · Trả phòng trước <strong>${esc(s.checkOutTime)}</strong>.</p><p>Phụ thu: ${esc(money(s.extraGuestPerNight))}/người/đêm khi vượt sức chứa tiêu chuẩn.${extraCount ? ` Kỳ lưu trú này có ${extraCount} khách vượt chuẩn trong ${q.numberOfNights} đêm.` : ""}</p><ul>${s.cancellationRules.map(r => `<li>Huỷ trước ít nhất ${r.hoursBefore} giờ: hoàn ${r.refundPercent}% tiền cọc đã ghi nhận.</li>`).join("")}</ul>`;
     $("selection-summary").innerHTML = `<strong>${esc(q.roomTypeName)}</strong>${dateLabel(q.checkIn)} – ${dateLabel(q.checkOut)} · ${q.numberOfNights} đêm · ${q.guestCount} khách · Tổng tiền ${esc(money(q.totalAmount))}`;
   }
-  function continueBooking() { if (!state.quote || state.busy || state.uncertain) return; $("booking-section").hidden = false; notice("booking-message", ""); progress(3); focusSection("booking-title"); }
+  let checkingLogin=false;
+  function loginForSelection(){sessionStorage.removeItem('hs_token');sessionStorage.removeItem('hs_user');HS.bookingReturn.login({roomTypeId:state.selected.roomTypeId,...(state.criteria.homestayId?{homestayId:state.criteria.homestayId}:{}),checkIn:state.criteria.checkIn,checkOut:state.criteria.checkOut,guestCount:state.criteria.guestCount});}
+  async function continueBooking() {
+    if (!state.quote || state.busy || state.uncertain || checkingLogin) return;
+    if(!sessionStorage.getItem('hs_token')){loginForSelection();return;}
+    const quoteAtStart=state.quote;checkingLogin=true;$("continue-button").disabled=true;
+    try{await HS.api('/api/auth/me');if(state.quote!==quoteAtStart)return;$("booking-section").hidden=false;notice("booking-message", "");progress(3);focusSection("booking-title");}
+    catch(error){if(state.quote!==quoteAtStart)return;if(error.status===401)loginForSelection();else notice('quote-message',error.message,'error');}
+    finally{checkingLogin=false;$("continue-button").disabled=!state.quote;}
+  }
   function randomKey() { const bytes = new Uint8Array(16); crypto.getRandomValues(bytes); return Array.from(bytes, b => b.toString(16).padStart(2, "0")).join(""); }
   function setBookingLock(locked) {
     for (const el of searchForm.elements) el.disabled = locked;
     for (const el of bookingForm.elements) if (el.id !== "booking-button") el.disabled = locked;
     $("room-results").querySelectorAll("button").forEach(el => { el.disabled = locked; });
     $("continue-button").disabled = locked; $("clear-type-filter").disabled = locked;
-    $("booking-button").disabled = state.busy;
+    syncBookingButton();
     $("booking-button").textContent = state.busy ? "Đang gửi yêu cầu…" : state.uncertain ? "Thử lại cùng yêu cầu" : "Gửi yêu cầu đặt phòng";
   }
+  function syncBookingButton() { $("booking-button").disabled = state.busy || !state.quote || !$("policyAccepted").checked; }
+  $("policyAccepted").addEventListener("change",syncBookingButton);
+  syncBookingButton();
   function payload() {
     clearValidation(bookingForm);
     $("guestName").value = $("guestName").value.trim(); $("phone").value = $("phone").value.trim(); $("email").value = $("email").value.trim().toLowerCase();
@@ -152,7 +166,7 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value)) $("email").setCustomValidity("Vui lòng nhập email hợp lệ.");
     if (!bookingForm.reportValidity()) return null;
     const q = state.quote;
-    return { roomTypeId: q.roomTypeId, checkIn: q.checkIn, checkOut: q.checkOut, guestCount: q.guestCount, guestName: $("guestName").value, phone: $("phone").value, email: $("email").value, notes: $("notes").value.trim(), policyAccepted: $("policyAccepted").checked,
+    return { roomTypeId: q.roomTypeId, checkIn: q.checkIn, checkOut: q.checkOut, guestCount: q.guestCount, guestName: $("guestName").value, phone: $("phone").value, email: $("email").value, notes: $("notes").value.trim(), guestAddress:$("guestAddress")?.value.trim()||"",nationality:$("nationality")?.value.trim()||"", idNumber:$("idNumber").value.trim(),documentType:$("documentType").value,birthDate:$("birthDate").value,gender:$("gender").value, policyAccepted: $("policyAccepted").checked,
       expectedTotalAmount: q.totalAmount, expectedSettingsVersion: q.settingsSnapshot.version };
   }
   function validateBooking(data, body) {
@@ -161,6 +175,7 @@
   }
   async function book(event) {
     event.preventDefault(); if (state.busy || !state.quote) return;
+    if(!sessionStorage.getItem('hs_token')){loginForSelection();return;}
     let body;
     if (state.uncertain) body = state.pending.body;
     else {
@@ -177,6 +192,7 @@
       if (!error.status || error.status >= 500) { state.uncertain = true; notice("booking-message", "Chưa xác nhận được yêu cầu đã được lưu hay chưa. Hãy thử lại cùng yêu cầu để tránh đặt trùng.", "warning"); }
       else {
         state.uncertain = false;
+        if(error.status===401){loginForSelection();return;}
         notice("booking-message", `${error.message}${error.retryAfter ? ` Bạn có thể thử lại sau khoảng ${Math.ceil(error.retryAfter / 60)} phút.` : ""}`, error.status === 429 ? "warning" : "error");
         if (error.status === 409) {
           state.quote = null; $("policyAccepted").checked = false; $("continue-button").disabled = true; $("booking-button").disabled = true;
@@ -188,15 +204,17 @@
   function showSuccess(body) {
     const b = state.booking;
     $("success-code").textContent = b.bookingCode;
+    document.getElementById('success-payment-button')?.remove();const pay=document.createElement('button');pay.id='success-payment-button';pay.type='button';pay.className='btn primary';pay.textContent='Đặt cọc / Chuyển khoản QR';pay.onclick=()=>{sessionStorage.setItem('hs_payment_lookup',JSON.stringify({bookingCode:b.bookingCode,email:body.email}));location.href='/payment.html?code='+encodeURIComponent(b.bookingCode);};$("success-details").after(pay);
     const deadline = new Intl.DateTimeFormat("vi-VN", { timeZone: "Asia/Ho_Chi_Minh", dateStyle: "short", timeStyle: "short" }).format(new Date(b.holdExpiresAt));
-    const details = [["Loại phòng", b.roomTypeName], ["Ngày nhận – trả", `${dateLabel(b.checkInDay)} – ${dateLabel(b.checkOutDay)}`], ["Số đêm · Số khách", `${b.numberOfNights} đêm · ${body.guestCount} khách`], ["Tổng tiền", money(b.totalAmount)], ["Trạng thái", "Chờ xác nhận"], ["Hạn giữ chỗ (giờ Việt Nam)", deadline], ["Email tra cứu", body.email]];
+    const details = [["Cọc cần chuyển", money(b.amountDue)], ["Tiền còn thanh toán", money(b.balanceDue)], ["Homestay", b.homestayName||"Homestay"], ["Loại phòng", b.roomTypeName], ["Ngày nhận – trả", `${dateLabel(b.checkInDay)} – ${dateLabel(b.checkOutDay)}`], ["Số đêm · Số khách", `${b.numberOfNights} đêm · ${body.guestCount} khách`], ["Tổng tiền", money(b.totalAmount)], ["Họ tên", body.guestName], ["Điện thoại", body.phone], ["Trạng thái", "Đã giữ chỗ thành công · Chờ xác nhận"], ["Hạn giữ chỗ (giờ Việt Nam)", deadline], ["Email tra cứu", body.email]];
     $("success-details").innerHTML = details.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join("");
-    $("success-section").hidden = false; $("results-section").hidden = true; $("quote-section").hidden = true; $("booking-section").hidden = true; $("search-form").closest("section").hidden = true; progress(3); focusSection("success-title");
+    const contact = state.quote?.settingsSnapshot; const info = document.getElementById("contact-after-booking"); info.textContent = contact?.contactPhone || contact?.contactEmail ? `Liên hệ homestay: ${contact.contactPhone || ""} ${contact.contactEmail || ""}` : "Homestay chưa cấu hình thông tin liên hệ. Theo dõi trạng thái tại trang tra cứu booking."; $("success-section").hidden = false; $("results-section").hidden = true; $("quote-section").hidden = true; $("booking-section").hidden = true; $("search-form").closest("section").hidden = true; progress(3); focusSection("success-title");
   }
   function newBooking() {
     state.booking = null; state.pending = null; state.uncertain = false; bookingForm.reset(); clearValidation(bookingForm); setBookingLock(false); $("success-section").hidden = true;
     $("search-form").closest("section").hidden = false; $("copy-message").textContent = ""; invalidateSearch(); search();
   }
+  $("booking-pagination").addEventListener("click",event=>{const b=event.target.closest("[data-page]");if(b&&!state.busy&&!state.uncertain){state.roomPage=Number(b.dataset.page);renderRooms();$("results-title").scrollIntoView({block:"start"});}});
   searchForm.addEventListener("submit", search);
   for (const input of [$("checkIn"), $("checkOut"), $("guestCount")]) input.addEventListener("input", invalidateSearch);
   $("checkIn").addEventListener("change", () => { if (isDay($("checkIn").value)) { $("checkOut").min = addDays($("checkIn").value, 1); $("checkOut").max = addDays($("checkIn").value, 30); } });
@@ -215,4 +233,6 @@
     if (isId(params.get("roomTypeId"))) { state.filterTypeId = params.get("roomTypeId").toLowerCase(); $("selected-type-hint").textContent = "Đang tìm trong loại phòng bạn đã chọn."; $("selected-type-hint").hidden = false; $("clear-type-filter").hidden = false; }
     else notice("search-message", "Loại phòng trong liên kết không hợp lệ. Bạn có thể tìm trong tất cả loại phòng.", "warning");
   }
+  if(sessionStorage.getItem('hs_token'))HS.api('/api/auth/me').then(u=>{if(u.role==='guest'){$('guestName').value=u.fullName||'';$('phone').value=u.phone||'';$('email').value=u.email;$('email').readOnly=true;if($('guestAddress'))$('guestAddress').value=u.address||'';if($('nationality'))$('nationality').value=u.nationality||'';HS.api('/api/guest/profile').then(p=>{for(const k of ['documentType','idNumber','birthDate','gender'])if($(k)&&p[k])$(k).value=p[k];}).catch(()=>{});}}).catch(()=>{});
+  if(state.filterTypeId) search().then(async()=>{if(state.rooms.length===1){await selectRoom(state.rooms[0].roomTypeId);if(params.get('resume')==='booking'&&state.quote&&sessionStorage.getItem('hs_token'))await continueBooking();}});else if(params.has("checkIn")&&params.has("checkOut")) search();
 })();

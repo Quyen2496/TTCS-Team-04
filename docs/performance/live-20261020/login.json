@@ -1,0 +1,14 @@
+{
+  "realBrowser": true,
+  "samples": [
+    {
+      "at": "2026-10-19T17:26:51.958Z",
+      "endpoint": "/api/auth/login",
+      "method": "POST",
+      "status": 200,
+      "headersMs": 442.816,
+      "serverTiming": "atlas_login_0;dur=378.41, backend_total_1;dur=439.46",
+      "build": "90b7e360bcd6ca89"
+    }
+  ]
+}

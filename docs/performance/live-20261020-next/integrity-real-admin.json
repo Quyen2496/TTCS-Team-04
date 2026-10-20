@@ -1,0 +1,138 @@
+{
+  "at": "2026-10-20T00:34:53.122Z",
+  "readOnly": true,
+  "realBrowser": true,
+  "database": "live Atlas via localhost",
+  "checks": [
+    {
+      "name": "HTTP /api/admin/state?screen=reception",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=reception&view=list&pageSize=50",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=reception&view=list&pageSize=50&page=2",
+      "ok": true
+    },
+    {
+      "name": "Booking order, all visible list values and complete pagination",
+      "ok": true
+    },
+    {
+      "name": "Booking total count",
+      "ok": true
+    },
+    {
+      "name": "Initial list omits nightly prices, ledgers and policy snapshots",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=reception&view=list&pageSize=50",
+      "ok": true
+    },
+    {
+      "name": "Unicode search count",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/bookings/:code",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves nightlyPrices",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves depositLedger",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves settingsSnapshot",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves settlement",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves changeHistory",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves totalAmount",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves depositAmount",
+      "ok": true
+    },
+    {
+      "name": "Booking detail preserves version",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=2",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=3",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=4",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=5",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=6",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=7",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=8",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/state?screen=rooms&view=list&pageSize=50&page=9",
+      "ok": true
+    },
+    {
+      "name": "Room order, values and total count",
+      "ok": true
+    },
+    {
+      "name": "Initial room list omits galleries and notes",
+      "ok": true
+    },
+    {
+      "name": "HTTP /api/admin/rooms/:id",
+      "ok": true
+    },
+    {
+      "name": "Room detail preserves gallery",
+      "ok": true
+    },
+    {
+      "name": "Room detail preserves notes",
+      "ok": true
+    }
+  ],
+  "bookingCount": 54,
+  "roomCount": 413
+}
